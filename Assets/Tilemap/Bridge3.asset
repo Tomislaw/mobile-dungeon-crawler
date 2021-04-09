@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbd949ab97e5ff4fa55647666dc5fa0, type: 3}
+  m_Name: Bridge3
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: 3066928975942624311, guid: 8431d2e10637d2a44991a8e7150dc518, type: 3}
+  m_DefaultGameObject: {fileID: 7205391743602197430, guid: 45b9b6c2544dc704c88ec700b0d7ce2e, type: 3}
+  m_DefaultColliderType: 0
+  m_TilingRules: []
+  tiles: []
