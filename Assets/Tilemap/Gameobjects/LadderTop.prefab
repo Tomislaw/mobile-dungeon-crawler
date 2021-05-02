@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2597567323751379889}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: LadderTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3488200265356786595, guid: 45b9b6c2544dc704c88ec700b0d7ce2e, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7205391743602196553, guid: 45b9b6c2544dc704c88ec700b0d7ce2e, type: 3}
       propertyPath: m_RootOrder
@@ -93,7 +93,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7205391743602197430, guid: 45b9b6c2544dc704c88ec700b0d7ce2e, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45b9b6c2544dc704c88ec700b0d7ce2e, type: 3}
@@ -115,7 +115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8897054653239763015, guid: 4af3f805070635048b400b933944cdc0, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 9023251925266417111, guid: 4af3f805070635048b400b933944cdc0, type: 3}
       propertyPath: m_RootOrder

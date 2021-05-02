@@ -88,7 +88,7 @@ public class SkeletonAI : MonoBehaviour
                     Stop();
                     break;
                 }
-                else if (distance < 2) // attack when close
+                else if (distance < 1.5) // attack when close
                 {
                     state = State.Attacking;
                     Stop();

@@ -13,11 +13,11 @@ TagManager:
   - UI
   - 
   - 
-  - Platform
-  - NPC
-  - Player
-  - Dead
   - 
+  - Platform
+  - Dead
+  - Npc
+  - Player
   - 
   - 
   - 
@@ -41,9 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: NPC
-    uniqueID: 2918720085
+  - name: Platform
+    uniqueID: 3613448707
+    locked: 0
+  - name: Dead
+    uniqueID: 3441284443
+    locked: 0
+  - name: Npc
+    uniqueID: 1309158825
     locked: 0
   - name: Player
-    uniqueID: 3843918191
+    uniqueID: 256344927
     locked: 0

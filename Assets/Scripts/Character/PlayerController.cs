@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Character character;
+    public ControlData control;
 
     private void Awake()
     {
@@ -13,6 +14,8 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
+
+    private bool previousAttackState = false;
     private void Update()
     {
         var find = character.GetComponent<PathfindingController>();
@@ -22,22 +25,12 @@ public class PlayerController : MonoBehaviour
                 find.MoveTo(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
             
+        character.Move = control.move;
 
-       Vector2 move = new Vector2();
-
-        if (Input.GetKey(KeyCode.A))
-            move.x -= 1;
-        if (Input.GetKey(KeyCode.D))
-            move.x += 1;
-        if (Input.GetKey(KeyCode.W))
-            move.y += 1;
-        if (Input.GetKey(KeyCode.S))
-            move.y -= 1;
-
-        character.Move = move;
-
-        character.ChargeAttack = Input.GetKey(KeyCode.Space);
-        if (Input.GetKeyUp(KeyCode.Space))
+        character.ChargeAttack = control.attack;
+        if (previousAttackState == true && !control.attack)
             character.Attack();
+
+        previousAttackState = control.attack;
     }
 }

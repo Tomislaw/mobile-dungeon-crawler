@@ -22,6 +22,7 @@ public class MeeleAttack : MonoBehaviour, OnAttack
     public void Attack()
     {
         FindAndDamage(AttackDamage);
+        character.OnAttack.Invoke();
     }
 
     private void FindAndDamage(int damage)

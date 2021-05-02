@@ -48,6 +48,8 @@ public class Character : MonoBehaviour
 
     public UnityEvent OnDeath;
     public UnityEvent OnDamage;
+    public UnityEvent OnAttack;
+    public UnityEvent OnJump;
 
     public Collider2D collider2D;
     private Rigidbody2D rigidbody;
@@ -117,20 +119,38 @@ public class Character : MonoBehaviour
             IsOnLadder = true;
 
         if (IsOnLadder && CanUseLadder)
+        {
             rigidbody.velocity = new Vector2(rigidbody.velocity.x, ClimbLadderSpeed * Move.y);
+        }
         else if (IsGrounded && Move.y > 0)
+        {
             rigidbody.velocity = new Vector2(rigidbody.velocity.x, JumpSpeed * Move.y);
+            OnJump.Invoke();
+        }
+            
 
         string sneak = HaveSneakAnimation && IsColliderAbove ? "Sneak" : "";
-
-        if (ChargeAttack && CanAttack)
-            SetAnimation("PreAttack" + sneak);
-        else if (timeToAnimationAttackFinish > 0)
-            SetAnimation("Attack" + sneak);
-        else if (Move.x != 0 || rigidbody.velocity.x != 0)
-            SetAnimation("Walk" + sneak);
-        else if (IsDead)
+        if (IsDead)
+        {
             SetAnimation("Dead");
+        }
+        else if(ChargeAttack && CanAttack)
+        {
+            SetAnimation("PreAttack" + sneak);
+        }
+        else if (timeToAnimationAttackFinish > 0)
+        {
+            SetAnimation("Attack" + sneak);
+        }
+        else if (Move.x != 0 || rigidbody.velocity.x != 0)
+        {
+            SetAnimation("Walk" + sneak);
+        }
+        else if (IsDead)
+        {
+            SetAnimation("Dead");
+        }
+         
         else
             SetAnimation("Idle" + sneak);
 

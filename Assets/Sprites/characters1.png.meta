@@ -166,19 +166,19 @@ TextureImporter:
     second: mage_attack_sneak
   - first:
       213: 4768760009883279357
-    second: characters1_54
+    second: skeleton3_idle
   - first:
       213: -2125585444204290193
-    second: characters1_55
+    second: skeleton3_walk1
   - first:
       213: -1579087962806277887
-    second: characters1_56
+    second: skeleton3_walk2
   - first:
       213: -123794199717580027
-    second: characters1_57
+    second: skeleton3_preattack
   - first:
       213: -1835720290841914537
-    second: characters1_58
+    second: skeleton3_attack
   - first:
       213: -8021164673919988914
     second: warrior_idle
@@ -196,19 +196,19 @@ TextureImporter:
     second: warrior_attack
   - first:
       213: -8713493518541021169
-    second: characters1_64
+    second: skeleton3_precharge1
   - first:
       213: -8467788022286401004
-    second: characters1_65
+    second: skeleton3_precharge2
   - first:
       213: -1016874782122456009
-    second: characters1_66
+    second: skeleton3_charge1
   - first:
       213: 4960703942883072064
     second: characters1_67
   - first:
       213: 2619633555966177845
-    second: characters1_68
+    second: skeleton3_charge2
   - first:
       213: 7824808724289414409
     second: warrior_idle_sneak
@@ -226,19 +226,19 @@ TextureImporter:
     second: warrior_attack_sneak
   - first:
       213: -8140786519419244226
-    second: characters1_74
+    second: skeleton3_death1
   - first:
       213: 3119997977298897266
-    second: characters1_75
+    second: skeleton3_death2
   - first:
       213: 7503832954250335329
-    second: characters1_76
+    second: skeleton3_death3
   - first:
       213: 4654687889538217124
-    second: characters1_77
+    second: skeleton3_death4
   - first:
       213: -423056329687664942
-    second: characters1_78
+    second: skeleton3_death5
   - first:
       213: -8630745731214753651
     second: character_death1
@@ -254,6 +254,15 @@ TextureImporter:
   - first:
       213: 7948351344562215658
     second: character_death5
+  - first:
+      213: -7804985805481761794
+    second: fish_idle
+  - first:
+      213: -4905269066620425526
+    second: fish_attack
+  - first:
+      213: 740713637773250694
+    second: fish_dead
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1501,7 +1510,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characters1_54
+      name: skeleton3_idle
       rect:
         serializedVersion: 2
         x: 80
@@ -1522,7 +1531,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characters1_55
+      name: skeleton3_walk1
       rect:
         serializedVersion: 2
         x: 96
@@ -1543,7 +1552,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characters1_56
+      name: skeleton3_walk2
       rect:
         serializedVersion: 2
         x: 112
@@ -1564,7 +1573,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characters1_57
+      name: skeleton3_preattack
       rect:
         serializedVersion: 2
         x: 128
@@ -1585,7 +1594,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characters1_58
+      name: skeleton3_attack
       rect:
         serializedVersion: 2
         x: 144
@@ -1711,7 +1720,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characters1_64
+      name: skeleton3_precharge1
       rect:
         serializedVersion: 2
         x: 80
@@ -1732,7 +1741,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characters1_65
+      name: skeleton3_precharge2
       rect:
         serializedVersion: 2
         x: 96
@@ -1753,15 +1762,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characters1_66
+      name: skeleton3_charge1
       rect:
         serializedVersion: 2
         x: 112
         y: 16
-        width: 16
+        width: 24
         height: 16
       alignment: 9
-      pivot: {x: 0.25, y: 0}
+      pivot: {x: 0.16666667, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1774,15 +1783,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characters1_68
+      name: skeleton3_charge2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 136
         y: 16
-        width: 16
+        width: 24
         height: 16
       alignment: 9
-      pivot: {x: 0.25, y: 0}
+      pivot: {x: 0.16666667, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1900,7 +1909,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characters1_74
+      name: skeleton3_death1
       rect:
         serializedVersion: 2
         x: 80
@@ -1921,7 +1930,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characters1_75
+      name: skeleton3_death2
       rect:
         serializedVersion: 2
         x: 96
@@ -1942,7 +1951,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characters1_76
+      name: skeleton3_death3
       rect:
         serializedVersion: 2
         x: 112
@@ -1963,7 +1972,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characters1_77
+      name: skeleton3_death4
       rect:
         serializedVersion: 2
         x: 128
@@ -1984,7 +1993,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characters1_78
+      name: skeleton3_death5
       rect:
         serializedVersion: 2
         x: 144
@@ -2000,27 +2009,6 @@ TextureImporter:
       bones: []
       spriteID: 2d67cf47280012af0800000000000000
       internalID: -423056329687664942
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: characters1_67
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 16
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.25, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 048dc6ff3f5f7d440800000000000000
-      internalID: 4960703942883072064
       vertices: []
       indices: 
       edges: []
@@ -2126,6 +2114,69 @@ TextureImporter:
       bones: []
       spriteID: aea11aa8f673e4e60800000000000000
       internalID: 7948351344562215658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fish_idle
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 144
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef32b4333ce1fa390800000000000000
+      internalID: -7804985805481761794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fish_attack
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 144
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acaa06ce5cbfcebb0800000000000000
+      internalID: -4905269066620425526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fish_dead
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 144
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68013cb012b874a00800000000000000
+      internalID: 740713637773250694
       vertices: []
       indices: 
       edges: []
