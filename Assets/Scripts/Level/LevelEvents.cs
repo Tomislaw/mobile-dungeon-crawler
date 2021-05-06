@@ -19,6 +19,20 @@ public class LevelEvents : MonoBehaviour
 
     public PlayerSpawn spawner;
 
+    public void OnEnable()
+    {
+        EventManager.StartListening("LevelFailed", LevelFailed);
+        EventManager.StartListening("LevelFinished", LevelFinished);
+        EventManager.StartListening("LevelRestarted", LevelRestarted);
+    }
+
+    public void OnDisable()
+    {
+        EventManager.StopListening("LevelFailed", LevelFailed);
+        EventManager.StopListening("LevelFinished", LevelFinished);
+        EventManager.StopListening("LevelRestarted", LevelRestarted);
+    }
+
     public void LevelFailed()
     {
         if (OnLevelFailed != null)
@@ -35,7 +49,7 @@ public class LevelEvents : MonoBehaviour
         Debug.Log("Level " + adventure.levels[level].scene + " finished");
     }
 
-    public void RestartLevel()
+    public void LevelRestarted()
     {
         Debug.Log("Level " + adventure.levels[level].scene + " restarted");
         Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
@@ -46,6 +60,11 @@ public class LevelEvents : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void SelectHero(GameObject prefab)
+    {
+
+    }
+
     public void StartNextLevel()
     {
         if (level == adventure.levels.Count - 1)
@@ -53,5 +72,4 @@ public class LevelEvents : MonoBehaviour
         else
             SceneManager.LoadScene(adventure.levels[level + 1].scene);
     }
-
 }

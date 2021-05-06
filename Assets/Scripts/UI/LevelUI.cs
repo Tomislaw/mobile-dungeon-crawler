@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -21,6 +22,8 @@ public class LevelUI : MonoBehaviour
 
     public AdventureData data;
     public int level;
+
+    public float startDelay = 0.5f;
 
     public void Start()
     {
@@ -70,6 +73,13 @@ public class LevelUI : MonoBehaviour
 
     public void StartLevel()
     {
+        EventManager.TriggerEvent("Level Start");
+        StartCoroutine("DelayedStart");
+    }
+
+    private IEnumerator DelayedStart()
+    {
+        yield return new WaitForSeconds(startDelay);
         SceneManager.LoadScene(data.levels[level].scene);
     }
 }

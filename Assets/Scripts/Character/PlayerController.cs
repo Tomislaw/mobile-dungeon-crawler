@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Character))]
 public class PlayerController : MonoBehaviour
 {
     private Character character;
+
     public ControlData control;
+    public PlayerControlls inputControl;
 
     private void Awake()
     {
@@ -16,8 +19,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
 
     private bool previousAttackState = false;
-    private void Update()
+    public void Update()
     {
+        if (inputControl)
+            inputControl.Update();
+
         var find = character.GetComponent<PathfindingController>();
         if (find != null)
         {
@@ -32,5 +38,7 @@ public class PlayerController : MonoBehaviour
             character.Attack();
 
         previousAttackState = control.attack;
+
+
     }
 }

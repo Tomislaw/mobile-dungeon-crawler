@@ -43,6 +43,11 @@ public class AdventureData : ScriptableObject
     public struct ChestData
     {
         public bool acquired;
-        public int type;
+        public Type type;
+
+        public enum Type
+        {
+            Normal, Exotic
+        }
     }
 }

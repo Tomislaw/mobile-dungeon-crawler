@@ -123,8 +123,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 256344927
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 6600118581943582110, guid: 877a92fd574e585438c20ce319e9fa4b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -153,7 +153,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 6
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f9bace41386d69e40b8b8c61df95014c, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClimbLadderSpeed: 12
+  CoyoteTime: 0.15
   WalkSpeed: 9
   JumpSpeed: 20
   Acceleration: 40
@@ -183,10 +184,11 @@ MonoBehaviour:
   Health: 8
   MaxHealth: 8
   HaveSneakAnimation: 1
-  FaceLeft: 0
   AttackAnimationTime: 0.08
+  StepTime: 0.2
   Move: {x: 0, y: 0}
   ChargeAttack: 0
+  FaceLeft: 0
   OnDeath:
     m_PersistentCalls:
       m_Calls:
@@ -247,6 +249,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnWalk:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7068583201586914935}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: f1022c4568d4673439de2d21c5cde145, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   collider2D: {fileID: 0}
   isTeleporting: 0
   IsOnLadder: 0
@@ -262,7 +279,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95b67ac35d3aa7048874f846841e9e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  control: {fileID: 0}
+  control: {fileID: 11400000, guid: c61cd8efd3e12ab4489d55e2db5a8b6e, type: 2}
+  inputControl: {fileID: 11400000, guid: 5099324561f36ed429e3aacb5ca1bacb, type: 2}
 --- !u!95 &1586342966391059649
 Animator:
   serializedVersion: 3

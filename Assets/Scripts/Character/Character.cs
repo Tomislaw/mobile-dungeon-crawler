@@ -7,9 +7,9 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Character : MonoBehaviour
 {
-    // movement
+    // movement properties
     public float ClimbLadderSpeed = 0;
-
+    public float CoyoteTime = 0.15f;
     public float WalkSpeed = 10;
     public float JumpSpeed = 20;
     public float Acceleration = 10;
@@ -17,44 +17,49 @@ public class Character : MonoBehaviour
 
     public LayerMask platformLayer;
 
-    // attack
+    // attack and damage group
     public float AttackSpeed = 0.2f;
-
     public Group group;
 
     // health
-    public int Health;
+    public int Health = 4;
+    public int MaxHealth = 4;
 
-    public int MaxHealth;
-
-    // animation
+    // fields used for animations
     public bool HaveSneakAnimation = false;
-
-    public bool FaceLeft;
     public float AttackAnimationTime = 0.15f;
+    public float StepTime= 0.15f;
 
-    // control
-    public Vector2 Move;
 
-    public bool ChargeAttack;
+    // fields used for controllig character
+    public Vector2 Move = new Vector2();
+    public bool ChargeAttack = false;
+    public bool FaceLeft = false;
 
-    private float timeToNextAttack;
-    private float timeToAnimationAttackFinish;
-
+    // private fields
+    private float timeToNextAttack = 0;
+    private float timeToAnimationAttackFinish = 0;
+    private float timeToStep = 0;
+    private float timeToFinishCoyoteTime = 0;
+    private bool isJumping = false;
     public bool CanAttack { get => timeToNextAttack <= 0 && !IsDead; }
 
+    // damaging controlles (weapon used, armor etc)
     public OnAttack AttackController;
     public OnDamage DamageController;
 
+    // events
     public UnityEvent OnDeath;
     public UnityEvent OnDamage;
     public UnityEvent OnAttack;
     public UnityEvent OnJump;
+    public UnityEvent OnWalk;
 
     public Collider2D collider2D;
     private Rigidbody2D rigidbody;
     private Animator animator;
 
+    // on which platforms or ladders character currently is
     public HashSet<LadderTile> ladders = new HashSet<LadderTile>();
     public HashSet<PlatformTile> platforms = new HashSet<PlatformTile>();
 
@@ -65,7 +70,7 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
-        if (!collider2D)
+        if (collider2D == null)
             collider2D = GetComponent<Collider2D>();
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -93,14 +98,14 @@ public class Character : MonoBehaviour
 
         if (rigidbody.velocity.x > WalkSpeed * Move.x && Move.x <= 0)
         {
-            float additionalSpeed = Acceleration * Time.deltaTime;
+            float additionalSpeed = Acceleration * Time.fixedDeltaTime;
             rigidbody.velocity = new Vector2(Mathf.Max(WalkSpeed * Move.x, rigidbody.velocity.x - additionalSpeed), rigidbody.velocity.y);
         }
 
         // move right
         if (rigidbody.velocity.x < WalkSpeed * Move.x && Move.x >= 0)
         {
-            float additionalSpeed = Acceleration * Time.deltaTime;
+            float additionalSpeed = Acceleration * Time.fixedDeltaTime;
             rigidbody.velocity = new Vector2(Mathf.Min(WalkSpeed * Move.x, rigidbody.velocity.x + additionalSpeed), rigidbody.velocity.y);
         }
 
@@ -118,16 +123,38 @@ public class Character : MonoBehaviour
         if (Move.y != 0 && ladders.Count > 0 && CanUseLadder)
             IsOnLadder = true;
 
+        bool isGrounded = IsGrounded;
+        if (isGrounded)
+        {
+            isJumping = false;
+            timeToFinishCoyoteTime = CoyoteTime;
+        }
+        else
+            timeToFinishCoyoteTime -= Time.fixedDeltaTime;
+
+        bool canJump = (isGrounded || timeToFinishCoyoteTime > 0) && !isJumping;
+
+
         if (IsOnLadder && CanUseLadder)
         {
             rigidbody.velocity = new Vector2(rigidbody.velocity.x, ClimbLadderSpeed * Move.y);
         }
-        else if (IsGrounded && Move.y > 0)
+        else if (canJump && Move.y > 0)
         {
             rigidbody.velocity = new Vector2(rigidbody.velocity.x, JumpSpeed * Move.y);
+            isJumping = true;
             OnJump.Invoke();
         }
-            
+           
+        if(isGrounded && Move.x != 0)
+        {
+            timeToStep -= Time.fixedDeltaTime;
+            if (timeToStep < 0)
+            {
+                timeToStep = StepTime;
+                OnWalk.Invoke();
+            }
+        }
 
         string sneak = HaveSneakAnimation && IsColliderAbove ? "Sneak" : "";
         if (IsDead)

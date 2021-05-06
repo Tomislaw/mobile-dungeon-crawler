@@ -36,8 +36,9 @@ MonoBehaviour:
     staminaUpgrades: 0
     specialUpgrades: 0
   archer:
-    unlocked: 0
+    unlocked: 1
     healthUpgrades: 0
     attackUpgrades: 0
     staminaUpgrades: 0
     specialUpgrades: 0
+  selectedCharacter: 0

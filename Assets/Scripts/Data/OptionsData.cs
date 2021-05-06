@@ -8,6 +8,9 @@ public class OptionsData : ScriptableObject
 {
     public TouchUiType touchUiType;
 
+    public float musicVolume = 1;
+    public float effectsVolume = 1;
+
     public enum TouchUiType
     {
         Arrows1, 
@@ -16,4 +19,6 @@ public class OptionsData : ScriptableObject
         Joystick,
         None
     }
+
+
 }

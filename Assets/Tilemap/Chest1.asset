@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Chest1
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: -6834524911116659543, guid: d1274dc63351cce47918b5662c48f5e3, type: 3}
-  m_DefaultGameObject: {fileID: 0}
+  m_DefaultGameObject: {fileID: 3082100523231120117, guid: bcfb4ba1eb4ca414a8395aa76dbf638d, type: 3}
   m_DefaultColliderType: 0
   m_TilingRules:
   - m_Id: 1
     m_Sprites:
     - {fileID: -6834524911116659543, guid: d1274dc63351cce47918b5662c48f5e3, type: 3}
-    m_GameObject: {fileID: 0}
+    m_GameObject: {fileID: 3082100523231120117, guid: bcfb4ba1eb4ca414a8395aa76dbf638d, type: 3}
     m_AnimationSpeed: 1
     m_PerlinScale: 0.5
     m_Output: 0

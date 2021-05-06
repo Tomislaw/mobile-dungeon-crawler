@@ -76,7 +76,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7075215270467900574}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c79b1304bbc58f4c86e2d08ec5ce199, type: 3}
+  m_Script: {fileID: 11500000, guid: 2542995ff7f4bb7459de8a7b9b357d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   redGems: {fileID: 101998503715518640}

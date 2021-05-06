@@ -100,6 +100,7 @@ MonoBehaviour:
   button: {fileID: 3500871649617097090}
   data: {fileID: 11400000, guid: de6a0a484468d7f4da31dad342185329, type: 2}
   level: 0
+  startDelay: 0.5
 --- !u!114 &3500871649617097090
 MonoBehaviour:
   m_ObjectHideFlags: 0
