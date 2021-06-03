@@ -12,6 +12,8 @@ public class HealthUI : MonoBehaviour
 
     private int previousHealth = 0;
 
+    public int maxHeartsInRow = 4;
+
     // Update is called once per frame
     private void FixedUpdate()
     {
@@ -65,18 +67,21 @@ public class HealthUI : MonoBehaviour
 
         hearts.Clear();
 
+        
         int heartsCount = character.IsDead ? 0 : (character.MaxHealth + 1) / 2;
-        float startingPos = (float)heartsCount / 2 - 0.5f;
-        //if (heartsCount % 2 == 0)
-        //    startingPos -= 0.5f;
+
+        float hearthWidth = 1;
 
         for (int i = 0; i < heartsCount; i++)
         {
+            int hearthRow = i / maxHeartsInRow;
+            int heartsInRow = Mathf.Min(maxHeartsInRow, heartsCount - hearthRow * maxHeartsInRow);
+            float startingPos = (float)heartsInRow / 2 - hearthWidth / 2 - hearthWidth * i % maxHeartsInRow;
+
             var p = Instantiate(prefab);
             p.name = "heart" + i;
             p.transform.SetParent(transform, false);
-            p.transform.localPosition = new Vector2(startingPos, 0);
-            startingPos -= 1;
+            p.transform.localPosition = new Vector2(startingPos, hearthRow * hearthWidth);
             hearts.Add(p);
         }
     }

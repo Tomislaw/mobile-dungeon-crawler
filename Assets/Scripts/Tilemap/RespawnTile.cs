@@ -14,17 +14,18 @@ public class RespawnTile : MonoBehaviour
 
     private SubScene FindSubscene()
     {
-        GameObject scene = gameObject;
-        do
+        var scenes = FindObjectsOfType<SubScene>();
+        Debug.Log("Found scenes:" + scenes.Length);
+        foreach (var scene in scenes)
         {
-            scene = scene.transform?.parent?.gameObject;
-            var subscene = scene.GetComponent<SubScene>();
-            if (subscene == null)
-                continue;
-            return subscene;
-
+            Debug.Log(scene.respawnPoint + " - " + scene.Contains(transform.position));
+            if (scene.respawnPoint == null && scene.Contains(transform.position))
+            {
+                Debug.Log(scene.transform.position);
+                return scene;
+            }
+                
         }
-        while (scene != null);
 
         return null;
     }

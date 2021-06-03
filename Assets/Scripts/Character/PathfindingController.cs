@@ -15,6 +15,18 @@ public class PathfindingController : MonoBehaviour
     private float timeLeftOnNode;
     private static float maxTimeOnNode = 1f;
 
+    private Vector2Int movingToTile;
+    public Vector2Int Target
+    {
+        get
+        {
+            if (!IsMoving)
+                return GetCurrentTileId;
+
+            return movingToTile;
+        }
+    }
+   
     private void Start()
     {
         if (character == null)
@@ -31,12 +43,24 @@ public class PathfindingController : MonoBehaviour
     public bool MoveToId(Vector2Int id)
     {
         var start = GetCurrentTileId;
+        if (character.IsGrounded && !CanWalkOnTile(start))
+        {
+            // scenario when character is standing on corner of tile
+            if (CanWalkOnTile(start - new Vector2Int(1, 0)))
+                start = start - new Vector2Int(1, 0);
+            else if (CanWalkOnTile(start + new Vector2Int(1, 0)))
+                start = start + new Vector2Int(1, 0);
+        }
+
         var end = id;
+
         nodes = astar.GetPath(start, end, data);
         if (nodes == null)
         {
             return false;
         }
+
+        movingToTile = id;
 
 
         timeLeftOnNode = maxTimeOnNode;
@@ -66,7 +90,7 @@ public class PathfindingController : MonoBehaviour
 
             var id = nodes.Peek().Id;
             var current = GetCurrentTileId;
-            if (id == current)
+            if (id.x == current.x && Mathf.Abs(id.y - current.y) <=1)
             {
                 nodes.Pop();
                 timeLeftOnNode = maxTimeOnNode;
@@ -110,7 +134,10 @@ public class PathfindingController : MonoBehaviour
         Gizmos.color = Color.white;
     }
 
-
+    public bool CanWalkOnPosition(Vector2 position)
+    {
+        return CanWalkOnTile(GetTileId(position));
+    }
     public bool CanWalkOnTile(Vector2Int Id)
     {
         for (int i = Id.y + 1; i < Id.y + data.height; i++)
@@ -121,10 +148,16 @@ public class PathfindingController : MonoBehaviour
         }
 
         var floor = astar.GetNode(new Vector2Int(Id.x, Id.y - 1));
+
         return floor.Block || floor.Platform;
     }
 
-    public Vector2Int GetCurrentTileId { get => astar.GetTileId(transform.position + new Vector3(0, 0.1F)); }
+    public Vector2Int GetTileId(Vector2 position)
+    {
+        return astar.GetTileId(position + new Vector2(0, 0.1F));
+    }
+
+    public Vector2Int GetCurrentTileId { get => GetTileId(transform.position); }
 
     private AStar FindAStar()
     {
@@ -139,7 +172,7 @@ public class PathfindingController : MonoBehaviour
 
         }
         while (parent != null);
-
+        Debug.LogWarning("AStar not found");
         return null;
     }
 }

@@ -30,9 +30,6 @@ public class HealthHeart : MonoBehaviour
         get => _health;
         set
         {
-            if (coroutine != null)
-                StopCoroutine(coroutine);
-
             coroutine = StartCoroutine("SetHealth", value);
         }
     }

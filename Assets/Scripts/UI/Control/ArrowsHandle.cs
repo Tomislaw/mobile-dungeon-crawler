@@ -229,7 +229,7 @@ public class ArrowsHandle : MonoBehaviour
                 id++;
             }
         }
-        if (Mouse.current.leftButton.isPressed)
+        if (Mouse.current.leftButton.isPressed && Mouse.current.leftButton.wasPressedThisFrame)
         {
             if (Contains(Mouse.current.position.ReadValue()))
             {

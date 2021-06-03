@@ -88,7 +88,7 @@ public class SkeletonAI : MonoBehaviour
                     Stop();
                     break;
                 }
-                else if (distance < 1.5) // attack when close
+                else if (distance < distanceWhenStartAttacking) // attack when close
                 {
                     state = State.Attacking;
                     Stop();
@@ -155,6 +155,7 @@ public class SkeletonAI : MonoBehaviour
     public float searchDistance = 10f;
     public float searchHeight = 2f;
     public float timeBetweenSearch = 0.5f;
+    public float distanceWhenStartAttacking = 1.5f;
     private float timeToSearch;
 
     public bool SearchForEnemies()
