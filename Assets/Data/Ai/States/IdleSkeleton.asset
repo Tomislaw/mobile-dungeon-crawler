@@ -19,3 +19,4 @@ MonoBehaviour:
   - State: {fileID: 11400000, guid: 39c1dd7f65c97bd40a1464e05798633d, type: 2}
     Activators:
     - {fileID: 11400000, guid: 81fa808bae629c14d9590a2f0df729d0, type: 2}
+    - {fileID: 11400000, guid: 47c0a15e818bf9f47a03f8be1b2aa01e, type: 2}

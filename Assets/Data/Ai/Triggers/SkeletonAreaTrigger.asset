@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkeletonAreaTrigger
   m_EditorClassIdentifier: Assembly-CSharp::AreaTriggerActivatorData
   Name: Skeleton Area Trigger
-  TriggerArea: {x: 8, y: 4}
-  Raycast: 0
+  TriggerArea: {x: 12, y: 4}
+  Raycast: 1
   triggerDelay: 0.3
   Activators: 0100000002000000

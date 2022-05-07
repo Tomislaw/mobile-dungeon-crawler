@@ -14,6 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: MoveToRandom
   searchDistanceX: 4
-  searchDistanceY: 1
-  NumberOfRetries: 3
-  AwaitTime: 1
+  searchDistanceY: 0
+  AwaitTime: 2

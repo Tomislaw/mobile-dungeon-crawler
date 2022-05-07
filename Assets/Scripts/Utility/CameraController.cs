@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.U2D;
@@ -50,13 +51,21 @@ public class CameraController : MonoBehaviour
 
     private void UpdateCameraPosition()
     {
-        if (!objectToFollow)
+        if (objectToFollow == null)
             return;
 
         transform.position = new Vector3(
             objectToFollow.transform.position.x,
             objectToFollow.transform.position.y,
             transform.position.z);
+
+        if (subScene == null)
+        {
+            var scenes = FindObjectsOfType<SubScene>();
+            if (scenes.Length == 0)
+                return;
+            subScene = scenes.OrderBy(it => Vector3.Distance(it.transform.position, transform.position)).First();
+        }
 
         if (subScene)
         {
@@ -70,7 +79,7 @@ public class CameraController : MonoBehaviour
                 SetSubScene(subScene.top);
         }
 
-        if (camera)
+        if (camera && subScene)
         {
             //float w = camera.orthographicSize * Screen.width / Screen.height;
             //float h = camera.orthographicSize;

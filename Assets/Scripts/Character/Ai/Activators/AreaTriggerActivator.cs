@@ -2,6 +2,7 @@
 using Assets.Scripts.Character.Ai;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(fileName = "AreaTriggerActivator", menuName = "RuinsRaiders/Ai/AreaTriggerActivator", order = 1)]
 public class AreaTriggerActivator : BasicAiActivatorData
@@ -10,7 +11,7 @@ public class AreaTriggerActivator : BasicAiActivatorData
     public Vector2 TriggerArea;
     public bool Raycast;
     public float triggerDelay;
-    public List<Character.Group> Activators;
+    public List<HealthController.Group> Activators;
 
     public override BasicAiActivator Create(GameObject gameObject)
     {
@@ -39,15 +40,21 @@ public class AreaTriggerActivator : BasicAiActivatorData
             var raycast = Physics2D.OverlapBoxAll(Target.transform.position,data.TriggerArea*2, 0);
             foreach (var go in raycast)
             {
-                var ch = go.gameObject.GetComponent<Character>();
+                var target = go.gameObject.GetComponent<HealthController>();
 
-                if (ch != null && !ch.IsDead && data.Activators.Contains(ch.group))
+                if (target != null && !target.IsDead && data.Activators.Contains(target.group))
                 {
+                    if (this.data.Raycast)
+                        foreach (var item in Physics2D.LinecastAll(Target.transform.position + new Vector3(0,0.95f,0), 
+                            go.gameObject.transform.position))
+                        {
+                            if (item.collider is TilemapCollider2D)
+                                return null;
+                        }
+
                     ActivatorData data;
                     data.triggeredBy = go.gameObject;
                     data.triggeredFor = Target;
-
-                    Debug.Log("Area trigger occured for "+ Target.name + " by " + go.gameObject.name);
 
                     return data;
                 }

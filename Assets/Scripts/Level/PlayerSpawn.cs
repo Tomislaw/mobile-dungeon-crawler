@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,22 +11,40 @@ public class PlayerSpawn : MonoBehaviour
     public Character knightPrefab;
     public Character archerPrefab;
     public Character magePrefab;
-    public Character spermanPrefab;
+    public Character spearmanPrefab;
 
-    public LevelEvents levelEvents;
 
-    private void Start()
+    public void Spawn(CharacterType type)
     {
+        Character player = null;
+        switch (type)
+        {
+            case CharacterType.Spearman:
+                player = Instantiate(spearmanPrefab);
+                break;
+            case CharacterType.Mage:
+                player = Instantiate(magePrefab);
+                break;
+            case CharacterType.Knight:
+                player = Instantiate(knightPrefab);
+                break;
+            case CharacterType.Bowman:
+                player = Instantiate(archerPrefab);
+                break;
+        }
+        player.transform.position = transform.position;
+        transform.parent = player.gameObject.transform;
+        player.GetComponent<HealthController>()?.OnDeath.AddListener(OnDeath);
     }
 
-    // Update is called once per frame
-    private void OnValidate()
+    private void OnDeath()
     {
-        if (levelEvents == null)
-            levelEvents = Object.FindObjectOfType<LevelEvents>();
+        FindObjectOfType<LevelEvents>()?.LevelFailed();
     }
 
-    public void SpawnCharacter()
+    [Serializable]
+    public enum CharacterType
     {
+        Knight, Bowman, Spearman, Mage
     }
 }

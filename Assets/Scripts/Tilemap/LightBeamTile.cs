@@ -22,7 +22,7 @@ public class LightBeamTile : MonoBehaviour
         if (playerLayer == (playerLayer | (1 << collision.gameObject.layer)))
         {
             levelEvents.LevelFinished();
-            StartCoroutine(character.Hide());
+            StartCoroutine(character.HideCoroutine());
         }
     }
 }

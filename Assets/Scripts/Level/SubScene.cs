@@ -1,0 +1,47 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.IMGUI.Controls;
+using UnityEngine;
+
+public class SubScene : MonoBehaviour
+{
+    public int id = -1;
+    public float width = 32;
+    public float height = 18;
+
+    public SubScene left;
+    public SubScene right;
+    public SubScene top;
+    public SubScene bottom;
+
+    public GameObject respawnPoint;
+
+
+    private BoxBoundsHandle handle;
+
+    // Update is called once per frame
+    private void Update()
+    {
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = new Color(1, 0, 0, 0.5f);
+        Gizmos.DrawWireCube(transform.position, new Vector3(width, height, 1));
+    }
+
+    public bool Contains(Vector2 position)
+    {
+        var left = -width / 2 + transform.position.x;
+        var right = width / 2 + transform.position.x;
+        var top = height / 2 + transform.position.y;
+        var bottom = -height / 2 + transform.position.y;
+        return position.x >= left && position.x <= right && position.y >= bottom && position.y <= top;
+    }
+
+    internal void OrderBy()
+    {
+        throw new System.NotImplementedException();
+    }
+}

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: ChaseAndAttackTargetAction
   m_EditorClassIdentifier: Assembly-CSharp::ChaseAndAttackTarget
   Name: Attack
-  resignDistance: -1
+  resignDistance: 12
+  resignTime: 3
   timeBetweenRetryingFindingPath: 0.5
   distanceForAttack: 2
   attackTime: 0.3

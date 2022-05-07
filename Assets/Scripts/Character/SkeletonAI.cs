@@ -7,10 +7,12 @@ public class SkeletonAI : MonoBehaviour
 {
     public List<string> friends;
 
-    private Character character;
+    private HealthController healthController;
+    private MovementController movementController;
+    private AttackController attackController;
     private PathfindingController pathfinding;
 
-    private Character target = null;
+    private HealthController target = null;
 
     public State state;
 
@@ -19,8 +21,10 @@ public class SkeletonAI : MonoBehaviour
 
     private void Start()
     {
-        character = GetComponent<Character>();
+        movementController = GetComponent<MovementController>();
+        attackController = GetComponent<AttackController>();
         pathfinding = GetComponent<PathfindingController>();
+        healthController = GetComponent<HealthController>();
         timeToAttack = timeBetweenAttacks;
 
     }
@@ -39,7 +43,7 @@ public class SkeletonAI : MonoBehaviour
     // Update is called once per frame
     private void Think()
     {
-        if (character.IsDead)
+        if (healthController.IsDead)
             return;
 
         switch (state)
@@ -112,8 +116,8 @@ public class SkeletonAI : MonoBehaviour
                 if (target == null || target.IsDead)
                 {
                     state = State.Idle;
-                    character.Move = new Vector2();
-                    character.ChargeAttack = false;
+                    movementController.Stop();
+                    attackController.ChargeAttack = false;
                     break;
                 }
 
@@ -128,14 +132,14 @@ public class SkeletonAI : MonoBehaviour
                     if (dist > 1.5)
                     {
                         state = State.Alerted;
-                        character.Move = new Vector2();
-                        character.ChargeAttack = false;
+                        movementController.Stop();
+                        attackController.ChargeAttack = false;
                         break;
                     }
                 }
                 else
                 {
-                    if (!character.ChargeAttack)
+                    if (!attackController.ChargeAttack)
                     {
                         PreAttack();
                         Stop();
@@ -163,11 +167,11 @@ public class SkeletonAI : MonoBehaviour
         var raycast = Physics2D.OverlapBoxAll(transform.position, new Vector2(searchDistance * 2, searchHeight * 2), 0);
         foreach (var go in raycast)
         {
-            var ch = go.gameObject.GetComponent<Character>();
+            var hc = go.gameObject.GetComponent<HealthController>();
 
-            if (ch != null && !ch.IsDead && ch.group != character.group)
+            if (hc != null && !hc.IsDead && hc.group != healthController.group)
             {
-                target = ch;
+                target = hc;
                 return true;
             }
         }
@@ -208,18 +212,18 @@ public class SkeletonAI : MonoBehaviour
     public void Attack()
     {
         //character.FaceLeft = target.transform.position.x < transform.position.x;
-        character.Attack();
+        attackController.Attack();
     }
 
     public void PreAttack()
     {
-        character.FaceLeft = target.transform.position.x < transform.position.x;
-        character.ChargeAttack = true;
+        movementController.FaceLeft = target.transform.position.x < transform.position.x;
+        attackController.ChargeAttack = true;
     }
 
     public void Stop()
     {
-        character.Move = new Vector2(0, 0);
+        movementController.Stop();
         pathfinding.StopMoving();
     }
 

@@ -24,24 +24,22 @@ public class ChaseAndAttackAction : ChaseAction
         private float _attackCooldown;
         private bool attacking = false;
 
+        private AttackController attackController;
+
         public Action(ChaseAndAttackAction parent, ActivatorData trigger) : base(parent,trigger)
         {
+            attackController = trigger.triggeredFor.GetComponent<AttackController>();
             this.parent = parent;
         }
 
         public override void Update(float dt)
         {
-            if (IsFinished())
-            {
-                character.ChargeAttack = false;
-                character.Move = new Vector2();
-                return;
-            }
-            
-            if (targetCharacter != null && targetCharacter.IsDead)
+            if (shouldResign(dt))
             {
                 targetCharacter = null;
                 target = null;
+                attackController.ChargeAttack = false;
+                movementController.Stop();
                 return;
             }
 
@@ -50,28 +48,29 @@ public class ChaseAndAttackAction : ChaseAction
                 _attackCooldown -= dt;
                 return;
             }
-             
+
 
             if (attacking)
             {
-                if(_timeToAttack == parent.attackTime)
+                if (_timeToAttack == parent.attackTime)
                 {
-                    character.Move = new Vector2();
+                    movementController.Stop();
+                    movementController.FacePosition(target.transform.position);
                 }
-                if(_timeToAttack < 0)
+                if (_timeToAttack < 0)
                 {
-                    character.Attack();
-                    character.ChargeAttack = false;
+                    attackController.Attack();
+                    attackController.ChargeAttack = false;
                     attacking = false;
                     _attackCooldown = parent.timeBetweenAttack;
                 }
                 else
                 {
-                    character.ChargeAttack = true;
+                    attackController.ChargeAttack = true;
                     _timeToAttack -= dt;
                 }
             }
-            if(!attacking && parent.distanceForAttack > Vector2.Distance(character.transform.position,target.transform.position))
+            if (!attacking && parent.distanceForAttack > Vector2.Distance(character.transform.position, target.transform.position))
             {
                 attacking = true;
                 _timeToAttack = parent.attackTime;

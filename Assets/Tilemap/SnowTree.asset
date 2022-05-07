@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 535f8e525ff367c4ba67961e201a05ed, type: 3}
+  m_Name: SnowTree
+  m_EditorClassIdentifier: 
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Transform:
+    e00: 1
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 1
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 1
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+  m_InstancedGameObject: {fileID: 0}
+  m_Flags: 1
+  m_ColliderType: 0
+  m_Sprites:
+  - {fileID: 8828894263068139572, guid: a1aa2ae13b4ef4c4f95582818b6c91e0, type: 3}
+  - {fileID: -3593705851917715864, guid: a1aa2ae13b4ef4c4f95582818b6c91e0, type: 3}
+  - {fileID: 9080190067718580867, guid: a1aa2ae13b4ef4c4f95582818b6c91e0, type: 3}
+  - {fileID: -450560309250269947, guid: a1aa2ae13b4ef4c4f95582818b6c91e0, type: 3}
+  - {fileID: 6618411599127548137, guid: a1aa2ae13b4ef4c4f95582818b6c91e0, type: 3}

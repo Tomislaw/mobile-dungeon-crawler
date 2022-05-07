@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Character.Ai;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -9,7 +10,6 @@ public class MoveToRandomTileAction : BasicAiActionData
     public int searchDistanceX = 4;
     public int searchDistanceY = 1;
 
-    public int NumberOfRetries = 5;
     public float AwaitTime = 1;
 
     public override BasicAiAction Create(ActivatorData trigger)
@@ -19,26 +19,33 @@ public class MoveToRandomTileAction : BasicAiActionData
 
     public class Action : BasicAiAction
     {
-        private Character character;
+        private MovementController character;
         private PathfindingController pathfinding;
         private float awaitTime;
         public Action(ActivatorData trigger, MoveToRandomTileAction parent)
         {
-            character = trigger.triggeredFor.GetComponent<Character>();
+            character = trigger.triggeredFor.GetComponent<MovementController>();
             pathfinding = trigger.triggeredFor.GetComponent<PathfindingController>();
             awaitTime = parent.AwaitTime;
             var id = pathfinding.GetCurrentTileId;
-            for (int i = 0; i < parent.NumberOfRetries; i++)
+
+            List<Vector2Int> positions = new List<Vector2Int>();
+            for(int x = -parent.searchDistanceX; x <= parent.searchDistanceX; x++)
+                for (int y = -parent.searchDistanceY; y <= parent.searchDistanceY; y++)
+                {
+                    if (id.x == 0 && id.y == 0)
+                        continue;
+
+                    var pos = new Vector2Int(id.x + x, id.y + y);
+                    if (pathfinding.CanWalkOnTile(pos))
+                        positions.Add(pos);
+                }
+
+            var randomizedPositions = positions.OrderBy(it=>Random.Range(0f, 1f));
+            foreach (var pos in randomizedPositions)
             {
-                var pos = new Vector2Int(
-                    id.x + Random.Range(-parent.searchDistanceX, parent.searchDistanceX + 1),
-                    id.y + Random.Range(-parent.searchDistanceY, parent.searchDistanceY + 1));
-
-                if (!pathfinding.CanWalkOnTile(pos))
-                    continue;
-
                 if (pathfinding.MoveToId(pos))
-                    break;
+                    return;
             }
         }
 
@@ -57,6 +64,15 @@ public class MoveToRandomTileAction : BasicAiActionData
         {
             if (!pathfinding.IsMoving && awaitTime > 0)
                 awaitTime -= dt;
+        }
+
+        public override string ToString()
+        {
+            return "MoveToRandomTileAction;" +
+                "\nawait: " + awaitTime.ToString() +
+                "\nmoving: " + pathfinding.IsMoving +
+                "\nnodes: " + pathfinding.RemainingNodes() +
+                "\nfinished: " + IsFinished();
         }
     }
 }

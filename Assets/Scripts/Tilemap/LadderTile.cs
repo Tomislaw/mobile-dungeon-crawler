@@ -6,7 +6,7 @@ public class LadderTile : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var character = collision.gameObject.GetComponent<Character>();
+        var character = collision.gameObject.GetComponent<MovementController>();
         if (character && character.CanUseLadder)
         {
             character.ladders.Add(this);
@@ -15,7 +15,7 @@ public class LadderTile : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        var character = collision.gameObject.GetComponent<Character>();
+        var character = collision.gameObject.GetComponent<MovementController>();
         if (character && character.CanUseLadder)
         {
             character.ladders.Remove(this);

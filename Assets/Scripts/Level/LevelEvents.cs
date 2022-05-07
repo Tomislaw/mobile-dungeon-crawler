@@ -17,13 +17,14 @@ public class LevelEvents : MonoBehaviour
     public UnityEvent OnLevelFailed;
     public UnityEvent OnSubsceneChanged;
 
-    public PlayerSpawn spawner;
+    private PlayerSpawn spawner;
 
     public void OnEnable()
     {
         EventManager.StartListening("LevelFailed", LevelFailed);
         EventManager.StartListening("LevelFinished", LevelFinished);
         EventManager.StartListening("LevelRestarted", LevelRestarted);
+        spawner = FindObjectOfType<PlayerSpawn>();
     }
 
     public void OnDisable()
@@ -60,9 +61,9 @@ public class LevelEvents : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void SelectHero(GameObject prefab)
+    public void SelectHero(int id)
     {
-
+        spawner.Spawn((PlayerSpawn.CharacterType)id);
     }
 
     public void StartNextLevel()

@@ -42,8 +42,6 @@ namespace Assets.Scripts.Character.Ai.BasicAiState
             if (state.Action != null)
                 currentAction = state.Action.Create(trigger);
 
-            Debug.Log("Started action " + currentAction + " for " + trigger.triggeredFor);
-
             Transitions = state.StateTransitions.ConvertAll(it => Transition.Create(it, trigger.triggeredBy));
             OnActionFinished = state.OnActionFinished;
         }
@@ -58,7 +56,6 @@ namespace Assets.Scripts.Character.Ai.BasicAiState
                 var trigger = transiton.Triggered();
                 if (trigger.HasValue)
                 {
-                    Debug.Log("Transition occured for " + trigger.Value.triggeredFor);
                     return (transiton, trigger.Value);
                 }
             }
@@ -69,6 +66,11 @@ namespace Assets.Scripts.Character.Ai.BasicAiState
         {
             if (currentAction != null)
                 currentAction.Update(dt);
+        }
+
+        public void Stop()
+        {
+            currentAction?.Stop();
         }
 
         public bool CanStop()

@@ -6,14 +6,30 @@ using System.Linq;
 using System.Text;
 using UnityEngine.Tilemaps;
 using System.Threading;
+using UnityEngine.Events;
+
 
 [RequireComponent(typeof(Tilemap))]
 public class AStar : MonoBehaviour
 {
+    public UnityEvent OnMapUpdated = new UnityEvent();
     // Start is called before the first frame update
     private Tilemap tilemap;
+    private HashSet<Vector2Int> DynamicTiles = new HashSet<Vector2Int>();
 
-    private void Start()
+    public void AddDynamicBlockTile(Vector2Int tileId)
+    {
+        DynamicTiles.Add(tileId);
+        OnMapUpdated.Invoke();
+    }
+
+    public void RemoveDynamicBlockTile(Vector2Int tileId)
+    {
+        DynamicTiles.Remove(tileId);
+        OnMapUpdated.Invoke();
+    }
+
+    private void Awake()
     {
         tilemap = GetComponent<Tilemap>();
     }
@@ -25,7 +41,7 @@ public class AStar : MonoBehaviour
 
         var node = new AStarSharp.Node();
         node.Id = Id;
-        node.Block = collider != Tile.ColliderType.None;
+        node.Block = collider != Tile.ColliderType.None || DynamicTiles.Contains(Id);
         if (gameobject != null)
         {
             node.Ladder = gameobject.GetComponentInChildren<LadderTile>() != null;
@@ -38,12 +54,15 @@ public class AStar : MonoBehaviour
 
     public Vector2 GetPositionFromId(Vector2Int id)
     {
-        var pos = tilemap.CellToWorld(new Vector3Int(id.x,id.y,0));
+        var pos = tilemap.CellToWorld(new Vector3Int(id.x, id.y, 0));
         return new Vector2(pos.x + 0.5f, pos.y + 0.5f);
     }
 
     public Vector2Int GetTileId(Vector2 position)
     {
+        if(tilemap == null)
+            return new Vector2Int(0, 0);
+
         var pos = tilemap.WorldToCell(position);
         return new Vector2Int(pos.x, pos.y);
     }
@@ -58,6 +77,16 @@ public class AStar : MonoBehaviour
     public List<AStarSharp.Node> GetNearbyNodes(AStarSharp.Node node, WalkData data)
     {
         var list = new List<AStarSharp.Node>();
+
+        if (data.flying)
+        {
+            AddFlyingNodes(list, data, node.Id + new Vector2Int(0, -1), node);
+            AddFlyingNodes(list, data, node.Id + new Vector2Int(0, 1), node);
+            AddFlyingNodes(list, data, node.Id + new Vector2Int(-1, 0), node);
+            AddFlyingNodes(list, data, node.Id + new Vector2Int(1, 0), node);
+            return list;
+        }
+
 
         var floor = GetNode(node.Id + new Vector2Int(0, -1));
         if (floor == null)
@@ -226,6 +255,37 @@ public class AStar : MonoBehaviour
         }
     }
 
+    public void AddFlyingNodes(in List<AStarSharp.Node> nodes, WalkData data, Vector2Int Id, AStarSharp.Node parent)
+    {
+        var node = GetNode(Id);
+        if (node == null || node.Block)
+            return;
+
+        node.Weight = 1;
+        for (int i = Id.y + 1; i < Id.y + data.height; i++)
+        {
+            var above = GetNode(new Vector2Int(Id.x, i));
+            if (node == null || above.Block)
+                return;
+        }
+
+        // if blocks are nearby, then dont like coming near them
+        for (int x = -1; x <= 1; x++)
+            for (int y = -1; y <= 1; y++)
+            {
+                if (x == 0 || y == 0)
+                    continue;
+
+                var above = GetNode(new Vector2Int(Id.x + x, Id.y + y));
+                if (node == null || above.Block)
+                    node.Weight += 4;
+            }
+
+       
+        node.Parent = parent;
+        nodes.Add(node);
+    }
+
     private void AddUpNodes(in List<AStarSharp.Node> nodes, WalkData data, Vector2Int Id, AStarSharp.Node parent)
     {
         var node = GetNode(Id);
@@ -268,6 +328,9 @@ public class AStar : MonoBehaviour
 [Serializable]
 public struct WalkData
 {
+    public float maxTimeOnNode;
+    public bool flying;
+    public bool canSwim;
     public bool canUseLadder;
     public int height;
     public int jumpHeight;

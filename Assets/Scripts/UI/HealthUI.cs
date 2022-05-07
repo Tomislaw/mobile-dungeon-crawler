@@ -8,16 +8,26 @@ public class HealthUI : MonoBehaviour
 
     private List<HealthHeart> hearts = new List<HealthHeart>();
 
-    public Character character;
+    public HealthController healthController;
 
     private int previousHealth = 0;
 
     public int maxHeartsInRow = 4;
 
     // Update is called once per frame
+    private void OnEnable()
+    {
+        healthController = GetComponent<HealthController>();
+        if(healthController == null)
+            healthController = transform.parent?.GetComponent<HealthController>();
+    }
+
     private void FixedUpdate()
     {
-        if (character.IsDead)
+        if (healthController == null)
+            return;
+
+        if (healthController.IsDead)
         {
             if (hearts.Count != 0)
                 Invalidate();
@@ -29,15 +39,15 @@ public class HealthUI : MonoBehaviour
         else
             transform.localScale = new Vector3(1, 1, 1);
 
-        if ((character.MaxHealth + 1) / 2 != hearts.Count)
+        if ((healthController.MaxHealth + 1) / 2 != hearts.Count)
         {
             Invalidate();
             previousHealth = 0;
         }
 
-        if (character.Health != previousHealth)
+        if (healthController.Health != previousHealth)
         {
-            previousHealth = character.Health;
+            previousHealth = healthController.Health;
             var healthLeft = previousHealth;
             for (int i = hearts.Count - 1; i >= 0; i--)
             {
@@ -68,7 +78,7 @@ public class HealthUI : MonoBehaviour
         hearts.Clear();
 
         
-        int heartsCount = character.IsDead ? 0 : (character.MaxHealth + 1) / 2;
+        int heartsCount = healthController.IsDead ? 0 : (healthController.MaxHealth + 1) / 2;
 
         float hearthWidth = 1;
 

@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 3706bb345c2e62049a37a93f1aced8d3
   - enabled: 1
-    path: Assets/Scenes/Mountian1.unity
+    path: Assets/Scenes/Debug/Mountian1_test.unity
     guid: 28bf6d18aaac8f541a927ba7aa138295
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 5c3bd914ef89c5f428fecffd59da1e41, type: 2}

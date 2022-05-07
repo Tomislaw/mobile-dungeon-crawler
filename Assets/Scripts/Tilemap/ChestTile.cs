@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[DefaultExecutionOrder(100)]
 public class ChestTile : MonoBehaviour
 {
     private LevelEvents levelEvents;
-    public LayerMask playerLayer;
+
     public AdventureData.ChestData.Type type;
     private Animator animator;
 
@@ -34,8 +35,8 @@ public class ChestTile : MonoBehaviour
         if (levelEvents == null)
             return;
 
-        var character = collision.gameObject.GetComponent<Character>();
-        if (playerLayer == (playerLayer | (1 << collision.gameObject.layer)))
+        var character = collision.gameObject.GetComponent<PlayerController>();
+        if (character)
         {
             animator.Play("Open");
             OnOpen.Invoke();
