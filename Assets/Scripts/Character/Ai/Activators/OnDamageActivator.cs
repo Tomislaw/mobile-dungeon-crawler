@@ -28,7 +28,7 @@ public class OnDamageActivator : BasicAiActivatorData
         private void Damaged(GameObject by)
         {
             var projectile = by.GetComponent<Projectile>();
-            if (projectile)
+            if (projectile && projectile.Launcher != null)
                 damagedBy = projectile.Launcher.gameObject;
             else
                 damagedBy = by;

@@ -7,15 +7,20 @@ public class RangedAttack : AttackController
 {
 
     public List<ProjectileData> projectiles = new List<ProjectileData>();
+    public List<ProjectileData> projectilesCharged = new List<ProjectileData>();
 
     private Character character;
     public override void Attack()
     {
         if (CanAttack)
         {
-            foreach (var p in projectiles)
-                StartCoroutine(p.Launch(character));
-           base.Attack();
+            if (IsOvercharged)
+                foreach (var p in projectilesCharged)
+                    StartCoroutine(p.Launch(character));
+            else
+                foreach (var p in projectiles)
+                    StartCoroutine(p.Launch(character));
+            base.Attack();
         }
 
     }

@@ -282,8 +282,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   projectiles:
+  - projectile: {fileID: 1805714663868828917, guid: 77576999b5add6841ba4aceed134b5fe, type: 3}
+    offset: {x: 0, y: 0.75, z: 0}
+    delay: 0
+  projectilesCharged:
   - projectile: {fileID: 1805714663868828917, guid: ba581e901275eac46830855325ce67f8, type: 3}
-    offset: {x: 0, y: 0.5, z: 0}
+    offset: {x: -0.4, y: 0.75, z: 0}
+    delay: 0
+  - projectile: {fileID: 1805714663868828917, guid: ba581e901275eac46830855325ce67f8, type: 3}
+    offset: {x: -0.9, y: 0.5, z: 0}
+    delay: 0
+  - projectile: {fileID: 1805714663868828917, guid: ba581e901275eac46830855325ce67f8, type: 3}
+    offset: {x: 0, y: 0.25, z: 0}
     delay: 0
 --- !u!82 &7068583201586914935
 AudioSource:

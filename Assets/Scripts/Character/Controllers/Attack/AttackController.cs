@@ -18,7 +18,8 @@ public class AttackController : MonoBehaviour
 
     public bool ChargeAttack = false;
 
-    public UnityEvent OnAttack;
+    public UnityEvent OnAttack = new UnityEvent();
+    public UnityEvent OnChargedAttack = new UnityEvent();
 
     // private fields
     private float timeToNextAttack = 0;
@@ -56,6 +57,11 @@ public class AttackController : MonoBehaviour
             timeToAnimationAttackFinish = AttackAnimationTime;
             timeToNextAttack = AttackSpeed;
             ChargeAttack = false;
+
+            if(IsOvercharged)
+                OnChargedAttack.Invoke();
+            else
+                OnAttack.Invoke();
         }
     }
 }

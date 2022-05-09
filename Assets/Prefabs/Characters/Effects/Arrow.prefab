@@ -101,11 +101,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 2
-  Rotating: 0
+  Rotating: 1
   DestroyTime: 0.15
   LifeTime: 0.6
   ExplosionRadius: 0
-  ExplosionForce: 0
+  ExplosionForce: 10
   HitFilter: 000000000200000003000000
   InitialVelocity: {x: 24, y: 0}
   Deceleration: {x: 0, y: 0}
@@ -183,7 +183,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.014999986, y: -0.066606045}
+  m_Offset: {x: 0.32247412, y: -0.06227544}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -194,5 +194,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.25, y: 0.40039635}
+  m_Size: {x: 0.6350517, y: 0.1318978}
   m_EdgeRadius: 0

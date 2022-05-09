@@ -19,6 +19,9 @@ public class LightBeamTile : MonoBehaviour
             return;
 
         var character = collision.gameObject.GetComponent<Character>();
+        if (character == null)
+            return;
+
         if (playerLayer == (playerLayer | (1 << collision.gameObject.layer)))
         {
             levelEvents.LevelFinished();

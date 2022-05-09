@@ -25,27 +25,46 @@ public class RollableBox : MonoBehaviour
 
     private float rotation = 0;
     public bool IsRolling { get; private set; }
-    public bool CanRollLeft { get; private set; }
-    public bool CanRollRight { get; private set; }
-
+    public bool CanRollLeft { 
+        get => !IsFalling && !IsRolling
+            && astar?.GetNode(astar.GetTileId(transform.position) + new Vector2Int(-1, 0)).Block == false; }
+    public bool CanRollRight
+    {
+        get => !IsFalling && !IsRolling
+            && astar?.GetNode(astar.GetTileId(transform.position) + new Vector2Int(1, 0)).Block == false;
+    }
     public bool IsFalling { get; private set; }
 
     private Coroutine coroutine;
 
-    private void OnEnable()
+    private void Start()
     {
         astar = FindObjectOfType<AStar>();
-        astar?.AddDynamicBlockTile(astar.GetTileId(transform.position));
-        astar?.OnMapUpdated.AddListener(UpdateStandings);
+        rotation = transform.rotation.eulerAngles.z;
+
+        if (astar == null)
+            return;
+        astar.OnMapUpdated.AddListener(UpdateStandings);
+        astar.AddDynamicBlockTile(astar.GetTileId(transform.position));
+    }
+
+
+    private void OnEnable()
+    {
+        if (astar == null)
+            return;
+        astar.AddDynamicBlockTile(astar.GetTileId(transform.position));
         UpdateStandings();
     }
 
     private void OnDisable()
     {
-        astar?.RemoveDynamicBlockTile(astar.GetTileId(transform.position));
-        astar?.OnMapUpdated.RemoveListener(UpdateStandings);
-    }
+        if (astar == null)
+            return;
+        astar.RemoveDynamicBlockTile(astar.GetTileId(transform.position));
+        UpdateStandings();
 
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -76,7 +95,7 @@ public class RollableBox : MonoBehaviour
             return;
 
         // cannot push when standing on it
-        if (pusher.transform.position.y > transform.position.y + 0.48)
+        if (pusher.transform.position.y > transform.position.y - 0.48)
         {
             timeLeftToPush = TimeToPush;
             return;
@@ -92,9 +111,9 @@ public class RollableBox : MonoBehaviour
         timeLeftToPush -= Time.fixedDeltaTime;
         if (timeLeftToPush < 0)
         {
-            if (!CanRollLeft && pusher.FaceLeft)
+            if (pusher.FaceLeft && !CanRollLeft)
                 return;
-            if (!CanRollRight && !pusher.FaceLeft)
+            if (!pusher.FaceLeft && !CanRollRight)
                 return;
 
              coroutine = StartCoroutine(Roll(pusher.FaceLeft));
@@ -102,7 +121,7 @@ public class RollableBox : MonoBehaviour
             
 
     }
-    private void UpdateStandings()
+    public void UpdateStandings()
     {
         if (coroutine != null)
             return;
@@ -124,10 +143,6 @@ public class RollableBox : MonoBehaviour
         }
 
         IsFalling = false;
-        var leftTile = astar.GetNode(id + new Vector2Int(-1, 0));
-        var rightTile = astar.GetNode(id + new Vector2Int(1, 0));
-        CanRollLeft = !leftTile.Block;
-        CanRollRight = !rightTile.Block;
     }
 
     private IEnumerator Fall()
@@ -135,11 +150,10 @@ public class RollableBox : MonoBehaviour
        if (IsFalling == true || IsRolling == true)
             yield break;
 
-        CanRollLeft = false;
-        CanRollRight = false;
         IsFalling = true;
 
-        astar?.RemoveDynamicBlockTile(astar.GetTileId(transform.position));
+        if(isActiveAndEnabled)
+            astar.RemoveDynamicBlockTile(astar.GetTileId(transform.position));
 
         int falledTiles = 0;
         var movement = 1f / FallPoints;
@@ -149,33 +163,56 @@ public class RollableBox : MonoBehaviour
 
         while (IsFalling)
         {
+
             for (int i = 0; i < FallPoints; i++)
             {
                 transform.position -= new Vector3(0, movement, 0);
-                yield return new WaitForSeconds((TimeToFall / (float)FallPoints)* acceleration);
+                yield return new WaitForSeconds((TimeToFall / (float)FallPoints) * acceleration);
             }
-            acceleration *= accelearationFactor;
 
-            falledTiles++;
-
+            // stop if reached block or platform
             var id = astar.GetTileId(transform.position);
             var bottomTile = astar.GetNode(id + new Vector2Int(0, -1));
             if (bottomTile.Block || bottomTile.Platform)
+            {
                 IsFalling = false;
+                break;
+            }
+
+            acceleration *= accelearationFactor;
+            falledTiles++;
         }
 
+     
+        if (astar == null)
+        {
+            coroutine = null;
+            yield break;
+        }
+
+        if (isActiveAndEnabled)
+            astar.AddDynamicBlockTile(astar.GetTileId(transform.position));
+
+        yield return new WaitForSeconds((TimeToFall / (float)FallPoints));
+
         coroutine = null;
-        astar?.AddDynamicBlockTile(astar.GetTileId(transform.position));
+        UpdateStandings();
     }
     private IEnumerator Roll(bool left)
     {
+        if (!isActiveAndEnabled)
+            yield break;
+
+        if (astar == null)
+            yield break;
+
         if (IsFalling == true || IsRolling == true)
             yield break;
 
         IsRolling = true;
         IsFalling = false;
 
-        astar?.RemoveDynamicBlockTile(astar.GetTileId(transform.position));
+        astar.RemoveDynamicBlockTile(astar.GetTileId(transform.position));
 
 
         var sign = left ? 1 : -1;
@@ -196,7 +233,10 @@ public class RollableBox : MonoBehaviour
         IsRolling = false;
 
         coroutine = null;
-        astar?.AddDynamicBlockTile(astar.GetTileId(transform.position));
+
+        if (astar == null)
+            yield break;
+        astar.AddDynamicBlockTile(astar.GetTileId(transform.position));
     }
 
     public void ResetRotation()

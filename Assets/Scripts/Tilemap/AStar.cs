@@ -17,21 +17,33 @@ public class AStar : MonoBehaviour
     private Tilemap tilemap;
     private HashSet<Vector2Int> DynamicTiles = new HashSet<Vector2Int>();
 
+    private bool mapUpdated = false;
+
     public void AddDynamicBlockTile(Vector2Int tileId)
     {
         DynamicTiles.Add(tileId);
-        OnMapUpdated.Invoke();
+        mapUpdated = true;
     }
 
     public void RemoveDynamicBlockTile(Vector2Int tileId)
     {
         DynamicTiles.Remove(tileId);
-        OnMapUpdated.Invoke();
+        mapUpdated = true;
+
     }
 
     private void Awake()
     {
         tilemap = GetComponent<Tilemap>();
+    }
+
+    private void FixedUpdate()
+    {
+        if (mapUpdated)
+        {
+            OnMapUpdated.Invoke();
+            mapUpdated = false;
+        }
     }
 
     public AStarSharp.Node GetNode(Vector2Int Id)
@@ -41,7 +53,8 @@ public class AStar : MonoBehaviour
 
         var node = new AStarSharp.Node();
         node.Id = Id;
-        node.Block = collider != Tile.ColliderType.None || DynamicTiles.Contains(Id);
+        node.Destroyable = DynamicTiles.Contains(Id);
+        node.Block = collider != Tile.ColliderType.None || node.Destroyable;
         if (gameobject != null)
         {
             node.Ladder = gameobject.GetComponentInChildren<LadderTile>() != null;
@@ -362,6 +375,7 @@ namespace AStarSharp
         public bool Block;
         public bool Ladder;
         public bool Platform;
+        public bool Destroyable;
         public int jumpHeightLeft = -1;
         public int jumpDistanceLeft = -1;
 

@@ -43,7 +43,7 @@ public class HealthController : MonoBehaviour
         Health -= damage;
         if (Health <= 0)
         {
-            if(character)
+            if (character)
                 character.gameObject.layer = LayerMask.NameToLayer("Dead");
 
             if (ai)
@@ -72,8 +72,6 @@ public class HealthController : MonoBehaviour
     }
 }
 
-public class OnDamageEvent : UnityEvent<GameObject>
-{
-}
+public class OnDamageEvent : UnityEvent<GameObject>{}
 
 

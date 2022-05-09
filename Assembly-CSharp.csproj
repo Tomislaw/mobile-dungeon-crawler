@@ -78,6 +78,7 @@
     <Compile Include="Assets\Scripts\Character\Ai\Actions\MultiAction.cs" />
     <Compile Include="Assets\Scripts\Character\Ai\BasicAiStateData.cs" />
     <Compile Include="Assets\Scripts\UI\Control\ArrowsHandle.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Shockwave.cs" />
     <Compile Include="Assets\Scripts\Utility\EventManager.cs" />
     <Compile Include="Assets\Scripts\Character\Character.cs" />
     <Compile Include="Assets\Scripts\Character\Ai\BasicAi.cs" />

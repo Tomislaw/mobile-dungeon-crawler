@@ -8,13 +8,16 @@ public class SpikeTile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var healthController = collision.gameObject.GetComponent<HealthController>();
+        if (healthController == null || healthController.IsDead)
+            return;
+
         var player = collision.gameObject.GetComponent<PlayerController>();
         var character = collision.gameObject.GetComponent<Character>();
 
         if (character?.holdUpdate == true)
             return;
 
-        if(player != null && !healthController.IsDead)
+        if(player != null)
         {
             var respawn = FindRespawnPosition();
             if (respawn == null)
@@ -30,7 +33,7 @@ public class SpikeTile : MonoBehaviour
             }
             
         }
-        else if (!healthController.IsDead)
+        else
         {
             healthController.Damage(9999, gameObject);
         }

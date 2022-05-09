@@ -74,34 +74,34 @@ public class Projectile : MonoBehaviour
         else
             rigidbody.velocity -= Mathf.Sign(rigidbody.velocity.y) * new Vector2(0, deceleration.y);
 
-        float angle = Mathf.Atan2(rigidbody.velocity.y, rigidbody.velocity.x) * Mathf.Rad2Deg;
-
-        transform.eulerAngles = new Vector3(0, 0, angle - angle % 15);
-
+        if (Rotating)
+        {
+            float angle = Mathf.Atan2(rigidbody.velocity.y, rigidbody.velocity.x) * Mathf.Rad2Deg;
+            transform.eulerAngles = new Vector3(0, 0, angle - angle % 15);
+        }
     }
 
-    private void ResolveHit(GameObject hit)
+    private void ResolveHit(HealthController target)
     {
-        var target = hit.GetComponent<HealthController>();
-        if (target)
-            if (!HitFilter.Contains(target.group))
-                return;
-            else
+
+        if (!HitFilter.Contains(target.group))
+            return;
+        else
+        {
+            target.Damage(Damage, gameObject);
+            if (ExplosionForce > 0)
             {
-                target.Damage(Damage, gameObject);
-                if(ExplosionForce > 0)
+                var rg = target.GetComponent<Rigidbody2D>();
+                if (rg)
                 {
-                   var rg =  hit.GetComponent<Rigidbody2D>();
-                    if (rg)
-                    {
-                        var force = transform.position - hit.transform.position;
-                        force.Normalize();
-                        rg.AddForce(force * -ExplosionForce);
-                    }
-                        
+                    var force = transform.position - target.transform.position;
+                    force.Normalize();
+                    rg.AddForce(force * -ExplosionForce);
                 }
+
             }
-               
+        }
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -112,19 +112,51 @@ public class Projectile : MonoBehaviour
         if (collision.isTrigger)
             return;
 
-        if (ExplosionRadius > 0)
-        {
-            foreach (var item in Physics2D.OverlapCircleAll(transform.position, ExplosionRadius).Select(it=>it.gameObject).Distinct())
-                ResolveHit(item);
-        }
-        else
-        {
-            ResolveHit(collision.gameObject);
-        }
-        LifeTime = 0;
+        var hitItems = ExplosionRadius > 0
+            ? Physics2D.OverlapCircleAll(transform.position, ExplosionRadius).Select(it => it.gameObject).Distinct()
+            : new List<GameObject>() { collision.gameObject };
 
-        Stop();
-        OnProjectileDeath();
+        ResolveColliders(hitItems);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if (_hit)
+            return;
+
+        transform.position = collision.contacts.First().point;
+
+        var hitItems = ExplosionRadius > 0
+            ? Physics2D.OverlapCircleAll(transform.position, ExplosionRadius).Select(it => it.gameObject).Distinct()
+            : new List<GameObject>() { collision.gameObject };
+
+        ResolveColliders(hitItems);
+    }
+
+    private void ResolveColliders(IEnumerable<GameObject> hitItems)
+    {
+        foreach (var hit in hitItems)
+        {
+            var target = hit.GetComponent<HealthController>();
+            if (target == null)
+            {
+                LifeTime = 0;
+                continue;
+            }
+            if (target.IsDead)
+                continue;
+
+            LifeTime = 0;
+            ResolveHit(target);
+        }
+
+
+        if (LifeTime <= 0)
+        {
+            Stop();
+            OnProjectileDeath();
+        }
     }
 
     private void Stop()

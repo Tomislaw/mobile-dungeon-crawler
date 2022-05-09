@@ -68,6 +68,7 @@ GameObject:
   - component: {fileID: 1586342966391059676}
   - component: {fileID: 1586342966391059653}
   - component: {fileID: 1586342966391059648}
+  - component: {fileID: 9095645185290459867}
   m_Layer: 12
   m_Name: Knight
   m_TagString: Player
@@ -234,6 +235,21 @@ MonoBehaviour:
   OnAttack:
     m_PersistentCalls:
       m_Calls: []
+  OnChargedAttack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9095645185290459867}
+        m_TargetAssemblyTypeName: Shockwave, Assembly-CSharp
+        m_MethodName: StartShockwave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   AttackDamage: 2
   Distance: 1.5
   Knockback: 500
@@ -443,3 +459,20 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.45}
   m_Size: {x: 0.7, y: 0.9}
   m_Direction: 0
+--- !u!114 &9095645185290459867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586342966391059652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d13015ac466d864485547c903231aee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shockTile: {fileID: 1805714663868828912, guid: dae9ec3adbc79174bae86b5426490c19, type: 3}
+  shockWidth: 6
+  shockTime: 0.025
+  shockDistance: 1
+  InitialOffset: {x: 0, y: 0.1, z: 0}
