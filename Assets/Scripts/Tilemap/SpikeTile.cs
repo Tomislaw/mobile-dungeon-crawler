@@ -41,6 +41,9 @@ public class SpikeTile : MonoBehaviour
 
     private GameObject FindRespawnPosition()
     {
-        return FindObjectsOfType<SubScene>().OrderBy(it => Vector3.Distance(it.transform.position, transform.position)).First().respawnPoint; ;
+        var scenes = FindObjectsOfType<SubScene>().OrderBy(it => Vector3.Distance(it.transform.position, transform.position));
+        if(scenes.Count() > 0)
+            return scenes.First().respawnPoint;
+        return FindObjectsOfType<RespawnTile>().OrderBy(it => Vector3.Distance(it.transform.position, transform.position)).First().gameObject;
     }
 }

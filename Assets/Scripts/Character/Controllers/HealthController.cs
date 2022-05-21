@@ -18,15 +18,26 @@ public class HealthController : MonoBehaviour
     public OnDamageEvent OnDamage = new OnDamageEvent();
 
     public Group group;
+
+    private int initialLayer = 0;
     public enum Group
     {
         Skeletons, Player, Goblins, None
     }
 
-    private void OnEnable()
+    private void Start()
     {
         character = GetComponent<Character>();
         ai = GetComponent<BasicAi>();
+        initialLayer = gameObject.layer;
+        if (Health <= 0)
+        {
+            if (character)
+                gameObject.layer = LayerMask.NameToLayer("Dead");
+
+            if (ai)
+                ai.enabled = false;
+        }
     }
 
     public void Damage(int damage, GameObject who)
@@ -42,16 +53,22 @@ public class HealthController : MonoBehaviour
 
         Health -= damage;
         if (Health <= 0)
+            Death();
+    }
+
+    private void Death()
+    {
+        if (character)
+            gameObject.layer = LayerMask.NameToLayer("Dead");
+
+        if (ai)
         {
-            if (character)
-                character.gameObject.layer = LayerMask.NameToLayer("Dead");
-
-            if (ai)
-                ai.enabled = false;
-
-            if (OnDeath != null)
-                OnDeath.Invoke();
+            ai.enabled = false;
         }
+
+
+        if (OnDeath != null)
+            OnDeath.Invoke();
     }
 
     public void Resurrect()
@@ -61,6 +78,9 @@ public class HealthController : MonoBehaviour
 
     private IEnumerator ResurrectCoroutine()
     {
+        if (Health > 0)
+            yield break;
+
         character.holdUpdate = true;
         character.SetAnimation("Resurrect");
         yield return new WaitForSeconds(RessurectTime);
@@ -69,6 +89,9 @@ public class HealthController : MonoBehaviour
         var ai = GetComponent<BasicAi>();
         if (ai)
             ai.enabled = true;
+        gameObject.layer = initialLayer;
+        Health = MaxHealth;
+
     }
 }
 

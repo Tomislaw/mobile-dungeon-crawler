@@ -70,7 +70,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1927151836998164644, guid: bd9ea01d645c0874a999c7a4010a36e6, type: 3}
+  m_Sprite: {fileID: -4352409407941354246, guid: bd9ea01d645c0874a999c7a4010a36e6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locked: {fileID: -7334886338573059942, guid: bd9ea01d645c0874a999c7a4010a36e6, type: 3}
   hovered: {fileID: -6774437969098921397, guid: bd9ea01d645c0874a999c7a4010a36e6, type: 3}
-  normal: {fileID: -1927151836998164644, guid: bd9ea01d645c0874a999c7a4010a36e6, type: 3}
+  normal: {fileID: -4352409407941354246, guid: bd9ea01d645c0874a999c7a4010a36e6, type: 3}
   text: {fileID: 8695867864358465923}
   IsLocked: 0
   image: {fileID: 6451704525302508691}
@@ -145,7 +145,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6451704525302508691}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8831964147252316859}
+        m_TargetAssemblyTypeName: LevelUI, Assembly-CSharp
+        m_MethodName: StartLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8560512032252796966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,19 +238,7 @@ MonoBehaviour:
   - eventID: 4
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 8831964147252316859}
-          m_TargetAssemblyTypeName: LevelUI, Assembly-CSharp
-          m_MethodName: StartLevel
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
 --- !u!1 &7325908595693147035
 GameObject:
   m_ObjectHideFlags: 0

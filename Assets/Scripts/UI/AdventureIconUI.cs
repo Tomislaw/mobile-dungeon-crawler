@@ -17,14 +17,27 @@ public class AdventureIconUI : MonoBehaviour
 
     public List<Image> images = new List<Image>();
 
+    public GameObject ShowOnSelect;
+
+    private AdventureIconUI[] AllIcons;
+
+    private void Start()
+    {
+        AllIcons = FindObjectsOfType<AdventureIconUI>(true);
+        Invalidate();
+    }
+
     public void SetSelected(bool selected)
     {
+        if (ShowOnSelect)
+            ShowOnSelect.SetActive(selected);
+
         if (Selected == selected)
             return;
 
         this.Selected = selected;
         if (selected)
-            foreach (var icon in transform.parent.GetComponentsInChildren<AdventureIconUI>())
+            foreach (var icon in AllIcons)
             {
                 if (icon.gameObject == gameObject)
                     continue;
@@ -49,8 +62,4 @@ public class AdventureIconUI : MonoBehaviour
         Invalidate();
     }
 
-    private void Start()
-    {
-        Invalidate();
-    }
 }

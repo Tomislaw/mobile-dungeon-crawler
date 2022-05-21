@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa5b17902b952b49a58c598fbcbbf46, type: 3}
+  m_Name: Ruins
+  m_EditorClassIdentifier: 
+  levels:
+  - enabled: 0
+    finished: 0
+    chests: []
+    firstClearReward:
+      redGems: 0
+      blueGems: 0
+      greenGems: 0
+      silverGems: 0
+    scene: Ruins1
+  - enabled: 0
+    finished: 0
+    chests: []
+    firstClearReward:
+      redGems: 0
+      blueGems: 0
+      greenGems: 0
+      silverGems: 0
+    scene: Ruins2
+  - enabled: 0
+    finished: 0
+    chests: []
+    firstClearReward:
+      redGems: 0
+      blueGems: 0
+      greenGems: 0
+      silverGems: 0
+    scene: Ruins3
+  - enabled: 0
+    finished: 0
+    chests: []
+    firstClearReward:
+      redGems: 0
+      blueGems: 0
+      greenGems: 0
+      silverGems: 0
+    scene: Ruins4
+  - enabled: 0
+    finished: 0
+    chests: []
+    firstClearReward:
+      redGems: 0
+      blueGems: 0
+      greenGems: 0
+      silverGems: 0
+    scene: Ruins5
+  - enabled: 0
+    finished: 0
+    chests: []
+    firstClearReward:
+      redGems: 0
+      blueGems: 0
+      greenGems: 0
+      silverGems: 0
+    scene: Ruins6
+  - enabled: 0
+    finished: 0
+    chests: []
+    firstClearReward:
+      redGems: 0
+      blueGems: 0
+      greenGems: 0
+      silverGems: 0
+    scene: Ruins7
+  - enabled: 0
+    finished: 0
+    chests: []
+    firstClearReward:
+      redGems: 0
+      blueGems: 0
+      greenGems: 0
+      silverGems: 0
+    scene: Ruins8
+  - enabled: 0
+    finished: 0
+    chests: []
+    firstClearReward:
+      redGems: 0
+      blueGems: 0
+      greenGems: 0
+      silverGems: 0
+    scene: Ruins9

@@ -66,9 +66,11 @@ GameObject:
   - component: {fileID: 1217533563843094445}
   - component: {fileID: 7068583201586914935}
   - component: {fileID: 1586342966391059676}
-  - component: {fileID: 1586342966391059653}
   - component: {fileID: 1586342966391059648}
   - component: {fileID: 9095645185290459867}
+  - component: {fileID: 39514931662721533}
+  - component: {fileID: 6072170547237964431}
+  - component: {fileID: -8808715197590347756}
   m_Layer: 12
   m_Name: Knight
   m_TagString: Player
@@ -216,6 +218,8 @@ MonoBehaviour:
     jumpHeight: 3
     jumpDistance: 5
   character: {fileID: 1217533563843094445}
+  MaxNodesPerBatch: 10
+  MaxNodes: 600
 --- !u!114 &1586342966391059650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,11 +289,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Flying: 0
-  ClimbLadderSpeed: 10
+  GravityScale: 6
+  ClimbLadderSpeed: 6
   CoyoteTime: 0.15
-  WalkSpeed: 10
-  JumpSpeed: 20
+  WalkSpeed: 8
+  JumpSpeed: 18
+  MaxSpeed: 20
   Acceleration: 40
+  Jerk: 50
   CanUseLadder: 1
   FaceLeft: 0
   StepTime: 0.15
@@ -297,6 +304,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnWalk:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSwim:
     m_PersistentCalls:
       m_Calls: []
   move: {x: 0, y: 0}
@@ -410,39 +420,13 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 6
   m_Material: {fileID: 6200000, guid: f9bace41386d69e40b8b8c61df95014c, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &1586342966391059653
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1586342966391059652}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.22}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.25, y: 0}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.68, y: 0.4}
-  m_EdgeRadius: 0
 --- !u!70 &1586342966391059648
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -476,3 +460,53 @@ MonoBehaviour:
   shockTime: 0.025
   shockDistance: 1
   InitialOffset: {x: 0, y: 0.1, z: 0}
+--- !u!114 &39514931662721533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586342966391059652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d872bf0fe7dbe941ba4cd061e80a9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Death: {fileID: 8300000, guid: 3e34511c658d40e4ea1834c70865bda0, type: 3}
+  Hit: {fileID: 8300000, guid: 02451b72dcff5d44388112bd97f5c3b9, type: 3}
+  Walk: {fileID: 8300000, guid: 2e0968f0d29aadd4fab498fa32b11e92, type: 3}
+  Jump: {fileID: 8300000, guid: c0bcc74f1b33d9c428a4289e94feb478, type: 3}
+  Swim: {fileID: 8300000, guid: 907f1d61f8d1c81488f8255c9098592b, type: 3}
+  Attack: {fileID: 8300000, guid: 0e9cf4d9b8299934391e9f55cca28c6e, type: 3}
+  ChargedAttack: {fileID: 8300000, guid: 0e9cf4d9b8299934391e9f55cca28c6e, type: 3}
+--- !u!114 &6072170547237964431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586342966391059652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a7e7f3d2502159418ad467a5b17e3c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
+  soundType: 1
+--- !u!114 &-8808715197590347756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586342966391059652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30eb3c10d10333d448c42eea7725f764, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyPrefab: {fileID: 7926932315155287929, guid: 5f2504d000004fe45af3b49c1048cc13, type: 3}
+  HoverHeight: 2
+  HoverVariationDistance: 1
+  ItemSpeed: 5
+  NumberOfKeys: 0

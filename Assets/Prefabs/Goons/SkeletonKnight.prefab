@@ -27,6 +27,18 @@ PrefabInstance:
       propertyPath: WalkSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4885720716787640596, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
+      propertyPath: Health
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4885720716787640596, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
+      propertyPath: MaxHealth
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8932571243353351911, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
+      propertyPath: AttackSpeed
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 8932571243353351911, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
       propertyPath: AttackDamage
       value: 2

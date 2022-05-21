@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
             var find = character.GetComponent<PathfindingController>();
             if (find != null)
             {
-                if (Mouse.current.leftButton.isPressed)
+                if (Mouse.current.leftButton.isPressed && Camera.main != null)
                     find.MoveTo(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
             }
         }

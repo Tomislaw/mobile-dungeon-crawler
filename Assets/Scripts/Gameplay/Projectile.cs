@@ -94,7 +94,7 @@ public class Projectile : MonoBehaviour
                 var rg = target.GetComponent<Rigidbody2D>();
                 if (rg)
                 {
-                    var force = transform.position - target.transform.position;
+                    var force = transform.position - new Vector3(rg.worldCenterOfMass.x, rg.worldCenterOfMass.y, 0);
                     force.Normalize();
                     rg.AddForce(force * -ExplosionForce);
                 }

@@ -46,9 +46,9 @@ public class AreaTriggerActivator : BasicAiActivatorData
                 {
                     if (this.data.Raycast)
                         foreach (var item in Physics2D.LinecastAll(Target.transform.position + new Vector3(0,0.95f,0), 
-                            go.gameObject.transform.position))
+                            go.gameObject.transform.position + new Vector3(0, 0.5f, 0)))
                         {
-                            if (item.collider is TilemapCollider2D)
+                            if (item.collider is TilemapCollider2D or CompositeCollider2D)
                                 return null;
                         }
 

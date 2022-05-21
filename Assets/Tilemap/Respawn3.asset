@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-844652023101081103
+MonoBehaviour:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
+  m_Name: Respawn1 (Override)
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: -7423274291592263118, guid: 8431d2e10637d2a44991a8e7150dc518, type: 3}
+  m_DefaultGameObject: {fileID: 8238304576293687461, guid: 2fdcc4d5f118407489a5e93fbe95efda, type: 3}
+  m_DefaultColliderType: 0
+  m_TilingRules:
+  - m_Id: 0
+    m_Sprites:
+    - {fileID: -7423274291592263118, guid: 8431d2e10637d2a44991a8e7150dc518, type: 3}
+    - {fileID: 6055322118845834834, guid: 8431d2e10637d2a44991a8e7150dc518, type: 3}
+    m_GameObject: {fileID: 8238304576293687461, guid: 2fdcc4d5f118407489a5e93fbe95efda, type: 3}
+    m_AnimationSpeed: 2
+    m_PerlinScale: 0.5
+    m_Output: 2
+    m_ColliderType: 0
+    m_RandomTransform: 0
+    m_Neighbors: 
+    m_NeighborPositions:
+    - {x: -1, y: 1, z: 0}
+    - {x: 0, y: 1, z: 0}
+    - {x: 1, y: 1, z: 0}
+    - {x: -1, y: 0, z: 0}
+    - {x: 1, y: 0, z: 0}
+    - {x: -1, y: -1, z: 0}
+    - {x: 0, y: -1, z: 0}
+    - {x: 1, y: -1, z: 0}
+    m_RuleTransform: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c779848d9dd029409ca676b49e10a18, type: 3}
+  m_Name: Respawn3
+  m_EditorClassIdentifier: 
+  m_Tile: {fileID: 11400000, guid: b28fa8f2c3065d8419bde56a178848af, type: 2}
+  m_Sprites:
+  - m_OriginalSprite: {fileID: -2172192563175288652, guid: 8431d2e10637d2a44991a8e7150dc518, type: 3}
+    m_OverrideSprite: {fileID: -7423274291592263118, guid: 8431d2e10637d2a44991a8e7150dc518, type: 3}
+  - m_OriginalSprite: {fileID: 7151244006351828149, guid: 8431d2e10637d2a44991a8e7150dc518, type: 3}
+    m_OverrideSprite: {fileID: 6055322118845834834, guid: 8431d2e10637d2a44991a8e7150dc518, type: 3}
+  m_GameObjects: []
+  m_InstanceTile: {fileID: -844652023101081103}

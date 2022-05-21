@@ -15,4 +15,4 @@ MonoBehaviour:
   Name: CuriousDialog
   dialog: {fileID: 3565775690252107043, guid: b59baf7713dfff94283ffb22b410afd7, type: 3}
   offset: {x: 0, y: 3}
-  dialogTime: 0.35
+  dialogTime: 0.25

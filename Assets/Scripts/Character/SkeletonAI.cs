@@ -189,9 +189,8 @@ public class SkeletonAI : MonoBehaviour
         {
             var pos = new Vector2Int(id.x  + Random.Range(-3,4), id.y);
 
-            var walk = pathfinding.MoveToId(pos);
-            if (walk)
-                break;
+            pathfinding.MoveToId(pos);
+            return;
         }
     }
 

@@ -42,11 +42,10 @@ public class MoveToRandomTileAction : BasicAiActionData
                 }
 
             var randomizedPositions = positions.OrderBy(it=>Random.Range(0f, 1f));
-            foreach (var pos in randomizedPositions)
-            {
-                if (pathfinding.MoveToId(pos))
-                    return;
-            }
+
+            if (randomizedPositions.Any())
+                pathfinding.MoveToId(randomizedPositions.First(), false);
+
         }
 
 

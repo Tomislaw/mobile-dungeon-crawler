@@ -1,4 +1,6 @@
 ﻿using Assets.Scripts.Character.Ai;
+using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -27,6 +29,7 @@ public class ChaseAction : BasicAiActionData
         internal PathfindingController pathfinding;
         internal ChaseAction parent;
 
+        private CancellationTokenSource token = new CancellationTokenSource();
         public Action(ChaseAction parent, ActivatorData trigger)
         {
             character = trigger.triggeredFor.GetComponent<Character>();
@@ -39,33 +42,61 @@ public class ChaseAction : BasicAiActionData
             this.parent = parent;
         }
 
-        internal virtual bool TryWalkingToTarget()
-        {
-            movementController.Stop();
+        //internal virtual IEnumerator<bool?> TryWalkingToTarget(CancellationToken ct = default)
+        //{
+        //    movementController.Stop();
 
-            if (target == null)
-                return false;
+        //    if (target == null)
+        //    {
+        //        yield return false;
+        //        yield break;
+        //    }
 
-            if (pathfinding.CanWalkOnPosition(target.transform.position)
-                &&  pathfinding.MoveTo(target.transform.position))
-                return true;
+        //    IEnumerator<bool?> pathfindingProgress;
+        //    if (pathfinding.CanWalkOnPosition(target.transform.position))
+        //    {
+        //        pathfindingProgress = pathfinding.MoveToAsync(target.transform.position, token.Token);
+        //        while (pathfindingProgress.MoveNext())
+        //            if (!pathfindingProgress.Current.HasValue)
+        //                yield return null;
+        //            else
+        //            {
+        //                if (pathfindingProgress.Current.Value == true)
+        //                {
+        //                    yield return true;
+        //                    yield break;
+        //                }
+        //            }
+        //    }
 
-            var tile = pathfinding.GetTileId(target.transform.position);
+        //    var tile = pathfinding.GetTileId(target.transform.position);
+        //    for (int x = -1; x <= 1; x++) {
+        //        for (int y = 1; y >= -6; y--)
+        //        {
+        //            if (x == 0 && y == 0)
+        //                continue;
 
-            for (int x = -1; x <= 1; x++) {
-                for (int y = -1; y <= 1; y++)
-                {
-                    if (x == 0 && y == 0)
-                        continue;
+        //            if (!pathfinding.CanWalkOnTile(tile + new Vector2Int(x, y)))
+        //                continue;
 
-                    if (pathfinding.CanWalkOnTile(tile + new Vector2Int(x, y)) 
-                        && pathfinding.MoveTo(tile + new Vector2Int(x, y)))
-                            return true;
-                    
-                }
-            }
-            return false;
-        }
+        //            pathfindingProgress = pathfinding.MoveToAsync(target.transform.position, token.Token);
+        //            while (pathfindingProgress.MoveNext())
+        //                if (!pathfindingProgress.Current.HasValue)
+        //                    yield return null;
+        //                else
+        //                {
+        //                    if (pathfindingProgress.Current.Value == true)
+        //                    {
+        //                        yield return true;
+        //                        yield break;
+        //                    }
+        //                }
+
+        //        }
+        //    }
+        //    yield return false;
+        //    yield break;
+        //}
 
         public override bool CanStop()
         {
@@ -76,9 +107,18 @@ public class ChaseAction : BasicAiActionData
             return target == null;
         }
 
+        public override void Stop()
+        {
+            token.Cancel();
+            base.Stop();
+        }
+
         protected bool shouldResign(float dt)
         {
             if (IsFinished())
+                return true;
+
+            if (stopped)
                 return true;
 
             if (targetCharacter != null && targetCharacter.IsDead
@@ -118,8 +158,11 @@ public class ChaseAction : BasicAiActionData
             {
                 targetCharacter = null;
                 target = null;
+                movementController.Stop();
+                pathfinding.StopMoving();
                 return;
             }
+
 
 
             timeToNextPathfinding -= dt;
@@ -129,8 +172,8 @@ public class ChaseAction : BasicAiActionData
             timeToNextPathfinding = parent.timeBetweenRetryingFindingPath;
             if (pathfinding.Target == pathfinding.GetTileId(target.transform.position))
                 return;
-
-            TryWalkingToTarget();
+ 
+            pathfinding.MoveTo(target.transform.position, true);
 
         }
     }

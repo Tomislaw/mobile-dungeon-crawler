@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class LevelEvents : MonoBehaviour
 {
     public AdventureData adventure;
-    public int level;
 
     public GameObject playerCharacter;
 
@@ -39,7 +38,7 @@ public class LevelEvents : MonoBehaviour
         if (OnLevelFailed != null)
             OnLevelFailed.Invoke();
 
-        Debug.Log("Level " + adventure.levels[level].scene + " failed");
+        Debug.Log("Level failed");
     }
 
     public void LevelFinished()
@@ -47,12 +46,13 @@ public class LevelEvents : MonoBehaviour
         if (OnLevelFinished != null)
             OnLevelFinished.Invoke();
 
-        Debug.Log("Level " + adventure.levels[level].scene + " finished");
+        adventure.FinishedCurrentLevel();
+        Debug.Log("Level finished");
     }
 
     public void LevelRestarted()
     {
-        Debug.Log("Level " + adventure.levels[level].scene + " restarted");
+        Debug.Log("Level restarted");
         Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
     }
 
@@ -68,9 +68,10 @@ public class LevelEvents : MonoBehaviour
 
     public void StartNextLevel()
     {
-        if (level == adventure.levels.Count - 1)
+        var level = adventure.GetNextLevel();
+        if (level == null)
             SceneManager.LoadScene("MainMenu");
         else
-            SceneManager.LoadScene(adventure.levels[level + 1].scene);
+            SceneManager.LoadScene(level.scene);
     }
 }

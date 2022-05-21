@@ -22,15 +22,6 @@ MonoBehaviour:
       greenGems: 0
       silverGems: 0
     scene: Mountian1
-  - enabled: 1
-    finished: 0
-    chests: []
-    firstClearReward:
-      redGems: 0
-      blueGems: 0
-      greenGems: 0
-      silverGems: 0
-    scene: 
   - enabled: 0
     finished: 0
     chests: []
@@ -39,7 +30,7 @@ MonoBehaviour:
       blueGems: 0
       greenGems: 0
       silverGems: 0
-    scene: 
+    scene: Mountian2
   - enabled: 0
     finished: 0
     chests: []
@@ -48,7 +39,7 @@ MonoBehaviour:
       blueGems: 0
       greenGems: 0
       silverGems: 0
-    scene: 
+    scene: Mountian3
   - enabled: 0
     finished: 0
     chests: []
@@ -57,7 +48,7 @@ MonoBehaviour:
       blueGems: 0
       greenGems: 0
       silverGems: 0
-    scene: 
+    scene: Mountian4
   - enabled: 0
     finished: 0
     chests: []
@@ -66,7 +57,7 @@ MonoBehaviour:
       blueGems: 0
       greenGems: 0
       silverGems: 0
-    scene: 
+    scene: Mountian5
   - enabled: 0
     finished: 0
     chests: []
@@ -75,7 +66,7 @@ MonoBehaviour:
       blueGems: 0
       greenGems: 0
       silverGems: 0
-    scene: 
+    scene: Mountian6
   - enabled: 0
     finished: 0
     chests: []
@@ -84,7 +75,7 @@ MonoBehaviour:
       blueGems: 0
       greenGems: 0
       silverGems: 0
-    scene: 
+    scene: Mountian7
   - enabled: 0
     finished: 0
     chests: []
@@ -93,4 +84,13 @@ MonoBehaviour:
       blueGems: 0
       greenGems: 0
       silverGems: 0
-    scene: 
+    scene: Mountian8
+  - enabled: 0
+    finished: 0
+    chests: []
+    firstClearReward:
+      redGems: 0
+      blueGems: 0
+      greenGems: 0
+      silverGems: 0
+    scene: Mountian9

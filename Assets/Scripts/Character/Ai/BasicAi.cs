@@ -46,7 +46,8 @@ public class BasicAi: MonoBehaviour
 
     private void OnDisable()
     {
-        state?.Stop();
+        if (state != null)
+            state.Stop();
     }
 }
 

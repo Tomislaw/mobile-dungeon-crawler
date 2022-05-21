@@ -11,6 +11,40 @@ public class AdventureData : ScriptableObject
 {
     public List<Level> levels = new List<Level>();
 
+    public Level GetCurrentLevel()
+    {
+        return levels.Find(it=>it.scene.Equals(SceneManager.GetActiveScene().name)) ;
+    }
+
+    public Level GetNextLevel()
+    {
+        for (int i = 0; i < levels.Count; i++)
+        {
+            if (levels[i].scene != (SceneManager.GetActiveScene().name))
+                continue;
+
+            if (i >= levels.Count - 1)
+                return null;
+
+            return levels[i+1];
+        }
+        return null;
+    }
+
+    public void FinishedCurrentLevel()
+    {
+        for (int i = 0; i < levels.Count; i++)
+        {
+            if (levels[i].scene != (SceneManager.GetActiveScene().name))
+                continue;
+
+
+            levels[i].finished = true;
+            if (i < levels.Count - 1)
+                levels[i].enabled = true;
+        }
+    }
+
     [Serializable]
     public class Level
     {

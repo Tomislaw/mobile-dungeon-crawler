@@ -7,7 +7,7 @@ using System.Text;
 using UnityEngine.Tilemaps;
 using System.Threading;
 using UnityEngine.Events;
-
+using static AStarSharp.Astar;
 
 [RequireComponent(typeof(Tilemap))]
 public class AStar : MonoBehaviour
@@ -16,6 +16,8 @@ public class AStar : MonoBehaviour
     // Start is called before the first frame update
     private Tilemap tilemap;
     private HashSet<Vector2Int> DynamicTiles = new HashSet<Vector2Int>();
+
+    private Dictionary<Vector2Int, AStarSharp.Node> cache = new Dictionary<Vector2Int, AStarSharp.Node>();
 
     private bool mapUpdated = false;
 
@@ -48,20 +50,34 @@ public class AStar : MonoBehaviour
 
     public AStarSharp.Node GetNode(Vector2Int Id)
     {
-        var collider = tilemap.GetColliderType(new Vector3Int(Id.x, Id.y, 0));
-        var gameobject = tilemap.GetInstantiatedObject(new Vector3Int(Id.x, Id.y, 0));
-
-        var node = new AStarSharp.Node();
-        node.Id = Id;
-        node.Destroyable = DynamicTiles.Contains(Id);
-        node.Block = collider != Tile.ColliderType.None || node.Destroyable;
-        if (gameobject != null)
+        var cachedNode = cache.GetValueOrDefault(Id);
+        if(cachedNode == null)
         {
-            node.Ladder = gameobject.GetComponentInChildren<LadderTile>() != null;
-            node.Platform = gameobject.GetComponentInChildren<PlatformTile>() != null;
+            cachedNode = new AStarSharp.Node();
+            cachedNode.Id = Id;
+            var collider = tilemap.GetColliderType(new Vector3Int(Id.x, Id.y, 0));
+            var gameobject = tilemap.GetInstantiatedObject(new Vector3Int(Id.x, Id.y, 0));
+            if (gameobject != null)
+            {
+                cachedNode.Spike = gameobject.GetComponentInChildren<SpikeTile>() != null;
+                cachedNode.Ladder = gameobject.GetComponentInChildren<LadderTile>() != null;
+                cachedNode.Platform = gameobject.GetComponentInChildren<PlatformTile>() != null;
+            }
+            cachedNode.Block = collider != Tile.ColliderType.None;
+            cachedNode.Weight = 1;
+            cachedNode.Cost = 1;
+
+            cache.Add(Id, cachedNode);
         }
-        node.Weight = 1;
-        node.Cost = 1;
+
+        var node = cachedNode.Clone();
+
+        if (node.Block)
+            return node;
+ 
+        node.Destroyable = DynamicTiles.Contains(Id);
+        node.Block = node.Destroyable;
+
         return node;
     }
 
@@ -90,6 +106,9 @@ public class AStar : MonoBehaviour
     public List<AStarSharp.Node> GetNearbyNodes(AStarSharp.Node node, WalkData data)
     {
         var list = new List<AStarSharp.Node>();
+
+        if(node.Spike)
+            return list;
 
         if (data.flying)
         {
@@ -136,7 +155,7 @@ public class AStar : MonoBehaviour
             AddJumpNodes(list, data, node.Id + new Vector2Int(0, 1), node);
             AddJumpNodes(list, data, node.Id + new Vector2Int(-1, 1), node);
         }
-        else if (node.jumpHeightLeft == 0)
+        else if (node.jumpHeightLeft <= 0)
         {
             AddFallNodes(list, data, node.Id + new Vector2Int(0, -1), node);
             if (node.jumpDistanceLeft > 0)
@@ -172,10 +191,13 @@ public class AStar : MonoBehaviour
     private void AddFallNodes(in List<AStarSharp.Node> nodes, WalkData data, Vector2Int Id, AStarSharp.Node parent)
     {
         var node = GetNode(Id);
-        node.Weight = 3;
+        node.Weight = 2;
+
+        // stop if node is blocked
         if (node == null || node.Block)
             return;
 
+        // stop if character is too tall
         for (int i = Id.y + 1; i < Id.y + data.height; i++)
         {
             var above = GetNode(new Vector2Int(Id.x, i));
@@ -185,14 +207,16 @@ public class AStar : MonoBehaviour
 
         var floor = GetNode(new Vector2Int(Id.x, Id.y - 1));
 
+        // stop if node is out of bounds
         if (floor == null)
             return;
 
+        // if can stand on tile  
         if (floor.Block || floor.Platform)
         {
             node.Parent = parent;
             nodes.Add(node);
-        }
+        } // if ladder
         else if (floor.Ladder && data.canUseLadder)
         {
             node.Weight = 1;
@@ -329,12 +353,20 @@ public class AStar : MonoBehaviour
         }
     }
 
-    public Stack<AStarSharp.Node> GetPath(Vector2Int start, Vector2Int end, WalkData data, CancellationToken ct = default)
+    //public Stack<AStarSharp.Node> GetPath(Vector2Int start, Vector2Int end, WalkData data, int maxNodes = 600, CancellationToken ct = default)
+    //{
+    //    var astar = new AStarSharp.Astar();
+    //    astar.GetAdjacentNodes = (it) => { return GetNearbyNodes(it, data); };
+    //    astar.GetNode = (it) => { return GetNode(it); };
+    //    return astar.FindPath(start, end, maxNodes, ct);
+    //}
+
+    public IEnumerator<FindPathStatus> GetPath(Vector2Int start, Vector2Int end, WalkData data, int maxNodesPerBatch = 10, int maxNodes = 600, CancellationToken ct = default)
     {
         var astar = new AStarSharp.Astar();
         astar.GetAdjacentNodes = (it) => { return GetNearbyNodes(it, data); };
         astar.GetNode = (it) => { return GetNode(it); };
-        return astar.FindPath(start, end, ct);
+        return astar.FindPath(start, end, maxNodesPerBatch, maxNodes, ct);
     }
 }
 
@@ -372,6 +404,7 @@ namespace AStarSharp
             }
         }
 
+        public bool Spike;
         public bool Block;
         public bool Ladder;
         public bool Platform;
@@ -391,6 +424,11 @@ namespace AStarSharp
                 && this.jumpHeightLeft == compare.jumpHeightLeft
                 && this.jumpDistanceLeft == compare.jumpDistanceLeft;
         }
+
+        public Node Clone()
+        {
+            return (Node) this.MemberwiseClone();
+        }
     }
 
     public class Astar
@@ -398,9 +436,86 @@ namespace AStarSharp
         public Func<Vector2Int, Node> GetNode;
         public Func<Node, List<Node>> GetAdjacentNodes;
 
-        public int MaxSize = 500;
+        public struct FindPathStatus
+        {
+            public bool Finished;
+            public bool PathFound;
+            public Stack<Node> Path;
 
-        public Stack<Node> FindPath(Vector2Int Start, Vector2Int End, CancellationToken ct = default)
+        }
+
+        public IEnumerator<FindPathStatus> FindPath(Vector2Int Start, Vector2Int End, int SizePerBatch = 10, int MaxSize = 600, CancellationToken ct = default)
+        {
+            Node start = GetNode(Start);
+            Node end = GetNode(End);
+
+            Stack<Node> Path = new Stack<Node>();
+            List<Node> OpenList = new List<Node>();
+            List<Node> ClosedList = new List<Node>();
+            List<Node> adjacencies;
+            Node current = start;
+
+            // add start node to Open List
+            OpenList.Add(start);
+
+            while (OpenList.Count != 0 && !ClosedList.Exists(x => x.Id == end.Id) && ClosedList.Count < MaxSize)
+            {
+                if (ct.IsCancellationRequested || ClosedList.Count % SizePerBatch == 0)
+                    yield return new FindPathStatus();
+
+                current = OpenList[0];
+                OpenList.Remove(current);
+                ClosedList.Add(current);
+                adjacencies = GetAdjacentNodes(current);
+
+                foreach (Node n in adjacencies)
+                {
+                    if (ct.IsCancellationRequested)
+                        yield return new FindPathStatus();
+
+                    if (ClosedList.Contains(n))
+                        continue;
+                    if (OpenList.Contains(n))
+                        continue;
+
+                    n.Parent = current;
+                    n.DistanceToTarget = Vector2.Distance(n.Id, end.Id);
+                    n.Cost = n.Weight + n.Parent.Cost;
+                    OpenList.Add(n);
+                    OpenList = OpenList.OrderBy(node => node.F).ToList<Node>();
+
+                }
+            };
+
+            var pathFound = true;
+            // construct path, if end was not closed return null
+            if (!ClosedList.Exists(x => x.Id == end.Id))
+            {
+                current = ClosedList.Where(it => it.jumpHeightLeft == -1 && !it.Spike).OrderBy(it => Vector2Int.Distance(it.Id, End)).First();
+                pathFound = false;
+            }
+
+            // if all good, return path
+            Node temp = ClosedList[ClosedList.IndexOf(current)];
+            if (temp == null)
+            {
+                yield return new FindPathStatus() { Finished = true, PathFound = false };
+                yield break;
+            }
+
+            do
+            {
+                Path.Push(temp);
+                temp = temp.Parent;
+            } while (temp != start && temp != null);
+
+            yield return new FindPathStatus() { Finished = true, PathFound = pathFound, Path = Path };
+            yield break;
+
+        }
+
+
+        public (bool, Stack<Node>) FindPath(Vector2Int Start, Vector2Int End, int MaxSize = 600, CancellationToken ct = default)
         {
             Node start = GetNode(Start);
             Node end = GetNode(End);
@@ -417,7 +532,7 @@ namespace AStarSharp
             while (OpenList.Count != 0 && !ClosedList.Exists(x => x.Id == end.Id) && ClosedList.Count < MaxSize)
             {
                 if (ct.IsCancellationRequested)
-                    return null;
+                    return (false,null);
                 current = OpenList[0];
                 OpenList.Remove(current);
                 ClosedList.Add(current);
@@ -426,41 +541,44 @@ namespace AStarSharp
                 foreach (Node n in adjacencies)
                 {
                     if (ct.IsCancellationRequested)
-                        return null;
-                    if (!ClosedList.Contains(n))
-                    {
-                        if (!OpenList.Contains(n))
-                        {
-                            n.Parent = current;
-                            n.DistanceToTarget = Vector2.Distance(n.Id, end.Id);
-                            n.Cost = n.Weight + n.Parent.Cost;
-                            OpenList.Add(n);
-                            OpenList = OpenList.OrderBy(node => node.F).ToList<Node>();
-                        }
-                    }
+                        return (false, null);
+                    if (ClosedList.Contains(n))
+                        continue;
+                    if (OpenList.Contains(n))
+                        continue;
+
+                    n.Parent = current;
+                    n.DistanceToTarget = Vector2.Distance(n.Id, end.Id);
+                    n.Cost = n.Weight + n.Parent.Cost;
+                    OpenList.Add(n);
+                    OpenList = OpenList.OrderBy(node => node.F).ToList<Node>();
                 }
             }
 
             if (ct.IsCancellationRequested)
-                return null;
+                return (false, null);
 
+
+            bool pathFound = true;
             // construct path, if end was not closed return null
             if (!ClosedList.Exists(x => x.Id == end.Id))
             {
-                return null;
+                current = ClosedList.Where(it=>it.jumpHeightLeft==-1 && !it.Spike).OrderBy(it=> Vector2Int.Distance(it.Id,End)).First();
+                pathFound = false;
             }
 
             // if all good, return path
             Node temp = ClosedList[ClosedList.IndexOf(current)];
-            if (temp == null) return null;
+            if (temp == null) return (false,null);
             do
             {
                 if (ct.IsCancellationRequested)
-                    return null;
+                    return (false, null);
+
                 Path.Push(temp);
                 temp = temp.Parent;
             } while (temp != start && temp != null);
-            return Path;
+            return (true, Path);
         }
     }
 }

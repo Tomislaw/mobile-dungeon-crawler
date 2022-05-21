@@ -84,7 +84,7 @@ public class ChaseAndAttackAction : ChaseAction
             if (pathfinding.Target == pathfinding.GetTileId(target.transform.position))
                 return;
 
-            TryWalkingToTarget();
+            pathfinding.MoveTo(target.transform.position, true);
 
         }
     }

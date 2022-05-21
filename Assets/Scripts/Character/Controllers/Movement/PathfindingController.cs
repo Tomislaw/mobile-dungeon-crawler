@@ -2,20 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Threading;
 
 [ExecuteAlways]
 public class PathfindingController : MonoBehaviour
 {
     public AStar astar;
-
     public WalkData data;
 
     private Stack<AStarSharp.Node> nodes;
     public MovementController character;
 
     private float timeLeftOnNode;
-
     private Vector2Int movingToTile;
+
+    public int MaxNodesPerBatch = 10;
+    public int MaxNodes = 600;
+
+    private Coroutine coroutine;
+    private CancellationTokenSource cancellationTokenSource;
+
     public Vector2Int Target
     {
         get
@@ -35,15 +41,53 @@ public class PathfindingController : MonoBehaviour
             astar = FindAStar();
     }
 
-    public bool MoveTo(Vector2 position)
+    public void MoveToId(Vector2Int id, bool moveToClosestTileIfFail = false)
     {
-        return MoveToId(astar.GetTileId(position));
+        StopMoving();
+        coroutine = StartCoroutine(MoveToCoroutine(id, moveToClosestTileIfFail));
     }
 
-    public bool MoveToId(Vector2Int id)
+    public void MoveTo(Vector2 position, bool moveToClosestTileIfFail = false)
+    {
+        StopMoving();
+        coroutine = StartCoroutine(MoveToCoroutine(position, moveToClosestTileIfFail));
+    }
+
+    private IEnumerator MoveToCoroutine(Vector2 position, bool moveToClosestTileIfFail = false)
+    {
+        return MoveToIdCoroutine(astar.GetTileId(position), moveToClosestTileIfFail);
+    }
+
+    private IEnumerator MoveToIdCoroutine(Vector2Int id, bool moveToClosestTileIfFail = false)
+    {
+        cancellationTokenSource = new CancellationTokenSource();
+        var start = StartingTileId();
+        var end = id;
+
+        var enumerator = astar.GetPath(start, end, data, MaxNodesPerBatch, MaxNodes, cancellationTokenSource.Token);
+        while (enumerator.MoveNext())
+        {
+            if (enumerator.Current.Finished)
+            {
+                if  (!enumerator.Current.PathFound && !moveToClosestTileIfFail)
+                {
+                    coroutine = null;
+                    yield break;
+                }
+
+                nodes = enumerator.Current.Path;
+                movingToTile = id;
+                timeLeftOnNode = data.maxTimeOnNode;
+                coroutine = null;
+                yield break;
+            }
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
+    private Vector2Int StartingTileId()
     {
         var start = GetCurrentTileId;
-
         if (data.flying)
         {
 
@@ -56,30 +100,24 @@ public class PathfindingController : MonoBehaviour
             else if (CanWalkOnTile(start + new Vector2Int(1, 0)))
                 start = start + new Vector2Int(1, 0);
         }
-
-        var end = id;
-
-        nodes = astar.GetPath(start, end, data);
-        if (nodes == null)
-        {
-            return false;
-        }
-
-        movingToTile = id;
-
-
-        timeLeftOnNode = data.maxTimeOnNode;
-
-        return true;
+        return start;
     }
 
     public void StopMoving()
     {
+        if (cancellationTokenSource != null)
+            cancellationTokenSource.Cancel();
+        character.Stop();
         if (nodes != null)
             nodes.Clear();
+
+        if (coroutine != null)
+            StopCoroutine(coroutine);
+
+        coroutine = null;
     }
 
-    public bool IsMoving { get; set; }
+    public bool IsMoving { get => coroutine != null || nodes!=null && nodes.Count > 0; }
 
     // Update is called once per frame
     private void FixedUpdate()
@@ -113,7 +151,7 @@ public class PathfindingController : MonoBehaviour
             if (node.Id.y > current.y)
                 move.y = 1;
 
-            if (node.Parent?.Platform == true && !node.Platform)
+            if (node.Parent?.Platform == true && !node.Platform || node.Ladder && character.CanUseLadder || character.IsOnLadder)
                 if (node.Id.y < current.y)
                     move.y = -1;
 
@@ -157,16 +195,16 @@ public class PathfindingController : MonoBehaviour
     }
     public bool CanWalkOnTile(Vector2Int Id)
     {
-        for (int i = Id.y + 1; i < Id.y + data.height; i++)
+        for (int i = Id.y; i < Id.y + data.height; i++)
         {
             var above = astar.GetNode(new Vector2Int(Id.x, i));
-            if (above.Block)
+            if (above.Block || above.Spike)
                 return false;
         }
 
         var floor = astar.GetNode(new Vector2Int(Id.x, Id.y - 1));
 
-        return floor.Block || floor.Platform;
+        return (floor.Block || floor.Platform) && !floor.Spike;
     }
 
     public Vector2Int GetTileId(Vector2 position)

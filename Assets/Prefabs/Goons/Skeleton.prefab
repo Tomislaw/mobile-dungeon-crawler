@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 8932571243353351934}
   - component: {fileID: 1644591716329279559}
   - component: {fileID: -5021091212187416249}
+  - component: {fileID: 4013012953703228152}
+  - component: {fileID: -4647018605040078090}
   m_Layer: 11
   m_Name: Skeleton
   m_TagString: Untagged
@@ -138,6 +140,8 @@ MonoBehaviour:
     jumpHeight: 1
     jumpDistance: 2
   character: {fileID: 4069350316886678256}
+  MaxNodesPerBatch: 10
+  MaxNodes: 100
 --- !u!114 &8932571243353351935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,6 +155,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HaveSneakAnimation: 0
+  HaveWalkPreAttackAnimation: 0
+  HaveOverchargeAnimation: 0
   holdUpdate: 0
 --- !u!114 &8932571243353351911
 MonoBehaviour:
@@ -165,9 +171,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackSpeed: 0.2
-  ChargeAttack: 0
   AttackAnimationTime: 0.15
+  OverchargeTime: 1
+  ChargeAttack: 0
   OnAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  OnChargedAttack:
     m_PersistentCalls:
       m_Calls: []
   AttackDamage: 1
@@ -186,11 +196,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Flying: 0
-  ClimbLadderSpeed: 0
+  GravityScale: 6
+  ClimbLadderSpeed: 4
   CoyoteTime: 0.15
   WalkSpeed: 8
   JumpSpeed: 14
-  Acceleration: 40
+  MaxSpeed: 20
+  Acceleration: 50
+  Jerk: 10
   CanUseLadder: 0
   FaceLeft: 0
   StepTime: 0.15
@@ -198,6 +211,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnWalk:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSwim:
     m_PersistentCalls:
       m_Calls: []
   move: {x: 0, y: 0}
@@ -215,10 +231,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 4
   MaxHealth: 4
+  RessurectTime: 1
   OnDeath:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDamage:
     m_PersistentCalls:
       m_Calls: []
   group: 0
@@ -303,10 +317,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 50
+  MaxDistance: 58
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -314,23 +328,23 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.78125
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -0.040597945
+      outSlope: -0.040597945
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 1
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: -7.0664954
+      outSlope: -7.0664954
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0.19126211
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -339,7 +353,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -354,7 +368,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -379,6 +393,39 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4013012953703228152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932571243353351920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d872bf0fe7dbe941ba4cd061e80a9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Death: {fileID: 8300000, guid: 3e34511c658d40e4ea1834c70865bda0, type: 3}
+  Hit: {fileID: 8300000, guid: 02451b72dcff5d44388112bd97f5c3b9, type: 3}
+  Walk: {fileID: 8300000, guid: d8d2c517572bf6f47bdbc7a5312e60fc, type: 3}
+  Jump: {fileID: 8300000, guid: c0bcc74f1b33d9c428a4289e94feb478, type: 3}
+  Swim: {fileID: 8300000, guid: 74c91e7aa8aa7e94782cec3abfdfe47c, type: 3}
+  Attack: {fileID: 8300000, guid: 0e9cf4d9b8299934391e9f55cca28c6e, type: 3}
+  ChargedAttack: {fileID: 8300000, guid: 0e9cf4d9b8299934391e9f55cca28c6e, type: 3}
+--- !u!114 &-4647018605040078090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932571243353351920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a7e7f3d2502159418ad467a5b17e3c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
+  soundType: 1
 --- !u!1 &8932571244200176013
 GameObject:
   m_ObjectHideFlags: 0

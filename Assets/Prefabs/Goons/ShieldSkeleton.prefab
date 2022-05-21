@@ -7,9 +7,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5671693322976097471, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
-      propertyPath: m_SortingLayer
-      value: 3
+    - target: {fileID: 4885720716787640596, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
+      propertyPath: Health
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4885720716787640596, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
+      propertyPath: MaxHealth
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8932571243353351920, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
       propertyPath: m_Name
@@ -59,25 +63,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8932571243353351930, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
+      propertyPath: astar
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8932571243353351931, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 6447220455983910817, guid: 877a92fd574e585438c20ce319e9fa4b, type: 3}
+      objectReference: {fileID: 1843634070, guid: e697adbf1d7fc0347b4c0f6b08579205, type: 3}
+    - target: {fileID: 8932571243353351931, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8932571243353351933, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: 696b8bfac8c11c2428a6b35e7aa3b33c, type: 2}
-    - target: {fileID: 8932571243353351935, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
-      propertyPath: Health
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8932571243353351935, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
-      propertyPath: MaxHealth
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8932571244200176013, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}

@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\Data\OptionsData.cs" />
     <Compile Include="Assets\Scripts\UI\CutoutMask.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Projectile.cs" />
+    <Compile Include="Assets\Scripts\Character\Controllers\ItemsController.cs" />
     <Compile Include="Assets\Scripts\Tilemap\MultipleTilesRuleTile.cs" />
     <Compile Include="Assets\Scripts\UI\GemsUI.cs" />
     <Compile Include="Assets\Scripts\Utility\Drawing.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Assets\Scripts\Level\SubScene.cs" />
     <Compile Include="Assets\Scripts\Data\SoundData.cs" />
     <Compile Include="Assets\Scripts\Level\Trigger.cs" />
+    <Compile Include="Assets\SoundAssigner.cs" />
     <Compile Include="Assets\Scripts\Utility\CameraController.cs" />
     <Compile Include="Assets\Scripts\UI\ChestUI.cs" />
     <Compile Include="Assets\Scripts\Character\Controllers\Movement\MovementController.cs" />
@@ -112,6 +114,7 @@
     <Compile Include="Assets\Scripts\Utility\Poly.cs" />
     <Compile Include="Assets\Scripts\Gameplay\SoundVolumeScaler.cs" />
     <Compile Include="Assets\Scripts\Character\Controllers\Movement\PathfindingController.cs" />
+    <Compile Include="Assets\Scripts\Tilemap\DoorTile.cs" />
     <Compile Include="Assets\Scripts\Character\Ai\Actions\RandomAction.cs" />
     <Compile Include="Assets\Scripts\Character\SkeletonAI.cs" />
     <Compile Include="Assets\Scripts\Character\Controllers\Attack\RangedAttack.cs" />
@@ -123,6 +126,7 @@
     <Compile Include="Assets\Scripts\Tilemap\RespawnTile.cs" />
     <Compile Include="Assets\Scripts\Character\Ai\Activators\AreaTriggerActivator.cs" />
     <Compile Include="Assets\Scripts\UI\AdventureIconUI.cs" />
+    <Compile Include="Assets\InventoryController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
