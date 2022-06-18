@@ -30,7 +30,7 @@ public class AttackController : MonoBehaviour
 
     public bool CanAttack { get => timeToNextAttack <= 0 && !character.IsDead && !character.holdUpdate; }
     public bool IsAttacking { get => timeToAnimationAttackFinish > 0; }
-    public bool IsOvercharged{ get => timeToOvercharge <=0; }
+    public bool IsOvercharged{ get => OverchargeTime > 0 && timeToOvercharge <= 0; }
 
     public void OnEnable()
     {

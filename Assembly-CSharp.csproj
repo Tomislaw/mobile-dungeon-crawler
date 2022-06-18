@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\Character\Ai\BasicAiStateData.cs" />
     <Compile Include="Assets\Scripts\UI\Control\ArrowsHandle.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Shockwave.cs" />
+    <Compile Include="Assets\InventoryController.cs" />
     <Compile Include="Assets\Scripts\Utility\EventManager.cs" />
     <Compile Include="Assets\Scripts\Character\Character.cs" />
     <Compile Include="Assets\Scripts\Character\Ai\BasicAi.cs" />
@@ -126,7 +127,6 @@
     <Compile Include="Assets\Scripts\Tilemap\RespawnTile.cs" />
     <Compile Include="Assets\Scripts\Character\Ai\Activators\AreaTriggerActivator.cs" />
     <Compile Include="Assets\Scripts\UI\AdventureIconUI.cs" />
-    <Compile Include="Assets\InventoryController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
