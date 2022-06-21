@@ -19,11 +19,6 @@ public class SubScene : MonoBehaviour
         Gizmos.DrawWireCube(transform.position, new Vector3(width, height, 1));
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-    }
-
     public bool Contains(Vector2 position)
     {
         var left = -width / 2 + transform.position.x;
