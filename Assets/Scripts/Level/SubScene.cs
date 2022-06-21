@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.IMGUI.Controls;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SubScene : MonoBehaviour
 {
@@ -17,18 +13,15 @@ public class SubScene : MonoBehaviour
 
     public GameObject respawnPoint;
 
-
-    private BoxBoundsHandle handle;
-
-    // Update is called once per frame
-    private void Update()
-    {
-    }
-
     private void OnDrawGizmos()
     {
         Gizmos.color = new Color(1, 0, 0, 0.5f);
         Gizmos.DrawWireCube(transform.position, new Vector3(width, height, 1));
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
     }
 
     public bool Contains(Vector2 position)
@@ -40,8 +33,4 @@ public class SubScene : MonoBehaviour
         return position.x >= left && position.x <= right && position.y >= bottom && position.y <= top;
     }
 
-    internal void OrderBy()
-    {
-        throw new System.NotImplementedException();
-    }
 }
