@@ -1,13 +1,12 @@
 ﻿using Assets.Scripts.Character.Ai;
 using Assets.Scripts.Character.Ai.BasicAiState;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEditor;
+
 using UnityEngine;
-using Random = UnityEngine.Random;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 
 public class BasicAi: MonoBehaviour
 {
@@ -51,6 +50,7 @@ public class BasicAi: MonoBehaviour
     }
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(BasicAi))]
 public class BasicAiEditor : Editor
 {
@@ -72,4 +72,4 @@ public class BasicAiEditor : Editor
             
     }
 }
-
+#endif

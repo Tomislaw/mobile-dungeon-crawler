@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.IMGUI.Controls;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SubScene : MonoBehaviour
 {
@@ -16,14 +12,6 @@ public class SubScene : MonoBehaviour
     public SubScene bottom;
 
     public GameObject respawnPoint;
-
-
-    private BoxBoundsHandle handle;
-
-    // Update is called once per frame
-    private void Update()
-    {
-    }
 
     private void OnDrawGizmos()
     {
@@ -40,8 +28,4 @@ public class SubScene : MonoBehaviour
         return position.x >= left && position.x <= right && position.y >= bottom && position.y <= top;
     }
 
-    internal void OrderBy()
-    {
-        throw new System.NotImplementedException();
-    }
 }
