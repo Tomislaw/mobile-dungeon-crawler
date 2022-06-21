@@ -17,5 +17,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Mountian/Mountian3.unity
     guid: 6949e05add6addd4ebcef714ca49134c
+  - enabled: 1
+    path: Assets/Scenes/Mountian/Mountian4.unity
+    guid: 6f0cd3f799d63714a93b1e3267988241
+  - enabled: 1
+    path: Assets/Scenes/Mountian/Mountian5.unity
+    guid: a4fd0e15c72bea744bcb5a3695d60863
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 5c3bd914ef89c5f428fecffd59da1e41, type: 2}
