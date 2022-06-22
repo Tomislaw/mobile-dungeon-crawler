@@ -1,69 +1,71 @@
-using System.Collections;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DebugConsole : MonoBehaviour
+namespace RuinsRaiders
 {
-
-    public int lines = 8;
-
-    private FixedSizedQueue<string> logs;
-    private TMPro.TMP_Text text;
-
-    void OnEnable()
+    // Debug class for writing all global events into TextMeshPro Text
+    public class DebugConsole : MonoBehaviour
     {
-        EventManager.instance.OnTrigger.AddListener(HandleLog);
-    }
 
-    void OnDisable()
-    {
-        EventManager.instance.OnTrigger.RemoveListener(HandleLog);
-    }
+        public int lines = 8;
 
-    void HandleLog(string logString)
-    {
-        logs.Enqueue(logString);
-        string str = "";
-        foreach(var s in logs)
+        private FixedSizedQueue<string> logs;
+        private TMPro.TMP_Text text;
+
+        void OnEnable()
         {
-            str += ">" + s + "\n";
+            EventManager.Register(HandleLog);
         }
-        text.text = str;
-    }
-    void Awake()
-    {
-        logs = new FixedSizedQueue<string>(lines);
-        text = GetComponent<TMPro.TMP_Text>();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
-
-public class FixedSizedQueue<T> : ConcurrentQueue<T>
-{
-    private readonly object syncObject = new object();
-
-    public int Size { get; private set; }
-
-    public FixedSizedQueue(int size)
-    {
-        Size = size;
-    }
-
-    public new void Enqueue(T obj)
-    {
-        base.Enqueue(obj);
-        lock (syncObject)
+        void OnDisable()
         {
-            while (base.Count > Size)
+            EventManager.Register(HandleLog);
+        }
+
+        void HandleLog(string logString)
+        {
+            logs.Enqueue(logString);
+            string str = "";
+            foreach (var s in logs)
             {
-                T outObj;
-                base.TryDequeue(out outObj);
+                str += ">" + s + "\n";
+            }
+            text.text = str;
+        }
+        void Awake()
+        {
+            logs = new FixedSizedQueue<string>(lines);
+            text = GetComponent<TMPro.TMP_Text>();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+    }
+
+    public class FixedSizedQueue<T> : ConcurrentQueue<T>
+    {
+        private readonly object syncObject = new object();
+
+        public int Size { get; private set; }
+
+        public FixedSizedQueue(int size)
+        {
+            Size = size;
+        }
+
+        public new void Enqueue(T obj)
+        {
+            base.Enqueue(obj);
+            lock (syncObject)
+            {
+                while (base.Count > Size)
+                {
+                    T outObj;
+                    base.TryDequeue(out outObj);
+                }
             }
         }
     }

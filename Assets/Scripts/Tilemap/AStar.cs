@@ -31,7 +31,6 @@ public class AStar : MonoBehaviour
     {
         DynamicTiles.Remove(tileId);
         mapUpdated = true;
-
     }
 
     private void Awake()
@@ -441,7 +440,6 @@ namespace AStarSharp
             public bool Finished;
             public bool PathFound;
             public Stack<Node> Path;
-
         }
 
         public IEnumerator<FindPathStatus> FindPath(Vector2Int Start, Vector2Int End, int SizePerBatch = 10, int MaxSize = 600, CancellationToken ct = default)

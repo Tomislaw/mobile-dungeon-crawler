@@ -1,43 +1,45 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
-public class ChestUI : MonoBehaviour
+namespace RuinsRaiders.UI
 {
-    public enum Type
+    // responsible for showing opening chest animation after level is finished
+    // todo
+    [RequireComponent(typeof(Animator))]
+    public class ChestUI : MonoBehaviour
     {
-        Normal, Expensive
-    }
+        public enum ChestType
+        {
+            Normal, Expensive
+        }
 
-    public enum State
-    {
-        Empty, AlreadyOpen, Normal
-    }
+        public enum ChestState
+        {
+            Empty, AlreadyOpen, Normal
+        }
 
-    public State state;
-    public Type type;
+        private ChestState State;
+        private ChestType Type;
+        private bool IsOpen;
 
-    public bool open;
+        private Animator animator;
 
-    private Animator animator;
+        private void Start()
+        {
+            animator = GetComponent<Animator>();
+            animator.SetBool("Open", IsOpen);
+            animator.SetInteger("Style", (int)Type);
+            animator.SetInteger("State", (int)State);
+        }
 
-    private void Start()
-    {
-        animator = GetComponent<Animator>();
-        animator.SetBool("Open", open);
-        animator.SetInteger("Style", (int)type);
-        animator.SetInteger("State", (int)state);
-    }
+        public void Update()
+        {
+            animator.SetBool("Open", IsOpen);
+            animator.SetInteger("Style", (int)Type);
+            animator.SetInteger("State", (int)State);
+        }
 
-    public void Update()
-    {
-        animator.SetBool("Open", open);
-        animator.SetInteger("Style", (int)type);
-        animator.SetInteger("State", (int)state);
-    }
-
-    public void OnOpen()
-    {
+        public void OnOpen()
+        {
+        }
     }
 }
