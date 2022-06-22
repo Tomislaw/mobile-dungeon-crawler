@@ -1,168 +1,173 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
-[ExecuteAlways]
-[RequireComponent(typeof(RectTransform))]
-public class JoystickHandle : MonoBehaviour
+
+namespace RuinsRaiders.UI
 {
-    internal float Radius;
-
-    internal Vector2 Center;
-    internal Vector2 Value;
-    internal bool Pressed;
-
-    private Vector2 LocalInitialPosition;
-    private Vector2 WorldInitialPosition;
-
-    private int pointerId = -2;
-
-    public void Awake()
+    // Responsibe for inner part of virtual joystick
+    [ExecuteAlways]
+    [RequireComponent(typeof(RectTransform))]
+    public class JoystickHandle : MonoBehaviour
     {
-        LocalInitialPosition = transform.localPosition;
-    }
+        internal float Radius;
 
-    private void CheckForPress()
-    {
-        LocalInitialPosition = transform.localPosition;
-        WorldInitialPosition = transform.position;
-        if (Touchscreen.current != null)
+        internal Vector2 Center;
+        internal Vector2 Value;
+        internal bool Pressed;
+
+        private Vector2 LocalInitialPosition;
+        private Vector2 WorldInitialPosition;
+
+        private int pointerId = -2;
+
+        public void Awake()
         {
-            int id = 0;
-            foreach (var touch in Touchscreen.current.touches)
+            LocalInitialPosition = transform.localPosition;
+        }
+
+        private void CheckForPress()
+        {
+            LocalInitialPosition = transform.localPosition;
+            WorldInitialPosition = transform.position;
+            if (Touchscreen.current != null)
             {
-                if (touch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Began)
+                int id = 0;
+                foreach (var touch in Touchscreen.current.touches)
                 {
-                    var distance = Vector2.Distance(WorldInitialPosition, touch.position.ReadValue());
-                    if (distance < Radius)
+                    if (touch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Began)
                     {
-                        TouchStarted(touch.touchId.ReadValue());
-                        return;
+                        var distance = Vector2.Distance(WorldInitialPosition, touch.position.ReadValue());
+                        if (distance < Radius)
+                        {
+                            TouchStarted(touch.touchId.ReadValue());
+                            return;
+                        }
+
                     }
-
+                    id++;
                 }
-                id++;
             }
-        }
 
-        if (Mouse.current.leftButton.isPressed && Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            var distance = Vector2.Distance(WorldInitialPosition, Mouse.current.position.ReadValue());
-            if (distance < Radius)
+            if (Mouse.current.leftButton.isPressed && Mouse.current.leftButton.wasPressedThisFrame)
             {
-                TouchStarted(-1);
-                return;
-            }
-        }
-    }
-
-    public void CheckForUnpress()
-    {
-        if (pointerId >= 0)
-        {
-            foreach (var touch in Touchscreen.current.touches)
-            {
-                if (touch.touchId.ReadValue() == pointerId)
+                var distance = Vector2.Distance(WorldInitialPosition, Mouse.current.position.ReadValue());
+                if (distance < Radius)
                 {
-                    switch (touch.phase.ReadValue())
-                    {
-                        case UnityEngine.InputSystem.TouchPhase.None:
-                        case UnityEngine.InputSystem.TouchPhase.Ended:
-                        case UnityEngine.InputSystem.TouchPhase.Canceled:
-                            TouchFinished(pointerId);
-                            break;
-                    };
+                    TouchStarted(-1);
+                    return;
                 }
             }
         }
-        else if (pointerId == -1)
-        {
-            if (!Mouse.current.leftButton.isPressed)
-                TouchFinished(-1);
-        }
-    }
-    public void ResolveMove()
-    {
-        Vector2 point = new Vector2();
-        if (pointerId >= 0)
-        {
-            foreach (var touch in Touchscreen.current.touches)
-            {
-                if (touch.touchId.ReadValue() != pointerId)
-                    continue;
 
-                point = touch.position.ReadValue();
-                    break;
+        public void CheckForUnpress()
+        {
+            if (pointerId >= 0)
+            {
+                foreach (var touch in Touchscreen.current.touches)
+                {
+                    if (touch.touchId.ReadValue() == pointerId)
+                    {
+                        switch (touch.phase.ReadValue())
+                        {
+                            case UnityEngine.InputSystem.TouchPhase.None:
+                            case UnityEngine.InputSystem.TouchPhase.Ended:
+                            case UnityEngine.InputSystem.TouchPhase.Canceled:
+                                TouchFinished(pointerId);
+                                break;
+                        };
+                    }
+                }
+            }
+            else if (pointerId == -1)
+            {
+                if (!Mouse.current.leftButton.isPressed)
+                    TouchFinished(-1);
             }
         }
-        else if (pointerId == -1)
-            point = Mouse.current.position.ReadValue();
-
-        var normalized = (point - WorldInitialPosition).normalized;
-
-        transform.position = point;
-        var distance = Vector2.Distance(LocalInitialPosition, transform.localPosition);
-        if (distance > Radius)
-            transform.localPosition = normalized * Radius;
-
-        var previousValue = Value;
-        Value = transform.localPosition / Radius;
-        if (previousValue != Value)
-            TouchMoved(pointerId, Value);
-    }
-
-    public void Update()
-    {
-        if (!Pressed)
-            CheckForPress();
-
-        if (Pressed)
+        public void ResolveMove()
         {
-            ResolveMove();
-            CheckForUnpress();
+            Vector2 point = new Vector2();
+            if (pointerId >= 0)
+            {
+                foreach (var touch in Touchscreen.current.touches)
+                {
+                    if (touch.touchId.ReadValue() != pointerId)
+                        continue;
+
+                    point = touch.position.ReadValue();
+                    break;
+                }
+            }
+            else if (pointerId == -1)
+                point = Mouse.current.position.ReadValue();
+
+            var normalized = (point - WorldInitialPosition).normalized;
+
+            transform.position = point;
+            var distance = Vector2.Distance(LocalInitialPosition, transform.localPosition);
+            if (distance > Radius)
+                transform.localPosition = normalized * Radius;
+
+            var previousValue = Value;
+            Value = transform.localPosition / Radius;
+            if (previousValue != Value)
+                TouchMoved(pointerId, Value);
+        }
+
+        public void Update()
+        {
+            if (!Pressed)
+                CheckForPress();
+
+            if (Pressed)
+            {
+                ResolveMove();
+                CheckForUnpress();
+            }
+        }
+
+        public void TouchStarted(int id)
+        {
+            Debug.Log(id + " - started");
+            pointerId = id;
+            Pressed = true;
+        }
+
+        public void TouchFinished(int id)
+        {
+            Debug.Log(id + " - finished");
+            pointerId = -2;
+            Pressed = false;
+            Value = new Vector2();
+            transform.localPosition = LocalInitialPosition;
+        }
+
+        public void TouchMoved(int id, Vector2 value)
+        {
+
         }
     }
 
-    public void TouchStarted(int id)
+    [ExecuteAlways]
+    [RequireComponent(typeof(RectTransform))]
+    public abstract class BasicJoystick : MonoBehaviour
     {
-        Debug.Log(id + " - started");
-        pointerId = id;
-        Pressed = true;
-    }
+        public float Radius;
+        public Vector2 Center;
 
-    public void TouchFinished(int id)
-    {
-        Debug.Log(id + " - finished");
-        pointerId = -2;
-        Pressed = false;
-        Value = new Vector2();
-        transform.localPosition = LocalInitialPosition;
-    }
+        public Vector2 Value { get => joystick == null ? new Vector2() : joystick.Value; }
 
-    public void TouchMoved(int id, Vector2 value)
-    {
-        
-    }
-}
+        [SerializeField]
+        protected JoystickHandle joystick;
 
-[ExecuteAlways]
-[RequireComponent(typeof(RectTransform))]
-public abstract class BasicJoystick : MonoBehaviour
-{
-    public float Radius;
-    public Vector2 Center;
-    public JoystickHandle Joystick;
-
-    public Vector2 Value { get => Joystick == null ? new Vector2() : Joystick.Value; }
-
-    // Update is called once per frame
-    protected virtual void Update()
-    {
-        if (Joystick)
+        // Update is called once per frame
+        protected virtual void Update()
         {
-            Joystick.Center = Center;
-            Joystick.Radius = Radius;
+            if (joystick)
+            {
+                joystick.Center = Center;
+                joystick.Radius = Radius;
+            }
         }
     }
 }

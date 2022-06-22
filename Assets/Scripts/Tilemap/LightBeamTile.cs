@@ -1,31 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class LightBeamTile : MonoBehaviour
+namespace RuinsRaiders
 {
-    private LevelEvents levelEvents;
-    public LayerMask playerLayer;
-
-    private void Start()
+    public class LightBeamTile : MonoBehaviour
     {
-        if (levelEvents == null)
-            levelEvents = FindObjectOfType<LevelEvents>();
-    }
+        [SerializeField]
+        private LayerMask playerLayer;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (levelEvents == null)
-            return;
+        private LevelEvents levelEvents;
 
-        var character = collision.gameObject.GetComponent<Character>();
-        if (character == null)
-            return;
-
-        if (playerLayer == (playerLayer | (1 << collision.gameObject.layer)))
+        private void Start()
         {
-            levelEvents.LevelFinished();
-            StartCoroutine(character.HideCoroutine());
+            if (levelEvents == null)
+                levelEvents = FindObjectOfType<LevelEvents>();
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (levelEvents == null)
+                return;
+
+            var character = collision.gameObject.GetComponent<Character>();
+            if (character == null)
+                return;
+
+            if (playerLayer == (playerLayer | (1 << collision.gameObject.layer)))
+            {
+                levelEvents.LevelFinished();
+                StartCoroutine(character.HideCoroutine());
+            }
         }
     }
 }

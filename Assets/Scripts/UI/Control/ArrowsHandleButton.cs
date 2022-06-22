@@ -1,24 +1,28 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-public class ArrowsHandleButton : MonoBehaviour
+namespace RuinsRaiders.UI
 {
-    public UnityEvent OnPointerDown;
-    public UnityEvent OnPointerUp;
-
-    bool selected = false;
-    internal void SetSelected(bool selected)
+    // Responsible for single button for Mobile controls
+    public class ArrowsHandleButton : MonoBehaviour
     {
-        if (this.selected != selected)
+        public UnityEvent OnPointerDown;
+        public UnityEvent OnPointerUp;
+
+        bool selected = false;
+        internal void SetSelected(bool selected)
         {
-            if (selected)
-                OnPointerDown.Invoke();
-            else
+            if (this.selected != selected)
             {
-                OnPointerUp.Invoke();
+                if (selected)
+                    OnPointerDown.Invoke();
+                else
+                {
+                    OnPointerUp.Invoke();
+                }
+                this.selected = selected;
             }
-            this.selected = selected;
+
         }
-      
     }
 }

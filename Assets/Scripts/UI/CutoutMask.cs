@@ -1,19 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
-public class CutoutMask : Image
+namespace RuinsRaiders.UI
 {
-    public override Material materialForRendering
+    // Helper function for creating transparent holes in images
+    public class CutoutMask : Image
     {
-        get
+        public override Material materialForRendering
         {
-            Material m = new Material(base.materialForRendering);
-            m.SetInt("_StencilComp", (int)CompareFunction.NotEqual);
-            return m;
-        }
+            get
+            {
+                Material m = new Material(base.materialForRendering);
+                m.SetInt("_StencilComp", (int)CompareFunction.NotEqual);
+                return m;
+            }
 
+        }
     }
 }

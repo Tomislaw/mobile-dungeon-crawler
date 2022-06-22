@@ -17,9 +17,9 @@ namespace RuinsRaiders.UI
             Empty, AlreadyOpen, Normal
         }
 
-        private ChestState State;
-        private ChestType Type;
-        private bool IsOpen;
+        public ChestState State;
+        public ChestType Type;
+        public bool IsOpen;
 
         private Animator animator;
 
