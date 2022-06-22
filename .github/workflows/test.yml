@@ -12,8 +12,8 @@ jobs:
           lfs: true
       - uses: actions/cache@v2
         with:
-          path: test-project/Library
-          key: Library-test-project
+          path: mobile-dungeon-crawler/Library
+          key: Library-mobile-dungeon-crawler
           restore-keys: |
             Library-
       - uses: game-ci/unity-test-runner@v2
@@ -21,7 +21,7 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          projectPath: test-project
+          projectPath: mobile-dungeon-crawler
           testMode: playmode
           artifactsPath: playmode-artifacts
           githubToken: ${{ secrets.GITHUB_TOKEN }}
