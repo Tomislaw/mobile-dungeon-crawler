@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
-using System.Text;
 using UnityEngine.Tilemaps;
 using System.Threading;
 using UnityEngine.Events;
@@ -559,12 +557,10 @@ namespace AStarSharp
                 return (false, null);
 
 
-            bool pathFound = true;
             // construct path, if end was not closed return null
             if (!ClosedList.Exists(x => x.Id == end.Id))
             {
                 current = ClosedList.Where(it=>it.jumpHeightLeft==-1 && !it.Spike).OrderBy(it=> Vector2Int.Distance(it.Id,End)).First();
-                pathFound = false;
             }
 
             // if all good, return path
