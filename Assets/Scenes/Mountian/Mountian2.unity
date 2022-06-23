@@ -292,16 +292,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c35b887df91418428964f26514168de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnStart:
+  onStart:
     m_PersistentCalls:
       m_Calls: []
-  OnCollisionEnter:
+  onCollisionEnter:
     m_PersistentCalls:
       m_Calls: []
-  OnCollisionExit:
+  onCollisionExit:
     m_PersistentCalls:
       m_Calls: []
-  OnTriggerEnter:
+  onTriggerEnter:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 303333376}
@@ -316,10 +316,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnTriggerExit:
+  onTriggerExit:
     m_PersistentCalls:
       m_Calls: []
-  OnKilled:
+  onKilled:
     m_PersistentCalls:
       m_Calls: []
 --- !u!61 &303333379
@@ -1310,13 +1310,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: -1
-  width: 54
-  height: 40
+  respawnPoint: {fileID: 0}
   left: {fileID: 1368013242}
   right: {fileID: 649253718}
   top: {fileID: 0}
   bottom: {fileID: 0}
-  respawnPoint: {fileID: 0}
+  size: {x: 56, y: 38}
 --- !u!1001 &390761297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1545,13 +1544,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: -1
-  width: 44
-  height: 40
+  respawnPoint: {fileID: 0}
   left: {fileID: 351539262}
   right: {fileID: 0}
   top: {fileID: 0}
   bottom: {fileID: 0}
-  respawnPoint: {fileID: 0}
+  size: {x: 42, y: 22}
 --- !u!1 &774470937
 GameObject:
   m_ObjectHideFlags: 0
@@ -41006,7 +41004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73981cda94e13714098cb9a2a7c9f58b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnMapUpdated:
+  onMapUpdated:
     m_PersistentCalls:
       m_Calls: []
 --- !u!66 &1093150932
@@ -43617,13 +43615,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  width: 70
-  height: 40
+  respawnPoint: {fileID: 0}
   left: {fileID: 0}
   right: {fileID: 351539262}
   top: {fileID: 0}
   bottom: {fileID: 0}
-  respawnPoint: {fileID: 0}
+  size: {x: 68, y: 38}
 --- !u!1 &1527277005
 GameObject:
   m_ObjectHideFlags: 0

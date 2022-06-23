@@ -92,11 +92,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 635d1100977e48b46a93495699b032ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  locked: {fileID: -7334886338573059942, guid: bd9ea01d645c0874a999c7a4010a36e6, type: 3}
-  hovered: {fileID: -6774437969098921397, guid: bd9ea01d645c0874a999c7a4010a36e6, type: 3}
-  normal: {fileID: -4352409407941354246, guid: bd9ea01d645c0874a999c7a4010a36e6, type: 3}
-  text: {fileID: 8695867864358465923}
-  IsLocked: 0
+  isLocked: 0
+  lockedSprite: {fileID: -7334886338573059942, guid: bd9ea01d645c0874a999c7a4010a36e6, type: 3}
+  hoveredSprite: {fileID: -6774437969098921397, guid: bd9ea01d645c0874a999c7a4010a36e6, type: 3}
+  normalSprite: {fileID: -4352409407941354246, guid: bd9ea01d645c0874a999c7a4010a36e6, type: 3}
+  tmpText: {fileID: 8695867864358465923}
   image: {fileID: 6451704525302508691}
   button: {fileID: 3500871649617097090}
   data: {fileID: 11400000, guid: de6a0a484468d7f4da31dad342185329, type: 2}

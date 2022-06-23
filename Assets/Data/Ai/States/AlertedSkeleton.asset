@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3165c69492433e0409aa1ec6efa0ceee, type: 3}
   m_Name: AlertedSkeleton
   m_EditorClassIdentifier: Assembly-CSharp::BasicAiStateData
-  Name: Alerted
-  Action: {fileID: 11400000, guid: 803c76245a7836f4e8827914d0b6ea53, type: 2}
-  OnActionFinished: {fileID: 11400000, guid: 22e155b6c03379e48baa9fba9fcfeb1b, type: 2}
-  StateTransitions: []
+  action: {fileID: 11400000, guid: 803c76245a7836f4e8827914d0b6ea53, type: 2}
+  onActionFinished: {fileID: 11400000, guid: 22e155b6c03379e48baa9fba9fcfeb1b, type: 2}
+  stateTransitions: []

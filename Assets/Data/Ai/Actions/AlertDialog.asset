@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ba7db77f36cb54cb2cb15dfd3d3828, type: 3}
   m_Name: AlertDialog
   m_EditorClassIdentifier: 
-  Name: CuriousDialog
   dialog: {fileID: 3565775690252107043, guid: b59baf7713dfff94283ffb22b410afd7, type: 3}
   offset: {x: 0, y: 3}
   dialogTime: 0.25

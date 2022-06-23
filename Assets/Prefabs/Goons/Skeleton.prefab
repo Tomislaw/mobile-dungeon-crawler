@@ -140,8 +140,8 @@ MonoBehaviour:
     jumpHeight: 1
     jumpDistance: 2
   character: {fileID: 4069350316886678256}
-  MaxNodesPerBatch: 10
-  MaxNodes: 100
+  maxNodesPerBatch: 10
+  maxNodes: 600
 --- !u!114 &8932571243353351935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,10 +154,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9290149db6b4a4e94084979ed9ad4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HaveSneakAnimation: 0
-  HaveWalkPreAttackAnimation: 0
-  HaveOverchargeAnimation: 0
   holdUpdate: 0
+  haveSneakAnimation: 0
+  haveWalkPreAttackAnimation: 0
+  haveOverchargeAnimation: 0
 --- !u!114 &8932571243353351911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,19 +170,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 262c84ae8ceb69345ac9ed36833301f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackSpeed: 0.2
-  AttackAnimationTime: 0.15
-  OverchargeTime: 1
-  ChargeAttack: 0
-  OnAttack:
+  attackSpeed: 0.2
+  attackAnimationTime: 0.15
+  overchargeTime: 1
+  chargeAttack: 0
+  onAttack:
     m_PersistentCalls:
       m_Calls: []
-  OnChargedAttack:
+  onChargedAttack:
     m_PersistentCalls:
       m_Calls: []
-  AttackDamage: 1
-  Distance: 1.5
-  Knockback: 200
+  attackDamage: 1
+  distance: 1.6
+  knockback: 200
 --- !u!114 &4069350316886678256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,25 +195,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 681d635a5cb7c4c48be5480f465c0c27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Flying: 0
-  GravityScale: 6
-  ClimbLadderSpeed: 4
-  CoyoteTime: 0.15
-  WalkSpeed: 8
-  JumpSpeed: 14
-  MaxSpeed: 20
-  Acceleration: 50
-  Jerk: 10
-  CanUseLadder: 0
-  FaceLeft: 0
-  StepTime: 0.15
-  OnJump:
+  flying: 0
+  gravityScale: 6
+  climbLadderSpeed: 0
+  coyoteTime: 0.15
+  walkSpeed: 9
+  jumpSpeed: 12
+  maxSpeed: 30
+  acceleration: 65
+  jerk: 10
+  canUseLadder: 1
+  faceLeft: 0
+  stepTime: 0.15
+  onJump:
     m_PersistentCalls:
       m_Calls: []
-  OnWalk:
+  onWalk:
     m_PersistentCalls:
       m_Calls: []
-  OnSwim:
+  onSwim:
     m_PersistentCalls:
       m_Calls: []
   move: {x: 0, y: 0}
@@ -229,13 +229,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2c6fe3b94d91a41a1db1471222ce76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 4
-  MaxHealth: 4
-  RessurectTime: 1
-  OnDeath:
+  group: 0
+  onDeath:
     m_PersistentCalls:
       m_Calls: []
-  group: 0
+  health: 4
+  haxHealth: 4
+  ressurectTime: 1
 --- !u!114 &2774166976484500296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0c3f2aa8029a645bfe45835783f313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialState: {fileID: 11400000, guid: fd1e7698c18c53f42b1b1296ed730d02, type: 2}
+  initialState: {fileID: 11400000, guid: fd1e7698c18c53f42b1b1296ed730d02, type: 2}
 --- !u!210 &5671693322976097471
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -405,13 +405,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d872bf0fe7dbe941ba4cd061e80a9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Death: {fileID: 8300000, guid: 3e34511c658d40e4ea1834c70865bda0, type: 3}
-  Hit: {fileID: 8300000, guid: 02451b72dcff5d44388112bd97f5c3b9, type: 3}
-  Walk: {fileID: 8300000, guid: d8d2c517572bf6f47bdbc7a5312e60fc, type: 3}
-  Jump: {fileID: 8300000, guid: c0bcc74f1b33d9c428a4289e94feb478, type: 3}
-  Swim: {fileID: 8300000, guid: 74c91e7aa8aa7e94782cec3abfdfe47c, type: 3}
-  Attack: {fileID: 8300000, guid: 0e9cf4d9b8299934391e9f55cca28c6e, type: 3}
-  ChargedAttack: {fileID: 8300000, guid: 0e9cf4d9b8299934391e9f55cca28c6e, type: 3}
+  death: {fileID: 8300000, guid: 7d7a1d4dc22096d48aac9d1c04324f0c, type: 3}
+  hit: {fileID: 8300000, guid: 02451b72dcff5d44388112bd97f5c3b9, type: 3}
+  walk: {fileID: 8300000, guid: d8d2c517572bf6f47bdbc7a5312e60fc, type: 3}
+  jump: {fileID: 8300000, guid: a0170ec428e117a4c82b67a01b979c1b, type: 3}
+  swim: {fileID: 8300000, guid: 74c91e7aa8aa7e94782cec3abfdfe47c, type: 3}
+  attack: {fileID: 8300000, guid: 0e9cf4d9b8299934391e9f55cca28c6e, type: 3}
+  chargedAttack: {fileID: 8300000, guid: 0e9cf4d9b8299934391e9f55cca28c6e, type: 3}
 --- !u!114 &-4647018605040078090
 MonoBehaviour:
   m_ObjectHideFlags: 0

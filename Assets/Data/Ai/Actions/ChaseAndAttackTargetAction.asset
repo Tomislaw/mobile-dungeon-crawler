@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 129ca456005e6974ca06ace0fb8d7414, type: 3}
   m_Name: ChaseAndAttackTargetAction
   m_EditorClassIdentifier: Assembly-CSharp::ChaseAndAttackTarget
-  Name: Attack
+  timeBetweenRetryingFindingPath: 0.5
   resignDistance: 15
   resignTime: 3
-  timeBetweenRetryingFindingPath: 0.5
   distanceForAttack: 2
   attackTime: 0.2
   timeBetweenAttack: 0.2
