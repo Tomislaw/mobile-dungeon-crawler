@@ -1,121 +1,122 @@
-﻿using Assets.Scripts.Character.Ai;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MultiAction", menuName = "RuinsRaiders/Ai/MultiAction", order = 1)]
-public class MultiAction : BasicAiActionData
+
+namespace RuinsRaiders.AI
 {
-    public bool parallel = false;
-    public List<BasicAiActionData> actions = new List<BasicAiActionData>();
-
-    public override BasicAiAction Create(ActivatorData trigger)
+    [CreateAssetMenu(fileName = "MultiAction", menuName = "RuinsRaiders/Ai/MultiAction", order = 1)]
+    public class MultiAction : BasicAiActionData
     {
-        return new Action(trigger, this);
-    }
-    public class Action : BasicAiAction
-    {
+        [SerializeField]
+        private bool parallel = false;
 
-        private ActivatorData trigger;
-        private MultiAction parent;
+        [SerializeField]
+        private List<BasicAiActionData> actions = new();
 
-        private List<BasicAiAction> actions;
-        private int currentAction = -1;
-
-        public override bool CanStop()
+        public override BasicAiAction Create(ActivatorData trigger)
         {
-            if (parent.parallel)
+            return new Action(trigger, this);
+        }
+        public class Action : BasicAiAction
+        {
+            readonly private MultiAction _parent;
+
+            readonly private List<BasicAiAction> _actions;
+            private int _currentAction = -1;
+
+            public override bool CanStop()
             {
-                foreach (var action in actions)
+                if (_parent.parallel)
                 {
-                    if (!action.CanStop())
-                        return false;
-                }
-                return true;
-            }
-            else
-            {
-                if (currentAction == -1)
-                    return true;
-                else
-                    return actions.ElementAt(currentAction).CanStop();
-            }
-        }
-
-        public Action(ActivatorData trigger, MultiAction parent)
-        {
-            if (!parent.parallel && parent.actions.Count() > 0)
-                currentAction = 0;
-
-            this.actions = parent.actions.Select(it => it.Create(trigger)).ToList();
-            this.parent = parent;
-        }
-
-        public override bool IsFinished()
-        {
-            if (parent.parallel)
-            {
-                foreach (var action in actions)
-                {
-                    if (!action.IsFinished())
-                        return false;
-                }
-                return true;
-            }
-            else
-            {
-                return currentAction == -1;
-            }
-        }
-
-        public override void Stop()
-        {
-            base.Stop();
-            if (parent.parallel)
-            {
-                foreach (var action in actions)
-                    action.Stop();
-            }
-            else
-            {
-                if (currentAction == -1)
-                    return;
-                else
-                    actions.ElementAt(currentAction).Stop();
-            }
-        }
-
-        public override void Update(float dt)
-        {
-            base.Stop();
-            if (parent.parallel)
-            {
-                foreach (var action in actions)
-                    action.Update(dt);
-            }
-            else
-            {
-                if (currentAction == -1)
-                    return;
-
-                if (currentAction == -1)
-                    return;
-
-                if (actions.ElementAt(currentAction).IsFinished())
-                {
-                    if (currentAction >= actions.Count() - 1)
+                    foreach (var action in _actions)
                     {
-                        currentAction = -1;
-                        return;
+                        if (!action.CanStop())
+                            return false;
                     }
-                    else
-                        currentAction++;
+                    return true;
                 }
+                else
+                {
+                    if (_currentAction == -1)
+                        return true;
+                    else
+                        return _actions.ElementAt(_currentAction).CanStop();
+                }
+            }
 
-                actions.ElementAt(currentAction).Update(dt);
+            public Action(ActivatorData trigger, MultiAction parent)
+            {
+                if (!parent.parallel && parent.actions.Count() > 0)
+                    _currentAction = 0;
+
+                this._actions = parent.actions.Select(it => it.Create(trigger)).ToList();
+                this._parent = parent;
+            }
+
+            public override bool IsFinished()
+            {
+                if (_parent.parallel)
+                {
+                    foreach (var action in _actions)
+                    {
+                        if (!action.IsFinished())
+                            return false;
+                    }
+                    return true;
+                }
+                else
+                {
+                    return _currentAction == -1;
+                }
+            }
+
+            public override void Stop()
+            {
+                base.Stop();
+                if (_parent.parallel)
+                {
+                    foreach (var action in _actions)
+                        action.Stop();
+                }
+                else
+                {
+                    if (_currentAction == -1)
+                        return;
+                    else
+                        _actions.ElementAt(_currentAction).Stop();
+                }
+            }
+
+            public override void Update(float dt)
+            {
+                base.Stop();
+                if (_parent.parallel)
+                {
+                    foreach (var action in _actions)
+                        action.Update(dt);
+                }
+                else
+                {
+                    if (_currentAction == -1)
+                        return;
+
+                    if (_currentAction == -1)
+                        return;
+
+                    if (_actions.ElementAt(_currentAction).IsFinished())
+                    {
+                        if (_currentAction >= _actions.Count() - 1)
+                        {
+                            _currentAction = -1;
+                            return;
+                        }
+                        else
+                            _currentAction++;
+                    }
+
+                    _actions.ElementAt(_currentAction).Update(dt);
+                }
             }
         }
     }

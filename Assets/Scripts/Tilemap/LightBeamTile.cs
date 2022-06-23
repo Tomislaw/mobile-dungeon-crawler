@@ -7,17 +7,17 @@ namespace RuinsRaiders
         [SerializeField]
         private LayerMask playerLayer;
 
-        private LevelEvents levelEvents;
+        private LevelEvents _levelEvents;
 
         private void Start()
         {
-            if (levelEvents == null)
-                levelEvents = FindObjectOfType<LevelEvents>();
+            if (_levelEvents == null)
+                _levelEvents = FindObjectOfType<LevelEvents>();
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (levelEvents == null)
+            if (_levelEvents == null)
                 return;
 
             var character = collision.gameObject.GetComponent<Character>();
@@ -26,7 +26,7 @@ namespace RuinsRaiders
 
             if (playerLayer == (playerLayer | (1 << collision.gameObject.layer)))
             {
-                levelEvents.LevelFinished();
+                _levelEvents.LevelFinished();
                 StartCoroutine(character.HideCoroutine());
             }
         }

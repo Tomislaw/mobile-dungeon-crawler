@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +9,6 @@ namespace RuinsRaiders.UI
     {
         [SerializeField]
         private GameObject showOnSelect;
-
         [SerializeField]
         private bool selected;
 
@@ -24,13 +22,14 @@ namespace RuinsRaiders.UI
         private Sprite hoveredSprite;
 
         [SerializeField]
-        private List<Image> images = new List<Image>();
+        private List<Image> images = new();
 
-        private AdventureIconUI[] AllIcons;
+
+        private AdventureIconUI[] _allIcons;
 
         private void Start()
         {
-            AllIcons = FindObjectsOfType<AdventureIconUI>(true);
+            _allIcons = FindObjectsOfType<AdventureIconUI>(true);
             Invalidate();
         }
 
@@ -44,7 +43,7 @@ namespace RuinsRaiders.UI
 
             this.selected = selected;
             if (selected)
-                foreach (var icon in AllIcons)
+                foreach (var icon in _allIcons)
                 {
                     if (icon.gameObject == gameObject)
                         continue;

@@ -1,114 +1,115 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Tilemaps;
 
-[RequireComponent(typeof(Collider2D))]
-[RequireComponent(typeof(Rigidbody2D))]
-public class Character : MonoBehaviour
+
+namespace RuinsRaiders
 {
-
-    // fields used for animations
-    public bool HaveSneakAnimation = false;
-    public bool HaveWalkPreAttackAnimation = false;
-    public bool HaveOverchargeAnimation = false;
-    public HealthController.Group Group { get => HealthController.group; }
-
-    public MovementController MovementController { get; private set; }
-    public AttackController AttackController { get; private set; }
-    public HealthController HealthController { get; private set; }
-    // events
-
-    private Animator animator;
-
-
-
-    private void OnEnable()
+    [RequireComponent(typeof(Collider2D))]
+    [RequireComponent(typeof(Rigidbody2D))]
+    public class Character : MonoBehaviour
     {
+        [HideInInspector]
+        public bool holdUpdate;
 
-        animator = GetComponent<Animator>();
+        // fields used for animations
+        [SerializeField]
+        private bool haveSneakAnimation = false;
+        [SerializeField]
+        private bool haveWalkPreAttackAnimation = false;
+        [SerializeField]
+        private bool haveOverchargeAnimation = false;
 
-        AttackController = GetComponent<AttackController>();
-        MovementController = GetComponent<MovementController>();
-        HealthController = GetComponent<HealthController>();
-    }
 
-    // Update is called once per frame
-    private void FixedUpdate()
-    {
-        if (holdUpdate)
-            return;
+        private string _currentAnimation;
 
-        string suffix = HaveSneakAnimation && MovementController.IsColliderAbove ? "Sneak" : "";
-        if (IsDead)
+
+        public HealthController.Group Group { get => HealthController.group; }
+
+        public MovementController MovementController { get; private set; }
+        public AttackController AttackController { get; private set; }
+        public HealthController HealthController { get; private set; }
+        // events
+
+        private Animator _animator;
+
+
+        private void OnEnable()
         {
+
+            _animator = GetComponent<Animator>();
+
+            AttackController = GetComponent<AttackController>();
+            MovementController = GetComponent<MovementController>();
+            HealthController = GetComponent<HealthController>();
+        }
+
+        // Update is called once per frame
+        private void FixedUpdate()
+        {
+            if (holdUpdate)
+                return;
+
+            string suffix = haveSneakAnimation && MovementController.IsColliderAbove ? "Sneak" : "";
+            if (IsDead)
+            {
+                SetAnimation("Dead");
+
+            }
+            else if (AttackController.chargeAttack && AttackController.CanAttack)
+            {
+                if (haveWalkPreAttackAnimation && MovementController.IsMoving)
+                    suffix = "Walk" + suffix;
+
+                if (haveOverchargeAnimation && AttackController.IsOvercharged)
+                    suffix = "2" + suffix;
+
+                SetAnimation("PreAttack" + suffix);
+
+            }
+            else if (AttackController.IsAttacking)
+            {
+                SetAnimation("Attack" + suffix);
+            }
+            else if (MovementController.IsMoving)
+            {
+                SetAnimation("Walk" + suffix);
+            }
+            else if (IsDead)
+            {
+                SetAnimation("Dead");
+            }
+
+            else
+                SetAnimation("Idle" + suffix);
+
+
+        }
+
+
+        public void Hide()
+        {
+            StartCoroutine(HideCoroutine());
+        }
+
+        public IEnumerator HideCoroutine()
+        {
+            holdUpdate = true;
             SetAnimation("Dead");
-            
+            yield return new WaitForSeconds(0.3f);
+            gameObject.SetActive(false);
         }
-        else if(AttackController.ChargeAttack && AttackController.CanAttack)
-        {
-            if (HaveWalkPreAttackAnimation && MovementController.IsMoving)
-                suffix = "Walk" + suffix;
 
-            if (HaveOverchargeAnimation && AttackController.IsOvercharged)
-                suffix = "2" + suffix;
+        public void SetAnimation(string animation)
+        {
+            if (_currentAnimation == animation)
+                return;
 
-            SetAnimation("PreAttack" + suffix);
-            
-        }
-        else if (AttackController.IsAttacking)
-        {
-            SetAnimation("Attack" + suffix);
-        }
-        else if (MovementController.IsMoving)
-        {
-            SetAnimation("Walk" + suffix);
-        }
-        else if (IsDead)
-        {
-            SetAnimation("Dead");
-        }
-         
-        else
-            SetAnimation("Idle" + suffix);
+            _currentAnimation = animation;
+            _animator.Play(animation);
 
+        }
+
+        public bool IsDead { get => HealthController ? HealthController.IsDead : false; }
 
     }
-
-
-
-    private string currentAnimation;
-
-    public bool holdUpdate = false;
-
-
-
-    public void Hide()
-    {
-        StartCoroutine(HideCoroutine());
-    }
-
-    public IEnumerator HideCoroutine()
-    {
-        holdUpdate = true;
-        SetAnimation("Dead");
-        yield return new WaitForSeconds(0.3f);
-        gameObject.SetActive(false);
-    }
-
-    public void SetAnimation(string animation)
-    {
-        if (currentAnimation == animation)
-            return;
-
-        currentAnimation = animation;
-        animator.Play(animation);
-
-    }
-
-    public bool IsDead { get => HealthController ? HealthController.IsDead : false; }
-
-  
-
 }

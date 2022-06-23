@@ -7,25 +7,27 @@ namespace RuinsRaiders
     [DefaultExecutionOrder(100)]
     public class ChestTile : MonoBehaviour
     {
-        public UnityEvent OnOpen;
-        public bool IsOpen;
+        private const string OpenAnimation = "Open";
+
+        public UnityEvent onOpen;
+        public bool isOpen;
 
         [SerializeField]
         private AdventureData.ChestData.Type type;
 
-        private LevelEvents levelEvents;
-        private Animator animator;
+        private LevelEvents _levelEvents;
+        private Animator _animator;
 
         private void Start()
         {
-            if (levelEvents == null)
-                levelEvents = FindObjectOfType<LevelEvents>();
+            if (_levelEvents == null)
+                _levelEvents = FindObjectOfType<LevelEvents>();
 
-            animator = GetComponent<Animator>();
+            _animator = GetComponent<Animator>();
 
-            if (IsOpen)
+            if (isOpen)
             {
-                animator.Play("Open");
+                _animator.Play(OpenAnimation);
                 var collider = GetComponent<Collider2D>();
                 collider.enabled = false;
             }
@@ -34,17 +36,17 @@ namespace RuinsRaiders
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (levelEvents == null)
+            if (_levelEvents == null)
                 return;
 
             var character = collision.gameObject.GetComponent<PlayerController>();
             if (character)
             {
-                animator.Play("Open");
-                OnOpen.Invoke();
+                _animator.Play("Open");
+                onOpen.Invoke();
                 var collider = GetComponent<Collider2D>();
                 collider.enabled = false;
-                IsOpen = true;
+                isOpen = true;
             }
         }
     }

@@ -11,9 +11,9 @@ namespace RuinsRaiders.UI
         {
             get
             {
-                Material m = new Material(base.materialForRendering);
-                m.SetInt("_StencilComp", (int)CompareFunction.NotEqual);
-                return m;
+                var mmaterial = new Material(base.materialForRendering);
+                mmaterial.SetInt("_StencilComp", (int)CompareFunction.NotEqual);
+                return mmaterial;
             }
 
         }

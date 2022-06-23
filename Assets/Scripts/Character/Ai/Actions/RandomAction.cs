@@ -1,65 +1,68 @@
-﻿using Assets.Scripts.Character.Ai;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RandomAction", menuName = "RuinsRaiders/Ai/RandomAction", order = 1)]
-public class RandomAction : BasicAiActionData
+
+namespace RuinsRaiders.AI
 {
-    public float timeToNextAction = -1;
-    public List<BasicAiActionData> actions = new List<BasicAiActionData>();
-
-    public override BasicAiAction Create(ActivatorData trigger)
+    [CreateAssetMenu(fileName = "RandomAction", menuName = "RuinsRaiders/Ai/RandomAction", order = 1)]
+    public class RandomAction : BasicAiActionData
     {
-        return new Action(trigger, this);
-    }
-    public class Action : BasicAiAction
-    {
-        private BasicAiAction currentAction;
-        private System.Random random = new System.Random();
-        private ActivatorData trigger;
-        private RandomAction parent;
+        [SerializeField]
+        private float timeToNextAction = -1;
 
-        private float _timeToNextAction = 0;
-        public override bool CanStop()
+        [SerializeField]
+        private List<BasicAiActionData> actions = new();
+
+        public override BasicAiAction Create(ActivatorData trigger)
         {
-            return currentAction.CanStop();
+            return new Action(trigger, this);
         }
-
-        public Action(ActivatorData trigger, RandomAction parent)
+        public class Action : BasicAiAction
         {
-            int index = random.Next(parent.actions.Count);
-            currentAction = parent.actions[index].Create(trigger);
-            this.parent = parent;
+            private BasicAiAction _currentAction;
+            private readonly System.Random _random = new();
+            private ActivatorData _trigger;
+            private readonly RandomAction _parent;
+
+            private float _timeToNextAction = 0;
+            public override bool CanStop()
+            {
+                return _currentAction.CanStop();
+            }
+
+            public Action(ActivatorData trigger, RandomAction parent)
+            {
+                int index = _random.Next(parent.actions.Count);
+                _currentAction = parent.actions[index].Create(trigger);
+                _parent = parent;
+                _trigger = trigger;
+            }
+
+            public override bool IsFinished()
+            {
+                return false;
+            }
+
+            public override void Stop()
+            {
+                base.Stop();
+                _currentAction.Stop();
+            }
+
+            public override void Update(float dt)
+            {
+                if (
+                    ((_timeToNextAction < 0) && _parent.timeToNextAction >= 0)
+                    || _currentAction.IsFinished()
+                    )
+
+                    _timeToNextAction = _parent.timeToNextAction;
+
+                int index = _random.Next(_parent.actions.Count);
+                _currentAction = _parent.actions[index].Create(_trigger);
+            }
+
+
         }
-
-        public override bool IsFinished()
-        {
-            return false;
-        }
-
-        public override void Stop()
-        {
-            base.Stop();
-            currentAction.Stop();
-        }
-
-        public override void Update(float dt)
-        {
-            if (
-                ((_timeToNextAction < 0) && parent.timeToNextAction >= 0)
-                || currentAction.IsFinished()
-                )
-
-                _timeToNextAction = parent.timeToNextAction;
-
-            int index = random.Next(parent.actions.Count);
-            currentAction = parent.actions[index].Create(trigger);
-        }
-
-
     }
 }

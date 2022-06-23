@@ -1,52 +1,51 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Character))]
-public class PlayerController : MonoBehaviour
+namespace RuinsRaiders
 {
-    private Character character;
-    private MovementController movementController;
-    private AttackController attackController;
-
-    public ControlData control;
-    public PlayerControlls inputControl;
-
-    private void Awake()
+    [RequireComponent(typeof(Character))]
+    public class PlayerController : MonoBehaviour
     {
-        character = GetComponent<Character>();
-        movementController = GetComponent<MovementController>();
-        attackController = GetComponent<AttackController>();
-    }
+        [SerializeField]
+        private ControlData control;
 
-    // Update is called once per frame
+        private Character _character;
+        private MovementController _movementController;
+        private AttackController _attackController;
 
-    private bool previousAttackState = false;
-    public void Update()
-    {
+        private bool _previousAttackState = false;
 
-
-        if (inputControl)
+        private void Awake()
         {
-            inputControl.Update();
-            movementController.Move(control.move);
-
-            attackController.ChargeAttack = control.attack;
-            if (previousAttackState == true && !control.attack)
-                attackController.Attack();
-
-            previousAttackState = control.attack;
+            _character = GetComponent<Character>();
+            _movementController = GetComponent<MovementController>();
+            _attackController = GetComponent<AttackController>();
         }
-        else
+
+        public void Update()
         {
-            var find = character.GetComponent<PathfindingController>();
-            if (find != null)
+
+
+            if (control)
             {
-                if (Mouse.current.leftButton.isPressed && Camera.main != null)
-                    find.MoveTo(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
-            }
-        }
+                _movementController.Move(control.move);
+                _attackController.chargeAttack = control.attack;
 
+                if (_previousAttackState == true && !control.attack)
+                    _attackController.Attack();
+
+                _previousAttackState = control.attack;
+            }
+            else
+            {
+                var find = _character.GetComponent<PathfindingController>();
+                if (find != null)
+                {
+                    if (Mouse.current.leftButton.isPressed && Camera.main != null)
+                        find.MoveTo(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
+                }
+            }
+
+        }
     }
 }

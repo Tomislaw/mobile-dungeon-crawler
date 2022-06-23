@@ -15,10 +15,13 @@ namespace RuinsRaiders
         // todo, store these in scriptable object instead
         [SerializeField]
         private Character knightPrefab;
+
         [SerializeField]
         private Character archerPrefab;
+
         [SerializeField]
         private Character magePrefab;
+
         [SerializeField]
         private Character spearmanPrefab;
 
@@ -43,12 +46,15 @@ namespace RuinsRaiders
             }
             player.transform.position = transform.position;
             transform.parent = player.gameObject.transform;
-            player.GetComponent<HealthController>()?.OnDeath.AddListener(OnDeath);
+
+            var healthComponent = player.GetComponent<HealthController>();
+            if(healthComponent)
+                healthComponent.onDeath.AddListener(OnDeath);
         }
 
         private void OnDeath()
         {
-            FindObjectOfType<LevelEvents>()?.LevelFailed();
+            FindObjectOfType<LevelEvents>().LevelFailed();
         }
 
         [Serializable]

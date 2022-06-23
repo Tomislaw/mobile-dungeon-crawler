@@ -6,39 +6,34 @@ namespace RuinsRaiders.UI
     // responsible for character selection ui at the beginning of each level
     public class CharacterSelectUI : MonoBehaviour
     {
-
-        public UnityEvent IsLocked;
-        public UnityEvent IsUnlocked;
+        public UnityEvent isLockedEvent;
+        public UnityEvent isUnlockedEvent;
 
         [SerializeField]
         private PlayerData playerData;
+
         [SerializeField]
         private PlayerData.CharacterType characterType;
 
         void OnEnable()
         {
             if (IsCharacterUnlocked)
-                IsUnlocked.Invoke();
+                isUnlockedEvent.Invoke();
             else
-                IsLocked.Invoke();
+                isLockedEvent.Invoke();
         }
 
         public bool IsCharacterUnlocked
         {
             get
             {
-                switch (characterType)
+                return characterType switch
                 {
-                    case PlayerData.CharacterType.Knight:
-                        return playerData.knight.unlocked;
-                    case PlayerData.CharacterType.Mage:
-                        return playerData.mage.unlocked;
-                    case PlayerData.CharacterType.Archer:
-                        return playerData.archer.unlocked;
-                    case PlayerData.CharacterType.Spearman:
-                        return playerData.spearman.unlocked;
-                    default:
-                        return false;
+                    PlayerData.CharacterType.Knight => playerData.knight.unlocked,
+                    PlayerData.CharacterType.Mage => playerData.mage.unlocked,
+                    PlayerData.CharacterType.Archer => playerData.archer.unlocked,
+                    PlayerData.CharacterType.Spearman => playerData.spearman.unlocked,
+                    _ => false,
                 };
             }
         }

@@ -7,23 +7,26 @@ namespace RuinsRaiders.UI
     // Responsible for custom Mobile joystick type based on arrows
     public class ArrowsHandle : MonoBehaviour
     {
-        [SerializeField]
-        private ArrowsHandleButton Up;
-        [SerializeField]
-        protected ArrowsHandleButton Down;
-        [SerializeField]
-        private ArrowsHandleButton Left;
-        [SerializeField]
-        private ArrowsHandleButton Right;
+        public Vector2 Value { get; internal set; }
+        public bool Pressed { get; private set; }
 
         [SerializeField]
-        private ArrowsHandleButton LeftUp;
+        private ArrowsHandleButton upButton;
         [SerializeField]
-        private ArrowsHandleButton LeftDown;
+        protected ArrowsHandleButton downButton;
         [SerializeField]
-        private ArrowsHandleButton RightUp;
+        private ArrowsHandleButton leftButton;
         [SerializeField]
-        private ArrowsHandleButton RightDown;
+        private ArrowsHandleButton rightBytton;
+
+        [SerializeField]
+        private ArrowsHandleButton leftUpButton;
+        [SerializeField]
+        private ArrowsHandleButton leftDownButton;
+        [SerializeField]
+        private ArrowsHandleButton rightUpButton;
+        [SerializeField]
+        private ArrowsHandleButton rightDownButton;
 
         [SerializeField]
         private float startOffsetVertical;
@@ -35,7 +38,7 @@ namespace RuinsRaiders.UI
         private float endOffsetVertical;
         [SerializeField]
         private float endSizeVertical;
-
+        [SerializeField]
         private float startOffsetHorizontal;
         [SerializeField]
         private float midOffsetHorizontal;
@@ -46,37 +49,33 @@ namespace RuinsRaiders.UI
         [SerializeField]
         private float endSizeHorizontal;
 
-        private int pointerId = -1;
+        private int _pointerId = -1;
 
-        private RectTransform rect;
-
-        public Vector2 Value { get; internal set; }
-
-        public bool Pressed { get; private set; }
+        private RectTransform _rect;
 
         void Start()
         {
-            rect = GetComponent<RectTransform>();
+            _rect = GetComponent<RectTransform>();
         }
 
 
         private void PressingPoint(Vector2 point)
         {
             point = transform.InverseTransformVector(point);
-            point -= rect.anchoredPosition;
+            point -= _rect.anchoredPosition;
 
             Value = new Vector2();
-            ResolvePress(Poly.ContainsPoint(LeftHull(), point), Left, new Vector2(-1, Value.y));
-            ResolvePress(Poly.ContainsPoint(RightHull(), point), Right, new Vector2(1, Value.y));
+            ResolvePress(Poly.ContainsPoint(LeftHull(), point), leftButton, new Vector2(-1, Value.y));
+            ResolvePress(Poly.ContainsPoint(RightHull(), point), rightBytton, new Vector2(1, Value.y));
 
-            ResolvePress(Poly.ContainsPoint(TopHull(), point), Up, new Vector2(Value.x, 1));
-            ResolvePress(Poly.ContainsPoint(BottomHull(), point), Down, new Vector2(Value.x, -1));
+            ResolvePress(Poly.ContainsPoint(TopHull(), point), upButton, new Vector2(Value.x, 1));
+            ResolvePress(Poly.ContainsPoint(BottomHull(), point), downButton, new Vector2(Value.x, -1));
 
-            ResolvePress(Poly.ContainsPoint(LeftTopHull(), point), LeftUp, new Vector2(-1, 1));
-            ResolvePress(Poly.ContainsPoint(RightTopHull(), point), RightUp, new Vector2(1, 1));
+            ResolvePress(Poly.ContainsPoint(LeftTopHull(), point), leftUpButton, new Vector2(-1, 1));
+            ResolvePress(Poly.ContainsPoint(RightTopHull(), point), rightUpButton, new Vector2(1, 1));
 
-            ResolvePress(Poly.ContainsPoint(LeftBottomHull(), point), LeftDown, new Vector2(-1, -1));
-            ResolvePress(Poly.ContainsPoint(RightBottomHull(), point), RightDown, new Vector2(1, -1));
+            ResolvePress(Poly.ContainsPoint(LeftBottomHull(), point), leftDownButton, new Vector2(-1, -1));
+            ResolvePress(Poly.ContainsPoint(RightBottomHull(), point), rightDownButton, new Vector2(1, -1));
         }
 
         private void ResolvePress(bool pressed, ArrowsHandleButton button, Vector2 valuePressed = new Vector2())
@@ -111,7 +110,7 @@ namespace RuinsRaiders.UI
         private void DrawHull(IEnumerable<Vector2> vertex)
         {
             bool started = false;
-            Vector2 previous = new Vector2();
+            Vector2 previous = new();
             foreach (var v in vertex)
             {
                 if (started)
@@ -259,30 +258,30 @@ namespace RuinsRaiders.UI
         private bool Contains(Vector2 position)
         {
             position = transform.InverseTransformVector(position);
-            position -= rect.anchoredPosition;
+            position -= _rect.anchoredPosition;
             return Poly.ContainsPoint(TotalHull(), position);
         }
 
         public void CheckForUnpress()
         {
-            if (pointerId >= 0)
+            if (_pointerId >= 0)
             {
                 foreach (var touch in Touchscreen.current.touches)
                 {
-                    if (touch.touchId.ReadValue() == pointerId)
+                    if (touch.touchId.ReadValue() == _pointerId)
                     {
                         switch (touch.phase.ReadValue())
                         {
                             case UnityEngine.InputSystem.TouchPhase.None:
                             case UnityEngine.InputSystem.TouchPhase.Ended:
                             case UnityEngine.InputSystem.TouchPhase.Canceled:
-                                TouchFinished(pointerId);
+                                TouchFinished(_pointerId);
                                 break;
                         };
                     }
                 }
             }
-            else if (pointerId == -1)
+            else if (_pointerId == -1)
             {
                 if (!Mouse.current.leftButton.isPressed)
                     TouchFinished(-1);
@@ -290,25 +289,25 @@ namespace RuinsRaiders.UI
         }
         public void ResolveMove()
         {
-            Vector2 point = new Vector2();
-            if (pointerId >= 0)
+            Vector2 point = new();
+            if (_pointerId >= 0)
             {
                 foreach (var touch in Touchscreen.current.touches)
                 {
-                    if (touch.touchId.ReadValue() != pointerId)
+                    if (touch.touchId.ReadValue() != _pointerId)
                         continue;
 
                     point = touch.position.ReadValue();
                     break;
                 }
             }
-            else if (pointerId == -1)
+            else if (_pointerId == -1)
                 point = Mouse.current.position.ReadValue();
 
             var previousValue = Value;
             PressingPoint(point);
             if (previousValue != Value)
-                TouchMoved(pointerId, Value);
+                TouchMoved(_pointerId, Value);
         }
 
         public void Update()
@@ -325,26 +324,24 @@ namespace RuinsRaiders.UI
 
         public void TouchStarted(int id)
         {
-            Debug.Log(id + " - started");
-            pointerId = id;
+            _pointerId = id;
             Pressed = true;
         }
 
         public void TouchFinished(int id)
         {
-            Debug.Log(id + " - finished");
-            pointerId = -2;
+            _pointerId = -2;
             Pressed = false;
             Value = new Vector2();
 
-            ResolvePress(false, Left);
-            ResolvePress(false, Right);
-            ResolvePress(false, Up);
-            ResolvePress(false, Down);
-            ResolvePress(false, LeftDown);
-            ResolvePress(false, LeftUp);
-            ResolvePress(false, RightUp);
-            ResolvePress(false, RightDown);
+            ResolvePress(false, leftButton);
+            ResolvePress(false, rightBytton);
+            ResolvePress(false, upButton);
+            ResolvePress(false, downButton);
+            ResolvePress(false, leftDownButton);
+            ResolvePress(false, leftUpButton);
+            ResolvePress(false, rightUpButton);
+            ResolvePress(false, rightDownButton);
         }
 
         public void TouchMoved(int id, Vector2 value)

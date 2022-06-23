@@ -6,21 +6,21 @@ namespace RuinsRaiders.UI
     // Responsible for single button for Mobile controls
     public class ArrowsHandleButton : MonoBehaviour
     {
-        public UnityEvent OnPointerDown;
-        public UnityEvent OnPointerUp;
+        public UnityEvent onPointerDown = new();
+        public UnityEvent onPointerUp = new();
 
-        bool selected = false;
+        protected bool _selected = false;
         internal void SetSelected(bool selected)
         {
-            if (this.selected != selected)
+            if (this._selected != selected)
             {
                 if (selected)
-                    OnPointerDown.Invoke();
+                    onPointerDown.Invoke();
                 else
                 {
-                    OnPointerUp.Invoke();
+                    onPointerUp.Invoke();
                 }
-                this.selected = selected;
+                this._selected = selected;
             }
 
         }

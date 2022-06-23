@@ -7,17 +7,20 @@ namespace RuinsRaiders.UI
     {
         [SerializeField]
         private ControlData control;
+
         [SerializeField]
-        private Vector2 graceDistance = new Vector2(0.2f, 0.5f);
+        private Vector2 graceDistance = new(0.2f, 0.5f);
+
         [SerializeField]
         private float sensitivityX = 2;
+
         [SerializeField]
         private float sensitivityY = 1000;
 
-        private bool previousPressedState = false;
+        private bool _previousPressedState = false;
         private void LateUpdate()
         {
-            if (joystick.Pressed)
+            if (joystick._pressed)
             {
                 var vector = new Vector2();
                 if (Value.x > graceDistance.x)
@@ -32,12 +35,12 @@ namespace RuinsRaiders.UI
                 control.move = vector;
 
             }
-            else if (joystick.Pressed != previousPressedState)
+            else if (joystick._pressed != _previousPressedState)
             {
                 control.move = new Vector2();
             }
 
-            previousPressedState = joystick.Pressed;
+            _previousPressedState = joystick._pressed;
         }
     }
 }

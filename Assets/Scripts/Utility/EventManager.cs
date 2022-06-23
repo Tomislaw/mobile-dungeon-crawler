@@ -10,50 +10,49 @@ namespace RuinsRaiders
     public class EventManager : MonoBehaviour
     {
         [SerializeField]
-        private GlobalEvent OnTrigger;
+        private GlobalEvent onTrigger;
 
-        private Dictionary<string, UnityEvent> eventDictionary;
-        private static EventManager eventManager;
+        private Dictionary<string, UnityEvent> _eventDictionary;
+        private static EventManager _eventManager;
 
-        private static EventManager instance
+        private static EventManager Instance
         {
             get
             {
-                if (!eventManager)
+                if (!_eventManager)
                 {
-                    eventManager = FindObjectOfType(typeof(EventManager)) as EventManager;
+                    _eventManager = FindObjectOfType(typeof(EventManager)) as EventManager;
 
-                    if (!eventManager)
+                    if (!_eventManager)
                     {
                         Debug.LogError("There needs to be one active EventManger script on a GameObject in your scene.");
                     }
                     else
                     {
-                        eventManager.Init();
+                        _eventManager.Init();
                     }
                 }
 
-                return eventManager;
+                return _eventManager;
             }
         }
 
         void Init()
         {
-            if (eventDictionary == null)
+            if (_eventDictionary == null)
             {
-                eventDictionary = new Dictionary<string, UnityEvent>();
+                _eventDictionary = new Dictionary<string, UnityEvent>();
             }
         }
 
         public static void Register(UnityAction<string> action)
         {
-            instance.OnTrigger.AddListener(action);
+            Instance.onTrigger.AddListener(action);
         }
 
         public static void StartListening(string eventName, UnityAction listener)
         {
-            UnityEvent thisEvent = null;
-            if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
+            if (Instance._eventDictionary.TryGetValue(eventName, out UnityEvent thisEvent))
             {
                 thisEvent.AddListener(listener);
             }
@@ -61,15 +60,16 @@ namespace RuinsRaiders
             {
                 thisEvent = new UnityEvent();
                 thisEvent.AddListener(listener);
-                instance.eventDictionary.Add(eventName, thisEvent);
+                Instance._eventDictionary.Add(eventName, thisEvent);
             }
         }
 
         public static void StopListening(string eventName, UnityAction listener)
         {
-            if (eventManager == null) return;
-            UnityEvent thisEvent = null;
-            if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
+            if (_eventManager == null)
+                return;
+
+            if (Instance._eventDictionary.TryGetValue(eventName, out UnityEvent thisEvent))
             {
                 thisEvent.RemoveListener(listener);
             }
@@ -77,15 +77,14 @@ namespace RuinsRaiders
 
         public static void TriggerEvent(string eventName)
         {
-            UnityEvent thisEvent = null;
-            if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
+            if (Instance._eventDictionary.TryGetValue(eventName, out UnityEvent thisEvent))
             {
                 thisEvent.Invoke();
             }
-            instance.OnTrigger.Invoke(eventName);
+            Instance.onTrigger.Invoke(eventName);
         }
 
-        [System.Serializable]
+        [Serializable]
         public class GlobalEvent : UnityEvent<string> { }
     }
 }

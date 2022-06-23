@@ -8,14 +8,15 @@ namespace RuinsRaiders
     {
         [SerializeField]
         private float weight;
+
         [SerializeField]
         private int layerIndex;
 
-        private Animator animator;
+        private Animator _animator;
         void Start()
         {
-            animator = GetComponent<Animator>();
-            animator.SetLayerWeight(layerIndex, weight);
+            _animator = GetComponent<Animator>();
+            _animator.SetLayerWeight(layerIndex, weight);
         }
 
     }

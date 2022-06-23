@@ -9,18 +9,15 @@ namespace RuinsRaiders
     // responsible for propagating global level events and handling level actions
     public class LevelEvents : MonoBehaviour
     {
-        public UnityEvent OnLevelFinished;
-        public UnityEvent OnLevelFailed;
-        public UnityEvent OnSubsceneChanged;
+        public UnityEvent onLevelFinished;
+        public UnityEvent onLevelFailed;
+        public UnityEvent onSubsceneChanged;
 
         [SerializeField]
         private AdventureData adventure;
 
         [SerializeField]
         private GameObject playerCharacter;
-
-        [SerializeField]
-        private List<AdventureData.ChestData> chests = new List<AdventureData.ChestData>();
 
         private PlayerSpawn spawner;
 
@@ -41,16 +38,16 @@ namespace RuinsRaiders
 
         public void LevelFailed()
         {
-            if (OnLevelFailed != null)
-                OnLevelFailed.Invoke();
+            if (onLevelFailed != null)
+                onLevelFailed.Invoke();
 
             Debug.Log("Level failed");
         }
 
         public void LevelFinished()
         {
-            if (OnLevelFinished != null)
-                OnLevelFinished.Invoke();
+            if (onLevelFinished != null)
+                onLevelFinished.Invoke();
 
             adventure.FinishedCurrentLevel();
             Debug.Log("Level finished");

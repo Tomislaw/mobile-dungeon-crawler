@@ -1,21 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject Prefab;
-    public UnityEvent OnSpawn;
+   
+    public UnityEvent onSpawn;
 
-    public bool preserveScale;
+    [SerializeField]
+    private GameObject prefab;
+
+    [SerializeField]
+    private bool preserveScale;
 
     public void Spawn()
     {
-        var spawn = Instantiate(Prefab, transform.position, Quaternion.identity);
+        var spawn = Instantiate(prefab, transform.position, Quaternion.identity);
         if(preserveScale)
             spawn.transform.localScale = transform.localScale;
-        OnSpawn.Invoke();
+        onSpawn.Invoke();
     }
 
 }

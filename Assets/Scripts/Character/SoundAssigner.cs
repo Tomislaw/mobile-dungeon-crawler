@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 namespace RuinsRaiders
@@ -6,71 +5,71 @@ namespace RuinsRaiders
     public class SoundAssigner : MonoBehaviour
     {
         [SerializeField]
-        private AudioClip Death;
+        private AudioClip death;
         [SerializeField]
-        private AudioClip Hit;
+        private AudioClip hit;
         [SerializeField]
-        private AudioClip Walk;
+        private AudioClip walk;
         [SerializeField]
-        private AudioClip Jump;
+        private AudioClip jump;
         [SerializeField]
-        private AudioClip Swim;
+        private AudioClip swim;
         [SerializeField]
-        private AudioClip Attack;
+        private AudioClip attack;
         [SerializeField]
-        private AudioClip ChargedAttack;
+        private AudioClip chargedAttack;
 
-        private MovementController movementController;
-        private AttackController attackController;
-        private HealthController healthController;
+        private MovementController _movementController;
+        private AttackController _attackController;
+        private HealthController _healthController;
 
-        private AudioSource source;
+        private AudioSource _source;
 
         void Start()
         {
-            movementController = GetComponent<MovementController>();
-            attackController = GetComponent<AttackController>();
-            healthController = GetComponent<HealthController>();
-            source = GetComponent<AudioSource>();
+            _movementController = GetComponent<MovementController>();
+            _attackController = GetComponent<AttackController>();
+            _healthController = GetComponent<HealthController>();
+            _source = GetComponent<AudioSource>();
 
-            if (movementController != null)
+            if (_movementController != null)
             {
-                movementController.OnWalk.AddListener(PlayWalk);
-                movementController.OnJump.AddListener(PlayJump);
-                movementController.OnSwim.AddListener(PlaySwim);
+                _movementController.onWalk.AddListener(PlayWalk);
+                _movementController.onJump.AddListener(PlayJump);
+                _movementController.onSwim.AddListener(PlaySwim);
             }
 
-            if (attackController != null)
+            if (_attackController != null)
             {
-                attackController.OnAttack.AddListener(PlayAttack);
-                attackController.OnChargedAttack.AddListener(PlayChargedAttack);
+                _attackController.onAttack.AddListener(PlayAttack);
+                _attackController.onChargedAttack.AddListener(PlayChargedAttack);
             }
 
-            if (healthController != null)
+            if (_healthController != null)
             {
-                healthController.OnDamage.AddListener(PlayHitInternal);
-                healthController.OnDeath.AddListener(PlayDeath);
+                _healthController.onDamage.AddListener(PlayHitInternal);
+                _healthController.onDeath.AddListener(PlayDeath);
             }
         }
 
         public void PlayWalk()
         {
-            PlayClip(Walk);
+            PlayClip(walk);
         }
 
         public void PlayJump()
         {
-            PlayClip(Jump);
+            PlayClip(jump);
         }
 
         public void PlaySwim()
         {
-            PlayClip(Swim);
+            PlayClip(swim);
         }
 
         public void PlayDeath()
         {
-            PlayClip(Death);
+            PlayClip(death);
         }
 
         private void PlayHitInternal(GameObject go)
@@ -79,23 +78,23 @@ namespace RuinsRaiders
         }
         public void PlayHit()
         {
-            PlayClip(Hit);
+            PlayClip(hit);
         }
 
         public void PlayAttack()
         {
-            PlayClip(Attack);
+            PlayClip(attack);
         }
 
         public void PlayChargedAttack()
         {
-            PlayClip(ChargedAttack);
+            PlayClip(chargedAttack);
         }
 
         private void PlayClip(AudioClip clip)
         {
-            if (clip != null && source != null)
-                source.PlayOneShot(clip);
+            if (clip != null && _source != null)
+                _source.PlayOneShot(clip);
         }
 
     }

@@ -8,16 +8,17 @@ namespace RuinsRaiders.UI
     {
         [SerializeField]
         private OptionsData.TouchUiType type;
+
         [SerializeField]
         private OptionsData data;
 
-        private Toggle toggle;
+        private Toggle _toggle;
 
         void Start()
         {
-            toggle = GetComponent<Toggle>();
-            toggle.isOn = type == data.touchUiType;
-            toggle.onValueChanged.AddListener(OnChange);
+            _toggle = GetComponent<Toggle>();
+            _toggle.isOn = type == data.touchUiType;
+            _toggle.onValueChanged.AddListener(OnChange);
         }
 
         public void OnChange(bool change)

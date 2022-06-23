@@ -9,34 +9,34 @@ namespace RuinsRaiders
     public class InventoryController : MonoBehaviour
     {
         [SerializeField]
-        private int NumberOfKeys = 1;
+        private int numberOfKeys = 1;
         [SerializeField]
-        private AudioClip PickupSound;
+        private AudioClip pickupSound;
 
+        private AudioSource _audioSource;
 
-        private AudioSource audioSource;
         void Start()
         {
             // When killed, add key to player
             var health = GetComponent<HealthController>();
             if (health != null)
-                health.OnDeath.AddListener(AddItemsToPlayer);
+                health.onDeath.AddListener(AddItemsToPlayer);
 
-            audioSource = GetComponent<AudioSource>();
+            _audioSource = GetComponent<AudioSource>();
         }
 
         public void AddItemsToPlayer()
         {
             var items = FindObjectOfType<ItemsController>();
 
-            while (NumberOfKeys > 0)
+            while (numberOfKeys > 0)
             {
-                NumberOfKeys--;
+                numberOfKeys--;
                 items.AddKey();
             }
 
-            if (audioSource)
-                audioSource.PlayOneShot(PickupSound);
+            if (_audioSource)
+                _audioSource.PlayOneShot(pickupSound);
 
         }
     }

@@ -10,27 +10,35 @@ namespace RuinsRaiders.UI
     public class LevelUI : MonoBehaviour
     {
         [SerializeField]
-        private bool IsLocked;
+        private bool isLocked;
+
 
         [SerializeField]
-        private Sprite locked;
-        [SerializeField]
-        private Sprite hovered;
-        [SerializeField]
-        private Sprite normal;
+        private Sprite lockedSprite;
 
         [SerializeField]
-        private TMPro.TMP_Text text;
+        private Sprite hoveredSprite;
+
+        [SerializeField]
+        private Sprite normalSprite;
+
+
+        [SerializeField]
+        private TMPro.TMP_Text tmpText;
+
 
         [SerializeField]
         private Image image;
+
         [SerializeField]
         private Button button;
 
         [SerializeField]
         private AdventureData data;
+
         [SerializeField]
         private int level;
+
         [SerializeField]
         private float startDelay = 0.5f;
 
@@ -41,21 +49,21 @@ namespace RuinsRaiders.UI
 
         public void SetHovered(bool hovered)
         {
-            if (IsLocked)
+            if (isLocked)
             {
                 if (image)
-                    image.sprite = locked;
-                if (text)
-                    text.gameObject.SetActive(false);
+                    image.sprite = lockedSprite;
+                if (tmpText)
+                    tmpText.gameObject.SetActive(false);
                 if (button)
                     button.interactable = false;
             }
             else
             {
                 if (image)
-                    image.sprite = hovered ? this.hovered : this.normal;
-                if (text)
-                    text.gameObject.SetActive(true);
+                    image.sprite = hovered ? this.hoveredSprite : this.normalSprite;
+                if (tmpText)
+                    tmpText.gameObject.SetActive(true);
                 if (button)
                     button.interactable = true;
             }
@@ -72,10 +80,10 @@ namespace RuinsRaiders.UI
                 return;
 
             var levelData = data.levels[level];
-            IsLocked = !levelData.enabled;
+            isLocked = !levelData.enabled;
 
-            if (text)
-                text.text = (level + 1).ToString();
+            if (tmpText)
+                tmpText.text = (level + 1).ToString();
 
             SetHovered(false);
         }
@@ -83,7 +91,7 @@ namespace RuinsRaiders.UI
         public void StartLevel()
         {
             EventManager.TriggerEvent("Level Start");
-            StartCoroutine("DelayedStart");
+            StartCoroutine(DelayedStart());
         }
 
         // Start is delayed to show some cool transition effects

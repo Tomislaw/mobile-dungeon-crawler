@@ -2,72 +2,83 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorTile : MonoBehaviour
+namespace RuinsRaiders
 {
-    public GameObject lockGameObject;
-
-    public AudioClip LockedSound;
-    public AudioClip OpenSound;
-
-    private bool isOpen = false;
-    private List<ItemsController> colliders = new List<ItemsController>();
-
-    private Animator animator;
-    private Collider2D collider;
-
-    private AudioSource audio;
-    void Start()
+    public class DoorTile : MonoBehaviour
     {
-        animator = GetComponent<Animator>();
-        collider = GetComponent<Collider2D>();
-        audio = GetComponent<AudioSource>();
-    }
+        private const string OpenAnimation = "Open";
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (isOpen)
-            return;
+        [SerializeField]
+        private AudioClip lockedSound;
 
-        var itemController = collision.gameObject.GetComponent<ItemsController>();
-        if (itemController == null)
-            return;
+        [SerializeField]
+        private AudioClip openSound;
 
-        if (itemController.NumberOfKeys > 0)
+        [SerializeField]
+        private GameObject lockGameObject;
+
+
+        private bool _isOpen = false;
+        private readonly List<ItemsController> _colliders = new();
+
+        private Animator _animator;
+        private Collider2D _collider;
+
+        private AudioSource _audio;
+        void Start()
         {
-            itemController.RemoveKey();
-            Open();
-        } else
-        {
-            if (audio != null)
-                audio.PlayOneShot(LockedSound);
-
-            colliders.Add(itemController);
-            if(lockGameObject)
-                lockGameObject.SetActive(true);
+            _animator = GetComponent<Animator>();
+            _collider = GetComponent<Collider2D>();
+            _audio = GetComponent<AudioSource>();
         }
-    }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        var itemController = collision.gameObject.GetComponent<ItemsController>();
-        if (itemController == null)
-            return;
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (_isOpen)
+                return;
 
-        colliders.Remove(itemController);
-        if(colliders.Count == 0 && lockGameObject != null)
-            lockGameObject.SetActive(false);
+            var itemController = collision.gameObject.GetComponent<ItemsController>();
+            if (itemController == null)
+                return;
 
-    }
+            if (itemController.numberOfKeys > 0)
+            {
+                itemController.RemoveKey();
+                Open();
+            }
+            else
+            {
+                if (_audio != null)
+                    _audio.PlayOneShot(lockedSound);
 
-    public void Open()
-    {
-        if (audio != null)
-            audio.PlayOneShot(OpenSound);
+                _colliders.Add(itemController);
+                if (lockGameObject)
+                    lockGameObject.SetActive(true);
+            }
+        }
 
-        isOpen = true;
-        if (animator)
-            animator.Play("Open");
-        if(collider)
-            collider.enabled = false;
+        private void OnCollisionExit2D(Collision2D collision)
+        {
+            var itemController = collision.gameObject.GetComponent<ItemsController>();
+            if (itemController == null)
+                return;
+
+            _colliders.Remove(itemController);
+            if (_colliders.Count == 0 && lockGameObject != null)
+                lockGameObject.SetActive(false);
+
+        }
+
+        public void Open()
+        {
+            if (_audio != null)
+                _audio.PlayOneShot(openSound);
+
+            _isOpen = true;
+            if (_animator)
+                _animator.Play(OpenAnimation);
+            if (_collider)
+                _collider.enabled = false;
+        }
     }
 }

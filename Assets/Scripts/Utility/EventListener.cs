@@ -9,7 +9,7 @@ namespace RuinsRaiders
     public class EventListener : MonoBehaviour
     {
         [SerializeField]
-        private List<Event> events = new List<Event>();
+        private List<Event> events = new();
 
         private void Start()
         {

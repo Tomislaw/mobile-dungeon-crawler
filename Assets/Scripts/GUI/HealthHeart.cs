@@ -10,17 +10,22 @@ namespace RuinsRaiders.GUI
         public float SwitchTime = 0.5f;
 
         [SerializeField]
-        private Sprite full;
+        private Sprite fullSprite;
+
         [SerializeField]
-        private Sprite halfFull;
+        private Sprite halfFullSprite;
+
         [SerializeField]
-        private Sprite none;
+        private Sprite noneSprite;
+
         [SerializeField]
-        private Sprite damageFull;
+        private Sprite damageFullSprite;
+
         [SerializeField]
-        private Sprite damageHalfLeft;
+        private Sprite damageHalfLeftSprite;
+
         [SerializeField]
-        private Sprite damageHalfRight;
+        private Sprite damageHalfRightSprite;
 
 
         [HideInInspector]
@@ -29,13 +34,12 @@ namespace RuinsRaiders.GUI
 
         private SpriteRenderer sprite;
 
-
         public int Health
         {
             get => _health;
             set
             {
-                StartCoroutine("SetHealth", value);
+                StartCoroutine(SetHealth(value));
             }
         }
 
@@ -53,45 +57,45 @@ namespace RuinsRaiders.GUI
             {
                 if (health == 1)
                 {
-                    sprite.sprite = damageHalfRight;
+                    sprite.sprite = damageHalfRightSprite;
                     yield return new WaitForSeconds(SwitchTime);
-                    sprite.sprite = halfFull;
+                    sprite.sprite = halfFullSprite;
                 }
                 else if (health == 0)
                 {
-                    sprite.sprite = damageFull;
+                    sprite.sprite = damageFullSprite;
                     yield return new WaitForSeconds(SwitchTime);
-                    sprite.sprite = none;
+                    sprite.sprite = noneSprite;
                 }
             }
             else if (current == 1)
             {
                 if (health == 2)
                 {
-                    sprite.sprite = damageHalfRight;
+                    sprite.sprite = damageHalfRightSprite;
                     yield return new WaitForSeconds(SwitchTime);
-                    sprite.sprite = full;
+                    sprite.sprite = fullSprite;
                 }
                 else if (health == 0)
                 {
-                    sprite.sprite = damageHalfLeft;
+                    sprite.sprite = damageHalfLeftSprite;
                     yield return new WaitForSeconds(SwitchTime);
-                    sprite.sprite = none;
+                    sprite.sprite = noneSprite;
                 }
             }
             else if (current == 0)
             {
                 if (health == 2)
                 {
-                    sprite.sprite = damageFull;
+                    sprite.sprite = damageFullSprite;
                     yield return new WaitForSeconds(SwitchTime);
-                    sprite.sprite = full;
+                    sprite.sprite = fullSprite;
                 }
                 else if (health == 1)
                 {
-                    sprite.sprite = damageHalfLeft;
+                    sprite.sprite = damageHalfLeftSprite;
                     yield return new WaitForSeconds(SwitchTime);
-                    sprite.sprite = halfFull;
+                    sprite.sprite = halfFullSprite;
                 }
             }
         }

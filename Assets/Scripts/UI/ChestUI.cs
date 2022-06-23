@@ -7,6 +7,31 @@ namespace RuinsRaiders.UI
     [RequireComponent(typeof(Animator))]
     public class ChestUI : MonoBehaviour
     {
+        public ChestState state;
+        public ChestType type;
+        public bool isOpen;
+
+        private Animator _animator;
+
+        private void Start()
+        {
+            _animator = GetComponent<Animator>();
+            _animator.SetBool("Open", isOpen);
+            _animator.SetInteger("Style", (int)type);
+            _animator.SetInteger("State", (int)state);
+        }
+
+        public void Update()
+        {
+            _animator.SetBool("Open", isOpen);
+            _animator.SetInteger("Style", (int)type);
+            _animator.SetInteger("State", (int)state);
+        }
+
+        public void OnOpen()
+        {
+        }
+
         public enum ChestType
         {
             Normal, Expensive
@@ -15,31 +40,6 @@ namespace RuinsRaiders.UI
         public enum ChestState
         {
             Empty, AlreadyOpen, Normal
-        }
-
-        public ChestState State;
-        public ChestType Type;
-        public bool IsOpen;
-
-        private Animator animator;
-
-        private void Start()
-        {
-            animator = GetComponent<Animator>();
-            animator.SetBool("Open", IsOpen);
-            animator.SetInteger("Style", (int)Type);
-            animator.SetInteger("State", (int)State);
-        }
-
-        public void Update()
-        {
-            animator.SetBool("Open", IsOpen);
-            animator.SetInteger("Style", (int)Type);
-            animator.SetInteger("State", (int)State);
-        }
-
-        public void OnOpen()
-        {
         }
     }
 }

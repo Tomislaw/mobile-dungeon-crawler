@@ -8,19 +8,19 @@ namespace RuinsRaiders.UI
         [SerializeField]
         private ControlData control;
 
-        private bool previousPressedState = false;
+        private bool _previousPressedState = false;
         private void LateUpdate()
         {
             if (Pressed)
             {
                 control.move = Value;
             }
-            else if (Pressed != previousPressedState)
+            else if (Pressed != _previousPressedState)
             {
                 control.move = new Vector2();
             }
 
-            previousPressedState = Pressed;
+            _previousPressedState = Pressed;
         }
     }
 }

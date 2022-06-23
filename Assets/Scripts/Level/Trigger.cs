@@ -1,44 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Trigger : MonoBehaviour
+namespace RuinsRaiders
 {
-    public UnityEvent OnStart;
-    public UnityEvent OnCollisionEnter;
-    public UnityEvent OnCollisionExit;
-    public UnityEvent OnTriggerEnter;
-    public UnityEvent OnTriggerExit;
-    public UnityEvent OnKilled;
-    void Start()
+    public class Trigger : MonoBehaviour
     {
-        OnStart.Invoke();
-    }
+        public UnityEvent onStart;
+        public UnityEvent onCollisionEnter;
+        public UnityEvent onCollisionExit;
+        public UnityEvent onTriggerEnter;
+        public UnityEvent onTriggerExit;
+        public UnityEvent onKilled;
 
-    // Update is called once per frame
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        OnCollisionEnter.Invoke();
-    }
+        void Start()
+        {
+            onStart.Invoke();
+        }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        OnCollisionExit.Invoke();
-    }
+        // Update is called once per frame
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            onCollisionEnter.Invoke();
+        }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        OnTriggerEnter.Invoke();
-    }
+        private void OnCollisionExit2D(Collision2D collision)
+        {
+            onCollisionExit.Invoke();
+        }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        OnTriggerExit.Invoke();
-    }
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            onTriggerEnter.Invoke();
+        }
 
-    private void OnDestroy()
-    {
-        OnKilled.Invoke();
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            onTriggerExit.Invoke();
+        }
+
+        private void OnDestroy()
+        {
+            onKilled.Invoke();
+        }
     }
 }

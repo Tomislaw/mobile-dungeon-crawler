@@ -8,23 +8,26 @@ namespace RuinsRaiders
     {
         [SerializeField]
         private GameObject objectToFollow;
+
         [SerializeField]
-        private Camera camera;
+        private Camera controlledCamera;
+
         [SerializeField]
         private SubScene subScene;
+
         [SerializeField]
-        private Vector2 cameraSizeInUnits = new Vector2(16, 9);
+        private Vector2 cameraSizeInUnits = new(16, 9);
 
         // bounds of current SubScene
-        private float left = 0;
-        private float right = 0;
-        private float top = 0;
-        private float bottom = 0;
+        private float _left = 0;
+        private float _right = 0;
+        private float _top = 0;
+        private float _bottom = 0;
 
         private void Start()
         {
-            if (camera == null)
-                camera = GetComponent<Camera>();
+            if (controlledCamera == null)
+                controlledCamera = GetComponent<Camera>();
 
             SetSubScene(subScene);
             UpdateCameraPosition();
@@ -32,8 +35,8 @@ namespace RuinsRaiders
 
         private void OnValidate()
         {
-            if (camera == null)
-                camera = GetComponent<Camera>();
+            if (controlledCamera == null)
+                controlledCamera = GetComponent<Camera>();
         }
 
         private void LateUpdate()
@@ -46,10 +49,10 @@ namespace RuinsRaiders
             if (!scene)
                 return;
 
-            left = -scene.width / 2 + scene.transform.position.x;
-            right = scene.width / 2 + scene.transform.position.x;
-            top = scene.height / 2 + scene.transform.position.y;
-            bottom = -scene.height / 2 + scene.transform.position.y;
+            _left = -scene.size.x / 2 + scene.transform.position.x;
+            _right = scene.size.x / 2 + scene.transform.position.x;
+            _top = scene.size.y / 2 + scene.transform.position.y;
+            _bottom = -scene.size.y / 2 + scene.transform.position.y;
 
             subScene = scene;
         }
@@ -74,29 +77,29 @@ namespace RuinsRaiders
 
             if (subScene)
             {
-                if (subScene.left && left > objectToFollow.transform.position.x)
+                if (subScene.left && _left > objectToFollow.transform.position.x)
                     SetSubScene(subScene.left);
-                else if (subScene.right && right < objectToFollow.transform.position.x)
+                else if (subScene.right && _right < objectToFollow.transform.position.x)
                     SetSubScene(subScene.right);
-                else if (subScene.bottom && bottom > objectToFollow.transform.position.y)
+                else if (subScene.bottom && _bottom > objectToFollow.transform.position.y)
                     SetSubScene(subScene.bottom);
-                else if (subScene.top && top < objectToFollow.transform.position.y)
+                else if (subScene.top && _top < objectToFollow.transform.position.y)
                     SetSubScene(subScene.top);
             }
 
-            if (camera && subScene)
+            if (controlledCamera && subScene)
             {
                 float w = cameraSizeInUnits.x;
                 float h = cameraSizeInUnits.y;
 
-                if (transform.position.x - w < left)
-                    transform.position = new Vector3(left + w, transform.position.y, transform.position.z);
-                if (transform.position.x + w > right)
-                    transform.position = new Vector3(right - w, transform.position.y, transform.position.z);
-                if (transform.position.y - h < bottom)
-                    transform.position = new Vector3(transform.position.x, bottom + h, transform.position.z);
-                if (transform.position.y + h > top)
-                    transform.position = new Vector3(transform.position.x, top - h, transform.position.z);
+                if (transform.position.x - w < _left)
+                    transform.position = new Vector3(_left + w, transform.position.y, transform.position.z);
+                if (transform.position.x + w > _right)
+                    transform.position = new Vector3(_right - w, transform.position.y, transform.position.z);
+                if (transform.position.y - h < _bottom)
+                    transform.position = new Vector3(transform.position.x, _bottom + h, transform.position.z);
+                if (transform.position.y + h > _top)
+                    transform.position = new Vector3(transform.position.x, _top - h, transform.position.z);
 
             }
         }

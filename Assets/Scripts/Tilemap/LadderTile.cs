@@ -1,24 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class LadderTile : MonoBehaviour
+namespace RuinsRaiders
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    public class LadderTile : MonoBehaviour
     {
-        var character = collision.gameObject.GetComponent<MovementController>();
-        if (character && character.CanUseLadder)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            character.ladders.Add(this);
+            var character = collision.gameObject.GetComponent<MovementController>();
+            if (character && character.canUseLadder)
+            {
+                character.ladders.Add(this);
+            }
         }
-    }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        var character = collision.gameObject.GetComponent<MovementController>();
-        if (character && character.CanUseLadder)
+        private void OnTriggerExit2D(Collider2D collision)
         {
-            character.ladders.Remove(this);
+            var character = collision.gameObject.GetComponent<MovementController>();
+            if (character && character.canUseLadder)
+            {
+                character.ladders.Remove(this);
+            }
         }
     }
 }

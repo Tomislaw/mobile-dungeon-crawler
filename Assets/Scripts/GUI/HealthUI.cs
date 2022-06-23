@@ -7,22 +7,22 @@ namespace RuinsRaiders.GUI
     public class HealthUI : MonoBehaviour
     {
         [SerializeField]
-        public HealthHeart prefab;
+        private HealthHeart prefab;
         [SerializeField]
-        public HealthController healthController;
+        private HealthController healthController;
         [SerializeField]
-        public int maxHeartsInRow = 4;
+        private int maxHeartsInRow = 4;
 
-        private List<HealthHeart> hearts = new List<HealthHeart>();
+        private readonly List<HealthHeart> _hearts = new();
 
-        private int previousHealth = 0;
+        private int _previousHealth = 0;
 
         // Update is called once per frame
         private void OnEnable()
         {
             healthController = GetComponent<HealthController>();
-            if (healthController == null)
-                healthController = transform.parent?.GetComponent<HealthController>();
+            if (healthController == null && transform.parent!=null)
+                healthController = transform.parent.GetComponent<HealthController>();
         }
 
         private void FixedUpdate()
@@ -32,7 +32,7 @@ namespace RuinsRaiders.GUI
 
             if (healthController.IsDead)
             {
-                if (hearts.Count != 0)
+                if (_hearts.Count != 0)
                     Invalidate();
                 return;
             }
@@ -42,19 +42,19 @@ namespace RuinsRaiders.GUI
             else
                 transform.localScale = new Vector3(1, 1, 1);
 
-            if ((healthController.MaxHealth + 1) / 2 != hearts.Count)
+            if ((healthController.haxHealth + 1) / 2 != _hearts.Count)
             {
                 Invalidate();
-                previousHealth = 0;
+                _previousHealth = 0;
             }
 
-            if (healthController.Health != previousHealth)
+            if (healthController.health != _previousHealth)
             {
-                previousHealth = healthController.Health;
-                var healthLeft = previousHealth;
-                for (int i = hearts.Count - 1; i >= 0; i--)
+                _previousHealth = healthController.health;
+                var healthLeft = _previousHealth;
+                for (int i = _hearts.Count - 1; i >= 0; i--)
                 {
-                    var heart = hearts[i];
+                    var heart = _hearts[i];
                     if (healthLeft >= 2)
                     {
                         heart.Health = 2;
@@ -75,13 +75,13 @@ namespace RuinsRaiders.GUI
 
         private void Invalidate()
         {
-            foreach (var heart in hearts)
+            foreach (var heart in _hearts)
                 Destroy(heart.gameObject);
 
-            hearts.Clear();
+            _hearts.Clear();
 
 
-            int heartsCount = healthController.IsDead ? 0 : (healthController.MaxHealth + 1) / 2;
+            int heartsCount = healthController.IsDead ? 0 : (healthController.haxHealth + 1) / 2;
 
             float hearthWidth = 1;
 
@@ -95,7 +95,7 @@ namespace RuinsRaiders.GUI
                 p.name = "heart" + i;
                 p.transform.SetParent(transform, false);
                 p.transform.localPosition = new Vector2(startingPos, hearthRow * hearthWidth);
-                hearts.Add(p);
+                _hearts.Add(p);
             }
         }
     }

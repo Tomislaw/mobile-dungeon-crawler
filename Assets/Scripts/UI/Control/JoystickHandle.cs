@@ -9,26 +9,26 @@ namespace RuinsRaiders.UI
     [RequireComponent(typeof(RectTransform))]
     public class JoystickHandle : MonoBehaviour
     {
-        internal float Radius;
+        internal float _radius;
 
-        internal Vector2 Center;
-        internal Vector2 Value;
-        internal bool Pressed;
+        internal Vector2 _center;
+        internal Vector2 _value;
+        internal bool _pressed;
 
-        private Vector2 LocalInitialPosition;
-        private Vector2 WorldInitialPosition;
+        private Vector2 _localInitialPosition;
+        private Vector2 _worldInitialPosition;
 
-        private int pointerId = -2;
+        private int _pointerId = -2;
 
         public void Awake()
         {
-            LocalInitialPosition = transform.localPosition;
+            _localInitialPosition = transform.localPosition;
         }
 
         private void CheckForPress()
         {
-            LocalInitialPosition = transform.localPosition;
-            WorldInitialPosition = transform.position;
+            _localInitialPosition = transform.localPosition;
+            _worldInitialPosition = transform.position;
             if (Touchscreen.current != null)
             {
                 int id = 0;
@@ -36,8 +36,8 @@ namespace RuinsRaiders.UI
                 {
                     if (touch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Began)
                     {
-                        var distance = Vector2.Distance(WorldInitialPosition, touch.position.ReadValue());
-                        if (distance < Radius)
+                        var distance = Vector2.Distance(_worldInitialPosition, touch.position.ReadValue());
+                        if (distance < _radius)
                         {
                             TouchStarted(touch.touchId.ReadValue());
                             return;
@@ -50,8 +50,8 @@ namespace RuinsRaiders.UI
 
             if (Mouse.current.leftButton.isPressed && Mouse.current.leftButton.wasPressedThisFrame)
             {
-                var distance = Vector2.Distance(WorldInitialPosition, Mouse.current.position.ReadValue());
-                if (distance < Radius)
+                var distance = Vector2.Distance(_worldInitialPosition, Mouse.current.position.ReadValue());
+                if (distance < _radius)
                 {
                     TouchStarted(-1);
                     return;
@@ -61,24 +61,24 @@ namespace RuinsRaiders.UI
 
         public void CheckForUnpress()
         {
-            if (pointerId >= 0)
+            if (_pointerId >= 0)
             {
                 foreach (var touch in Touchscreen.current.touches)
                 {
-                    if (touch.touchId.ReadValue() == pointerId)
+                    if (touch.touchId.ReadValue() == _pointerId)
                     {
                         switch (touch.phase.ReadValue())
                         {
                             case UnityEngine.InputSystem.TouchPhase.None:
                             case UnityEngine.InputSystem.TouchPhase.Ended:
                             case UnityEngine.InputSystem.TouchPhase.Canceled:
-                                TouchFinished(pointerId);
+                                TouchFinished(_pointerId);
                                 break;
                         };
                     }
                 }
             }
-            else if (pointerId == -1)
+            else if (_pointerId == -1)
             {
                 if (!Mouse.current.leftButton.isPressed)
                     TouchFinished(-1);
@@ -86,40 +86,40 @@ namespace RuinsRaiders.UI
         }
         public void ResolveMove()
         {
-            Vector2 point = new Vector2();
-            if (pointerId >= 0)
+            Vector2 point = new();
+            if (_pointerId >= 0)
             {
                 foreach (var touch in Touchscreen.current.touches)
                 {
-                    if (touch.touchId.ReadValue() != pointerId)
+                    if (touch.touchId.ReadValue() != _pointerId)
                         continue;
 
                     point = touch.position.ReadValue();
                     break;
                 }
             }
-            else if (pointerId == -1)
+            else if (_pointerId == -1)
                 point = Mouse.current.position.ReadValue();
 
-            var normalized = (point - WorldInitialPosition).normalized;
+            var normalized = (point - _worldInitialPosition).normalized;
 
             transform.position = point;
-            var distance = Vector2.Distance(LocalInitialPosition, transform.localPosition);
-            if (distance > Radius)
-                transform.localPosition = normalized * Radius;
+            var distance = Vector2.Distance(_localInitialPosition, transform.localPosition);
+            if (distance > _radius)
+                transform.localPosition = normalized * _radius;
 
-            var previousValue = Value;
-            Value = transform.localPosition / Radius;
-            if (previousValue != Value)
-                TouchMoved(pointerId, Value);
+            var previousValue = _value;
+            _value = transform.localPosition / _radius;
+            if (previousValue != _value)
+                TouchMoved(_pointerId, _value);
         }
 
         public void Update()
         {
-            if (!Pressed)
+            if (!_pressed)
                 CheckForPress();
 
-            if (Pressed)
+            if (_pressed)
             {
                 ResolveMove();
                 CheckForUnpress();
@@ -129,17 +129,17 @@ namespace RuinsRaiders.UI
         public void TouchStarted(int id)
         {
             Debug.Log(id + " - started");
-            pointerId = id;
-            Pressed = true;
+            _pointerId = id;
+            _pressed = true;
         }
 
         public void TouchFinished(int id)
         {
             Debug.Log(id + " - finished");
-            pointerId = -2;
-            Pressed = false;
-            Value = new Vector2();
-            transform.localPosition = LocalInitialPosition;
+            _pointerId = -2;
+            _pressed = false;
+            _value = new Vector2();
+            transform.localPosition = _localInitialPosition;
         }
 
         public void TouchMoved(int id, Vector2 value)
@@ -155,7 +155,7 @@ namespace RuinsRaiders.UI
         public float Radius;
         public Vector2 Center;
 
-        public Vector2 Value { get => joystick == null ? new Vector2() : joystick.Value; }
+        public Vector2 Value { get => joystick == null ? new Vector2() : joystick._value; }
 
         [SerializeField]
         protected JoystickHandle joystick;
@@ -165,8 +165,8 @@ namespace RuinsRaiders.UI
         {
             if (joystick)
             {
-                joystick.Center = Center;
-                joystick.Radius = Radius;
+                joystick._center = Center;
+                joystick._radius = Radius;
             }
         }
     }

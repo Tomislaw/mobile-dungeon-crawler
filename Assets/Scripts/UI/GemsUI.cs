@@ -6,21 +6,21 @@ namespace RuinsRaiders.UI
     public class GemsUI : MonoBehaviour
     {
         [SerializeField]
-        private TMPro.TMP_Text redGems;
+        private TMPro.TMP_Text tmpTextRedGems;
         [SerializeField]
-        private TMPro.TMP_Text blueGems;
+        private TMPro.TMP_Text tmpTextBlueGems;
         [SerializeField]
-        private TMPro.TMP_Text greenGems;
+        private TMPro.TMP_Text tmpTextGreenGems;
         [SerializeField]
-        private TMPro.TMP_Text silverGems;
+        private TMPro.TMP_Text tmpTextSilverGems;
 
         [SerializeField]
-        private PlayerData data;
+        private PlayerData _data;
 
-        private int red;
-        private int blue;
-        private int green;
-        private int silver;
+        private int _redGemsCount;
+        private int _blueGemsCount;
+        private int _greenGemsCount;
+        private int _silverGemsCount;
 
         private void Start()
         {
@@ -34,14 +34,14 @@ namespace RuinsRaiders.UI
 
         public void Invalidate()
         {
-            if (red != data.gems.redGems)
-                SetText(redGems, red = data.gems.redGems);
-            if (blue != data.gems.blueGems)
-                SetText(blueGems, blue = data.gems.blueGems);
-            if (green != data.gems.greenGems)
-                SetText(greenGems, green = data.gems.greenGems);
-            if (silver != data.gems.silverGems)
-                SetText(silverGems, silver = data.gems.silverGems);
+            if (_redGemsCount != _data.gems.redGems)
+                SetText(tmpTextRedGems, _redGemsCount = _data.gems.redGems);
+            if (_blueGemsCount != _data.gems.blueGems)
+                SetText(tmpTextBlueGems, _blueGemsCount = _data.gems.blueGems);
+            if (_greenGemsCount != _data.gems.greenGems)
+                SetText(tmpTextGreenGems, _greenGemsCount = _data.gems.greenGems);
+            if (_silverGemsCount != _data.gems.silverGems)
+                SetText(tmpTextSilverGems, _silverGemsCount = _data.gems.silverGems);
         }
 
         private void SetText(TMPro.TMP_Text text, int count)
