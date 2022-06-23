@@ -6,8 +6,8 @@ namespace RuinsRaiders.UI
     // responsible for character selection ui at the beginning of each level
     public class CharacterSelectUI : MonoBehaviour
     {
-        public UnityEvent isLockedEvent;
-        public UnityEvent isUnlockedEvent;
+        public UnityEvent onLocked;
+        public UnityEvent onUnlocked;
 
         [SerializeField]
         private PlayerData playerData;
@@ -18,9 +18,9 @@ namespace RuinsRaiders.UI
         void OnEnable()
         {
             if (IsCharacterUnlocked)
-                isUnlockedEvent.Invoke();
+                onUnlocked.Invoke();
             else
-                isLockedEvent.Invoke();
+                onLocked.Invoke();
         }
 
         public bool IsCharacterUnlocked
