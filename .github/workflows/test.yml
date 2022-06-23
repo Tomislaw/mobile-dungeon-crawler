@@ -25,7 +25,7 @@ jobs:
           artifactsPath: playmode-artifacts
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           checkName: Test Results
-          coverageOptions: 'generateAdditionalMetrics;generateHtmlReport;generateBadgeReport;assemblyFilters:+my.assembly.*'
+          coverageOptions: 'generateAdditionalMetrics;generateHtmlReport;generateBadgeReport;'
       - uses: actions/upload-artifact@v2
         if: always()
         with:
