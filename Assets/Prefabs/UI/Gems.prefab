@@ -28,6 +28,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7075215269029469150}
   - {fileID: 101998503548314574}
@@ -79,11 +80,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2542995ff7f4bb7459de8a7b9b357d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  redGems: {fileID: 101998503715518640}
-  blueGems: {fileID: 101998504439963862}
-  greenGems: {fileID: 101998504501530146}
-  silverGems: {fileID: 7075215270240515634}
-  data: {fileID: 11400000, guid: 968a04ce1fca0b743bb1689a0969032f, type: 2}
+  tmpTextRedGems: {fileID: 101998503715518640}
+  tmpTextBlueGems: {fileID: 101998504439963862}
+  tmpTextGreenGems: {fileID: 101998504501530146}
+  tmpTextSilverGems: {fileID: 7075215270240515634}
+  _data: {fileID: 11400000, guid: 968a04ce1fca0b743bb1689a0969032f, type: 2}
 --- !u!1001 &101998503787086130
 PrefabInstance:
   m_ObjectHideFlags: 0

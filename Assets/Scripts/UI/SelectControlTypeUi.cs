@@ -1,24 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SelectControlTypeUi : MonoBehaviour
+namespace RuinsRaiders.UI
 {
-    private Toggle toggle;
-    public OptionsData.TouchUiType type;
-    public OptionsData data;
-    void Start()
+    // Helper class for selecting different control type on Mobile
+    public class SelectControlTypeUi : MonoBehaviour
     {
-        toggle = GetComponent<Toggle>();
-        toggle.isOn = type == data.touchUiType;
-        toggle.onValueChanged.AddListener(OnChange);
-    }
+        [SerializeField]
+        private OptionsData.TouchUiType type;
 
-    public void OnChange(bool change)
-    {
-        if (change)
-            data.touchUiType = type;
-    }
+        [SerializeField]
+        private OptionsData data;
 
+        private Toggle _toggle;
+
+        void Start()
+        {
+            _toggle = GetComponent<Toggle>();
+            _toggle.isOn = type == data.touchUiType;
+            _toggle.onValueChanged.AddListener(OnChange);
+        }
+
+        public void OnChange(bool change)
+        {
+            if (change)
+                data.touchUiType = type;
+        }
+    }
 }

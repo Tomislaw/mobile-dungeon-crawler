@@ -1,42 +1,46 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformTile : MonoBehaviour
+
+namespace RuinsRaiders
 {
-    public Collider2D collider;
-
-    private HashSet<MovementController> characters = new HashSet<MovementController>();
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    public class PlatformTile : MonoBehaviour
     {
-        var character = collision.gameObject.GetComponent<MovementController>();
-        if (character)
+        [SerializeField]
+        private Collider2D platformCollider;
+
+        private readonly HashSet<MovementController> _characters = new();
+
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            characters.Add(character);
-            var colliders = character.GetComponentsInChildren<Collider2D>();
-            foreach (var character_collider in colliders)
-                Physics2D.IgnoreCollision(collider, character_collider, character.move.y < 0);
+            var character = collision.gameObject.GetComponent<MovementController>();
+            if (character)
+            {
+                _characters.Add(character);
+                var colliders = character.GetComponentsInChildren<Collider2D>();
+                foreach (var characterCollider in colliders)
+                    Physics2D.IgnoreCollision(platformCollider, characterCollider, character.move.y < 0);
+            }
         }
-    }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        var character = collision.gameObject.GetComponent<MovementController>();
-        if (character)
+        private void OnTriggerExit2D(Collider2D collision)
         {
-            characters.Remove(character);
+            var character = collision.gameObject.GetComponent<MovementController>();
+            if (character)
+            {
+                _characters.Remove(character);
+            }
         }
-    }
 
-    private void FixedUpdate()
-    {
-        foreach (var character in characters)
+        private void FixedUpdate()
         {
-            var colliders = character.GetComponentsInChildren<Collider2D>();
-            foreach (var character_collider in colliders)
-                if (character.move.y < 0)
-                    Physics2D.IgnoreCollision(collider, character_collider);
+            foreach (var character in _characters)
+            {
+                var colliders = character.GetComponentsInChildren<Collider2D>();
+                foreach (var characterCollider in colliders)
+                    if (character.move.y < 0)
+                        Physics2D.IgnoreCollision(platformCollider, characterCollider);
+            }
         }
     }
 }

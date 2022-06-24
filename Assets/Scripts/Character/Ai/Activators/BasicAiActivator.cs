@@ -1,7 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Scripts.Character.Ai
+namespace RuinsRaiders.AI
 {
     public struct ActivatorData{
         public GameObject triggeredBy;

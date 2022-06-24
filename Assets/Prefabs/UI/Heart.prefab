@@ -45,13 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1cde2c6cc46b6945b98cfe888088e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  full: {fileID: 3901815962169110082, guid: 06731b940e85d2c44b075d5701bf2b81, type: 3}
-  halfFull: {fileID: -6939497845479108836, guid: 06731b940e85d2c44b075d5701bf2b81, type: 3}
-  none: {fileID: 1769671512009193391, guid: 06731b940e85d2c44b075d5701bf2b81, type: 3}
-  damageFull: {fileID: -4477578937794702022, guid: 06731b940e85d2c44b075d5701bf2b81, type: 3}
-  damageHalfLeft: {fileID: -1401104878230470536, guid: 06731b940e85d2c44b075d5701bf2b81, type: 3}
-  damageHalfRight: {fileID: -6219630003773089793, guid: 06731b940e85d2c44b075d5701bf2b81, type: 3}
   SwitchTime: 0.2
+  fullSprite: {fileID: 3901815962169110082, guid: 06731b940e85d2c44b075d5701bf2b81, type: 3}
+  halfFullSprite: {fileID: -6939497845479108836, guid: 06731b940e85d2c44b075d5701bf2b81, type: 3}
+  noneSprite: {fileID: 1769671512009193391, guid: 06731b940e85d2c44b075d5701bf2b81, type: 3}
+  damageFullSprite: {fileID: -4477578937794702022, guid: 06731b940e85d2c44b075d5701bf2b81, type: 3}
+  damageHalfLeftSprite: {fileID: -1401104878230470536, guid: 06731b940e85d2c44b075d5701bf2b81, type: 3}
+  damageHalfRightSprite: {fileID: -6219630003773089793, guid: 06731b940e85d2c44b075d5701bf2b81, type: 3}
   _health: 2
 --- !u!212 &9060408073096087315
 SpriteRenderer:

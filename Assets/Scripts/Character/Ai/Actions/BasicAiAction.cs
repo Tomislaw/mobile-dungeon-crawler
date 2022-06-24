@@ -1,60 +1,60 @@
-﻿using Assets.Scripts.Character.Ai;
-using System.Collections.Generic;
-using UnityEngine;
-public abstract class BasicAiAction
-{
-    internal bool stopped;
-    public abstract bool CanStop();
+﻿using UnityEngine;
 
-    public virtual void Stop()
+namespace RuinsRaiders.AI
+{
+    public abstract class BasicAiAction
     {
-        stopped = true;
-    }
-    public abstract bool IsFinished();
+        internal bool stopped;
+        public abstract bool CanStop();
 
-    public abstract void Update(float dt);
+        public virtual void Stop()
+        {
+            stopped = true;
+        }
+        public abstract bool IsFinished();
 
-}
+        public abstract void Update(float dt);
 
-
-public abstract class BasicAiActionData : ScriptableObject
-{
-    public string Name;
-    public abstract BasicAiAction Create(ActivatorData trigger);
-}
-[CreateAssetMenu(fileName = "IdleAction", menuName = "RuinsRaiders/Ai/IdleAction", order = 1)]
-public class IdleAction : BasicAiActionData
-{
-    public float idlingTime;
-    public override BasicAiAction Create(ActivatorData trigger)
-    {
-        return new Action(trigger, this);
     }
 
-    public class Action : BasicAiAction
+
+    public abstract class BasicAiActionData : ScriptableObject
     {
-        private IdleAction idlingTime;
-        private float _idlingTime;
-        public override bool CanStop()
+        public abstract BasicAiAction Create(ActivatorData trigger);
+    }
+    [CreateAssetMenu(fileName = "IdleAction", menuName = "RuinsRaiders/Ai/IdleAction", order = 1)]
+    public class IdleAction : BasicAiActionData
+    {
+        public float idlingTime;
+        public override BasicAiAction Create(ActivatorData trigger)
         {
-            return true;
+            return new Action(this);
         }
 
-        public Action(ActivatorData trigger, IdleAction parent)
+        public class Action : BasicAiAction
         {
-            _idlingTime = parent.idlingTime;
-        }
+            private float _idlingTime;
+            public override bool CanStop()
+            {
+                return true;
+            }
 
-        public override bool IsFinished()
-        {
-            return _idlingTime < 0;
-        }
+            public Action(IdleAction parent)
+            {
+                _idlingTime = parent.idlingTime;
+            }
 
-        public override void Update(float dt)
-        {
-            if (stopped)
-                return;
-            _idlingTime -= dt;
+            public override bool IsFinished()
+            {
+                return _idlingTime < 0;
+            }
+
+            public override void Update(float dt)
+            {
+                if (stopped)
+                    return;
+                _idlingTime -= dt;
+            }
         }
     }
 }

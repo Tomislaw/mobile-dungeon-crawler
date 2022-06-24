@@ -178,10 +178,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9290149db6b4a4e94084979ed9ad4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HaveSneakAnimation: 1
-  HaveWalkPreAttackAnimation: 1
-  HaveOverchargeAnimation: 1
   holdUpdate: 0
+  haveSneakAnimation: 1
+  haveWalkPreAttackAnimation: 1
+  haveOverchargeAnimation: 1
 --- !u!114 &1586342966391059678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,7 +195,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   control: {fileID: 11400000, guid: c61cd8efd3e12ab4489d55e2db5a8b6e, type: 2}
-  inputControl: {fileID: 11400000, guid: 5099324561f36ed429e3aacb5ca1bacb, type: 2}
 --- !u!114 &1586342966391059651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,8 +217,8 @@ MonoBehaviour:
     jumpHeight: 3
     jumpDistance: 5
   character: {fileID: 1217533563843094445}
-  MaxNodesPerBatch: 10
-  MaxNodes: 600
+  maxNodesPerBatch: 10
+  maxNodes: 600
 --- !u!114 &1586342966391059650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,18 +231,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 262c84ae8ceb69345ac9ed36833301f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackSpeed: 0.2
-  AttackAnimationTime: 0.15
-  OverchargeTime: 1
-  ChargeAttack: 0
-  OnAttack:
+  attackSpeed: 0.2
+  attackAnimationTime: 0.15
+  overchargeTime: 1
+  chargeAttack: 0
+  onAttack:
     m_PersistentCalls:
       m_Calls: []
-  OnChargedAttack:
+  onChargedAttack:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9095645185290459867}
-        m_TargetAssemblyTypeName: Shockwave, Assembly-CSharp
+        m_TargetAssemblyTypeName: RuinsRaiders.Shockwave, Assembly-CSharp
         m_MethodName: StartShockwave
         m_Mode: 1
         m_Arguments:
@@ -254,9 +253,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  AttackDamage: 2
-  Distance: 1.5
-  Knockback: 500
+  attackDamage: 2
+  distance: 1
+  knockback: 200
 --- !u!114 &2839153680246517994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,13 +268,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2c6fe3b94d91a41a1db1471222ce76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 8
-  MaxHealth: 8
-  RessurectTime: 1
-  OnDeath:
+  group: 1
+  onDeath:
     m_PersistentCalls:
       m_Calls: []
-  group: 1
+  health: 8
+  haxHealth: 8
+  ressurectTime: 1
 --- !u!114 &1217533563843094445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,25 +287,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 681d635a5cb7c4c48be5480f465c0c27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Flying: 0
-  GravityScale: 6
-  ClimbLadderSpeed: 6
-  CoyoteTime: 0.15
-  WalkSpeed: 8
-  JumpSpeed: 18
-  MaxSpeed: 20
-  Acceleration: 40
-  Jerk: 50
-  CanUseLadder: 1
-  FaceLeft: 0
-  StepTime: 0.15
-  OnJump:
+  flying: 0
+  gravityScale: 6
+  climbLadderSpeed: 12
+  coyoteTime: 0.05
+  walkSpeed: 10
+  jumpSpeed: 16
+  maxSpeed: 20
+  acceleration: 50
+  jerk: 20
+  canUseLadder: 1
+  faceLeft: 0
+  stepTime: 0.15
+  onJump:
     m_PersistentCalls:
       m_Calls: []
-  OnWalk:
+  onWalk:
     m_PersistentCalls:
       m_Calls: []
-  OnSwim:
+  onSwim:
     m_PersistentCalls:
       m_Calls: []
   move: {x: 0, y: 0}
@@ -436,7 +435,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 1586342966391059652}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f9bace41386d69e40b8b8c61df95014c, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -459,7 +458,7 @@ MonoBehaviour:
   shockWidth: 6
   shockTime: 0.025
   shockDistance: 1
-  InitialOffset: {x: 0, y: 0.1, z: 0}
+  initialOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &39514931662721533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,13 +471,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d872bf0fe7dbe941ba4cd061e80a9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Death: {fileID: 8300000, guid: 3e34511c658d40e4ea1834c70865bda0, type: 3}
-  Hit: {fileID: 8300000, guid: 02451b72dcff5d44388112bd97f5c3b9, type: 3}
-  Walk: {fileID: 8300000, guid: 2e0968f0d29aadd4fab498fa32b11e92, type: 3}
-  Jump: {fileID: 8300000, guid: c0bcc74f1b33d9c428a4289e94feb478, type: 3}
-  Swim: {fileID: 8300000, guid: 907f1d61f8d1c81488f8255c9098592b, type: 3}
-  Attack: {fileID: 8300000, guid: 0e9cf4d9b8299934391e9f55cca28c6e, type: 3}
-  ChargedAttack: {fileID: 8300000, guid: 0e9cf4d9b8299934391e9f55cca28c6e, type: 3}
+  death: {fileID: 8300000, guid: 3e34511c658d40e4ea1834c70865bda0, type: 3}
+  hit: {fileID: 8300000, guid: 02451b72dcff5d44388112bd97f5c3b9, type: 3}
+  walk: {fileID: 8300000, guid: f1022c4568d4673439de2d21c5cde145, type: 3}
+  jump: {fileID: 8300000, guid: c0bcc74f1b33d9c428a4289e94feb478, type: 3}
+  swim: {fileID: 8300000, guid: 74c91e7aa8aa7e94782cec3abfdfe47c, type: 3}
+  attack: {fileID: 8300000, guid: 0e9cf4d9b8299934391e9f55cca28c6e, type: 3}
+  chargedAttack: {fileID: 8300000, guid: 0e9cf4d9b8299934391e9f55cca28c6e, type: 3}
 --- !u!114 &6072170547237964431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,7 +505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyPrefab: {fileID: 7926932315155287929, guid: 5f2504d000004fe45af3b49c1048cc13, type: 3}
-  HoverHeight: 2
-  HoverVariationDistance: 1
-  ItemSpeed: 5
-  NumberOfKeys: 0
+  hoverHeight: 2
+  hoverVariationDistance: 0.5
+  itemSpeed: 10
+  numberOfKeys: 0

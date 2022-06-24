@@ -1,22 +1,26 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
-public class MovementArrowsHandle : ArrowsHandle
+
+namespace RuinsRaiders.UI
 {
-    public ControlData control;
-
-    private bool previousPressedState = false;
-    private void LateUpdate()
+    public class MovementArrowsHandle : ArrowsHandle
     {
-        if (Pressed)
-        {
-            control.move = Value;
-        }
-        else if (Pressed != previousPressedState)
-        {
-            control.move = new Vector2();
-        }
+        [SerializeField]
+        private ControlData control;
 
-        previousPressedState = Pressed;
+        private bool _previousPressedState = false;
+        private void LateUpdate()
+        {
+            if (Pressed)
+            {
+                control.move = Value;
+            }
+            else if (Pressed != _previousPressedState)
+            {
+                control.move = new Vector2();
+            }
+
+            _previousPressedState = Pressed;
+        }
     }
 }

@@ -1,69 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
-using static Character;
 
-public class AttackController : MonoBehaviour
+namespace RuinsRaiders
 {
-    // attack and damage group
-    public float AttackSpeed = 0.2f;
-    public float AttackAnimationTime = 0.15f;
-
-    public float OverchargeTime = 1;
-
-
-    public bool ChargeAttack = false;
-
-    public UnityEvent OnAttack = new UnityEvent();
-    public UnityEvent OnChargedAttack = new UnityEvent();
-
-    // private fields
-    private float timeToNextAttack = 0;
-    private float timeToAnimationAttackFinish = 0;
-    private float timeToOvercharge = 0;
-
-    private Character character;
-
-    public bool CanAttack { get => timeToNextAttack <= 0 && !character.IsDead && !character.holdUpdate; }
-    public bool IsAttacking { get => timeToAnimationAttackFinish > 0; }
-    public bool IsOvercharged{ get => OverchargeTime > 0 && timeToOvercharge <= 0; }
-
-    public void OnEnable()
+    public class AttackController : MonoBehaviour
     {
-        timeToOvercharge = OverchargeTime;
-        character = GetComponent<Character>();
-      
-    }
-    public void FixedUpdate()
-    {
-        if (timeToAnimationAttackFinish > 0) timeToAnimationAttackFinish -= Time.deltaTime;
-        if (timeToNextAttack > 0) timeToNextAttack -= Time.deltaTime;
+        // attack and damage group
+        public float attackSpeed = 0.2f;
+        public float attackAnimationTime = 0.15f;
+        public float overchargeTime = 1;
+        public bool chargeAttack = false;
 
-        if (ChargeAttack)
-            timeToOvercharge -= Time.fixedDeltaTime;
-        else
-            timeToOvercharge = OverchargeTime;
+        public UnityEvent onAttack = new();
+        public UnityEvent onChargedAttack = new();
 
-    }
+        // private fields
+        private float _timeToNextAttack = 0;
+        private float _timeToAnimationAttackFinish = 0;
+        private float _timeToOvercharge = 0;
 
-    public virtual void Attack()
-    {
-        if (CanAttack)
+        private Character _character;
+
+        public bool CanAttack { get => _timeToNextAttack <= 0 && !_character.IsDead && !_character.holdUpdate; }
+        public bool IsAttacking { get => _timeToAnimationAttackFinish > 0; }
+        public bool IsOvercharged { get => overchargeTime > 0 && _timeToOvercharge <= 0; }
+
+        public void OnEnable()
         {
-            timeToAnimationAttackFinish = AttackAnimationTime;
-            timeToNextAttack = AttackSpeed;
-            ChargeAttack = false;
+            _timeToOvercharge = overchargeTime;
+            _character = GetComponent<Character>();
 
-            if(IsOvercharged)
-                OnChargedAttack.Invoke();
+        }
+        public void FixedUpdate()
+        {
+            if (_timeToAnimationAttackFinish > 0) _timeToAnimationAttackFinish -= Time.deltaTime;
+            if (_timeToNextAttack > 0) _timeToNextAttack -= Time.deltaTime;
+
+            if (chargeAttack)
+                _timeToOvercharge -= Time.fixedDeltaTime;
             else
-                OnAttack.Invoke();
+                _timeToOvercharge = overchargeTime;
+
+        }
+
+        public virtual void Attack()
+        {
+            if (CanAttack)
+            {
+                _timeToAnimationAttackFinish = attackAnimationTime;
+                _timeToNextAttack = attackSpeed;
+                chargeAttack = false;
+
+                if (IsOvercharged)
+                    onChargedAttack.Invoke();
+                else
+                    onAttack.Invoke();
+            }
         }
     }
 }
- 
 

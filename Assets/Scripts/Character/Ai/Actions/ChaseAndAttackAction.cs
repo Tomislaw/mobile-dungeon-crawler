@@ -1,91 +1,92 @@
-﻿using Assets.Scripts.Character.Ai;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "ChaseAndAttackTargetAction", menuName = "RuinsRaiders/Ai/ChaseAndAttackTargetAction", order = 1)]
-public class ChaseAndAttackAction : ChaseAction
+namespace RuinsRaiders.AI
 {
-    public float distanceForAttack;
-    public float attackTime;
-    public float timeBetweenAttack;
-    public override BasicAiAction Create(ActivatorData trigger)
+    [CreateAssetMenu(fileName = "ChaseAndAttackTargetAction", menuName = "RuinsRaiders/Ai/ChaseAndAttackTargetAction", order = 1)]
+    public class ChaseAndAttackAction : ChaseAction
     {
-        return new Action(this, trigger);
-    }
+        [SerializeField]
+        private float distanceForAttack;
+        [SerializeField]
+        private float attackTime;
+        [SerializeField]
+        private float timeBetweenAttack;
 
-    new public class Action : ChaseAction.Action
-    {
-        new ChaseAndAttackAction parent;
-        private float _timeToAttack;
-        private float _attackCooldown;
-        private bool attacking = false;
-
-        private AttackController attackController;
-
-        public Action(ChaseAndAttackAction parent, ActivatorData trigger) : base(parent,trigger)
+        public override BasicAiAction Create(ActivatorData trigger)
         {
-            attackController = trigger.triggeredFor.GetComponent<AttackController>();
-            this.parent = parent;
+            return new Action(this, trigger);
         }
 
-        public override void Update(float dt)
+        new public class Action : ChaseAction.Action
         {
-            if (shouldResign(dt))
+            readonly new ChaseAndAttackAction parent;
+            private float _timeToAttack;
+            private float _attackCooldown;
+            private bool _attacking = false;
+
+            readonly private AttackController _attackController;
+
+            public Action(ChaseAndAttackAction parent, ActivatorData trigger) : base(parent, trigger)
             {
-                targetCharacter = null;
-                target = null;
-                attackController.ChargeAttack = false;
-                movementController.Stop();
-                return;
+                _attackController = trigger.triggeredFor.GetComponent<AttackController>();
+                this.parent = parent;
             }
 
-            if (_attackCooldown > 0)
+            public override void Update(float dt)
             {
-                _attackCooldown -= dt;
-                return;
-            }
-
-
-            if (attacking)
-            {
-                if (_timeToAttack == parent.attackTime)
+                if (ShouldResign(dt))
                 {
+                    targetCharacter = null;
+                    target = null;
+                    _attackController.chargeAttack = false;
                     movementController.Stop();
-                    movementController.FacePosition(target.transform.position);
+                    return;
                 }
-                if (_timeToAttack < 0)
+
+                if (_attackCooldown > 0)
                 {
-                    attackController.Attack();
-                    attackController.ChargeAttack = false;
-                    attacking = false;
-                    _attackCooldown = parent.timeBetweenAttack;
+                    _attackCooldown -= dt;
+                    return;
                 }
-                else
+
+
+                if (_attacking)
                 {
-                    attackController.ChargeAttack = true;
-                    _timeToAttack -= dt;
+                    if (_timeToAttack == parent.attackTime)
+                    {
+                        movementController.Stop();
+                        movementController.FacePosition(target.transform.position);
+                    }
+                    if (_timeToAttack < 0)
+                    {
+                        _attackController.Attack();
+                        _attackController.chargeAttack = false;
+                        _attacking = false;
+                        _attackCooldown = parent.timeBetweenAttack;
+                    }
+                    else
+                    {
+                        _attackController.chargeAttack = true;
+                        _timeToAttack -= dt;
+                    }
                 }
+                if (!_attacking && parent.distanceForAttack > Vector2.Distance(character.transform.position, target.transform.position))
+                {
+                    _attacking = true;
+                    _timeToAttack = parent.attackTime;
+                }
+
+                timeToNextPathfinding -= dt;
+                if (timeToNextPathfinding > 0)
+                    return;
+
+                timeToNextPathfinding = parent.timeBetweenRetryingFindingPath;
+                if (pathfinding.Target == pathfinding.GetTileId(target.transform.position))
+                    return;
+
+                pathfinding.MoveTo(target.transform.position, true);
+
             }
-            if (!attacking && parent.distanceForAttack > Vector2.Distance(character.transform.position, target.transform.position))
-            {
-                attacking = true;
-                _timeToAttack = parent.attackTime;
-            }
-
-            timeToNextPathfinding -= dt;
-            if (timeToNextPathfinding > 0)
-                return;
-
-            timeToNextPathfinding = parent.timeBetweenRetryingFindingPath;
-            if (pathfinding.Target == pathfinding.GetTileId(target.transform.position))
-                return;
-
-            pathfinding.MoveTo(target.transform.position, true);
-
         }
     }
 }

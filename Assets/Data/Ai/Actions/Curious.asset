@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dc5c407c30168244bf8f2b73c499c3d, type: 3}
   m_Name: Curious
   m_EditorClassIdentifier: 
-  Name: Curious
   parallel: 1
   actions:
   - {fileID: 11400000, guid: fc4090c0f170ff04d83803e95101c21d, type: 2}

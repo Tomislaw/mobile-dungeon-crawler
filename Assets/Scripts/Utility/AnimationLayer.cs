@@ -1,22 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
-public class AnimationLayer : MonoBehaviour
+namespace RuinsRaiders
 {
-    public float weight;
-    public int layerIndex;
-    private Animator animator;
-    void Start()
+    // Helper function for setting animation layer weight via MonoBehavior
+    [RequireComponent(typeof(Animator))]
+    public class AnimationLayer : MonoBehaviour
     {
-        animator = GetComponent<Animator>();
-        animator.SetLayerWeight(layerIndex, weight);
-    }
+        [SerializeField]
+        private float weight;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [SerializeField]
+        private int layerIndex;
+
+        private Animator _animator;
+        void Start()
+        {
+            _animator = GetComponent<Animator>();
+            _animator.SetLayerWeight(layerIndex, weight);
+        }
+
     }
 }

@@ -1,79 +1,90 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
+using System;
 
-public class EventManager : MonoBehaviour
+namespace RuinsRaiders
 {
-
-    Dictionary<string, UnityEvent> eventDictionary;
-    public GlobalEvent OnTrigger;
-    static EventManager eventManager;
-
-    public static EventManager instance
+    // Global event distributor, only one instance should be created for scene
+    // Objects can listen for global events like player character death, level finished and other
+    public class EventManager : MonoBehaviour
     {
-        get
+        [SerializeField]
+        private GlobalEvent onTrigger;
+
+        private Dictionary<string, UnityEvent> _eventDictionary;
+        private static EventManager _eventManager;
+
+        private static EventManager Instance
         {
-            if (!eventManager)
+            get
             {
-                eventManager = FindObjectOfType(typeof(EventManager)) as EventManager;
+                if (!_eventManager)
+                {
+                    _eventManager = FindObjectOfType(typeof(EventManager)) as EventManager;
 
-                if (!eventManager)
-                {
-                    Debug.LogError("There needs to be one active EventManger script on a GameObject in your scene.");
+                    if (!_eventManager)
+                    {
+                        Debug.LogError("There needs to be one active EventManger script on a GameObject in your scene.");
+                    }
+                    else
+                    {
+                        _eventManager.Init();
+                    }
                 }
-                else
-                {
-                    eventManager.Init();
-                }
+
+                return _eventManager;
             }
-
-            return eventManager;
         }
-    }
 
-    void Init()
-    {
-        if (eventDictionary == null)
+        void Init()
         {
-            eventDictionary = new Dictionary<string, UnityEvent>();
+            if (_eventDictionary == null)
+            {
+                _eventDictionary = new Dictionary<string, UnityEvent>();
+            }
         }
-    }
 
-    public static void StartListening(string eventName, UnityAction listener)
-    {
-        UnityEvent thisEvent = null;
-        if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
+        public static void Register(UnityAction<string> action)
         {
-            thisEvent.AddListener(listener);
+            Instance.onTrigger.AddListener(action);
         }
-        else
-        {
-            thisEvent = new UnityEvent();
-            thisEvent.AddListener(listener);
-            instance.eventDictionary.Add(eventName, thisEvent);
-        }
-    }
 
-    public static void StopListening(string eventName, UnityAction listener)
-    {
-        if (eventManager == null) return;
-        UnityEvent thisEvent = null;
-        if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
+        public static void StartListening(string eventName, UnityAction listener)
         {
-            thisEvent.RemoveListener(listener);
+            if (Instance._eventDictionary.TryGetValue(eventName, out UnityEvent thisEvent))
+            {
+                thisEvent.AddListener(listener);
+            }
+            else
+            {
+                thisEvent = new UnityEvent();
+                thisEvent.AddListener(listener);
+                Instance._eventDictionary.Add(eventName, thisEvent);
+            }
         }
-    }
 
-    public static void TriggerEvent(string eventName)
-    {
-        UnityEvent thisEvent = null;
-        if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
+        public static void StopListening(string eventName, UnityAction listener)
         {
-            thisEvent.Invoke();
-        }
-        instance.OnTrigger.Invoke(eventName);
-    }
+            if (_eventManager == null)
+                return;
 
-[System.Serializable]
-    public class GlobalEvent : UnityEvent<string> { }
+            if (Instance._eventDictionary.TryGetValue(eventName, out UnityEvent thisEvent))
+            {
+                thisEvent.RemoveListener(listener);
+            }
+        }
+
+        public static void TriggerEvent(string eventName)
+        {
+            if (Instance._eventDictionary.TryGetValue(eventName, out UnityEvent thisEvent))
+            {
+                thisEvent.Invoke();
+            }
+            Instance.onTrigger.Invoke(eventName);
+        }
+
+        [Serializable]
+        public class GlobalEvent : UnityEvent<string> { }
+    }
 }

@@ -1,39 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CharacterSelectUI : MonoBehaviour
+namespace RuinsRaiders.UI
 {
-    public PlayerData playerData;
-    public PlayerData.CharacterType characterType;
-
-    public UnityEvent IsLocked;
-    public UnityEvent IsUnlocked;
-    void OnEnable()
+    // responsible for character selection ui at the beginning of each level
+    public class CharacterSelectUI : MonoBehaviour
     {
-        if (IsCharacterUnlocked)
-            IsUnlocked.Invoke();
-        else
-            IsLocked.Invoke();
+        public UnityEvent onLocked;
+        public UnityEvent onUnlocked;
 
-    }
+        [SerializeField]
+        private PlayerData playerData;
 
-    public bool IsCharacterUnlocked { 
-        get {
-            switch (characterType)
+        [SerializeField]
+        private PlayerData.CharacterType characterType;
+
+        void OnEnable()
+        {
+            if (IsCharacterUnlocked)
+                onUnlocked.Invoke();
+            else
+                onLocked.Invoke();
+        }
+
+        public bool IsCharacterUnlocked
+        {
+            get
             {
-                case PlayerData.CharacterType.Knight:
-                    return playerData.knight.unlocked;
-                case PlayerData.CharacterType.Mage:
-                    return playerData.mage.unlocked;
-                case PlayerData.CharacterType.Archer:
-                    return playerData.archer.unlocked;
-                case PlayerData.CharacterType.Spearman:
-                    return playerData.spearman.unlocked;
-                default:
-                    return false;
-            };
-        } 
+                return characterType switch
+                {
+                    PlayerData.CharacterType.Knight => playerData.knight.unlocked,
+                    PlayerData.CharacterType.Mage => playerData.mage.unlocked,
+                    PlayerData.CharacterType.Archer => playerData.archer.unlocked,
+                    PlayerData.CharacterType.Spearman => playerData.spearman.unlocked,
+                    _ => false,
+                };
+            }
+        }
     }
 }
