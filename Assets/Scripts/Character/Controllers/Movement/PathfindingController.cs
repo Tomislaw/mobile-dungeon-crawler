@@ -228,5 +228,16 @@ namespace RuinsRaiders
                 return null;
             return astars.First();
         }
+
+        //Public Getters (Used for tests at the moment)
+        public AStar GetAStar()
+        {
+            return astar;
+        }
+
+        public WalkData GetWalkData()
+        {
+            return data;
+        }
     }
 }

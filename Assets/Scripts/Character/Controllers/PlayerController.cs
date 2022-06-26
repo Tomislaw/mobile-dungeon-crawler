@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace RuinsRaiders
@@ -24,8 +25,6 @@ namespace RuinsRaiders
 
         public void Update()
         {
-
-
             if (control)
             {
                 _movementController.Move(control.move);
@@ -46,6 +45,11 @@ namespace RuinsRaiders
                 }
             }
 
+        }
+
+        public ControlData GetControlData()
+        {
+            return control;
         }
     }
 }

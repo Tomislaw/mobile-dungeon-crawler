@@ -45,9 +45,9 @@ namespace RuinsRaiders
                     continue;
 
                 // do not hit character at back
-                if (_movementController.faceLeft == true
+                if (_movementController.FaceLeft == true
                     && hitHc.transform.position.x > transform.position.x
-                    || _movementController.faceLeft == false
+                    || _movementController.FaceLeft == false
                     && hitHc.transform.position.x < transform.position.x)
                     continue;
 

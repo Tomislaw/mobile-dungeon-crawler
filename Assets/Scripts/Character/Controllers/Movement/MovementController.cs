@@ -24,7 +24,6 @@ namespace RuinsRaiders
         public float acceleration = 10;
         public float jerk = 10;
         public bool canUseLadder = true;
-        public bool faceLeft = false;
 
         public float stepTime = 0.15f;
 
@@ -35,7 +34,6 @@ namespace RuinsRaiders
         // on which platforms or ladders character currently is
         public HashSet<LadderTile> ladders = new ();
         public HashSet<PlatformTile> platforms = new ();
-
         public Vector2 move = new ();
 
         private Vector2 _previousMove = new();
@@ -49,6 +47,7 @@ namespace RuinsRaiders
 
         private float _accumulatedAcceleration;
 
+        public bool FaceLeft { get; private set; }
         public bool IsJumping { get; private set; }
         public bool IsMoving { get => move.x != 0; }
         public bool IsOnLadder { get; private set; }
@@ -83,6 +82,7 @@ namespace RuinsRaiders
             _character = GetComponent<Character>();
             _collider2D = GetComponent<Collider2D>();
             _rigidbody = GetComponent<Rigidbody2D>();
+            FaceLeft = false;
         }
 
         private bool CheckForGround()
@@ -114,7 +114,7 @@ namespace RuinsRaiders
             landed = !landed && IsGrounded;
 
             // change scale based on face direction
-            if (faceLeft)
+            if (FaceLeft)
                 transform.localScale = new Vector2(-1, 1);
             else
                 transform.localScale = new Vector2(1, 1);
@@ -126,10 +126,10 @@ namespace RuinsRaiders
 
             // set direction based on movement
             if (move.x > 0)
-                faceLeft = false;
+                FaceLeft = false;
 
             if (move.x < 0)
-                faceLeft = true;
+                FaceLeft = true;
 
             // if flying use diffirent behavior
             if (flying)
@@ -236,7 +236,7 @@ namespace RuinsRaiders
 
             var hit1 = Physics2D.Raycast(center, Vector2.down, height, Physics2D.GetLayerCollisionMask(_collider2D.gameObject.layer));
 
-            float dir = faceLeft ? -1 : 1;
+            float dir = FaceLeft ? -1 : 1;
             center.x += _collider2D.bounds.size.x * dir / 2f;
             center.y -= 0.001f;
 
@@ -312,7 +312,7 @@ namespace RuinsRaiders
 
         public void FacePosition(Vector2 position)
         {
-            faceLeft = position.x < transform.position.x;
+            FaceLeft = position.x < transform.position.x;
         }
     }
 }

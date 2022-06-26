@@ -20,6 +20,10 @@ namespace RuinsRaiders.UI
         private bool _previousPressedState = false;
         private void LateUpdate()
         {
+            if (joystick == null)
+            {
+                return;
+            }
             if (joystick._pressed)
             {
                 var vector = new Vector2();
