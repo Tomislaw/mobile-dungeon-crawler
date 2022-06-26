@@ -1,30 +1,16 @@
 ﻿using UnityEngine;
 
-
-public class RespawnTile : MonoBehaviour
+namespace RuinsRaiders
 {
-    private void Start()
+    public class RespawnTile : MonoBehaviour
     {
-        SubScene scene = FindSubscene();
-        if (scene)
+        private void Start()
         {
-            scene.respawnPoint = gameObject;
-        }
-    }
-
-    private SubScene FindSubscene()
-    {
-        var scenes = FindObjectsOfType<SubScene>();
-        foreach (var scene in scenes)
-        {
-            if (scene.respawnPoint == null && scene.Contains(transform.position))
+            SubScene scene = transform.FindSubscene();
+            if (scene)
             {
-                return scene;
+                scene.respawnPoint = gameObject;
             }
-                
         }
-
-        return null;
     }
 }
-    

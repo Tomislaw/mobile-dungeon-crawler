@@ -1,21 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Spawner : MonoBehaviour
+namespace RuinsRaiders
 {
-    public GameObject Prefab;
-    public UnityEvent OnSpawn;
-
-    public bool preserveScale;
-
-    public void Spawn()
+    public class Spawner : MonoBehaviour
     {
-        var spawn = Instantiate(Prefab, transform.position, Quaternion.identity);
-        if(preserveScale)
-            spawn.transform.localScale = transform.localScale;
-        OnSpawn.Invoke();
-    }
+        public UnityEvent onSpawn;
 
+        [SerializeField]
+        private GameObject prefab;
+
+        [SerializeField]
+        private bool preserveScale;
+
+        public void Spawn()
+        {
+            var spawn = Instantiate(prefab, transform.position, Quaternion.identity);
+            if (preserveScale)
+                spawn.transform.localScale = transform.localScale;
+            onSpawn.Invoke();
+        }
+
+    }
 }

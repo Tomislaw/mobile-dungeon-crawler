@@ -1,31 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EventListener : MonoBehaviour
+
+namespace RuinsRaiders
 {
-    public List<Event> events = new List<Event>();
-
-    private void Start()
+    // Event lister, used for registering into global EventManager instance
+    public class EventListener : MonoBehaviour
     {
-        EventManager.instance.OnTrigger.AddListener(OnEvent);
-    }
+        [SerializeField]
+        private List<Event> events = new();
 
-    private void OnEvent(string name)
-    {
-        foreach (var item in events)
-            if (item.Name == name)
-                item.UnityEvent.Invoke();
-    }
+        private void Start()
+        {
+            EventManager.Register(OnEvent);
+        }
 
-    [System.Serializable]
-    public struct Event
-    {
-        public string Name;
-        public UnityEvent UnityEvent;
+        private void OnEvent(string name)
+        {
+            foreach (var item in events)
+                if (item.Name == name)
+                    item.UnityEvent.Invoke();
+        }
+
+        [System.Serializable]
+        public struct Event
+        {
+            public string Name;
+            public UnityEvent UnityEvent;
+        }
     }
 }

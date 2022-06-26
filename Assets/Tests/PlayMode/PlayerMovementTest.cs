@@ -11,10 +11,10 @@ public class PlayerMovementTest : TestSceneTests
     {
         yield return new WaitForDone(waitTime, () => !mCtrl.IsMoving);
         var startPos = knight.transform.position;
-        pCtrl.control.MoveRight(true);
+        pCtrl.GetControlData().MoveRight(true);
         yield return new WaitForDone(waitTime, () => startPos.x < knight.transform.position.x);
         yield return new WaitForSeconds(0.1F); //Give it just a moment extra
-        pCtrl.control.MoveRight(false);
+        pCtrl.GetControlData().MoveRight(false);
         Assert.Less(startPos.x, knight.transform.position.x, "Player didn't move right");
         Assert.False(mCtrl.FaceLeft, "Should be facing right");
     }
@@ -24,10 +24,10 @@ public class PlayerMovementTest : TestSceneTests
     {
         yield return new WaitForDone(waitTime, () => !mCtrl.IsMoving);
         var startPos = knight.transform.position;
-        pCtrl.control.MoveLeft(true);
+        pCtrl.GetControlData().MoveLeft(true);
         yield return new WaitForDone(waitTime, () => startPos.x > knight.transform.position.x);
         yield return new WaitForSeconds(0.1F); //Give it just a moment extra
-        pCtrl.control.MoveLeft(false);
+        pCtrl.GetControlData().MoveLeft(false);
         Assert.Greater(startPos.x, knight.transform.position.x, "Player didn't move left");
         Assert.True(mCtrl.FaceLeft, "Should be facing left");
     }
@@ -37,9 +37,9 @@ public class PlayerMovementTest : TestSceneTests
     {
         yield return new WaitForDone(waitTime, () => !mCtrl.IsMoving && mCtrl.IsGrounded);
         var startPos = knight.transform.position;
-        pCtrl.control.MoveUp(true);
+        pCtrl.GetControlData().MoveUp(true);
         yield return new WaitForDone(waitTime, () => mCtrl.IsJumping);
-        pCtrl.control.MoveUp(false);
+        pCtrl.GetControlData().MoveUp(false);
         Assert.Less(startPos.y, knight.transform.position.y, "Player didn't jump");
         Assert.True(mCtrl.IsJumping, "Player isn't in jumping state");
     }
@@ -49,9 +49,9 @@ public class PlayerMovementTest : TestSceneTests
     {
         yield return new WaitForDone(waitTime, () => !mCtrl.IsMoving && mCtrl.IsGrounded);
         var startPos = knight.transform.position;
-        pCtrl.control.MoveDown(true);
+        pCtrl.GetControlData().MoveDown(true);
         yield return new WaitForDone(waitTime, () => !mCtrl.IsGrounded);
-        pCtrl.control.MoveDown(false);
+        pCtrl.GetControlData().MoveDown(false);
         Assert.Greater(startPos.y, knight.transform.position.y, "Player didn't fall");
         Assert.False(mCtrl.IsGrounded, "Player was grounded when it should be falling");
     }

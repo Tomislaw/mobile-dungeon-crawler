@@ -3,56 +3,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedAttack : AttackController
+namespace RuinsRaiders
 {
-
-    public List<ProjectileData> projectiles = new List<ProjectileData>();
-    public List<ProjectileData> projectilesCharged = new List<ProjectileData>();
-
-    private Character character;
-    public override void Attack()
+    public class RangedAttack : AttackController
     {
-        if (CanAttack)
+        [SerializeField]
+        private List<ProjectileData> projectiles = new();
+        [SerializeField]
+        private List<ProjectileData> projectilesCharged = new();
+
+        private Character _character;
+        public override void Attack()
         {
-            if (IsOvercharged)
-                foreach (var p in projectilesCharged)
-                    StartCoroutine(p.Launch(character));
-            else
-                foreach (var p in projectiles)
-                    StartCoroutine(p.Launch(character));
-            base.Attack();
+            if (CanAttack)
+            {
+                if (IsOvercharged)
+                    foreach (var p in projectilesCharged)
+                        StartCoroutine(p.Launch(_character));
+                else
+                    foreach (var p in projectiles)
+                        StartCoroutine(p.Launch(_character));
+                base.Attack();
+            }
+
         }
 
-    }
-
-    // Start is called before the first frame update
-    private void Awake()
-    {
-        character = GetComponent<Character>();
-    }
-
-    [Serializable]
-    public struct ProjectileData
-    {
-        public Projectile projectile;
-        public Vector3 offset;
-        public float delay;
-        public IEnumerator Launch(Character launcher, GameObject target = null)
+        // Start is called before the first frame update
+        private void Awake()
         {
-            yield return new WaitForSeconds(delay);
+            _character = GetComponent<Character>();
+        }
 
-            GameObject go = Instantiate(projectile.gameObject);
-            var p = go.GetComponent<Projectile>();
+        [Serializable]
+        public struct ProjectileData
+        {
+            public Projectile projectile;
+            public Vector3 offset;
+            public float delay;
+            public IEnumerator Launch(Character launcher)
+            {
+                yield return new WaitForSeconds(delay);
 
-            p.Launcher = launcher;
+                GameObject go = Instantiate(projectile.gameObject);
+                var p = go.GetComponent<Projectile>();
 
-            var movementController = launcher.GetComponent<MovementController>();
-            if (movementController == null)
-                yield break;
+                p.launcher = launcher;
 
-            go.transform.position = launcher.transform.position + new Vector3(offset.x * (movementController.FaceLeft ? 1 : -1), offset.y, 0);
-            if (movementController.FaceLeft)
-                p.InitialVelocity *= -1;
+                var movementController = launcher.GetComponent<MovementController>();
+                if (movementController == null)
+                    yield break;
+
+                go.transform.position = launcher.transform.position + new Vector3(offset.x * (movementController.FaceLeft ? 1 : -1), offset.y, 0);
+                if (movementController.FaceLeft)
+                    p.initialVelocity *= -1;
+            }
         }
     }
 }

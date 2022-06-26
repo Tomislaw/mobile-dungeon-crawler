@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3165c69492433e0409aa1ec6efa0ceee, type: 3}
   m_Name: IdleSkeleton
   m_EditorClassIdentifier: Assembly-CSharp::BasicAiStateData
-  Name: Idle
-  Action: {fileID: 11400000, guid: fa1971385135ed44aa3919d0c2ce58e1, type: 2}
-  OnActionFinished: {fileID: 11400000}
-  StateTransitions:
-  - State: {fileID: 11400000, guid: 39c1dd7f65c97bd40a1464e05798633d, type: 2}
-    Activators:
-    - {fileID: 11400000, guid: 81fa808bae629c14d9590a2f0df729d0, type: 2}
+  action: {fileID: 11400000, guid: fa1971385135ed44aa3919d0c2ce58e1, type: 2}
+  onActionFinished: {fileID: 11400000}
+  stateTransitions:
+  - state: {fileID: 11400000, guid: 39c1dd7f65c97bd40a1464e05798633d, type: 2}
+    activators:
     - {fileID: 11400000, guid: 47c0a15e818bf9f47a03f8be1b2aa01e, type: 2}
+    - {fileID: 11400000, guid: 81fa808bae629c14d9590a2f0df729d0, type: 2}

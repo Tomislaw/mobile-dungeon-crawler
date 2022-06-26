@@ -4,221 +4,240 @@ using UnityEngine;
 using System.Linq;
 using System.Threading;
 
-[ExecuteAlways]
-public class PathfindingController : MonoBehaviour
+namespace RuinsRaiders
 {
-    public AStar astar;
-    public WalkData data;
-
-    private Stack<AStarSharp.Node> nodes;
-    public MovementController character;
-
-    private float timeLeftOnNode;
-    private Vector2Int movingToTile;
-
-    public int MaxNodesPerBatch = 10;
-    public int MaxNodes = 600;
-
-    private Coroutine coroutine;
-    private CancellationTokenSource cancellationTokenSource;
-
-    public Vector2Int Target
+    [ExecuteAlways]
+    public class PathfindingController : MonoBehaviour
     {
-        get
+        [SerializeField]
+        private AStar astar;
+        [SerializeField]
+        private WalkData data;
+
+        [SerializeField]
+        private MovementController character;
+
+        [SerializeField]
+        private int maxNodesPerBatch = 10;
+        [SerializeField]
+        private int maxNodes = 600;
+
+        private Coroutine _coroutine;
+        private CancellationTokenSource _cancellationTokenSource;
+
+        private float _timeLeftOnNode;
+        private Vector2Int _movingToTile;
+        private Stack<AStarSharp.Node> _nodes;
+
+        public Vector2Int Target
         {
-            if (!IsMoving)
-                return GetCurrentTileId;
-
-            return movingToTile;
-        }
-    }
-   
-    private void OnEnable()
-    {
-        if (character == null)
-            character = GetComponent<MovementController>();
-        if (astar == null)
-            astar = FindAStar();
-    }
-
-    public void MoveToId(Vector2Int id, bool moveToClosestTileIfFail = false)
-    {
-        StopMoving();
-        coroutine = StartCoroutine(MoveToCoroutine(id, moveToClosestTileIfFail));
-    }
-
-    public void MoveTo(Vector2 position, bool moveToClosestTileIfFail = false)
-    {
-        StopMoving();
-        coroutine = StartCoroutine(MoveToCoroutine(position, moveToClosestTileIfFail));
-    }
-
-    private IEnumerator MoveToCoroutine(Vector2 position, bool moveToClosestTileIfFail = false)
-    {
-        return MoveToIdCoroutine(astar.GetTileId(position), moveToClosestTileIfFail);
-    }
-
-    private IEnumerator MoveToIdCoroutine(Vector2Int id, bool moveToClosestTileIfFail = false)
-    {
-        cancellationTokenSource = new CancellationTokenSource();
-        var start = StartingTileId();
-        var end = id;
-
-        var enumerator = astar.GetPath(start, end, data, MaxNodesPerBatch, MaxNodes, cancellationTokenSource.Token);
-        while (enumerator.MoveNext())
-        {
-            if (enumerator.Current.Finished)
+            get
             {
-                if  (!enumerator.Current.PathFound && !moveToClosestTileIfFail)
+                if (!IsMoving)
+                    return GetCurrentTileId;
+
+                return _movingToTile;
+            }
+        }
+
+        private void OnEnable()
+        {
+            if (character == null)
+                character = GetComponent<MovementController>();
+            if (astar == null)
+                astar = FindAStar();
+        }
+
+        public void MoveToId(Vector2Int id, bool moveToClosestTileIfFail = false)
+        {
+            StopMoving();
+            _coroutine = StartCoroutine(MoveToCoroutine(id, moveToClosestTileIfFail));
+        }
+
+        public void MoveTo(Vector2 position, bool moveToClosestTileIfFail = false)
+        {
+            StopMoving();
+            _coroutine = StartCoroutine(MoveToCoroutine(position, moveToClosestTileIfFail));
+        }
+
+        private IEnumerator MoveToCoroutine(Vector2 position, bool moveToClosestTileIfFail = false)
+        {
+            return MoveToIdCoroutine(astar.GetTileId(position), moveToClosestTileIfFail);
+        }
+
+        private IEnumerator MoveToIdCoroutine(Vector2Int id, bool moveToClosestTileIfFail = false)
+        {
+            _cancellationTokenSource = new CancellationTokenSource();
+            var start = StartingTileId();
+            var end = id;
+
+            var enumerator = astar.GetPath(start, end, data, maxNodesPerBatch, maxNodes, _cancellationTokenSource.Token);
+            while (enumerator.MoveNext())
+            {
+                if (enumerator.Current.Finished)
                 {
-                    coroutine = null;
+                    if (!enumerator.Current.PathFound && !moveToClosestTileIfFail)
+                    {
+                        _coroutine = null;
+                        yield break;
+                    }
+
+                    _nodes = enumerator.Current.Path;
+                    _movingToTile = id;
+                    _timeLeftOnNode = data.maxTimeOnNode;
+                    _coroutine = null;
                     yield break;
                 }
-
-                nodes = enumerator.Current.Path;
-                movingToTile = id;
-                timeLeftOnNode = data.maxTimeOnNode;
-                coroutine = null;
-                yield break;
+                yield return new WaitForFixedUpdate();
             }
-            yield return new WaitForFixedUpdate();
-        }
-    }
-
-    private Vector2Int StartingTileId()
-    {
-        var start = GetCurrentTileId;
-        if (data.flying)
-        {
-
-        }
-        else if (character.IsGrounded && !CanWalkOnTile(start))
-        {
-            // scenario when character is standing on corner of tile
-            if (CanWalkOnTile(start - new Vector2Int(1, 0)))
-                start = start - new Vector2Int(1, 0);
-            else if (CanWalkOnTile(start + new Vector2Int(1, 0)))
-                start = start + new Vector2Int(1, 0);
-        }
-        return start;
-    }
-
-    public void StopMoving()
-    {
-        if (cancellationTokenSource != null)
-            cancellationTokenSource.Cancel();
-        character.Stop();
-        if (nodes != null)
-            nodes.Clear();
-
-        if (coroutine != null)
-            StopCoroutine(coroutine);
-
-        coroutine = null;
-    }
-
-    public bool IsMoving { get => coroutine != null || nodes!=null && nodes.Count > 0; }
-
-    // Update is called once per frame
-    private void FixedUpdate()
-    {
-        if (timeLeftOnNode < 0 && nodes != null)
-        {
-            nodes.Clear();
-            character.Stop();
         }
 
-        if (nodes != null && nodes.Count > 0)
+        private Vector2Int StartingTileId()
         {
-            timeLeftOnNode -= Time.fixedDeltaTime;
-
-            var node = nodes.Peek();
-
-            var current = GetCurrentTileId;
-            if (node.Id.x == current.x && Mathf.Abs(node.Id.y - current.y) <= 1)
+            var start = GetCurrentTileId;
+            if (data.flying)
             {
-                nodes.Pop();
-                timeLeftOnNode = data.maxTimeOnNode;
+
+            }
+            else if (character.IsGrounded && !CanWalkOnTile(start))
+            {
+                // scenario when character is standing on corner of tile
+                if (CanWalkOnTile(start - new Vector2Int(1, 0)))
+                    start -= new Vector2Int(1, 0);
+                else if (CanWalkOnTile(start + new Vector2Int(1, 0)))
+                    start += new Vector2Int(1, 0);
+            }
+            return start;
+        }
+
+        public void StopMoving()
+        {
+            if (_cancellationTokenSource != null)
+                _cancellationTokenSource.Cancel();
+            character.Stop();
+            if (_nodes != null)
+                _nodes.Clear();
+
+            if (_coroutine != null)
+                StopCoroutine(_coroutine);
+
+            _coroutine = null;
+        }
+
+        public bool IsMoving { get => _coroutine != null || _nodes != null && _nodes.Count > 0; }
+
+        // Update is called once per frame
+        private void FixedUpdate()
+        {
+            if (_timeLeftOnNode < 0 && _nodes != null)
+            {
+                _nodes.Clear();
+                character.Stop();
             }
 
-            Vector2 move = new Vector2();
+            if (_nodes != null && _nodes.Count > 0)
+            {
+                _timeLeftOnNode -= Time.fixedDeltaTime;
 
-            if (node.Id.x > current.x)
-                move.x = 1;
-            else if (node.Id.x < current.x)
-                move.x = -1;
+                var node = _nodes.Peek();
 
-            if (node.Id.y > current.y)
-                move.y = 1;
+                var current = GetCurrentTileId;
+                if (node.Id.x == current.x && Mathf.Abs(node.Id.y - current.y) <= 1)
+                {
+                    _nodes.Pop();
+                    _timeLeftOnNode = data.maxTimeOnNode;
+                }
 
-            if (node.Parent?.Platform == true && !node.Platform || node.Ladder && character.CanUseLadder || character.IsOnLadder)
-                if (node.Id.y < current.y)
-                    move.y = -1;
+                Vector2 move = new();
 
-            character.Move(move);
+                if (node.Id.x > current.x)
+                    move.x = 1;
+                else if (node.Id.x < current.x)
+                    move.x = -1;
 
-            if (nodes.Count == 0)
-                character.Stop();
+                if (node.Id.y > current.y)
+                    move.y = 1;
 
+                if (node.Parent?.Platform == true && !node.Platform || node.Ladder && character.canUseLadder || character.IsOnLadder)
+                    if (node.Id.y < current.y)
+                        move.y = -1;
+
+                character.Move(move);
+
+                if (_nodes.Count == 0)
+                    character.Stop();
+
+            }
         }
-    }
 
-    private void OnDrawGizmos()
-    {
-        if (astar == null || nodes == null)
-            return;
-        foreach (var node in nodes)
-            DrawNode(node);
-    }
-
-    public int RemainingNodes()
-    {
-        if(nodes == null)
-            return 0;
-
-        return nodes.Count;
-    }
-
-    private void DrawNode(AStarSharp.Node node)
-    {
-  
-        var pos = astar.GetPositionFromId(node.Id);
-        if (node.jumpDistanceLeft > 0 || node.jumpHeightLeft > 0)
-            Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(new Vector3(pos.x, pos.y, 0) ,0.2f);
-        Gizmos.color = Color.white;
-    }
-
-    public bool CanWalkOnPosition(Vector2 position)
-    {
-        return CanWalkOnTile(GetTileId(position));
-    }
-    public bool CanWalkOnTile(Vector2Int Id)
-    {
-        for (int i = Id.y; i < Id.y + data.height; i++)
+        private void OnDrawGizmos()
         {
-            var above = astar.GetNode(new Vector2Int(Id.x, i));
-            if (above.Block || above.Spike)
-                return false;
+            if (astar == null || _nodes == null)
+                return;
+            foreach (var node in _nodes)
+                DrawNode(node);
         }
 
-        var floor = astar.GetNode(new Vector2Int(Id.x, Id.y - 1));
+        public int RemainingNodes()
+        {
+            if (_nodes == null)
+                return 0;
 
-        return (floor.Block || floor.Platform) && !floor.Spike;
-    }
+            return _nodes.Count;
+        }
 
-    public Vector2Int GetTileId(Vector2 position)
-    {
-        return astar.GetTileId(position + new Vector2(0, 0.1F));
-    }
+        private void DrawNode(AStarSharp.Node node)
+        {
 
-    public Vector2Int GetCurrentTileId { get => GetTileId(transform.position); }
+            var pos = astar.GetPositionFromId(node.Id);
+            if (node.jumpDistanceLeft > 0 || node.jumpHeightLeft > 0)
+                Gizmos.color = Color.blue;
+            Gizmos.DrawSphere(new Vector3(pos.x, pos.y, 0), 0.2f);
+            Gizmos.color = Color.white;
+        }
 
-    private AStar FindAStar()
-    {
-        var astars = FindObjectsOfType<AStar>().OrderBy(it => Vector2.Distance(it.transform.position, transform.position));
-        if(astars.Count() == 0)
-            return null;
-        return astars.First();
+        public bool CanWalkOnPosition(Vector2 position)
+        {
+            return CanWalkOnTile(GetTileId(position));
+        }
+        public bool CanWalkOnTile(Vector2Int Id)
+        {
+            for (int i = Id.y; i < Id.y + data.height; i++)
+            {
+                var above = astar.GetNode(new Vector2Int(Id.x, i));
+                if (above.Block || above.Spike)
+                    return false;
+            }
+
+            var floor = astar.GetNode(new Vector2Int(Id.x, Id.y - 1));
+
+            return (floor.Block || floor.Platform) && !floor.Spike;
+        }
+
+        public Vector2Int GetTileId(Vector2 position)
+        {
+            return astar.GetTileId(position + new Vector2(0, 0.1F));
+        }
+
+        public Vector2Int GetCurrentTileId { get => GetTileId(transform.position); }
+
+        private AStar FindAStar()
+        {
+            var astars = FindObjectsOfType<AStar>().OrderBy(it => Vector2.Distance(it.transform.position, transform.position));
+            if (astars.Count() == 0)
+                return null;
+            return astars.First();
+        }
+
+        //Public Getters (Used for tests at the moment)
+        public AStar GetAStar()
+        {
+            return astar;
+        }
+
+        public WalkData GetWalkData()
+        {
+            return data;
+        }
     }
 }

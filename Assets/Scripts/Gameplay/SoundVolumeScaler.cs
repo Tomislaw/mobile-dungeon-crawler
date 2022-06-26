@@ -1,40 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SoundVolumeScaler : MonoBehaviour
+namespace RuinsRaiders
 {
-    public OptionsData data;
-
-    public Type soundType = Type.Effects;
-
-    private AudioSource source;
-    private Slider slider;
-    public enum Type
+    public class SoundVolumeScaler : MonoBehaviour
     {
-        Music, Effects
-    }
-    void Start()
-    {
-        source = GetComponent<AudioSource>();
-        slider = GetComponent<Slider>();
-        if (slider != null)
-            if (soundType == Type.Effects)
-                 slider.value = data.effectsVolume;
-            else
-                slider.value = data.musicVolume;
-    }
+        [SerializeField]
+        private OptionsData data;
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        if (source != null)
-            source.volume = soundType == Type.Effects ? data.effectsVolume : data.musicVolume;
-        if (slider != null)
-            if (soundType == Type.Effects)
-                data.effectsVolume = slider.value;
-            else
-                data.musicVolume = slider.value;
+        [SerializeField]
+        private Type soundType = Type.Effects;
+
+        private AudioSource _source;
+        private Slider _slider;
+        public enum Type
+        {
+            Music, Effects
+        }
+        void Start()
+        {
+            _source = GetComponent<AudioSource>();
+            _slider = GetComponent<Slider>();
+            if (_slider != null)
+                if (soundType == Type.Effects)
+                    _slider.value = data.effectsVolume;
+                else
+                    _slider.value = data.musicVolume;
+        }
+
+        // Update is called once per frame
+        void FixedUpdate()
+        {
+            if (_source != null)
+                _source.volume = soundType == Type.Effects ? data.effectsVolume : data.musicVolume;
+            if (_slider != null)
+                if (soundType == Type.Effects)
+                    data.effectsVolume = _slider.value;
+                else
+                    data.musicVolume = _slider.value;
+        }
     }
 }

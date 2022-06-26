@@ -1,30 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[CreateAssetMenu(fileName = "MultipleTilesRuleTile", menuName = "RuinsRaiders/MultipleTilesRuleTile", order = 1)]
-public class MultipleTilesRuleTile : RuleTile<MultipleTilesRuleTile.Neighbor>
+namespace RuinsRaiders
 {
-    public List<string> tiles = new List<string>();
-
-    public class Neighbor : RuleTile.TilingRule.Neighbor
+    [CreateAssetMenu(fileName = "MultipleTilesRuleTile", menuName = "RuinsRaiders/MultipleTilesRuleTile", order = 1)]
+    public class MultipleTilesRuleTile : RuleTile<MultipleTilesRuleTile.Neighbor>
     {
-        public const int AnyFromList = 3;
-        public const int AnyNotFromList = 4;
-    }
+        [SerializeField]
+        private List<string> tiles = new();
 
-    public override bool RuleMatch(int neighbor, TileBase tile)
-    {
-        switch (neighbor)
+        public class Neighbor : RuleTile.TilingRule.Neighbor
         {
-            case Neighbor.AnyFromList: return tile != null && tiles.Exists(it => it == tile.name);
-            case Neighbor.AnyNotFromList:
-                if (tile == null)
-                    return !tiles.Exists(it => it == "null");
-                else
-                    return !tiles.Exists(it => it == tile.name);
+            public const int AnyFromList = 3;
+            public const int AnyNotFromList = 4;
         }
-        return base.RuleMatch(neighbor, tile);
+
+        public override bool RuleMatch(int neighbor, TileBase tile)
+        {
+            switch (neighbor)
+            {
+                case Neighbor.AnyFromList: return tile != null && tiles.Exists(it => it == tile.name);
+                case Neighbor.AnyNotFromList:
+                    if (tile == null)
+                        return !tiles.Exists(it => it == "null");
+                    else
+                        return !tiles.Exists(it => it == tile.name);
+            }
+            return base.RuleMatch(neighbor, tile);
+        }
     }
 }

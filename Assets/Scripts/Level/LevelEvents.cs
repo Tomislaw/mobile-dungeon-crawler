@@ -4,74 +4,78 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-public class LevelEvents : MonoBehaviour
+namespace RuinsRaiders
 {
-    public AdventureData adventure;
-
-    public GameObject playerCharacter;
-
-    public List<AdventureData.ChestData> chests = new List<AdventureData.ChestData>();
-
-    public UnityEvent OnLevelFinished;
-    public UnityEvent OnLevelFailed;
-    public UnityEvent OnSubsceneChanged;
-
-    private PlayerSpawn spawner;
-
-    public void OnEnable()
+    // responsible for propagating global level events and handling level actions
+    public class LevelEvents : MonoBehaviour
     {
-        EventManager.StartListening("LevelFailed", LevelFailed);
-        EventManager.StartListening("LevelFinished", LevelFinished);
-        EventManager.StartListening("LevelRestarted", LevelRestarted);
-        spawner = FindObjectOfType<PlayerSpawn>();
-    }
+        public UnityEvent onLevelFinished;
+        public UnityEvent onLevelFailed;
+        public UnityEvent onSubsceneChanged;
 
-    public void OnDisable()
-    {
-        EventManager.StopListening("LevelFailed", LevelFailed);
-        EventManager.StopListening("LevelFinished", LevelFinished);
-        EventManager.StopListening("LevelRestarted", LevelRestarted);
-    }
+        [SerializeField]
+        private AdventureData adventure;
 
-    public void LevelFailed()
-    {
-        if (OnLevelFailed != null)
-            OnLevelFailed.Invoke();
+        [SerializeField]
+        private GameObject playerCharacter;
 
-        Debug.Log("Level failed");
-    }
+        private PlayerSpawn spawner;
 
-    public void LevelFinished()
-    {
-        if (OnLevelFinished != null)
-            OnLevelFinished.Invoke();
+        public void OnEnable()
+        {
+            EventManager.StartListening("LevelFailed", LevelFailed);
+            EventManager.StartListening("LevelFinished", LevelFinished);
+            EventManager.StartListening("LevelRestarted", LevelRestarted);
+            spawner = FindObjectOfType<PlayerSpawn>();
+        }
 
-        adventure.FinishedCurrentLevel();
-        Debug.Log("Level finished");
-    }
+        public void OnDisable()
+        {
+            EventManager.StopListening("LevelFailed", LevelFailed);
+            EventManager.StopListening("LevelFinished", LevelFinished);
+            EventManager.StopListening("LevelRestarted", LevelRestarted);
+        }
 
-    public void LevelRestarted()
-    {
-        Debug.Log("Level restarted");
-        Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
-    }
+        public void LevelFailed()
+        {
+            if (onLevelFailed != null)
+                onLevelFailed.Invoke();
 
-    public void Menu()
-    {
-        SceneManager.LoadScene("MainMenu");
-    }
+            Debug.Log("Level failed");
+        }
 
-    public void SelectHero(int id)
-    {
-        spawner.Spawn((PlayerSpawn.CharacterType)id);
-    }
+        public void LevelFinished()
+        {
+            if (onLevelFinished != null)
+                onLevelFinished.Invoke();
 
-    public void StartNextLevel()
-    {
-        var level = adventure.GetNextLevel();
-        if (level == null)
+            adventure.FinishedCurrentLevel();
+            Debug.Log("Level finished");
+        }
+
+        public void LevelRestarted()
+        {
+            Debug.Log("Level restarted");
+            Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+        }
+
+        public void Menu()
+        {
             SceneManager.LoadScene("MainMenu");
-        else
-            SceneManager.LoadScene(level.scene);
+        }
+
+        public void SelectHero(int id)
+        {
+            spawner.Spawn((PlayerSpawn.CharacterType)id);
+        }
+
+        public void StartNextLevel()
+        {
+            var level = adventure.GetNextLevel();
+            if (level == null)
+                SceneManager.LoadScene("MainMenu");
+            else
+                SceneManager.LoadScene(level.scene);
+        }
     }
 }

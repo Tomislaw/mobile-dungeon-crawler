@@ -1,100 +1,106 @@
-﻿using System;
-using System.Collections;
-using System.Linq;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class HealthController : MonoBehaviour
+namespace RuinsRaiders
 {
-    // health
-    public int Health = 4;
-    public int MaxHealth = 4;
-    public float RessurectTime = 1f;
-
-    private Character character;
-    private BasicAi ai;
-    public bool IsDead { get => Health <= 0; }
-    public UnityEvent OnDeath = new UnityEvent();
-    public OnDamageEvent OnDamage = new OnDamageEvent();
-
-    public Group group;
-
-    private int initialLayer = 0;
-    public enum Group
+    public class HealthController : MonoBehaviour
     {
-        Skeletons, Player, Goblins, None
-    }
+        public bool IsDead { get => health <= 0; }
 
-    private void Start()
-    {
-        character = GetComponent<Character>();
-        ai = GetComponent<BasicAi>();
-        initialLayer = gameObject.layer;
-        if (Health <= 0)
+        public Group group;
+
+        public UnityEvent onDeath = new();
+        public OnDamageEvent onDamage = new();
+
+        // health
+        public int health = 4;
+        public int haxHealth = 4;
+
+        [SerializeField]
+        private float ressurectTime = 1f;
+
+        private Character _character;
+        private AI.BasicAi _ai;
+
+        private int _initialLayer = 0;
+
+        public enum Group
         {
-            if (character)
+            Skeletons, Player, Goblins, None
+        }
+
+        private void Start()
+        {
+            _character = GetComponent<Character>();
+            _ai = GetComponent<AI.BasicAi>();
+            _initialLayer = gameObject.layer;
+            if (health <= 0)
+            {
+                if (_character)
+                    gameObject.layer = LayerMask.NameToLayer("Dead");
+
+                if (_ai)
+                    _ai.enabled = false;
+            }
+        }
+
+        public void Damage(int damage, GameObject who)
+        {
+            if (_character != null && _character.holdUpdate == true)
+                return;
+
+            if (health <= 0 && damage > 0)
+                return;
+
+            if (onDamage != null)
+                onDamage.Invoke(who);
+
+            health -= damage;
+            if (health <= 0)
+                Death();
+        }
+
+        private void Death()
+        {
+            if (_character)
                 gameObject.layer = LayerMask.NameToLayer("Dead");
 
-            if (ai)
-                ai.enabled = false;
+            if (_ai)
+            {
+                _ai.enabled = false;
+            }
+
+
+            if (onDeath != null)
+                onDeath.Invoke();
         }
-    }
 
-    public void Damage(int damage, GameObject who)
-    {
-        if (character?.holdUpdate == true)
-            return;
-
-        if (Health <= 0 && damage > 0)
-            return;
-
-        if (OnDamage != null)
-            OnDamage.Invoke(who);
-
-        Health -= damage;
-        if (Health <= 0)
-            Death();
-    }
-
-    private void Death()
-    {
-        if (character)
-            gameObject.layer = LayerMask.NameToLayer("Dead");
-
-        if (ai)
+        public void Resurrect()
         {
-            ai.enabled = false;
+            StartCoroutine(ResurrectCoroutine());
         }
 
+        private IEnumerator ResurrectCoroutine()
+        {
+            if (health > 0)
+                yield break;
 
-        if (OnDeath != null)
-            OnDeath.Invoke();
+            _character.holdUpdate = true;
+            _character.SetAnimation("Resurrect");
+            yield return new WaitForSeconds(ressurectTime);
+            _character.SetAnimation("Idle");
+            _character.holdUpdate = false;
+            var ai = GetComponent<AI.BasicAi>();
+            if (ai)
+                ai.enabled = true;
+            gameObject.layer = _initialLayer;
+            health = haxHealth;
+
+        }
     }
 
-    public void Resurrect()
-    {
-        StartCoroutine(ResurrectCoroutine());
-    }
+    public class OnDamageEvent : UnityEvent<GameObject> { }
 
-    private IEnumerator ResurrectCoroutine()
-    {
-        if (Health > 0)
-            yield break;
 
-        character.holdUpdate = true;
-        character.SetAnimation("Resurrect");
-        yield return new WaitForSeconds(RessurectTime);
-        character.SetAnimation("Idle");
-        character.holdUpdate = false;
-        var ai = GetComponent<BasicAi>();
-        if (ai)
-            ai.enabled = true;
-        gameObject.layer = initialLayer;
-        Health = MaxHealth;
-
-    }
 }
-
-public class OnDamageEvent : UnityEvent<GameObject>{}
-
-

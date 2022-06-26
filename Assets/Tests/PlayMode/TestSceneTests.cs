@@ -1,10 +1,11 @@
+using RuinsRaiders;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
-using static AStarSharp.Astar;
+using static RuinsRaiders.AStarSharp.Astar;
 
 public class TestSceneTests
 {
@@ -16,9 +17,9 @@ public class TestSceneTests
     protected MovementController mCtrl;
     protected PlayerController pCtrl;
 
-    public Stack<AStarSharp.Node> waitForPath(IEnumerator<FindPathStatus> enumerator)
+    public Stack<RuinsRaiders.AStarSharp.Node> waitForPath(IEnumerator<FindPathStatus> enumerator)
     {
-        Stack<AStarSharp.Node> nodes = new Stack<AStarSharp.Node>();
+        Stack<RuinsRaiders.AStarSharp.Node> nodes = new Stack<RuinsRaiders.AStarSharp.Node>();
         while (enumerator.MoveNext())
         {
             if (enumerator.Current.Finished)

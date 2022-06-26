@@ -1,75 +1,75 @@
-﻿using Assets.Scripts.Character.Ai;
-using Assets.Scripts.Character.Ai.BasicAiState;
-
-using UnityEngine;
+﻿using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-
-public class BasicAi: MonoBehaviour
+namespace RuinsRaiders.AI
 {
-    public BasicAiStateData InitialState;
-    internal BasicAiState state;
-
-    private void FixedUpdate()
+    public class BasicAi : MonoBehaviour
     {
-        if(state == null)
+        public BasicAiStateData initialState;
+
+        internal BasicAiState _state;
+
+        private void FixedUpdate()
         {
-            ActivatorData trigger;
-            trigger.triggeredBy = gameObject;
-            trigger.triggeredFor = gameObject;
-            state = InitialState.Trigger(trigger);
+            if (_state == null)
+            {
+                ActivatorData trigger;
+                trigger.triggeredBy = gameObject;
+                trigger.triggeredFor = gameObject;
+                _state = initialState.Trigger(trigger);
+            }
+
+            _state.Update(Time.fixedDeltaTime);
+
+            if (_state.IsFinished())
+            {
+                ActivatorData data;
+                data.triggeredBy = gameObject;
+                data.triggeredFor = gameObject;
+                _state = _state.OnActionFinished.Trigger(data);
+                return;
+            }
+
+            var transition = _state.TransitionOccured();
+            if (transition.HasValue)
+            {
+                _state.Stop();
+                _state = transition.Value.Item1.State.Trigger(transition.Value.Item2);
+                return;
+            }
         }
 
-        state.Update(Time.fixedDeltaTime);
-
-        if (state.IsFinished())
+        private void OnDisable()
         {
-            ActivatorData data;
-            data.triggeredBy = gameObject;
-            data.triggeredFor = gameObject;
-            state = state.OnActionFinished.Trigger(data);
-            return;
-        }
-
-        var transition = state.TransitionOccured();
-        if (transition.HasValue)
-        {
-            state.Stop();
-            state = transition.Value.Item1.State.Trigger(transition.Value.Item2);
-            return;
+            if (_state != null)
+                _state.Stop();
         }
     }
-
-    private void OnDisable()
-    {
-        if (state != null)
-            state.Stop();
-    }
-}
 
 #if UNITY_EDITOR
-[CustomEditor(typeof(BasicAi))]
-public class BasicAiEditor : Editor
-{
-    BasicAi ai;
-    void OnEnable()
+    [CustomEditor(typeof(BasicAi))]
+    public class BasicAiEditor : Editor
     {
-        ai = target as BasicAi;
-    }
-
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
-        if(ai.state != null)
+        BasicAi ai;
+        void OnEnable()
         {
-            EditorGUILayout.LabelField(ai.state.Name);
-            if(ai.state.currentAction!=null)
-                EditorGUILayout.TextArea(ai.state.currentAction.ToString());
+            ai = target as BasicAi;
         }
-            
+
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
+            if (ai._state != null)
+            {
+                EditorGUILayout.LabelField(ai._state.GetType().Name);
+                if (ai._state.currentAction != null)
+                    EditorGUILayout.TextArea(ai._state.currentAction.ToString());
+            }
+
+        }
     }
-}
 #endif
+}

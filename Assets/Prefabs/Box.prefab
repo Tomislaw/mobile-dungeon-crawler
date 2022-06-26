@@ -74,12 +74,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5811163729b4144b9a584b1a0a8261e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeToRoll: 0.2
-  TimeToPush: 0.15
-  TimeToFall: 0.05
-  AccelerationPercentage: 0.2
-  Rotations: 6
-  FallPoints: 3
+  timeToRoll: 0.15
+  timeToPush: 0.2
+  timeToFall: 0.1
+  accelerationPercentage: 0.2
+  rotations: 6
+  fallPoints: 3
 --- !u!114 &8454631145469535880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,24 +92,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2c6fe3b94d91a41a1db1471222ce76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 2
-  MaxHealth: 2
-  RessurectTime: 1
-  OnDeath:
+  group: 3
+  onDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8751705499717736393}
-        m_TargetAssemblyTypeName: RollableBox, Assembly-CSharp
-        m_MethodName: ResetRotation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2185493022241433797}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
         m_MethodName: Play
@@ -131,7 +117,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Death
+          m_StringArgument: Destroy
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: -4811409719738153465}
@@ -143,22 +129,12 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Death
+          m_StringArgument: Destroy
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8751705499717736393}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  group: 3
+  health: 2
+  haxHealth: 2
+  ressurectTime: 1
 --- !u!212 &2294004080011893840
 SpriteRenderer:
   m_ObjectHideFlags: 0

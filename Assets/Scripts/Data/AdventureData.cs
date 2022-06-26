@@ -1,87 +1,88 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[CreateAssetMenu(fileName = "AdventureData", menuName = "RuinsRaiders/AdventureData", order = 1)]
-public class AdventureData : ScriptableObject
+
+namespace RuinsRaiders
 {
-    public List<Level> levels = new List<Level>();
-
-    public Level GetCurrentLevel()
+    [CreateAssetMenu(fileName = "AdventureData", menuName = "RuinsRaiders/AdventureData", order = 1)]
+    public class AdventureData : ScriptableObject
     {
-        return levels.Find(it=>it.scene.Equals(SceneManager.GetActiveScene().name)) ;
-    }
+        public List<Level> levels = new();
 
-    public Level GetNextLevel()
-    {
-        for (int i = 0; i < levels.Count; i++)
+        public Level GetCurrentLevel()
         {
-            if (levels[i].scene != (SceneManager.GetActiveScene().name))
-                continue;
-
-            if (i >= levels.Count - 1)
-                return null;
-
-            return levels[i+1];
+            return levels.Find(it => it.scene.Equals(SceneManager.GetActiveScene().name));
         }
-        return null;
-    }
 
-    public void FinishedCurrentLevel()
-    {
-        for (int i = 0; i < levels.Count; i++)
+        public Level GetNextLevel()
         {
-            if (levels[i].scene != (SceneManager.GetActiveScene().name))
-                continue;
-
-
-            levels[i].finished = true;
-            if (i < levels.Count - 1)
-                levels[i].enabled = true;
-        }
-    }
-
-    [Serializable]
-    public class Level
-    {
-        public bool enabled;
-        public bool finished;
-        public List<ChestData> chests = new List<ChestData>();
-        public PlayerData.Gems firstClearReward;
-
-        public string scene;
-    }
-
-    public void Invalidate()
-    {
-        Level previous = null;
-        foreach (var level in levels)
-        {
-            if (previous == null)
+            for (int i = 0; i < levels.Count; i++)
             {
-                previous = level;
-                break;
+                if (levels[i].scene != (SceneManager.GetActiveScene().name))
+                    continue;
+
+                if (i >= levels.Count - 1)
+                    return null;
+
+                return levels[i + 1];
             }
-
-            level.enabled = previous.finished;
-
-            previous = level;
+            return null;
         }
-    }
 
-    [Serializable]
-    public struct ChestData
-    {
-        public bool acquired;
-        public Type type;
-
-        public enum Type
+        public void FinishedCurrentLevel()
         {
-            Normal, Exotic
+            for (int i = 0; i < levels.Count; i++)
+            {
+                if (levels[i].scene != (SceneManager.GetActiveScene().name))
+                    continue;
+
+
+                levels[i].finished = true;
+                if (i < levels.Count - 1)
+                    levels[i].enabled = true;
+            }
+        }
+
+        [Serializable]
+        public class Level
+        {
+            public bool enabled;
+            public bool finished;
+            public List<ChestData> chests = new();
+            public PlayerData.Gems firstClearReward;
+
+            public string scene;
+        }
+
+        public void Invalidate()
+        {
+            Level previous = null;
+            foreach (var level in levels)
+            {
+                if (previous == null)
+                {
+                    previous = level;
+                    break;
+                }
+
+                level.enabled = previous.finished;
+
+                previous = level;
+            }
+        }
+
+        [Serializable]
+        public struct ChestData
+        {
+            public bool acquired;
+            public Type type;
+
+            public enum Type
+            {
+                Normal, Exotic
+            }
         }
     }
 }

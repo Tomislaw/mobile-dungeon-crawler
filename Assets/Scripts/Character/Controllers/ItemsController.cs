@@ -1,67 +1,66 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemsController : MonoBehaviour
+namespace RuinsRaiders
 {
-    public GameObject keyPrefab;
-
-    public float HoverHeight = 2;
-    public float HoverVariationDistance = 0.5f;
-    public float ItemSpeed = 10;
-    public int NumberOfKeys = 0;
-
-    private List<GameObject> keys = new List<GameObject>();
-
-    public void AddKey()
+    public class ItemsController : MonoBehaviour
     {
-        var key = Instantiate(keyPrefab);
-        key.transform.position = transform.position;
-        keys.Add(key);
-        NumberOfKeys++;
-    }
+        public GameObject keyPrefab;
 
-    public void RemoveKey()
-    {
-        if (NumberOfKeys > 0)
+        public float hoverHeight = 2;
+        public float hoverVariationDistance = 0.5f;
+        public float itemSpeed = 10;
+        public int numberOfKeys = 0;
+
+        private readonly List<GameObject> _keys = new();
+
+        public void AddKey()
         {
-            var key = keys[NumberOfKeys - 1];
-            keys.Remove(key);
-            Destroy(key.gameObject);
+            var key = Instantiate(keyPrefab);
+            key.transform.position = transform.position;
+            _keys.Add(key);
+            numberOfKeys++;
         }
-          
-        NumberOfKeys--;
-    }
 
-    public void FixedUpdate()
-    {
-        if (NumberOfKeys > keys.Count && keys.Count < 9)
-            while (NumberOfKeys != keys.Count && keys.Count < 9)
+        public void RemoveKey()
+        {
+            if (numberOfKeys > 0)
             {
-                var key = Instantiate(keyPrefab);
-                key.transform.position = transform.position;
-                keys.Add(key);
+                var key = _keys[numberOfKeys - 1];
+                _keys.Remove(key);
+                Destroy(key);
             }
 
-        if (NumberOfKeys != 0 && NumberOfKeys < keys.Count)
-            while (NumberOfKeys != keys.Count && keys.Count > 0)
-            {
-                var key = keys[NumberOfKeys - 1];
-                keys.Remove(key);
-                Destroy(key.gameObject);
-            }
-
-        for (int i = 0; i < keys.Count; i++)
-        {
-            var offset = Mathf.Sin(((Time.fixedTime + i / 2f) % 1f) * Mathf.PI) * HoverVariationDistance;
-            keys[i].transform.position = Vector3.Lerp(
-                keys[i].transform.position,
-                transform.position + new Vector3(-i - 1, HoverHeight + offset),
-                ItemSpeed * Time.fixedDeltaTime);
+            numberOfKeys--;
         }
-    }
 
+        public void FixedUpdate()
+        {
+            if (numberOfKeys > _keys.Count && _keys.Count < 9)
+                while (numberOfKeys != _keys.Count && _keys.Count < 9)
+                {
+                    var key = Instantiate(keyPrefab);
+                    key.transform.position = transform.position;
+                    _keys.Add(key);
+                }
+
+            if (numberOfKeys != 0 && numberOfKeys < _keys.Count)
+                while (numberOfKeys != _keys.Count && _keys.Count > 0)
+                {
+                    var key = _keys[numberOfKeys - 1];
+                    _keys.Remove(key);
+                    Destroy(key);
+                }
+
+            for (int i = 0; i < _keys.Count; i++)
+            {
+                var offset = Mathf.Sin(((Time.fixedTime + i / 2f) % 1f) * Mathf.PI) * hoverVariationDistance;
+                _keys[i].transform.position = Vector3.Lerp(
+                    _keys[i].transform.position,
+                    transform.position + new Vector3(-i - 1, hoverHeight + offset),
+                    itemSpeed * Time.fixedDeltaTime);
+            }
+        }
+
+    }
 }
