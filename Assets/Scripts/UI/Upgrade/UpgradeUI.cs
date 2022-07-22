@@ -13,6 +13,7 @@ namespace RuinsRaiders.UI {
         [SerializeField]
         private UpgradeCostData costData;
 
+        [SerializeField]
         private CharacterType type;
 
         [SerializeField]
