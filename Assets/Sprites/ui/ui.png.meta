@@ -1297,6 +1297,174 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: ui_buttom_white
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 69
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 3, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ac19c705163ae643b6d1966bb9ccccc
+      internalID: -732082220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_buttom_green
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 69
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 3, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c472a60616cc4347aeaccf090482ced
+      internalID: -952032293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_button_blue
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 61
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 3, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de106db736a4e1347bafe9dedeae96e3
+      internalID: -25475268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_button_red
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 61
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 3, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b0756ce62760534f89b0e8836be5ccc
+      internalID: -2091705346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_button_gray
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 53
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 3, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a3f02c75a64ade4fb4aa1bf69eff71e
+      internalID: 790034024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_add_pressed
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 37
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 10, y: 3, z: 3, w: 3}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3cb47294b947454eabe5eed7fadfeef
+      internalID: -1498349492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_add
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 21
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 10, y: 3, z: 3, w: 11}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0612a4b0abfe164ab26e5081e28bb8f
+      internalID: -1022458699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_add_locked
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 5
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 10, y: 4, z: 3, w: 3}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a64037718921a34c916c678bc049c46
+      internalID: 1623405597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1313,17 +1481,22 @@ TextureImporter:
       ui_smallchest2: 2593895063694430531
       ui_button_locked: 959864292
       ui_exit: -9211019987572867793
+      ui_add_locked: 1623405597
       ui_play: -7420991742971661633
       ui_info: -3439486116421378984
+      ui_buttom_white: -732082220
       ui_button1_pressed: 2163036573998151787
       ui_button2: -7975249404588759376
       ui_options: 2697481083480110284
       ui_button3_pressed: -9080700020481880845
       ui_smallchest1: -2586311204780557721
+      ui_add_pressed: -1498349492
       ui_greengem: -7787622976490332879
       ui_level: -4352409407941354246
+      ui_button_gray: 790034024
       ui_background12: 3556181715638617739
       ui_empty_pressed: -2699499167317838321
+      ui_add: -1022458699
       ui_silvergem: 8450739732141010018
       ui_button4: 8852797563311604980
       ui_39: 8472440867327373802
@@ -1345,11 +1518,14 @@ TextureImporter:
       ui_button2_pressed: 8599436577718238185
       ui_level_pressed: -6774437969098921397
       ui_back_pressed: -6132305547406914789
+      ui_button_red: -2091705346
       ui_info_pressed: 1113166408476123525
+      ui_buttom_green: -952032293
       ui_shop: 8825907884645483951
       ui_button1: 7263181891274304025
       ui_empty2: -8522723851631446894
       ui_level_locked: -7334886338573059942
+      ui_button_blue: -25475268
       ui_background1: 5707218116961789024
       ui_button3: -9005941153719796207
       ui_options_pressed: 1712464482933603101

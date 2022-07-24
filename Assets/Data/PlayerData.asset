@@ -13,32 +13,19 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   gems:
-    redGems: 0
-    blueGems: 0
-    greenGems: 9999
-    silverGems: 0
+    redGems: 50
+    blueGems: 50
+    greenGems: 50
+    silverGems: 50
   knight:
     unlocked: 1
-    healthUpgrades: 5
-    attackUpgrades: 5
-    staminaUpgrades: 0
-    specialUpgrades: 0
+    skills: 000000000000000000000000
   mage:
-    unlocked: 1
-    healthUpgrades: 0
-    attackUpgrades: 0
-    staminaUpgrades: 0
-    specialUpgrades: 0
+    unlocked: 0
+    skills: 000000000000000000000000
   spearman:
-    unlocked: 1
-    healthUpgrades: 0
-    attackUpgrades: 0
-    staminaUpgrades: 0
-    specialUpgrades: 0
+    unlocked: 0
+    skills: 000000000000000000000000
   archer:
-    unlocked: 1
-    healthUpgrades: 0
-    attackUpgrades: 0
-    staminaUpgrades: 0
-    specialUpgrades: 0
-  selectedCharacter: 0
+    unlocked: 0
+    skills: 000000000000000000000000
