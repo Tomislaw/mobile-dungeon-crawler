@@ -8,18 +8,19 @@ using static RuinsRaiders.AStarSharp.Astar;
 
 public class PathfindingTests : TestSceneTests
 {
+    private bool CanReachPath(PathfindingController source, PathfindingController target)
+    {
+        IEnumerator<FindPathStatus> enumerator = source.GetAStar().GetPath(source.GetCurrentTileId, target.GetCurrentTileId, source.GetWalkData());
+        Stack<RuinsRaiders.AStarSharp.Node> nodes = waitForPath(enumerator);
+        return nodes.Count > 0;
+    }
+
     // Test can find a path slightly to the right
     [UnityTest]
     public IEnumerator BasicPathfindingSuccessPath()
     {
-        PathfindingController pCtrl = skelly.GetComponent<PathfindingController>();
-
-        //TODO replace with test marker gameobject
-        Vector2Int easyTarget = pCtrl.GetCurrentTileId + new Vector2Int(2, 0);
-        IEnumerator<FindPathStatus> enumerator = pCtrl.GetAStar().GetPath(pCtrl.GetCurrentTileId, easyTarget, pCtrl.GetWalkData());
-        Stack<RuinsRaiders.AStarSharp.Node> nodes = waitForPath(enumerator);
-
-        Assert.Greater(nodes.Count, 1, "Too few nodes found");
+        bool canReach = CanReachPath(skelly1.GetComponent<PathfindingController>(), skelly2.GetComponent<PathfindingController>());
+        Assert.That(canReach, "Path to target not found");
 
         yield return null;
     }
@@ -28,14 +29,68 @@ public class PathfindingTests : TestSceneTests
     [UnityTest]
     public IEnumerator BasicPathfindingFailPath()
     {
-        PathfindingController pCtrl = skelly.GetComponent<PathfindingController>();
+        PathfindingController pCtrl = skelly1.GetComponent<PathfindingController>();
 
-        //TODO replace with test marker gameobject
         Vector2Int easyTarget = pCtrl.GetCurrentTileId + new Vector2Int(0, -2);
         IEnumerator<FindPathStatus> enumerator = pCtrl.GetAStar().GetPath(pCtrl.GetCurrentTileId, easyTarget, pCtrl.GetWalkData());
         Stack<RuinsRaiders.AStarSharp.Node> nodes = waitForPath(enumerator);
 
         Assert.AreEqual(nodes.Count, 0, "Path was found when it should not have");
+
+        yield return null;
+    }
+
+    // Test ladder use
+    [UnityTest]
+    public IEnumerator LadderUse()
+    {
+        //Skelly1 - can jump and use ladder
+        bool canReach = CanReachPath(skelly1.GetComponent<PathfindingController>(), skelly3.GetComponent<PathfindingController>());
+        Assert.That(canReach, "Path to target not found");
+
+        //Skelly2 - can jump but not use ladder
+        canReach = CanReachPath(skelly2.GetComponent<PathfindingController>(), skelly3.GetComponent<PathfindingController>());
+        Assert.False(canReach, "Path was found when it should not have");
+
+        //Skelly3 - can use ladder
+        canReach = CanReachPath(skelly3.GetComponent<PathfindingController>(), skelly2.GetComponent<PathfindingController>());
+        Assert.That(canReach, "Path to target not found");
+
+        yield return null;
+    }
+
+    // Test jumping ability
+    [UnityTest]
+    public IEnumerator JumpingAbility()
+    {
+        //Skelly2 - can jump
+        bool canReach = CanReachPath(skelly2.GetComponent<PathfindingController>(), skelly1.GetComponent<PathfindingController>());
+        Assert.That(canReach, "Path to target not found");
+
+        //Skelly2 - can't jump all the way to FlyingSkelly
+        canReach = CanReachPath(skelly2.GetComponent<PathfindingController>(), flyingSkelly.GetComponent<PathfindingController>());
+        Assert.False(canReach, "Path was found when it should not have");
+
+        //Skelly4 - can't jump high enough, can't go under
+        canReach = CanReachPath(skelly4.GetComponent<PathfindingController>(), skelly1.GetComponent<PathfindingController>());
+        Assert.False(canReach, "Path was found when it should not have");
+
+        yield return null;
+    }
+
+    // Test the power of flight!
+    [UnityTest]
+    public IEnumerator Flight()
+    {
+        //Can reach anywhere!
+        bool canReach = CanReachPath(flyingSkelly.GetComponent<PathfindingController>(), skelly1.GetComponent<PathfindingController>());
+        Assert.That(canReach, "Path to target not found");
+        canReach = CanReachPath(flyingSkelly.GetComponent<PathfindingController>(), skelly2.GetComponent<PathfindingController>());
+        Assert.That(canReach, "Path to target not found");
+        canReach = CanReachPath(flyingSkelly.GetComponent<PathfindingController>(), skelly3.GetComponent<PathfindingController>());
+        Assert.That(canReach, "Path to target not found");
+        canReach = CanReachPath(flyingSkelly.GetComponent<PathfindingController>(), skelly4.GetComponent<PathfindingController>());
+        Assert.That(canReach, "Path to target not found");
 
         yield return null;
     }

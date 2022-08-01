@@ -12,7 +12,11 @@ public class TestSceneTests
     protected const float waitTime = 1F;
     protected bool initialized = false;
     protected string ScenePath = "Assets/Scenes/Debug/TestScene";
-    protected GameObject skelly;
+    protected GameObject skelly1;
+    protected GameObject skelly2;
+    protected GameObject skelly3;
+    protected GameObject skelly4;
+    protected GameObject flyingSkelly;
     protected GameObject knight;
     protected MovementController mCtrl;
     protected PlayerController pCtrl;
@@ -61,7 +65,11 @@ public class TestSceneTests
         if (!initialized) //Only load the scene once!
         {
             yield return EditorSceneManager.LoadSceneAsyncInPlayMode($"{ScenePath}.unity", new LoadSceneParameters(LoadSceneMode.Single));
-            skelly = GameObject.Find("/Skeleton");
+            skelly1 = GameObject.Find("/Skelly1");
+            skelly2 = GameObject.Find("/Skelly2");
+            skelly3 = GameObject.Find("/Skelly3");
+            skelly4 = GameObject.Find("/Skelly4");
+            flyingSkelly = GameObject.Find("/FlyingSkelly");
             knight = GameObject.Find("/Knight");
             mCtrl = knight.GetComponent<MovementController>();
             pCtrl = knight.GetComponent<PlayerController>();
