@@ -329,3 +329,7 @@ MonoBehaviour:
   - Snow
   - Wood
   - WoodSlope
+  - TreeTrunk
+  - TreeBranch
+  - TreeTrunkSlope
+  - WaterWall

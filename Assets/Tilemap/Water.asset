@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbd949ab97e5ff4fa55647666dc5fa0, type: 3}
+  m_Name: Water
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: -9171300325430576412, guid: 977a2e7de413e9448905cc3924ffbb9e, type: 3}
+  m_DefaultGameObject: {fileID: 8897054653239763015, guid: f095043ffab074744af49c374c3ef9f3, type: 3}
+  m_DefaultColliderType: 1
+  m_TilingRules:
+  - m_Id: 0
+    m_Sprites:
+    - {fileID: 3991568953898065832, guid: 977a2e7de413e9448905cc3924ffbb9e, type: 3}
+    - {fileID: 2673405975860536578, guid: 977a2e7de413e9448905cc3924ffbb9e, type: 3}
+    - {fileID: 6886954874036816709, guid: 977a2e7de413e9448905cc3924ffbb9e, type: 3}
+    m_GameObject: {fileID: 8897054653239763015, guid: f095043ffab074744af49c374c3ef9f3, type: 3}
+    m_AnimationSpeed: 4
+    m_PerlinScale: 0.5
+    m_Output: 2
+    m_ColliderType: 0
+    m_RandomTransform: 0
+    m_Neighbors: 03000000
+    m_NeighborPositions:
+    - {x: 0, y: 1, z: 0}
+    m_RuleTransform: 0
+  - m_Id: 1
+    m_Sprites:
+    - {fileID: -791584091045098441, guid: 977a2e7de413e9448905cc3924ffbb9e, type: 3}
+    m_GameObject: {fileID: 8897054653239763015, guid: f095043ffab074744af49c374c3ef9f3, type: 3}
+    m_AnimationSpeed: 1
+    m_PerlinScale: 0.5
+    m_Output: 0
+    m_ColliderType: 0
+    m_RandomTransform: 0
+    m_Neighbors: 02000000
+    m_NeighborPositions:
+    - {x: 0, y: 1, z: 0}
+    m_RuleTransform: 0
+  - m_Id: 2
+    m_Sprites:
+    - {fileID: -9171300325430576412, guid: 977a2e7de413e9448905cc3924ffbb9e, type: 3}
+    m_GameObject: {fileID: 8897054653239763015, guid: f095043ffab074744af49c374c3ef9f3, type: 3}
+    m_AnimationSpeed: 1
+    m_PerlinScale: 0.5
+    m_Output: 0
+    m_ColliderType: 0
+    m_RandomTransform: 0
+    m_Neighbors: 
+    m_NeighborPositions:
+    - {x: -1, y: 1, z: 0}
+    - {x: 0, y: 1, z: 0}
+    - {x: 1, y: 1, z: 0}
+    - {x: -1, y: 0, z: 0}
+    - {x: 1, y: 0, z: 0}
+    - {x: -1, y: -1, z: 0}
+    - {x: 0, y: -1, z: 0}
+    - {x: 1, y: -1, z: 0}
+    m_RuleTransform: 0
+  tiles:
+  - Waterfall1
+  - Waterfall2

@@ -1,73 +1,7 @@
 fileFormatVersion: 2
-guid: 977a2e7de413e9448905cc3924ffbb9e
+guid: a181ef01de6c526408f87d953e1c7851
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 8509550459451208454
-    second: water_0
-  - first:
-      213: 3559705528278350927
-    second: water_1
-  - first:
-      213: -4124057691748712743
-    second: water_2
-  - first:
-      213: -7064220622572970029
-    second: water_3
-  - first:
-      213: -2740290441555968558
-    second: water_4
-  - first:
-      213: 7149751655148466542
-    second: water_5
-  - first:
-      213: -7655527456229970072
-    second: water_6
-  - first:
-      213: -1984912068192422301
-    second: water_7
-  - first:
-      213: -277465505295718648
-    second: water_8
-  - first:
-      213: 9222073198021860894
-    second: water_9
-  - first:
-      213: 3991568953898065832
-    second: water_10
-  - first:
-      213: 2673405975860536578
-    second: water_11
-  - first:
-      213: 6886954874036816709
-    second: water_12
-  - first:
-      213: -8209864517686610857
-    second: water_13
-  - first:
-      213: 8664258913517867861
-    second: water_14
-  - first:
-      213: -1544587663037173727
-    second: water_15
-  - first:
-      213: -791584091045098441
-    second: water_16
-  - first:
-      213: 3067914300574464226
-    second: water_17
-  - first:
-      213: -4676164812573971036
-    second: water_18
-  - first:
-      213: 9202675663719084700
-    second: water_19
-  - first:
-      213: -9171300325430576412
-    second: water_20
-  - first:
-      213: 3566556839041133005
-    second: water_21
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -104,13 +38,13 @@ TextureImporter:
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 8
@@ -146,31 +80,7 @@ TextureImporter:
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: 4
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -182,7 +92,31 @@ TextureImporter:
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -194,7 +128,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: water_0
+      name: tree_trunk_lt
       rect:
         serializedVersion: 2
         x: 0
@@ -208,14 +142,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 603f9ddae0ff71670800000000000000
-      internalID: 8509550459451208454
+      spriteID: 3b45d8602c3ec654d88c52d478f04da4
+      internalID: -21747669
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_1
+      name: tree_trunk_t
       rect:
         serializedVersion: 2
         x: 8
@@ -229,14 +163,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f4c760e515d966130800000000000000
-      internalID: 3559705528278350927
+      spriteID: 0f3c78f54718f974797e505e077d55ac
+      internalID: -962323593
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_2
+      name: tree_trunk_rt
       rect:
         serializedVersion: 2
         x: 16
@@ -250,14 +184,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9deb91a216764c6c0800000000000000
-      internalID: -4124057691748712743
+      spriteID: 7056ace325adc974d81fafea629ffc31
+      internalID: 1631787454
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_3
+      name: tree_trunk_lrt
       rect:
         serializedVersion: 2
         x: 24
@@ -271,14 +205,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3df9c8885c8d6fd90800000000000000
-      internalID: -7064220622572970029
+      spriteID: 0fc70ee70646b8248ac4a4cf34ab0833
+      internalID: 2085991195
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_4
+      name: tree_trunk_decoration_l1
       rect:
         serializedVersion: 2
         x: 32
@@ -292,14 +226,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2dd78a1bc5888f9d0800000000000000
-      internalID: -2740290441555968558
+      spriteID: 04def003aa846954b938e43d7bd7d9a1
+      internalID: 658843922
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_5
+      name: tree_trunk_l
       rect:
         serializedVersion: 2
         x: 0
@@ -313,14 +247,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e61b265df35093360800000000000000
-      internalID: 7149751655148466542
+      spriteID: e4040db1c3dfba8419c382dcab363d1e
+      internalID: 1840641677
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_6
+      name: tree_trunk_c
       rect:
         serializedVersion: 2
         x: 8
@@ -334,14 +268,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86fa92bd65a12c590800000000000000
-      internalID: -7655527456229970072
+      spriteID: ccf127cb8f62dc64c89e892aaf8fc1e9
+      internalID: -929253374
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_7
+      name: tree_trunk_r
       rect:
         serializedVersion: 2
         x: 16
@@ -355,14 +289,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36631019dfc2474e0800000000000000
-      internalID: -1984912068192422301
+      spriteID: 392a6ca56a36791488b6592736519e53
+      internalID: -1442767374
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_8
+      name: tree_trunk_lr
       rect:
         serializedVersion: 2
         x: 24
@@ -376,14 +310,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 807ac6fc79e362cf0800000000000000
-      internalID: -277465505295718648
+      spriteID: 921fb606cddf52b43ab54942d0ce8eee
+      internalID: -830855789
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_9
+      name: tree_trunk_9
       rect:
         serializedVersion: 2
         x: 32
@@ -397,14 +331,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1e5eb486b26bff70800000000000000
-      internalID: 9222073198021860894
+      spriteID: 44bd125329d420a438ba3365214e5d41
+      internalID: -2054529061
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_10
+      name: tree_trunk_lb
       rect:
         serializedVersion: 2
         x: 0
@@ -418,14 +352,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8af5299b0d6e46730800000000000000
-      internalID: 3991568953898065832
+      spriteID: 9379e2eb70913c64a979de498f32c3b5
+      internalID: 502618392
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_11
+      name: tree_trunk_b
       rect:
         serializedVersion: 2
         x: 8
@@ -439,14 +373,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 205e29b1298d91520800000000000000
-      internalID: 2673405975860536578
+      spriteID: 57bd622797bec424e8523c8b8a040a43
+      internalID: -2088569338
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_12
+      name: tree_trunk_rb
       rect:
         serializedVersion: 2
         x: 16
@@ -460,14 +394,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54b0c1328f0639f50800000000000000
-      internalID: 6886954874036816709
+      spriteID: 3ce97a75230eeb7478744beb0cc6bc8a
+      internalID: -1194071650
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_13
+      name: tree_trunk_lrb
       rect:
         serializedVersion: 2
         x: 24
@@ -481,14 +415,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 754b43908b3b01e80800000000000000
-      internalID: -8209864517686610857
+      spriteID: 87bfd403ed1d3024d9fc258a869e802f
+      internalID: 658878111
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_14
+      name: tree_trunk_decoration_l3
       rect:
         serializedVersion: 2
         x: 32
@@ -502,14 +436,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5539e3e9391ad3870800000000000000
-      internalID: 8664258913517867861
+      spriteID: 7de0194bc2b203a46aa4cb38ae641ee8
+      internalID: 863336435
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_15
+      name: tree_trunk_ltb
       rect:
         serializedVersion: 2
         x: 0
@@ -523,14 +457,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 120f73c34b5809ae0800000000000000
-      internalID: -1544587663037173727
+      spriteID: b9a88fbd52ffa674289b53ee040dbe58
+      internalID: 545698736
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_16
+      name: tree_trunk_tb
       rect:
         serializedVersion: 2
         x: 8
@@ -544,14 +478,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73c0863967ab305f0800000000000000
-      internalID: -791584091045098441
+      spriteID: 5f1b378178aa2774eb3cac388448cc8d
+      internalID: 1690512904
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_17
+      name: tree_trunk_rtb
       rect:
         serializedVersion: 2
         x: 16
@@ -565,14 +499,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e8f4174dcb639a20800000000000000
-      internalID: 3067914300574464226
+      spriteID: 577edef6bc50def419dcb05fee636331
+      internalID: 1735703273
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_18
+      name: tree_trunk_lrtb
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 8
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a050a4cc07a8814f8b979eda345d5d3
+      internalID: -1126629557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tree_trunk_decoration_r1
       rect:
         serializedVersion: 2
         x: 32
@@ -586,14 +541,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ade85bd0ecea1fb0800000000000000
-      internalID: -4676164812573971036
+      spriteID: 4d98dc1b094214b4ab6650b547606eec
+      internalID: 377106578
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_19
+      name: tree_trunk_slope1
       rect:
         serializedVersion: 2
         x: 0
@@ -607,14 +562,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c92bb1f12c876bf70800000000000000
-      internalID: 9202675663719084700
+      spriteID: ebad55e2f798c0f45bbea537767cef1a
+      internalID: -185139433
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_20
+      name: tree_trunk_irt
       rect:
         serializedVersion: 2
         x: 8
@@ -628,14 +583,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ea394612fef8b080800000000000000
-      internalID: -9171300325430576412
+      spriteID: 09e71bab0d27dc04b93635835e60eab0
+      internalID: 645133626
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_21
+      name: tree_trunk_ilt
       rect:
         serializedVersion: 2
         x: 16
@@ -649,14 +604,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc969467c84fe7130800000000000000
-      internalID: 3566556839041133005
+      spriteID: 106872685f44848469a216327af89236
+      internalID: -88544111
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_22
+      name: tree_trunk_slope2
       rect:
         serializedVersion: 2
         x: 24
@@ -664,20 +619,20 @@ TextureImporter:
         width: 8
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00ba0bdc5ad73d44184016a73f5ddf1c
-      internalID: 1716553747
+      spriteID: 81c3b0a3abfa56f4b97328be0abcd1a3
+      internalID: 366301741
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_23
+      name: tree_trunk_decoration_r2
       rect:
         serializedVersion: 2
         x: 32
@@ -685,35 +640,14 @@ TextureImporter:
         width: 8
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf9d047dd99ad9c4c96e0846f7b4784d
-      internalID: -1834691086
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: water_24
-      rect:
-        serializedVersion: 2
-        x: 24
-        y: 8
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 15a2a999c7a8ef946bae9a1138689df4
-      internalID: 1181478556
+      spriteID: dfea9fc1e63f7464b9319c5576001eec
+      internalID: 1335684087
       vertices: []
       indices: 
       edges: []
@@ -721,7 +655,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: fa2578640257d3e498e107f42e9e0c75
     internalID: 0
     vertices: []
     indices: 
@@ -729,31 +663,31 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      water_1: 3559705528278350927
-      water_5: 7149751655148466542
-      water_17: 3067914300574464226
-      water_3: -7064220622572970029
-      water_15: -1544587663037173727
-      water_4: -2740290441555968558
-      water_13: -8209864517686610857
-      water_20: -9171300325430576412
-      water_0: 8509550459451208454
-      water_19: 9202675663719084700
-      water_6: -7655527456229970072
-      water_16: -791584091045098441
-      water_9: 9222073198021860894
-      water_10: 3991568953898065832
-      water_23: -1834691086
-      water_11: 2673405975860536578
-      water_8: -277465505295718648
-      water_7: -1984912068192422301
-      water_21: 3566556839041133005
-      water_24: 1181478556
-      water_18: -4676164812573971036
-      water_22: 1716553747
-      water_14: 8664258913517867861
-      water_2: -4124057691748712743
-      water_12: 6886954874036816709
+      tree_trunk_r: -1442767374
+      tree_trunk_lrt: 2085991195
+      tree_trunk_decoration_l1: 658843922
+      tree_trunk_lb: 502618392
+      tree_trunk_ilt: -88544111
+      tree_trunk_decoration_r1: 377106578
+      tree_trunk_9: -2054529061
+      tree_trunk_rt: 1631787454
+      tree_trunk_tb: 1690512904
+      tree_trunk_t: -962323593
+      tree_trunk_lrtb: -1126629557
+      tree_trunk_c: -929253374
+      tree_trunk_lr: -830855789
+      tree_trunk_l: 1840641677
+      tree_trunk_decoration_l3: 863336435
+      tree_trunk_b: -2088569338
+      tree_trunk_ltb: 545698736
+      tree_trunk_slope1: -185139433
+      tree_trunk_lrb: 658878111
+      tree_trunk_rtb: 1735703273
+      tree_trunk_irt: 645133626
+      tree_trunk_decoration_r2: 1335684087
+      tree_trunk_lt: -21747669
+      tree_trunk_slope2: 366301741
+      tree_trunk_rb: -1194071650
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

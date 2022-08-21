@@ -12,7 +12,6 @@ namespace RuinsRaiders
         [SerializeField]
         private List<ProjectileData> projectilesCharged = new();
 
-        private Character _character;
         public override void Attack()
         {
             if (CanAttack)
@@ -26,12 +25,6 @@ namespace RuinsRaiders
                 base.Attack();
             }
 
-        }
-
-        // Start is called before the first frame update
-        private void Awake()
-        {
-            _character = GetComponent<Character>();
         }
 
         [Serializable]

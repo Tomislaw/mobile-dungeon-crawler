@@ -19,7 +19,7 @@ namespace RuinsRaiders
         private float _timeToAnimationAttackFinish = 0;
         private float _timeToOvercharge = 0;
 
-        private Character _character;
+        protected Character _character;
 
         public bool CanAttack { get => _timeToNextAttack <= 0 && !_character.IsDead && !_character.holdUpdate; }
         public bool IsAttacking { get => _timeToAnimationAttackFinish > 0; }
