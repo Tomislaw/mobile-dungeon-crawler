@@ -7,15 +7,10 @@ namespace RuinsRaiders
 {
     public class OxygenController : MonoBehaviour
     {
-
-        public HashSet<WaterTile> waterTiles = new();
-
-        public UnityEvent onInWater = new();
-        public UnityEvent onOutWater = new();
-
-        public bool inWater { get => waterTiles.Count > 0; }
         public int oxygen = 4;
         public int maxOxygen = 4;
+
+        public float headHeight = 0.8f;
 
         [SerializeField]
         private float oxygenTime;
@@ -25,15 +20,36 @@ namespace RuinsRaiders
 
         private float _oxygenTimeLeft;
         private HealthController _healthController;
+        private MovementController _movementController;
+
+        public bool IsUnderwater
+        {
+            get
+            {
+                if (_movementController == null || !_movementController.IsSwimming)
+                    return false;
+
+                var headPosition = gameObject.transform.position + new Vector3(0, headHeight);
+
+                foreach(var water in _movementController.waters)
+                {
+                    if (water.transform.position.y + 0.5 >= headPosition.y)
+                        return true;
+                }
+
+                return false;
+            }
+        }
 
         private void Start()
         {
             _healthController = GetComponent<HealthController>();
+            _movementController = GetComponent<MovementController>();
         }
 
         private void FixedUpdate()
         {
-            if (inWater == false || _healthController == null || _healthController.IsDead)
+            if (IsUnderwater == false || _healthController == null || _healthController.IsDead)
             {
                 oxygen = maxOxygen;
                 _oxygenTimeLeft = oxygenTime;

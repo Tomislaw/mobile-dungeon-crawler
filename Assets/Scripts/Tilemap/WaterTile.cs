@@ -6,19 +6,19 @@ namespace RuinsRaiders
     {
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            var character = collision.gameObject.GetComponent<OxygenController>();
+            var character = collision.gameObject.GetComponent<MovementController>();
             if (character)
             {
-                character.waterTiles.Add(this);
+                character.waters.Add(this);
             }
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            var character = collision.gameObject.GetComponent<OxygenController>();
+            var character = collision.gameObject.GetComponent<MovementController>();
             if (character)
             {
-                character.waterTiles.Remove(this);
+                character.waters.Remove(this);
             }
         }
     }

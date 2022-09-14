@@ -49,7 +49,7 @@ namespace RuinsRaiders
             if (holdUpdate)
                 return;
 
-            string suffix = haveSneakAnimation && MovementController.IsColliderAbove ? "Sneak" : "";
+            string suffix = haveSneakAnimation && (MovementController.IsColliderAbove || MovementController.IsSwimming) ? "Sneak" : "";
             if (IsDead)
             {
                 SetAnimation("Dead");

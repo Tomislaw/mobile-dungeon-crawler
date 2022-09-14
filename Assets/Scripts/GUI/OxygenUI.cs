@@ -41,7 +41,7 @@ namespace RuinsRaiders.GUI
             if (oxygenController == null)
                 return;
 
-            if (!oxygenController.inWater || healthController == null || healthController.IsDead)
+            if (!oxygenController.IsUnderwater || healthController == null || healthController.IsDead)
             {
                 if (_bubbles.Count != 0)
                     Invalidate();
@@ -91,7 +91,7 @@ namespace RuinsRaiders.GUI
 
             _bubbles.Clear();
 
-            int bubbleCount = !oxygenController.inWater || healthController.IsDead ? 0 : (oxygenController.maxOxygen + 1) / 2;
+            int bubbleCount = !oxygenController.IsUnderwater || healthController.IsDead ? 0 : (oxygenController.maxOxygen + 1) / 2;
 
             float bubbleWidth = 1;
 
