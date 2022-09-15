@@ -121,6 +121,9 @@ namespace RuinsRaiders
         {
             var node = astar.GetNode(Id);
             if (!CanFitInNode(astar, node, data))
+                return true;
+
+            if(!node.Water)
                 return false;
 
             node.Weight = 3;
