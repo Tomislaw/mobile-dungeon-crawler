@@ -294,11 +294,13 @@ MonoBehaviour:
   climbLadderSpeed: 12
   coyoteTime: 0.05
   walkSpeed: 10
+  swimSpeed: 8
   jumpSpeed: 16
   maxSpeed: 20
   acceleration: 50
   jerk: 20
   canUseLadder: 1
+  canSwim: 1
   stepTime: 0.15
   onJump:
     m_PersistentCalls:
@@ -522,14 +524,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f64d346ad54b95c41b0fdcaa083cb8a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onInWater:
-    m_PersistentCalls:
-      m_Calls: []
-  onOutWater:
-    m_PersistentCalls:
-      m_Calls: []
   oxygen: 4
   maxOxygen: 4
+  headHeight: 0.8
   oxygenTime: 1
   damageWithoutOxygen: 1
 --- !u!1 &2956168785758855339

@@ -317,7 +317,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tree_trunk_9
+      name: tree_trunk_decoration_l2
       rect:
         serializedVersion: 2
         x: 32
@@ -669,7 +669,6 @@ TextureImporter:
       tree_trunk_lb: 502618392
       tree_trunk_ilt: -88544111
       tree_trunk_decoration_r1: 377106578
-      tree_trunk_9: -2054529061
       tree_trunk_rt: 1631787454
       tree_trunk_tb: 1690512904
       tree_trunk_t: -962323593
@@ -677,6 +676,7 @@ TextureImporter:
       tree_trunk_c: -929253374
       tree_trunk_lr: -830855789
       tree_trunk_l: 1840641677
+      tree_trunk_decoration_l2: -2054529061
       tree_trunk_decoration_l3: 863336435
       tree_trunk_b: -2088569338
       tree_trunk_ltb: 545698736

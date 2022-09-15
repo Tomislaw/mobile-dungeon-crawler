@@ -29,6 +29,13 @@ namespace RuinsRaiders
         private Vector2Int _movingToTile;
         private Stack<AStarSharp.Node> _nodes;
 
+        private void Start()
+        {
+            data.canSwim = character.canSwim;
+            data.canUseLadder = character.canUseLadder;
+            data.flying = character.flying;
+        }
+
         public Vector2Int Target
         {
             get

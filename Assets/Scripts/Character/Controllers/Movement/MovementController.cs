@@ -95,6 +95,18 @@ namespace RuinsRaiders
             _collider2D = GetComponent<Collider2D>();
             _rigidbody = GetComponent<Rigidbody2D>();
             FaceLeft = false;
+
+            if(canUseLadder && climbLadderSpeed <= 0)
+                Debug.LogErrorFormat("{0} can climb but climb speed os set to {1}!", name, climbLadderSpeed);
+
+            if (canSwim && swimSpeed <= 0)
+                Debug.LogErrorFormat("{0} can swim but climb speed os set to {1}!", name, swimSpeed);
+
+            if (flying && gravityScale > 0)
+                Debug.LogErrorFormat("{0} is flying but gravity scale is set to {1}!", name, gravityScale);
+
+            if(walkSpeed > maxSpeed || swimSpeed > maxSpeed || jumpSpeed > maxSpeed)
+                Debug.LogErrorFormat("{0} movement speed is higher than max speed of {1}!", name, maxSpeed);
         }
 
         private bool CheckForGround()
