@@ -9,9 +9,7 @@ namespace RuinsRaiders.UI
         private OptionsData options;
 
         [SerializeField]
-        private GameObject arrows1;
-        [SerializeField]
-        private GameObject arrows2;
+        private GameObject arrows;
         [SerializeField]
         private GameObject arrowsSeparate;
         [SerializeField]
@@ -24,37 +22,26 @@ namespace RuinsRaiders.UI
         {
             switch (options.touchUiType)
             {
-                case OptionsData.TouchUiType.Arrows1:
-                    arrows1.SetActive(true);
-                    arrows2.SetActive(false);
-                    arrowsSeparate.SetActive(false);
-                    joystick.SetActive(false);
-                    attack.SetActive(true);
-                    break;
-                case OptionsData.TouchUiType.Arrows2:
-                    arrows1.SetActive(false);
-                    arrows2.SetActive(true);
+                case OptionsData.TouchUiType.Arrows:
+                    arrows.SetActive(true);
                     arrowsSeparate.SetActive(false);
                     joystick.SetActive(false);
                     attack.SetActive(true);
                     break;
                 case OptionsData.TouchUiType.ArrowsSeparate:
-                    arrows1.SetActive(false);
-                    arrows2.SetActive(false);
+                    arrows.SetActive(false);
                     arrowsSeparate.SetActive(true);
                     joystick.SetActive(false);
                     attack.SetActive(true);
                     break;
                 case OptionsData.TouchUiType.Joystick:
-                    arrows1.SetActive(false);
-                    arrows2.SetActive(false);
+                    arrows.SetActive(false);
                     arrowsSeparate.SetActive(false);
                     joystick.SetActive(true);
                     attack.SetActive(true);
                     break;
                 case OptionsData.TouchUiType.None:
-                    arrows1.SetActive(false);
-                    arrows2.SetActive(false);
+                    arrows.SetActive(false);
                     arrowsSeparate.SetActive(false);
                     joystick.SetActive(false);
                     attack.SetActive(false);

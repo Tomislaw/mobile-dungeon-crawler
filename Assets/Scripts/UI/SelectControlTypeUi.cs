@@ -4,6 +4,7 @@ using UnityEngine.UI;
 namespace RuinsRaiders.UI
 {
     // Helper class for selecting different control type on Mobile
+    [ExecuteAlways]
     public class SelectControlTypeUi : MonoBehaviour
     {
         [SerializeField]
@@ -14,7 +15,7 @@ namespace RuinsRaiders.UI
 
         private Toggle _toggle;
 
-        void Start()
+        void OnEnable()
         {
             _toggle = GetComponent<Toggle>();
             _toggle.isOn = type == data.touchUiType;
