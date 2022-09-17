@@ -62,11 +62,11 @@ namespace RuinsRaiders
                     cachedNode.Spike = gameobject.GetComponentInChildren<SpikeTile>() != null;
                     cachedNode.Ladder = gameobject.GetComponentInChildren<LadderTile>() != null;
                     cachedNode.Platform = gameobject.GetComponentInChildren<PlatformTile>() != null;
+                    cachedNode.Water = gameobject.GetComponentInChildren<WaterTile>() != null;
                 }
                 cachedNode.Block = collider != Tile.ColliderType.None;
                 cachedNode.Weight = 1;
                 cachedNode.Cost = 1;
-
                 _cache.Add(Id, cachedNode);
             }
 

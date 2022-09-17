@@ -102,7 +102,7 @@ namespace RuinsRaiders
         private Vector2Int StartingTileId()
         {
             var start = GetCurrentTileId;
-            if (data.flying)
+            if (data.flying || character.IsSwimming)
             {
 
             }
@@ -157,15 +157,23 @@ namespace RuinsRaiders
 
                 Vector2 move = new();
 
+                // always can move left and right
                 if (node.Id.x > current.x)
                     move.x = 1;
                 else if (node.Id.x < current.x)
                     move.x = -1;
 
+                // always can go up
                 if (node.Id.y > current.y)
                     move.y = 1;
 
-                if (node.Parent?.Platform == true && !node.Platform || node.Ladder && character.canUseLadder || character.IsOnLadder)
+                // can go down if 
+                if (character.flying
+                    || character.IsSwimming && character.canSwim // when swimming
+                    || node.Parent?.Platform == true && !node.Platform // when on platform
+                    || node.Ladder && character.canUseLadder && character.IsOnLadder // when on ladder
+                    )
+
                     if (node.Id.y < current.y)
                         move.y = -1;
 

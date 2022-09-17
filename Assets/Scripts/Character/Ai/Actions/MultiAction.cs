@@ -118,6 +118,12 @@ namespace RuinsRaiders.AI
                     _actions.ElementAt(_currentAction).Update(dt);
                 }
             }
+
+            public override string ToString()
+            {
+                return "MultiAction;" +
+                    "\n[" + _currentAction + "] " + ((_currentAction == -1) ? "none" :  _actions.ElementAt(_currentAction).ToString());
+            }
         }
     }
 }

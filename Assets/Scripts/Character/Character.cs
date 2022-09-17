@@ -18,10 +18,10 @@ namespace RuinsRaiders
         private bool haveWalkPreAttackAnimation = false;
         [SerializeField]
         private bool haveOverchargeAnimation = false;
-
+        [SerializeField]
+        private bool haveJumpAnimation = false;
 
         private string _currentAnimation;
-
 
         public HealthController.Group Group { get => HealthController.group; }
 
@@ -51,10 +51,7 @@ namespace RuinsRaiders
 
             string suffix = haveSneakAnimation && (MovementController.IsColliderAbove || MovementController.IsSwimming) ? "Sneak" : "";
             if (IsDead)
-            {
                 SetAnimation("Dead");
-
-            }
             else if (AttackController.chargeAttack && AttackController.CanAttack)
             {
                 if (haveWalkPreAttackAnimation && MovementController.IsMoving)
@@ -67,24 +64,19 @@ namespace RuinsRaiders
 
             }
             else if (AttackController.IsAttacking)
-            {
                 SetAnimation("Attack" + suffix);
-            }
+            else if (haveJumpAnimation && MovementController.IsJumping && MovementController.Velocity.y > 0)
+                SetAnimation("Jump");
+            else if (haveJumpAnimation && MovementController.IsJumping && MovementController.Velocity.y < 0)
+                SetAnimation("Fall");
             else if (MovementController.IsMoving)
-            {
                 SetAnimation("Walk" + suffix);
-            }
             else if (IsDead)
-            {
                 SetAnimation("Dead");
-            }
-
             else
                 SetAnimation("Idle" + suffix);
 
-
         }
-
 
         public void Hide()
         {

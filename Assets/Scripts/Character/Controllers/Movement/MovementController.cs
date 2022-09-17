@@ -23,6 +23,9 @@ namespace RuinsRaiders
         public float walkSpeed = 10;
         public float swimSpeed = 8;
         public float jumpSpeed = 20;
+
+        private float MovementSpeed { get => IsSwimming ? swimSpeed : walkSpeed; }
+
         public float maxSpeed = 30;
         public float acceleration = 10;
         public float jerk = 10;
@@ -36,10 +39,10 @@ namespace RuinsRaiders
         public UnityEvent onSwim;
 
         // on which platforms or ladders character currently is
-        public HashSet<LadderTile> ladders = new ();
+        public HashSet<LadderTile> ladders = new();
         public HashSet<WaterTile> waters = new();
-        public HashSet<PlatformTile> platforms = new ();
-        public Vector2 move = new ();
+        public HashSet<PlatformTile> platforms = new();
+        public Vector2 move = new();
 
         private Vector2 _previousMove = new();
         private bool _wasSwimming;
@@ -60,6 +63,7 @@ namespace RuinsRaiders
 
         public bool IsSwimming { get => waters.Count > 0; }
 
+        public Vector2 Velocity { get => _rigidbody.velocity; }
 
         public bool IsColliderAbove
         {
@@ -96,7 +100,7 @@ namespace RuinsRaiders
             _rigidbody = GetComponent<Rigidbody2D>();
             FaceLeft = false;
 
-            if(canUseLadder && climbLadderSpeed <= 0)
+            if (canUseLadder && climbLadderSpeed <= 0)
                 Debug.LogErrorFormat("{0} can climb but climb speed os set to {1}!", name, climbLadderSpeed);
 
             if (canSwim && swimSpeed <= 0)
@@ -105,7 +109,7 @@ namespace RuinsRaiders
             if (flying && gravityScale > 0)
                 Debug.LogErrorFormat("{0} is flying but gravity scale is set to {1}!", name, gravityScale);
 
-            if(walkSpeed > maxSpeed || swimSpeed > maxSpeed || jumpSpeed > maxSpeed)
+            if (walkSpeed > maxSpeed || swimSpeed > maxSpeed || jumpSpeed > maxSpeed)
                 Debug.LogErrorFormat("{0} movement speed is higher than max speed of {1}!", name, maxSpeed);
         }
 
@@ -113,7 +117,9 @@ namespace RuinsRaiders
         {
             //if (System.Math.Round(rigidbody.velocity.y, 1) != 0)
             //    return false;
-            var raycast = Physics2D.BoxCastAll(transform.position + new Vector3(0, 0.1f, 0),
+            var legsPosition = _collider2D.bounds.center - new Vector3(0, _collider2D.bounds.size.y/2f);
+            var position = transform.position;
+            var raycast = Physics2D.BoxCastAll(legsPosition + new Vector3(0, 0.1f, 0),
                   new Vector3(_collider2D.bounds.size.x - 0.02f, 0.01f), 0, Vector2.down, 0.2f);
             foreach (var cast in raycast)
             {
@@ -218,9 +224,9 @@ namespace RuinsRaiders
 
             // get move direction x
             int moveDir = 0;
-            if (_rigidbody.velocity.x > walkSpeed * move.x && move.x <= 0)
+            if (_rigidbody.velocity.x > MovementSpeed * move.x && move.x <= 0)
                 moveDir = -1;
-            else if (_rigidbody.velocity.x < walkSpeed * move.x && move.x >= 0)
+            else if (_rigidbody.velocity.x < MovementSpeed * move.x && move.x >= 0)
                 moveDir = 1;
 
 
@@ -228,7 +234,7 @@ namespace RuinsRaiders
             {
                 float speed = _accumulatedAcceleration * Time.fixedDeltaTime * moveDir;
                 Vector2 additionalSpeed = new(speed * slope.x, speed * slope.y);
-                AddSpeed(additionalSpeed, walkSpeed * Mathf.Abs(move.x));
+                AddSpeed(additionalSpeed, MovementSpeed * Mathf.Abs(move.x));
             }
 
             if (onSlope || IsOnLadder)
@@ -260,24 +266,24 @@ namespace RuinsRaiders
             else
                 _rigidbody.gravityScale = gravityScale;
 
-            if (_rigidbody.velocity.y > walkSpeed * move.y && move.y <= 0)
+            if (_rigidbody.velocity.y > MovementSpeed * move.y && move.y <= 0)
             {
                 float additionalSpeed = _accumulatedAcceleration * Time.fixedDeltaTime;
                 _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Max(
-                    (IsSwimming ? swimSpeed : walkSpeed) * move.y, _rigidbody.velocity.y - additionalSpeed));
+                   MovementSpeed * move.y, _rigidbody.velocity.y - additionalSpeed));
             }
 
-            if (_rigidbody.velocity.y < walkSpeed * move.y && move.y >= 0)
+            if (_rigidbody.velocity.y < MovementSpeed * move.y && move.y >= 0)
             {
                 float additionalSpeed = _accumulatedAcceleration * Time.fixedDeltaTime;
                 _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Min(
-                    (IsSwimming ? swimSpeed : walkSpeed) * move.y, _rigidbody.velocity.y + additionalSpeed));
+                    MovementSpeed * move.y, _rigidbody.velocity.y + additionalSpeed));
             }
 
             int moveDir = 0;
-            if (_rigidbody.velocity.x > walkSpeed * move.x && move.x <= 0)
+            if (_rigidbody.velocity.x > MovementSpeed * move.x && move.x <= 0)
                 moveDir = -1;
-            else if (_rigidbody.velocity.x < walkSpeed * move.x && move.x >= 0)
+            else if (_rigidbody.velocity.x < MovementSpeed * move.x && move.x >= 0)
                 moveDir = 1;
 
 
@@ -288,7 +294,7 @@ namespace RuinsRaiders
             {
                 float speed = _accumulatedAcceleration * Time.fixedDeltaTime * moveDir;
                 Vector2 additionalSpeed = new(speed * slope.x, speed * slope.y);
-                AddSpeed(additionalSpeed, (IsSwimming ? swimSpeed : walkSpeed) * Mathf.Abs(move.x));
+                AddSpeed(additionalSpeed, MovementSpeed * Mathf.Abs(move.x));
             }
 
             _wasSwimming = IsSwimming && canSwim;

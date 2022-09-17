@@ -54,7 +54,7 @@ namespace RuinsRaiders.AI
 
             public override bool CanStop()
             {
-                return IsFinished() || character.IsGrounded;
+                return IsFinished() || character.IsSwimming || character.flying || character.IsGrounded;
             }
             public override bool IsFinished()
             {

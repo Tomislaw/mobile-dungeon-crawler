@@ -27,7 +27,7 @@ namespace RuinsRaiders
 
         public enum Group
         {
-            Skeletons, Player, Goblins, None
+            Skeletons, Player, Goblins, Fish, None
         }
 
         private void Start()
