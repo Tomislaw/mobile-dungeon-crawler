@@ -19,6 +19,8 @@ namespace RuinsRaiders
         [SerializeField]
         private bool haveOverchargeAnimation = false;
         [SerializeField]
+        private bool haveOverchargeAttackAnimation = false;
+        [SerializeField]
         private bool haveJumpAnimation = false;
 
         private string _currentAnimation;
@@ -64,7 +66,12 @@ namespace RuinsRaiders
 
             }
             else if (AttackController.IsAttacking)
-                SetAnimation("Attack" + suffix);
+            {
+                if (haveOverchargeAttackAnimation && AttackController.IsOvercharged)
+                    SetAnimation("Attack2" + suffix);
+                else
+                    SetAnimation("Attack" + suffix);
+            }
             else if (haveJumpAnimation && MovementController.IsJumping && MovementController.Velocity.y > 0)
                 SetAnimation("Jump");
             else if (haveJumpAnimation && MovementController.IsJumping && MovementController.Velocity.y < 0)

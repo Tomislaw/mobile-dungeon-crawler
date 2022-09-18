@@ -11,6 +11,8 @@ namespace RuinsRaiders
         public float distance;
         public float knockback;
 
+        public bool deflectProjectiles = false;
+
         private HealthController _healthController;
         private MovementController _movementController;
         private void Awake()
@@ -29,35 +31,61 @@ namespace RuinsRaiders
 
         }
 
+        private void DeflectIfPossibe(Projectile target)
+        {
+            // can only deflect enemy projectiles
+            if (target.group == _healthController.group)
+                return;
+
+            target.group = _healthController.group;
+
+            var rigidbody2d = target.GetComponent<Rigidbody2D>();
+            if (rigidbody2d == null)
+                return;
+
+            rigidbody2d.velocity = -rigidbody2d.velocity;
+        }
+
+        private void DamageIfPossible(HealthController target)
+        {
+            // do not hit character from same group (avoid friendly fire)
+            if (target.group == _healthController.group || _healthController.IsDead)
+                return;
+
+            // do not hit character at back
+            if (_movementController.FaceLeft == true
+                && target.transform.position.x > transform.position.x
+                || _movementController.FaceLeft == false
+                && target.transform.position.x < transform.position.x)
+                return;
+
+            target.Damage(attackDamage, gameObject);
+            var hitBody = target.GetComponent<Rigidbody2D>();
+            if (hitBody)
+                hitBody.AddForce(new Vector2(Mathf.Sign(target.transform.position.x - transform.position.x) * knockback, knockback / 2));
+
+        }
+
         private void FindAndDamage()
         {
-            var alreadyDamaged = new List<HealthController>();
+            var alreadyDamaged = new List<GameObject>();
             var raycast = Physics2D.OverlapCircleAll(transform.position, distance);
             foreach (var cast in raycast)
             {
+
+                // avoid multiple damage for characters with multiple colliders
+                if (alreadyDamaged.Contains(cast.gameObject))
+                    continue;
+
                 var hitHc = cast.gameObject.GetComponent<HealthController>();
+                if(hitHc)
+                    DamageIfPossible(hitHc);
 
-                // do not hit character from same group (avoid friendly fire)
-                if (hitHc == null || hitHc.group == _healthController.group || _healthController.IsDead)
-                    continue;
+                var projectile = cast.gameObject.GetComponent<Projectile>();
+                if (projectile)
+                    DeflectIfPossibe(projectile);
 
-                if (alreadyDamaged.Contains(hitHc))
-                    continue;
-
-                // do not hit character at back
-                if (_movementController.FaceLeft == true
-                    && hitHc.transform.position.x > transform.position.x
-                    || _movementController.FaceLeft == false
-                    && hitHc.transform.position.x < transform.position.x)
-                    continue;
-
-                hitHc.Damage(attackDamage, gameObject);
-                var hitBody = hitHc.GetComponent<Rigidbody2D>();
-                if (hitBody)
-                    hitBody.AddForce(new Vector2(Mathf.Sign(hitHc.transform.position.x - transform.position.x) * knockback, knockback / 2));
-
-                // avoid multiple damage for characters with multi colliders
-                alreadyDamaged.Add(hitHc);
+                alreadyDamaged.Add(cast.gameObject);
             }
         }
     }

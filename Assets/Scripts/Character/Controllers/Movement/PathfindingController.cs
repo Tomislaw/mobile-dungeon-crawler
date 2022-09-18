@@ -33,6 +33,7 @@ namespace RuinsRaiders
         {
             data.canSwim = character.canSwim;
             data.canUseLadder = character.canUseLadder;
+            data.canUsePlatform = character.canUsePlatform;
             data.flying = character.flying;
         }
 
@@ -57,13 +58,13 @@ namespace RuinsRaiders
 
         public void MoveToId(Vector2Int id, bool moveToClosestTileIfFail = false)
         {
-            StopMoving();
+            Stop();
             _coroutine = StartCoroutine(MoveToCoroutine(id, moveToClosestTileIfFail));
         }
 
         public void MoveTo(Vector2 position, bool moveToClosestTileIfFail = false)
         {
-            StopMoving();
+            Stop();
             _coroutine = StartCoroutine(MoveToCoroutine(position, moveToClosestTileIfFail));
         }
 
@@ -117,7 +118,7 @@ namespace RuinsRaiders
             return start;
         }
 
-        public void StopMoving()
+        public void Stop()
         {
             if (_cancellationTokenSource != null)
                 _cancellationTokenSource.Cancel();

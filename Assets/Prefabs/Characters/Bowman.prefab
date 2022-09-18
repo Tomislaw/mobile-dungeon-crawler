@@ -16,34 +16,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1586342966391059674, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1586342966391059674, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1586342966391059674, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1586342966391059674, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1586342966391059674, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1586342966391059674, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1586342966391059674, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1586342966391059674, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -87,14 +59,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99119120af2677c47a83d1b83619b0bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackSpeed: 0.4
-  AttackAnimationTime: 0.1
-  OverchargeTime: 1
-  ChargeAttack: 0
-  OnAttack:
+  attackSpeed: 0.2
+  attackAnimationTime: 0.15
+  overchargeTime: 1
+  chargeAttack: 0
+  onAttack:
     m_PersistentCalls:
       m_Calls: []
-  OnChargedAttack:
+  onChargedAttack:
     m_PersistentCalls:
       m_Calls: []
   projectiles:

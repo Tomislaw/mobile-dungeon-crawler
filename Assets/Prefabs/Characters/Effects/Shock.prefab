@@ -128,7 +128,7 @@ MonoBehaviour:
   lifeTime: 2
   explosionRadius: 1
   explosionForce: 400
-  HitFilter: 000000000200000003000000
+  group: 1
   deceleration: {x: 0, y: 0}
   gravity: 0
 --- !u!50 &1805714663868828914

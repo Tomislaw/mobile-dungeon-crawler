@@ -21,7 +21,7 @@ namespace RuinsRaiders
                 AddInWaterNodes(astar, nodes, data, parent);
             else if (parent.Ladder && data.canUseLadder)
                 AddOnLadderNodes(astar, nodes, data, parent);
-            else if (floor.Platform)
+            else if (floor.Platform && data.canUsePlatform)
                 AddOnPlatformNodes(astar, nodes, data, parent);
             else if (floor.Block)
                 AddOnBlockNodes(astar, nodes, data, parent);

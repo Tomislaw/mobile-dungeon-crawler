@@ -65,6 +65,7 @@ GameObject:
   - component: {fileID: 5367954658345666729}
   - component: {fileID: 5367954658345666730}
   - component: {fileID: 3570942336502991756}
+  - component: {fileID: 6576698282549172827}
   m_Layer: 11
   m_Name: Lich
   m_TagString: Untagged
@@ -189,10 +190,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9290149db6b4a4e94084979ed9ad4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HaveSneakAnimation: 0
-  HaveWalkPreAttackAnimation: 0
-  HaveOverchargeAnimation: 0
   holdUpdate: 0
+  haveSneakAnimation: 0
+  haveWalkPreAttackAnimation: 0
+  haveOverchargeAnimation: 1
+  haveOverchargeAttackAnimation: 1
+  haveJumpAnimation: 0
 --- !u!95 &5367954658345666727
 Animator:
   serializedVersion: 4
@@ -227,16 +230,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   astar: {fileID: 0}
   data:
+    flying: 0
+    canSwim: 1
+    canUseLadder: 1
+    canUsePlatform: 1
     maxTimeOnNode: 1
-    flying: 1
-    canSwim: 0
-    canUseLadder: 0
     height: 5
     jumpHeight: 0
     jumpDistance: 0
   character: {fileID: 3570942336502991756}
-  MaxNodesPerBatch: 10
-  MaxNodes: 600
+  maxNodesPerBatch: 10
+  maxNodes: 600
 --- !u!114 &5367954658345666729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,7 +254,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   control: {fileID: 11400000, guid: c61cd8efd3e12ab4489d55e2db5a8b6e, type: 2}
-  inputControl: {fileID: 11400000, guid: 5099324561f36ed429e3aacb5ca1bacb, type: 2}
 --- !u!114 &5367954658345666730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,24 +266,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99119120af2677c47a83d1b83619b0bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackSpeed: 0.2
-  AttackAnimationTime: 0.6
-  OverchargeTime: -1
-  ChargeAttack: 0
-  OnAttack:
+  attackSpeed: 1
+  attackAnimationTime: 0.6
+  overchargeTime: 1
+  chargeAttack: 0
+  onAttack:
     m_PersistentCalls:
       m_Calls: []
-  OnChargedAttack:
+  onChargedAttack:
     m_PersistentCalls:
       m_Calls: []
   projectiles:
   - projectile: {fileID: 6199246207084554113, guid: 81e469a12c189134b87bf2f8620eefc5, type: 3}
     offset: {x: -3, y: 3, z: 0}
-    delay: 0.5
+    delay: 0.4
   - projectile: {fileID: 6199246207084554113, guid: 81e469a12c189134b87bf2f8620eefc5, type: 3}
     offset: {x: 1, y: 3, z: 0}
-    delay: 0.5
-  projectilesCharged: []
+    delay: 0.4
+  projectilesCharged:
+  - projectile: {fileID: 6199246207084554113, guid: 089247ce85f07fa4896ced890f732473, type: 3}
+    offset: {x: -3, y: 3, z: 0}
+    delay: 0.4
+  - projectile: {fileID: 6199246207084554113, guid: f39f8cc9bae5ec14da9cf8d96643eee2, type: 3}
+    offset: {x: 1, y: 3, z: 0}
+    delay: 0.4
 --- !u!114 &3570942336502991756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,25 +302,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 681d635a5cb7c4c48be5480f465c0c27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Flying: 1
-  GravityScale: 6
-  ClimbLadderSpeed: 0
-  CoyoteTime: 0.15
-  WalkSpeed: 10
-  JumpSpeed: 20
-  MaxSpeed: 30
-  Acceleration: 10
-  Jerk: 10
-  CanUseLadder: 1
-  FaceLeft: 0
-  StepTime: 0.15
-  OnJump:
+  flying: 1
+  gravityScale: 0
+  climbLadderSpeed: 8
+  coyoteTime: 0.15
+  walkSpeed: 10
+  swimSpeed: 8
+  jumpSpeed: 20
+  maxSpeed: 30
+  acceleration: 10
+  jerk: 10
+  canUseLadder: 1
+  canSwim: 1
+  canUsePlatform: 1
+  stepTime: 0.15
+  onJump:
     m_PersistentCalls:
       m_Calls: []
-  OnWalk:
+  onWalk:
     m_PersistentCalls:
       m_Calls: []
-  OnSwim:
+  onSwim:
     m_PersistentCalls:
       m_Calls: []
   move: {x: 0, y: 0}
+--- !u!114 &6576698282549172827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5367954658345666721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b2c6fe3b94d91a41a1db1471222ce76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  group: 0
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  health: 24
+  maxHealth: 24
+  ressurectTime: 1

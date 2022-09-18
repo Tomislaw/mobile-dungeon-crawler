@@ -6,7 +6,8 @@ namespace RuinsRaiders.AI
     public class ChaseAndAttackAction : ChaseAction
     {
         [SerializeField]
-        private float distanceForAttack;
+        private Vector2 distanceForAttack;
+
         [SerializeField]
         private float attackTime;
         [SerializeField]
@@ -40,6 +41,7 @@ namespace RuinsRaiders.AI
                     target = null;
                     _attackController.chargeAttack = false;
                     movementController.Stop();
+                    pathfinding.Stop();
                     return;
                 }
 
@@ -55,6 +57,7 @@ namespace RuinsRaiders.AI
                     if (_timeToAttack == parent.attackTime)
                     {
                         movementController.Stop();
+                        pathfinding.Stop();
                         movementController.FacePosition(target.transform.position);
                     }
                     if (_timeToAttack < 0)
@@ -69,11 +72,19 @@ namespace RuinsRaiders.AI
                         _attackController.chargeAttack = true;
                         _timeToAttack -= dt;
                     }
+                    return;
                 }
-                if (!_attacking && parent.distanceForAttack > Vector2.Distance(character.transform.position, target.transform.position))
+                var distance = character.transform.position - target.transform.position;
+                distance = new Vector2(Mathf.Abs(distance.x), Mathf.Abs(distance.y));
+
+                if (parent.distanceForAttack.x > distance.x 
+                    && parent.distanceForAttack.y > distance.y
+                    && (movementController.IsGrounded || movementController.IsSwimming || movementController.flying || !movementController.canUsePlatform)
+                    )
                 {
                     _attacking = true;
                     _timeToAttack = parent.attackTime;
+                    return;
                 }
 
                 timeToNextPathfinding -= dt;

@@ -29,8 +29,10 @@ namespace RuinsRaiders
         public float maxSpeed = 30;
         public float acceleration = 10;
         public float jerk = 10;
+
         public bool canUseLadder = true;
         public bool canSwim = true;
+        public bool canUsePlatform = true;
 
         public float stepTime = 0.15f;
 
@@ -137,7 +139,10 @@ namespace RuinsRaiders
                 return;
 
             if (_character.IsDead)
+            {
                 Stop();
+            }
+
 
             var landed = IsGrounded;
             IsGrounded = CheckForGround();

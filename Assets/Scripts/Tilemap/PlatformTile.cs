@@ -14,13 +14,23 @@ namespace RuinsRaiders
         private void OnTriggerEnter2D(Collider2D collision)
         {
             var character = collision.gameObject.GetComponent<MovementController>();
-            if (character)
+            if (character == null)
+                return;
+
+            var colliders = character.GetComponentsInChildren<Collider2D>();
+
+            if (character.canUsePlatform)
             {
                 _characters.Add(character);
-                var colliders = character.GetComponentsInChildren<Collider2D>();
                 foreach (var characterCollider in colliders)
                     Physics2D.IgnoreCollision(platformCollider, characterCollider, character.move.y < 0);
             }
+            else
+            {
+                foreach (var characterCollider in colliders)
+                    Physics2D.IgnoreCollision(platformCollider, characterCollider, true);
+            }
+
         }
 
         private void OnTriggerExit2D(Collider2D collision)

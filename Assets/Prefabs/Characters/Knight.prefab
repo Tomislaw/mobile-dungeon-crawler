@@ -184,6 +184,7 @@ MonoBehaviour:
   haveSneakAnimation: 1
   haveWalkPreAttackAnimation: 1
   haveOverchargeAnimation: 1
+  haveJumpAnimation: 0
 --- !u!114 &1586342966391059678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,10 +212,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   astar: {fileID: 0}
   data:
-    maxTimeOnNode: 0
     flying: 0
-    canSwim: 0
+    canSwim: 1
     canUseLadder: 1
+    canUsePlatform: 1
+    maxTimeOnNode: 0
     height: 0
     jumpHeight: 3
     jumpDistance: 5
@@ -258,6 +260,7 @@ MonoBehaviour:
   attackDamage: 2
   distance: 1
   knockback: 200
+  deflectProjectiles: 0
 --- !u!114 &2839153680246517994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,16 +294,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flying: 0
   gravityScale: 6
-  climbLadderSpeed: 12
+  climbLadderSpeed: 8
   coyoteTime: 0.05
-  walkSpeed: 10
-  swimSpeed: 8
-  jumpSpeed: 16
+  walkSpeed: 9
+  swimSpeed: 7
+  jumpSpeed: 16.5
   maxSpeed: 20
   acceleration: 50
   jerk: 20
   canUseLadder: 1
   canSwim: 1
+  canUsePlatform: 1
   stepTime: 0.15
   onJump:
     m_PersistentCalls:
