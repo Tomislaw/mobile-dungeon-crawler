@@ -16,6 +16,22 @@ MonoBehaviour:
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 2
   m_TilingRules:
+  - m_Id: 8
+    m_Sprites:
+    - {fileID: -726148550, guid: 5dec001c1ed6107438baa81a54eeb714, type: 3}
+    m_GameObject: {fileID: 0}
+    m_AnimationSpeed: 1
+    m_PerlinScale: 0.5
+    m_Output: 0
+    m_ColliderType: 1
+    m_RandomTransform: 0
+    m_Neighbors: 03000000030000000300000003000000
+    m_NeighborPositions:
+    - {x: -1, y: 0, z: 0}
+    - {x: 0, y: 1, z: 0}
+    - {x: 1, y: 0, z: 0}
+    - {x: 0, y: -1, z: 0}
+    m_RuleTransform: 0
   - m_Id: 0
     m_Sprites:
     - {fileID: -1605438072, guid: 5dec001c1ed6107438baa81a54eeb714, type: 3}
@@ -304,22 +320,6 @@ MonoBehaviour:
     - {x: 0, y: 1, z: 0}
     - {x: -1, y: 0, z: 0}
     m_RuleTransform: 0
-  - m_Id: 8
-    m_Sprites:
-    - {fileID: -726148550, guid: 5dec001c1ed6107438baa81a54eeb714, type: 3}
-    m_GameObject: {fileID: 0}
-    m_AnimationSpeed: 1
-    m_PerlinScale: 0.5
-    m_Output: 0
-    m_ColliderType: 1
-    m_RandomTransform: 0
-    m_Neighbors: 03000000030000000300000003000000
-    m_NeighborPositions:
-    - {x: -1, y: 0, z: 0}
-    - {x: 0, y: 1, z: 0}
-    - {x: 1, y: 0, z: 0}
-    - {x: 0, y: -1, z: 0}
-    m_RuleTransform: 0
   tiles:
   - Earth
   - Grass
@@ -332,6 +332,7 @@ MonoBehaviour:
   - TreeTrunk
   - TreeBranch
   - TreeTrunkSlope
+  - WaterWall
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

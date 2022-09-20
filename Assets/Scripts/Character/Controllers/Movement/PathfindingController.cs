@@ -9,6 +9,9 @@ namespace RuinsRaiders
     [ExecuteAlways]
     public class PathfindingController : MonoBehaviour
     {
+        private static float MinDistanceToMove = 0.1f;
+
+
         [SerializeField]
         private AStar astar;
         [SerializeField]
@@ -42,7 +45,7 @@ namespace RuinsRaiders
             get
             {
                 if (!IsMoving)
-                    return GetCurrentTileId;
+                    return TileId;
 
                 return _movingToTile;
             }
@@ -102,17 +105,17 @@ namespace RuinsRaiders
 
         private Vector2Int StartingTileId()
         {
-            var start = GetCurrentTileId;
+            var start = TileId;
             if (data.flying || character.IsSwimming)
             {
 
             }
-            else if (character.IsGrounded && !CanWalkOnTile(start))
+            else if (character.IsGrounded && !CanMoveToTile(start))
             {
                 // scenario when character is standing on corner of tile
-                if (CanWalkOnTile(start - new Vector2Int(1, 0)))
+                if (CanMoveToTile(start - new Vector2Int(1, 0)))
                     start -= new Vector2Int(1, 0);
-                else if (CanWalkOnTile(start + new Vector2Int(1, 0)))
+                else if (CanMoveToTile(start + new Vector2Int(1, 0)))
                     start += new Vector2Int(1, 0);
             }
             return start;
@@ -149,40 +152,79 @@ namespace RuinsRaiders
 
                 var node = _nodes.Peek();
 
-                var current = GetCurrentTileId;
-                if (node.Id.x == current.x && Mathf.Abs(node.Id.y - current.y) <= 1)
+                if (IsNodeReached(node))
                 {
                     _nodes.Pop();
                     _timeLeftOnNode = data.maxTimeOnNode;
                 }
 
-                Vector2 move = new();
-
-                // always can move left and right
-                if (node.Id.x > current.x)
-                    move.x = 1;
-                else if (node.Id.x < current.x)
-                    move.x = -1;
-
-                // always can go up
-                if (node.Id.y > current.y)
-                    move.y = 1;
-
-                // can go down if 
-                if (character.flying
-                    || character.IsSwimming && character.canSwim // when swimming
-                    || node.Parent?.Platform == true && !node.Platform // when on platform
-                    || node.Ladder && character.canUseLadder && character.IsOnLadder // when on ladder
-                    )
-
-                    if (node.Id.y < current.y)
-                        move.y = -1;
-
-                character.Move(move);
+                character.Move(GetMovement(node));
 
                 if (_nodes.Count == 0)
                     character.Stop();
+            }
+        }
 
+        private Vector2 GetMovement(AStarSharp.Node node)
+        {
+            var tilePosition = astar.GetPositionFromId(node.Id);
+            var position = new Vector2(transform.position.x, transform.position.y);
+            var distance = tilePosition - position;
+            Vector2 move = new();
+
+            if (Mathf.Abs(distance.x) > MinDistanceToMove)
+                move.x = Mathf.Clamp(distance.x, -1, 1);
+
+            if (character.flying
+                || character.IsSwimming && character.canSwim
+                || character.canUseLadder && character.ladders.Count > 0)
+            {
+                if (Mathf.Abs(distance.y) > MinDistanceToMove)
+                    move.y = Mathf.Clamp(distance.y, -1, 1);
+            }
+            else
+            {
+                var tileDifference = node.Id.y - TileId.y;
+                if (tileDifference > 0)
+                    move.y = 1;
+                else if (tileDifference < 0 &&
+                    (
+                     (node.Platform == true && character.canUsePlatform)
+                    || (node.Ladder && character.canUseLadder)
+                    ))
+                    move.y = -1;
+            }
+
+            return move;
+        }
+
+        private bool IsNodeReached(AStarSharp.Node node)
+        {
+            var currentTileId = TileId;
+            if (character.flying // when flying
+                || character.canSwim && node.Water // when swimming
+                || character.canUseLadder && node.Ladder) // when on ladder
+            {
+                return node.Id.x == currentTileId.x && node.Id.y == currentTileId.y;
+            }
+            else if ((node.Block || node.Platform)  // when walking
+                && (node.jumpDistanceLeft <= 0 || node.jumpHeightLeft <= 0)
+                )
+            {
+                return node.Id.x == currentTileId.x
+                    && node.Id.y == currentTileId.y
+                    && character.IsGrounded;
+            }
+            else // when jumping or falling
+            {
+                bool yReached = currentTileId.y >= node.Id.y && character.Velocity.y > 0
+                    || currentTileId.y <= node.Id.y && character.Velocity.y < 0
+                    || currentTileId.y == node.Id.y;
+
+                bool xReached = currentTileId.x >= node.Id.x && character.Velocity.x > 0
+                    || currentTileId.x <= node.Id.x && character.Velocity.x < 0
+                    || currentTileId.x == node.Id.x;
+                return xReached && yReached;
             }
         }
 
@@ -212,11 +254,11 @@ namespace RuinsRaiders
             Gizmos.color = Color.white;
         }
 
-        public bool CanWalkOnPosition(Vector2 position)
+        public bool CanMoveOnPosition(Vector2 position)
         {
-            return CanWalkOnTile(GetTileId(position));
+            return CanMoveToTile(GetTileId(position));
         }
-        public bool CanWalkOnTile(Vector2Int Id)
+        public bool CanMoveToTile(Vector2Int Id)
         {
             for (int i = Id.y; i < Id.y + data.height; i++)
             {
@@ -225,9 +267,18 @@ namespace RuinsRaiders
                     return false;
             }
 
-            var floor = astar.GetNode(new Vector2Int(Id.x, Id.y - 1));
+            var node = astar.GetNode(Id);
+            if (node.Water)
+                return character.canSwim;
 
-            return (floor.Block || floor.Platform) && !floor.Spike;
+            if (character.flying)
+                return true;
+
+            if(character.canUseLadder && node.Ladder)
+                return true;
+
+            var floor = astar.GetNode(new Vector2Int(Id.x, Id.y - 1));
+            return floor.Platform || floor.Block;
         }
 
         public Vector2Int GetTileId(Vector2 position)
@@ -235,7 +286,7 @@ namespace RuinsRaiders
             return astar.GetTileId(position + new Vector2(0, 0.1F));
         }
 
-        public Vector2Int GetCurrentTileId { get => GetTileId(transform.position); }
+        public Vector2Int TileId { get => GetTileId(transform.position); }
 
         private AStar FindAStar()
         {

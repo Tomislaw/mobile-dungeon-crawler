@@ -237,6 +237,7 @@ MonoBehaviour:
   haveSneakAnimation: 0
   haveWalkPreAttackAnimation: 0
   haveOverchargeAnimation: 0
+  haveOverchargeAttackAnimation: 0
   haveJumpAnimation: 1
 --- !u!114 &6431135801705382476
 MonoBehaviour:
@@ -261,7 +262,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   attackDamage: 1
-  distance: 1
+  distance: 1.2
   knockback: 0
   deflectProjectiles: 0
 --- !u!114 &6529528878227959671
@@ -281,7 +282,7 @@ MonoBehaviour:
   climbLadderSpeed: 0
   coyoteTime: 0.1
   walkSpeed: 1
-  swimSpeed: 8
+  swimSpeed: 12
   jumpSpeed: 14
   maxSpeed: 30
   acceleration: 65

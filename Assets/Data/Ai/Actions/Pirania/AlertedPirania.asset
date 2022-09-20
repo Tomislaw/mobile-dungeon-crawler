@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f987494fdcb549c4e866a2872200eb3e, type: 3}
-  m_Name: MoveToRandomTilePiraniaAction
+  m_Script: {fileID: 11500000, guid: 5dc5c407c30168244bf8f2b73c499c3d, type: 3}
+  m_Name: AlertedPirania
   m_EditorClassIdentifier: 
-  AwaitTime: 0.5
-  searchDistanceX: 3
-  searchDistanceY: 3
+  parallel: 0
+  actions:
+  - {fileID: 11400000, guid: a5eef494cedf72d438bdc7f8349b15ad, type: 2}
+  - {fileID: 11400000, guid: 200f4adb7e2ae214ab53f5ac9ee2eae9, type: 2}

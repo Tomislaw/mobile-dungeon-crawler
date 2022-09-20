@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 129ca456005e6974ca06ace0fb8d7414, type: 3}
   m_Name: ChaseAndAttackTargetBowGoblinAction
   m_EditorClassIdentifier: Assembly-CSharp::ChaseAndAttackTarget
-  timeBetweenRetryingFindingPath: 0.5
+  timeBetweenRetryingFindingPath: 0.7
   resignDistance: 15
   resignTime: 3
   distanceForAttack: {x: 8, y: 0.5}

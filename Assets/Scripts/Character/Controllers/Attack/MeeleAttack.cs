@@ -28,7 +28,6 @@ namespace RuinsRaiders
                 FindAndDamage();
                 base.Attack();
             }
-
         }
 
         private void DeflectIfPossibe(Projectile target)

@@ -16,6 +16,11 @@ namespace RuinsRaiders
             AddNode(astar, nodes, data, parent.Id + new Vector2Int(0, 1), parent);
             AddNode(astar, nodes, data, parent.Id + new Vector2Int(-1, 0), parent);
             AddNode(astar, nodes, data, parent.Id + new Vector2Int(1, 0), parent);
+
+            AddNode(astar, nodes, data, parent.Id + new Vector2Int(1, -1), parent);
+            AddNode(astar, nodes, data, parent.Id + new Vector2Int(1, 1), parent);
+            AddNode(astar, nodes, data, parent.Id + new Vector2Int(-1, 1), parent);
+            AddNode(astar, nodes, data, parent.Id + new Vector2Int(1, -1), parent);
             return nodes;
         }
 

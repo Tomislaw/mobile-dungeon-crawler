@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3165c69492433e0409aa1ec6efa0ceee, type: 3}
   m_Name: AlertedPirania
   m_EditorClassIdentifier: Assembly-CSharp::BasicAiStateData
-  action: {fileID: 11400000, guid: 803c76245a7836f4e8827914d0b6ea53, type: 2}
+  action: {fileID: 11400000, guid: b2689be1953e6ac4ebd8f74182833242, type: 2}
   onActionFinished: {fileID: 11400000, guid: 90dba53f17c7164419cc993da8c842a8, type: 2}
   stateTransitions: []

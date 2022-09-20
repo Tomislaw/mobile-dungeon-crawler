@@ -30,7 +30,7 @@ namespace RuinsRaiders.AI
                 character = trigger.triggeredFor.GetComponent<MovementController>();
                 pathfinding = trigger.triggeredFor.GetComponent<PathfindingController>();
                 awaitTime = parent.AwaitTime;
-                var id = pathfinding.GetCurrentTileId;
+                var id = pathfinding.TileId;
 
                 List<Vector2Int> positions = new();
                 for (int x = -parent.searchDistanceX; x <= parent.searchDistanceX; x++)
@@ -40,7 +40,7 @@ namespace RuinsRaiders.AI
                             continue;
 
                         var pos = new Vector2Int(id.x + x, id.y + y);
-                        if (pathfinding.CanWalkOnTile(pos))
+                        if (pathfinding.CanMoveToTile(pos))
                             positions.Add(pos);
                     }
 

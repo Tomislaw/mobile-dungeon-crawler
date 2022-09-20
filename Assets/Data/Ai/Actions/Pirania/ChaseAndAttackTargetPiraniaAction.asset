@@ -15,6 +15,6 @@ MonoBehaviour:
   timeBetweenRetryingFindingPath: 0.3
   resignDistance: 10
   resignTime: 2
-  distanceForAttack: 1
-  attackTime: 0.2
-  timeBetweenAttack: 0.1
+  distanceForAttack: {x: 1, y: 1}
+  attackTime: 0
+  timeBetweenAttack: 0.4

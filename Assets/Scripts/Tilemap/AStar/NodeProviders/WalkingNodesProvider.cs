@@ -72,15 +72,23 @@ namespace RuinsRaiders
         {
             if (!AddSwimNode(astar, nodes, data, parent.Id + new Vector2Int(0, -1), parent))
                 AddFallNode(astar, nodes, data, parent.Id + new Vector2Int(0, -1), parent);
+            if (!AddSwimNode(astar, nodes, data, parent.Id + new Vector2Int(1, -1), parent))
+                AddFallNode(astar, nodes, data, parent.Id + new Vector2Int(1, -1), parent);
+            if (!AddSwimNode(astar, nodes, data, parent.Id + new Vector2Int(-1, -1), parent))
+                AddFallNode(astar, nodes, data, parent.Id + new Vector2Int(-1, -1), parent);
 
             if (!AddSwimNode(astar, nodes, data, parent.Id + new Vector2Int(0, 1), parent))
                 AddJumpNode(astar, nodes, data, parent.Id + new Vector2Int(0, 1), parent);
+            AddSwimNode(astar, nodes, data, parent.Id + new Vector2Int(1, 1), parent);
+            AddSwimNode(astar, nodes, data, parent.Id + new Vector2Int(-1, 1), parent);
 
             if (!AddSwimNode(astar, nodes, data, parent.Id + new Vector2Int(-1, 0), parent))
                 AddWalkableNode(astar, nodes, data, parent.Id + new Vector2Int(-1, 0), parent);
 
             if (!AddSwimNode(astar, nodes, data, parent.Id + new Vector2Int(1, 0), parent))
                 AddWalkableNode(astar, nodes, data, parent.Id + new Vector2Int(1, 0), parent);
+
+
         }
 
         private static void AddOnLadderNodes(AStar astar, in List<AStarSharp.Node> nodes, WalkData data, AStarSharp.Node parent)
@@ -88,8 +96,6 @@ namespace RuinsRaiders
             AddJumpNode(astar, nodes, data, parent.Id + new Vector2Int(0, 1), parent);
             AddWalkableNode(astar, nodes, data, parent.Id + new Vector2Int(1, 0), parent);
             AddWalkableNode(astar, nodes, data, parent.Id + new Vector2Int(-1, 0), parent);
-            AddWalkableNode(astar, nodes, data, parent.Id + new Vector2Int(1, 1), parent);
-            AddWalkableNode(astar, nodes, data, parent.Id + new Vector2Int(-1, 1), parent);
             AddWalkableNode(astar, nodes, data, parent.Id + new Vector2Int(0, 1), parent);
             AddFallNode(astar, nodes, data, parent.Id + new Vector2Int(0, -1), parent);
             AddFallNode(astar, nodes, data, parent.Id + new Vector2Int(1, -1), parent);

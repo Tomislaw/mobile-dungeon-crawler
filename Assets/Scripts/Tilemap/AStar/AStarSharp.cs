@@ -191,7 +191,7 @@ namespace RuinsRaiders.AStarSharp
             // construct path, if end was not closed return null
             if (!ClosedList.Exists(x => x.Id == end.Id))
             {
-                current = ClosedList.Where(it => it.jumpHeightLeft == -1 && !it.Spike).OrderBy(it => Vector2Int.Distance(it.Id, End)).First();
+                current = ClosedList.Where(it => it.jumpHeightLeft == -1).OrderBy(it => Vector2Int.Distance(it.Id, End)).First();
             }
 
             // if all good, return path
