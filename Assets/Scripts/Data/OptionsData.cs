@@ -13,8 +13,7 @@ namespace RuinsRaiders
 
         public enum TouchUiType
         {
-            Arrows1,
-            Arrows2,
+            Arrows,
             ArrowsSeparate,
             Joystick,
             None

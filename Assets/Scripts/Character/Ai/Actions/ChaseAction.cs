@@ -79,7 +79,7 @@ namespace RuinsRaiders.AI
                 if (parent.resignTime > 0)
                 {
                     bool seeingTarget = true;
-                    foreach (var item in Physics2D.LinecastAll(target.transform.position + new Vector3(0, 0.5f), character.transform.position))
+                    foreach (var item in Physics2D.LinecastAll(target.transform.position + new Vector3(0, 0.5f), character.transform.position + new Vector3(0, 0.95f, 0)))
                     {
                         if (item.collider is TilemapCollider2D || item.collider is CompositeCollider2D)
                         {
@@ -106,7 +106,7 @@ namespace RuinsRaiders.AI
                     targetCharacter = null;
                     target = null;
                     movementController.Stop();
-                    pathfinding.StopMoving();
+                    pathfinding.Stop();
                     return;
                 }
 
@@ -123,7 +123,15 @@ namespace RuinsRaiders.AI
                 pathfinding.MoveTo(target.transform.position, true);
 
             }
-        }
 
+            public override string ToString()
+            {
+                return "ChaseAction;" +
+                    "\ntimeForResign: " + timeForResign.ToString() +
+                    "\ntimeToNextPathfinding: " + timeToNextPathfinding.ToString() +
+                    "\ntarget: " + target.name +
+                    "\nfinished: " + IsFinished();
+            }
+        }
     }
 }

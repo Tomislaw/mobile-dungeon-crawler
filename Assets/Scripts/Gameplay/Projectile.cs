@@ -32,7 +32,7 @@ namespace RuinsRaiders
         private float explosionForce = 1;
 
         [SerializeField]
-        private List<HealthController.Group> HitFilter = new();
+        public HealthController.Group group;
 
 
         [SerializeField]
@@ -97,7 +97,7 @@ namespace RuinsRaiders
         private void ResolveHit(HealthController target)
         {
 
-            if (!HitFilter.Contains(target.group))
+            if (group == target.group)
                 return;
             else
             {
@@ -118,11 +118,14 @@ namespace RuinsRaiders
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
-
             if (_hit)
                 return;
 
             if (collision.isTrigger)
+                return;
+
+            var healthController = collision.GetComponent<HealthController>();
+            if (healthController != null && group == healthController.group)
                 return;
 
             var hitItems = explosionRadius > 0

@@ -19,11 +19,11 @@ namespace RuinsRaiders
         private float _timeToAnimationAttackFinish = 0;
         private float _timeToOvercharge = 0;
 
-        private Character _character;
+        protected Character _character;
 
         public bool CanAttack { get => _timeToNextAttack <= 0 && !_character.IsDead && !_character.holdUpdate; }
         public bool IsAttacking { get => _timeToAnimationAttackFinish > 0; }
-        public bool IsOvercharged { get => overchargeTime > 0 && _timeToOvercharge <= 0; }
+        public bool IsOvercharged { get; private set; }
 
         public void OnEnable()
         {
@@ -35,6 +35,9 @@ namespace RuinsRaiders
         {
             if (_timeToAnimationAttackFinish > 0) _timeToAnimationAttackFinish -= Time.deltaTime;
             if (_timeToNextAttack > 0) _timeToNextAttack -= Time.deltaTime;
+
+            if(!IsAttacking)
+                IsOvercharged = _timeToOvercharge < 0 && overchargeTime > 0;
 
             if (chargeAttack)
                 _timeToOvercharge -= Time.fixedDeltaTime;

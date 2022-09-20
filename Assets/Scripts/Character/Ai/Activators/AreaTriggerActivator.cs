@@ -12,7 +12,10 @@ namespace RuinsRaiders.AI
         private Vector2 triggerArea;
 
         [SerializeField]
-        private bool raycast;
+        private bool onlyTargetInSight;
+
+        [SerializeField]
+        private bool onlyTargetInWater;
 
         [SerializeField]
         private List<HealthController.Group> activators = new();
@@ -47,25 +50,32 @@ namespace RuinsRaiders.AI
                 var raycast = Physics2D.OverlapBoxAll(target.transform.position, _data.triggerArea * 2, 0);
                 foreach (var go in raycast)
                 {
+                    // continue if target is dead or not in valid group
                     var target = go.gameObject.GetComponent<HealthController>();
+                    if (target == null || target.IsDead || !_data.activators.Contains(target.group))
+                        continue;
 
-                    if (target != null && !target.IsDead && _data.activators.Contains(target.group))
-                    {
-                        if (_data.raycast)
-                            foreach (var item in Physics2D.LinecastAll(this.target.transform.position + new Vector3(0, 0.95f, 0),
-                                go.gameObject.transform.position + new Vector3(0, 0.5f, 0)))
-                            {
-                                if (item.collider is TilemapCollider2D or CompositeCollider2D)
-                                    return null;
-                            }
+                    // continue if target is not swimming when looking only for characters in water
+                    var movementController = target.GetComponent<MovementController>();
+                    if (_data.onlyTargetInWater && movementController != null && !movementController.IsSwimming)
+                        continue;
 
-                        ActivatorData data;
-                        data.triggeredBy = go.gameObject;
-                        data.triggeredFor = this.target;
+                    // if blocked by tilemap collider then it is not visible when looking for targets in sight
+                    if (_data.onlyTargetInSight)
+                        foreach (var item in Physics2D.LinecastAll(this.target.transform.position + new Vector3(0, 0.95f, 0),
+                            go.gameObject.transform.position + new Vector3(0, 0.5f, 0)))
+                        {
+                            if (item.collider is TilemapCollider2D or CompositeCollider2D)
+                                return null;
+                        }
 
-                        return data;
-                    }
+                    ActivatorData data;
+                    data.triggeredBy = go.gameObject;
+                    data.triggeredFor = this.target;
+
+                    return data;
                 }
+
                 return null;
             }
         }

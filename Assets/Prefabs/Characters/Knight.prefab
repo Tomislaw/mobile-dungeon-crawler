@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 39514931662721533}
   - component: {fileID: 6072170547237964431}
   - component: {fileID: -8808715197590347756}
+  - component: {fileID: 21499108938568145}
   m_Layer: 12
   m_Name: Knight
   m_TagString: Player
@@ -91,6 +92,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1586342965606351067}
+  - {fileID: 3238673523870878560}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -182,6 +184,7 @@ MonoBehaviour:
   haveSneakAnimation: 1
   haveWalkPreAttackAnimation: 1
   haveOverchargeAnimation: 1
+  haveJumpAnimation: 0
 --- !u!114 &1586342966391059678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,10 +212,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   astar: {fileID: 0}
   data:
-    maxTimeOnNode: 0
     flying: 0
-    canSwim: 0
+    canSwim: 1
     canUseLadder: 1
+    canUsePlatform: 1
+    maxTimeOnNode: 0
     height: 0
     jumpHeight: 3
     jumpDistance: 5
@@ -256,6 +260,7 @@ MonoBehaviour:
   attackDamage: 2
   distance: 1
   knockback: 200
+  deflectProjectiles: 0
 --- !u!114 &2839153680246517994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,7 +278,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   health: 8
-  haxHealth: 8
+  maxHealth: 8
   ressurectTime: 1
 --- !u!114 &1217533563843094445
 MonoBehaviour:
@@ -289,15 +294,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flying: 0
   gravityScale: 6
-  climbLadderSpeed: 12
+  climbLadderSpeed: 8
   coyoteTime: 0.05
-  walkSpeed: 10
-  jumpSpeed: 16
+  walkSpeed: 9
+  swimSpeed: 7
+  jumpSpeed: 16.5
   maxSpeed: 20
   acceleration: 50
   jerk: 20
   canUseLadder: 1
-  faceLeft: 0
+  canSwim: 1
+  canUsePlatform: 1
   stepTime: 0.15
   onJump:
     m_PersistentCalls:
@@ -509,3 +516,68 @@ MonoBehaviour:
   hoverVariationDistance: 0.5
   itemSpeed: 10
   numberOfKeys: 0
+--- !u!114 &21499108938568145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586342966391059652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f64d346ad54b95c41b0fdcaa083cb8a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oxygen: 4
+  maxOxygen: 4
+  headHeight: 0.8
+  oxygenTime: 1
+  damageWithoutOxygen: 1
+--- !u!1 &2956168785758855339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3238673523870878560}
+  - component: {fileID: 5390855790421618147}
+  m_Layer: 12
+  m_Name: BubbleUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3238673523870878560
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2956168785758855339}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1586342966391059674}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5390855790421618147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2956168785758855339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c58c52e837181824e92afb2cc1eb8880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: -2785653933655266142, guid: f7dbdf9bb6cc5b74aad6324096daa1b1, type: 3}
+  oxygenController: {fileID: 0}
+  healthController: {fileID: 0}
+  maxBubblesInRow: 4

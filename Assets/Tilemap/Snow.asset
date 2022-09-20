@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbd949ab97e5ff4fa55647666dc5fa0, type: 3}
   m_Name: Snow
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: -7902772476317434796, guid: f83ac275bd84ffd4cb466200e561dfa6, type: 3}
+  m_DefaultSprite: {fileID: 6086247628662843074, guid: d75a4ec05da55a548974896b95ce251e, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 2
   m_TilingRules:

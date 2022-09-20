@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d03ceefcad813b418fe06fa33448a63, type: 3}
   m_Name: OptionsData
   m_EditorClassIdentifier: 
-  touchUiType: 3
+  touchUiType: 1
+  musicVolume: 1
+  effectsVolume: 1

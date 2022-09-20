@@ -15,7 +15,7 @@ namespace RuinsRaiders
 
         // health
         public int health = 4;
-        public int haxHealth = 4;
+        public int maxHealth = 4;
 
         [SerializeField]
         private float ressurectTime = 1f;
@@ -27,7 +27,7 @@ namespace RuinsRaiders
 
         public enum Group
         {
-            Skeletons, Player, Goblins, None
+            Skeletons, Player, Goblins, Fish, None
         }
 
         private void Start()
@@ -95,7 +95,7 @@ namespace RuinsRaiders
             if (ai)
                 ai.enabled = true;
             gameObject.layer = _initialLayer;
-            health = haxHealth;
+            health = maxHealth;
 
         }
     }

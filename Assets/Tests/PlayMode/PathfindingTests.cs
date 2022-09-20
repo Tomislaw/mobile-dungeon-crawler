@@ -10,7 +10,7 @@ public class PathfindingTests : TestSceneTests
 {
     private bool CanReachPath(PathfindingController source, PathfindingController target)
     {
-        IEnumerator<FindPathStatus> enumerator = source.GetAStar().GetPath(source.GetCurrentTileId, target.GetCurrentTileId, source.GetWalkData());
+        IEnumerator<FindPathStatus> enumerator = source.GetAStar().GetPath(source.TileId, target.TileId, source.GetWalkData());
         Stack<RuinsRaiders.AStarSharp.Node> nodes = waitForPath(enumerator);
         return nodes.Count > 0;
     }
@@ -31,8 +31,8 @@ public class PathfindingTests : TestSceneTests
     {
         PathfindingController pCtrl = skelly1.GetComponent<PathfindingController>();
 
-        Vector2Int easyTarget = pCtrl.GetCurrentTileId + new Vector2Int(0, -2);
-        IEnumerator<FindPathStatus> enumerator = pCtrl.GetAStar().GetPath(pCtrl.GetCurrentTileId, easyTarget, pCtrl.GetWalkData());
+        Vector2Int easyTarget = pCtrl.TileId + new Vector2Int(0, -2);
+        IEnumerator<FindPathStatus> enumerator = pCtrl.GetAStar().GetPath(pCtrl.TileId, easyTarget, pCtrl.GetWalkData());
         Stack<RuinsRaiders.AStarSharp.Node> nodes = waitForPath(enumerator);
 
         Assert.AreEqual(nodes.Count, 0, "Path was found when it should not have");

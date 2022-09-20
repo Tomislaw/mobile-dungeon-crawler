@@ -134,8 +134,8 @@ MonoBehaviour:
   data:
     maxTimeOnNode: 1
     flying: 0
-    canSwim: 0
-    canUseLadder: 0
+    canSwim: 1
+    canUseLadder: 1
     height: 2
     jumpHeight: 1
     jumpDistance: 2
@@ -158,6 +158,7 @@ MonoBehaviour:
   haveSneakAnimation: 0
   haveWalkPreAttackAnimation: 0
   haveOverchargeAnimation: 0
+  haveJumpAnimation: 0
 --- !u!114 &8932571243353351911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,12 +201,13 @@ MonoBehaviour:
   climbLadderSpeed: 0
   coyoteTime: 0.15
   walkSpeed: 9
+  swimSpeed: 8
   jumpSpeed: 12
   maxSpeed: 30
   acceleration: 65
   jerk: 10
-  canUseLadder: 1
-  faceLeft: 0
+  canUseLadder: 0
+  canSwim: 1
   stepTime: 0.15
   onJump:
     m_PersistentCalls:
@@ -234,7 +236,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   health: 4
-  haxHealth: 4
+  maxHealth: 4
   ressurectTime: 1
 --- !u!114 &2774166976484500296
 MonoBehaviour:

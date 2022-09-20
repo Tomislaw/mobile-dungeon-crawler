@@ -7,8 +7,7 @@ namespace RuinsRaiders
     [CreateAssetMenu(fileName = "MultipleTilesRuleTile", menuName = "RuinsRaiders/MultipleTilesRuleTile", order = 1)]
     public class MultipleTilesRuleTile : RuleTile<MultipleTilesRuleTile.Neighbor>
     {
-        [SerializeField]
-        private List<string> tiles = new();
+        public List<string> tiles = new();
 
         public class Neighbor : RuleTile.TilingRule.Neighbor
         {

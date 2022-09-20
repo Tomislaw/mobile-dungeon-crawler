@@ -102,20 +102,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 884a811e749bead4db30155a4ca075ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 2
-  Rotating: 1
-  DestroyTime: 0.15
-  LifeTime: 0.5
-  ExplosionRadius: 0
-  ExplosionForce: 0
-  HitFilter: 000000000200000003000000
-  InitialVelocity: {x: 24, y: 0}
-  Deceleration: {x: 0, y: 0}
-  Gravity: 0
-  OnSpawn:
+  launcher: {fileID: 0}
+  onSpawn:
     m_PersistentCalls:
       m_Calls: []
-  OnHit:
+  onHit:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1805714663868828918}
@@ -130,7 +121,16 @@ MonoBehaviour:
           m_StringArgument: Destroy
           m_BoolArgument: 0
         m_CallState: 2
-  Launcher: {fileID: 0}
+  initialVelocity: {x: 25, y: 0}
+  damage: 2
+  rotating: 1
+  destroyTime: 1
+  lifeTime: 0.4
+  explosionRadius: 1
+  explosionForce: 1
+  group: 1
+  deceleration: {x: 0, y: 0}
+  gravity: 0
 --- !u!50 &1805714663868828914
 Rigidbody2D:
   serializedVersion: 4

@@ -22,6 +22,9 @@ namespace RuinsRaiders.AI
 
             private void Damaged(GameObject by)
             {
+                if (by == null)
+                    return;
+
                 var projectile = by.GetComponent<Projectile>();
                 if (projectile && projectile.launcher != null)
                     damagedBy = projectile.launcher.gameObject;

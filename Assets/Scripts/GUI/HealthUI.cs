@@ -20,6 +20,9 @@ namespace RuinsRaiders.GUI
         // Update is called once per frame
         private void OnEnable()
         {
+            if (healthController != null)
+                return;
+
             healthController = GetComponent<HealthController>();
             if (healthController == null && transform.parent!=null)
                 healthController = transform.parent.GetComponent<HealthController>();
@@ -42,7 +45,7 @@ namespace RuinsRaiders.GUI
             else
                 transform.localScale = new Vector3(1, 1, 1);
 
-            if ((healthController.haxHealth + 1) / 2 != _hearts.Count)
+            if ((healthController.maxHealth + 1) / 2 != _hearts.Count)
             {
                 Invalidate();
                 _previousHealth = 0;
@@ -81,7 +84,7 @@ namespace RuinsRaiders.GUI
             _hearts.Clear();
 
 
-            int heartsCount = healthController.IsDead ? 0 : (healthController.haxHealth + 1) / 2;
+            int heartsCount = healthController.IsDead ? 0 : (healthController.maxHealth + 1) / 2;
 
             float hearthWidth = 1;
 

@@ -17,7 +17,7 @@ namespace RuinsRaiders.UI
         [SerializeField]
         private ArrowsHandleButton leftButton;
         [SerializeField]
-        private ArrowsHandleButton rightBytton;
+        private ArrowsHandleButton rightButton;
 
         [SerializeField]
         private ArrowsHandleButton leftUpButton;
@@ -66,7 +66,7 @@ namespace RuinsRaiders.UI
 
             Value = new Vector2();
             ResolvePress(Poly.ContainsPoint(LeftHull(), point), leftButton, new Vector2(-1, Value.y));
-            ResolvePress(Poly.ContainsPoint(RightHull(), point), rightBytton, new Vector2(1, Value.y));
+            ResolvePress(Poly.ContainsPoint(RightHull(), point), rightButton, new Vector2(1, Value.y));
 
             ResolvePress(Poly.ContainsPoint(TopHull(), point), upButton, new Vector2(Value.x, 1));
             ResolvePress(Poly.ContainsPoint(BottomHull(), point), downButton, new Vector2(Value.x, -1));
@@ -335,7 +335,7 @@ namespace RuinsRaiders.UI
             Value = new Vector2();
 
             ResolvePress(false, leftButton);
-            ResolvePress(false, rightBytton);
+            ResolvePress(false, rightButton);
             ResolvePress(false, upButton);
             ResolvePress(false, downButton);
             ResolvePress(false, leftDownButton);

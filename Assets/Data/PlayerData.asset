@@ -27,5 +27,5 @@ MonoBehaviour:
     unlocked: 0
     skills: 000000000000000000000000
   archer:
-    unlocked: 0
+    unlocked: 1
     skills: 000000000000000000000000

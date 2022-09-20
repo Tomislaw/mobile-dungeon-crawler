@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3165c69492433e0409aa1ec6efa0ceee, type: 3}
+  m_Name: IdlePirania
+  m_EditorClassIdentifier: Assembly-CSharp::BasicAiStateData
+  action: {fileID: 11400000, guid: a30f2f75817aa8f45883599730c9adac, type: 2}
+  onActionFinished: {fileID: 11400000}
+  stateTransitions:
+  - state: {fileID: 11400000, guid: a1fada03b0c0c2549968c2aaa3810f10, type: 2}
+    activators:
+    - {fileID: 11400000, guid: 47c0a15e818bf9f47a03f8be1b2aa01e, type: 2}
+    - {fileID: 11400000, guid: 81fa808bae629c14d9590a2f0df729d0, type: 2}
