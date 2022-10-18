@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Menus Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Menus
+  m_TableCollectionNameGuidString: 28b919ffe2a9ff94180b8b39235d679e
+  m_Entries:
+  - m_Id: 1554364559360
+    m_Key: MainMenu/Menu/Main/Panel/Selection/Adventure/Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1715090288640
+    m_Key: MainMenu/Menu/Main/Panel/Selection/Forge/Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2012118315008
+    m_Key: MainMenu/Menu/Main/Panel/Selection/Shop/Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2192947343360
+    m_Key: MainMenu/Menu/Main/Panel/Selection/Credits/Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3052251181056
+    m_Key: MainMenu/Menu/OptionsMenu/SelectUi/Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3227430481920
+    m_Key: MainMenu/Menu/OptionsMenu/SelectUi/Arrows/Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276499644416
+    m_Key: MainMenu/Menu/OptionsMenu/SelectUi/ArrowsSeparate/Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3411661090816
+    m_Key: MainMenu/Menu/OptionsMenu/SelectUi/Joystick/Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3467197870080
+    m_Key: MainMenu/Menu/OptionsMenu/SelectUi/None/Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3653504659456
+    m_Key: MainMenu/Menu/OptionsMenu/SoundUi/Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3751903031296
+    m_Key: MainMenu/Menu/OptionsMenu/SoundUi/Text 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3793363726336
+    m_Key: MainMenu/Menu/OptionsMenu/SoundUi/Text 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4800630026240
+    m_Key: MainMenu/Menu/Main/Panel/Forge/KnightUpgrades/Banner/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4967777234944
+    m_Key: MainMenu/Menu/Main/Panel/Forge/ArcherUpgrades/Banner/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5113785151488
+    m_Key: MainMenu/Menu/Main/Panel/Forge/MageUpgrades/Banner/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5277874712576
+    m_Key: MainMenu/Menu/Main/Panel/Forge/SpearmanUpgrades/Banner/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27215770742784
+    m_Key: MainMenu/Menu/OptionsMenu/LocaleUI/Text
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6640597658703495192
+  references:
+    version: 2
+    RefIds:
+    - rid: 6640597658703495192
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1666120402929
