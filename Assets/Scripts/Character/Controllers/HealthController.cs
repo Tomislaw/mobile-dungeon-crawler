@@ -6,6 +6,8 @@ namespace RuinsRaiders
 {
     public class HealthController : MonoBehaviour
     {
+        private static float FlashTime = 0.15f;
+
         public bool IsDead { get => health <= 0; }
 
         public Group group;
@@ -22,6 +24,7 @@ namespace RuinsRaiders
 
         private Character _character;
         private AI.BasicAi _ai;
+        private Renderer _renderer;
 
         private int _initialLayer = 0;
 
@@ -35,6 +38,8 @@ namespace RuinsRaiders
             _character = GetComponent<Character>();
             _ai = GetComponent<AI.BasicAi>();
             _initialLayer = gameObject.layer;
+            _renderer = GetComponent<Renderer>();
+
             if (health <= 0)
             {
                 if (_character)
@@ -55,6 +60,9 @@ namespace RuinsRaiders
 
             if (onDamage != null)
                 onDamage.Invoke(who);
+
+            if (_renderer != null)
+                StartCoroutine(FlashColor());
 
             health -= damage;
             if (health <= 0)
@@ -79,6 +87,13 @@ namespace RuinsRaiders
         public void Resurrect()
         {
             StartCoroutine(ResurrectCoroutine());
+        }
+
+        private IEnumerator FlashColor()
+        {
+            _renderer.material.SetFloat("Flash", 1);
+            yield return new WaitForSeconds(FlashTime);
+            _renderer.material.SetFloat("Flash", 0);
         }
 
         private IEnumerator ResurrectCoroutine()

@@ -9,23 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b42a5f0fe3795848a740419939dd3fd, type: 3}
-  m_Name: PlayerData
+  m_Script: {fileID: 11500000, guid: e89aa2aa0611880409b150dd0df1add4, type: 3}
+  m_Name: RewardsData
   m_EditorClassIdentifier: 
-  gems:
+  normalChestReward:
+    redGems: 10
+    blueGems: 10
+    greenGems: 10
+    silverGems: 10
+  exuisiteChestReward:
     redGems: 50
     blueGems: 50
     greenGems: 50
     silverGems: 50
-  knight:
-    unlocked: 1
-    skills: 000000000000000000000000
-  mage:
-    unlocked: 0
-    skills: 000000000000000000000000
-  spearman:
-    unlocked: 0
-    skills: 000000000000000000000000
-  archer:
-    unlocked: 1
-    skills: 000000000000000000000000

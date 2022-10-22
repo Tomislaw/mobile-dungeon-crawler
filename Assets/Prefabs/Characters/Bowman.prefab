@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1586342966391059649, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: a16dcf0a14c672d499fdc3e88ffd357f, type: 2}
     - target: {fileID: 1586342966391059652, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
       propertyPath: m_Name
       value: Bowman
@@ -28,9 +32,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1586342966391059677, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 2100000, guid: 26f3e313dfbd72b4a903f96d662305a3, type: 2}
+      objectReference: {fileID: 937433859, guid: 04fc3ad955fc7cb44bd7a9938d8d891c, type: 3}
     - target: {fileID: 2839153680246517994, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
       propertyPath: Health
       value: 6

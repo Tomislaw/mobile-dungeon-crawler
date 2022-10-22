@@ -1,9 +1,11 @@
-Shader "Sprites/Default-Replacable"
+Shader "Sprites/FlashSprite"
 {
 	Properties
 	{
-		TextureReplacable("Sprite Texture", 2D) = "white" {}
+		[PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
 		_Color("Tint", Color) = (1,1,1,1)
+		FlashColor("FlashColor", Color) = (1,1,1,1)
+		Flash("Flash", Float) = 0
 		[MaterialToggle] PixelSnap("Pixel snap", Float) = 0
 	}
 
@@ -46,6 +48,8 @@ Shader "Sprites/Default-Replacable"
 				};
 
 				fixed4 _Color;
+				fixed4 FlashColor;
+				float Flash;
 
 				v2f vert(appdata_t IN)
 				{
@@ -60,14 +64,17 @@ Shader "Sprites/Default-Replacable"
 					return OUT;
 				}
 
-				sampler2D TextureReplacable;
+				sampler2D _MainTex;
 				sampler2D _AlphaTex;
 				float _AlphaSplitEnabled;
 
 				fixed4 SampleSpriteTexture(float2 uv)
 				{
-					fixed4 color = tex2D(TextureReplacable, uv);
-
+					fixed4 normalColor = tex2D(_MainTex, uv);
+					fixed4 flashColor = FlashColor;
+					flashColor.a = normalColor.a;
+					fixed4 color = lerp(normalColor, flashColor, Flash);
+					
 	#if UNITY_TEXTURE_ALPHASPLIT_ALLOWED
 					if (_AlphaSplitEnabled)
 						color.a = tex2D(_AlphaTex, uv).r;

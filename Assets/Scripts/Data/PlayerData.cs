@@ -21,6 +21,14 @@ namespace RuinsRaiders
             public int blueGems;
             public int greenGems;
             public int silverGems;
+
+            public static Gems operator +(Gems a, Gems b) => new()
+            {
+                redGems = a.redGems + b.redGems, 
+                blueGems = a.blueGems + b.blueGems,
+                greenGems = a.blueGems - b.blueGems,
+                silverGems = a.silverGems + b.silverGems,
+            };
         }
 
         [Serializable]

@@ -66,7 +66,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8942d41327e0c8c4c83bc7bb38fd0089, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -132,10 +132,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   astar: {fileID: 0}
   data:
-    maxTimeOnNode: 1
     flying: 0
     canSwim: 1
     canUseLadder: 1
+    canUsePlatform: 0
+    maxTimeOnNode: 1
     height: 2
     jumpHeight: 1
     jumpDistance: 2
@@ -158,6 +159,7 @@ MonoBehaviour:
   haveSneakAnimation: 0
   haveWalkPreAttackAnimation: 0
   haveOverchargeAnimation: 0
+  haveOverchargeAttackAnimation: 0
   haveJumpAnimation: 0
 --- !u!114 &8932571243353351911
 MonoBehaviour:
@@ -184,6 +186,7 @@ MonoBehaviour:
   attackDamage: 1
   distance: 1.6
   knockback: 200
+  deflectProjectiles: 0
 --- !u!114 &4069350316886678256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,6 +211,7 @@ MonoBehaviour:
   jerk: 10
   canUseLadder: 0
   canSwim: 1
+  canUsePlatform: 1
   stepTime: 0.15
   onJump:
     m_PersistentCalls:

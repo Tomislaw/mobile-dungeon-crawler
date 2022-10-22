@@ -116,7 +116,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8942d41327e0c8c4c83bc7bb38fd0089, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -184,6 +184,7 @@ MonoBehaviour:
   haveSneakAnimation: 1
   haveWalkPreAttackAnimation: 1
   haveOverchargeAnimation: 1
+  haveOverchargeAttackAnimation: 0
   haveJumpAnimation: 0
 --- !u!114 &1586342966391059678
 MonoBehaviour:
@@ -528,10 +529,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f64d346ad54b95c41b0fdcaa083cb8a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oxygen: 4
-  maxOxygen: 4
+  oxygen: 8
+  maxOxygen: 8
   headHeight: 0.8
-  oxygenTime: 1
+  oxygenTime: 0.5
   damageWithoutOxygen: 1
 --- !u!1 &2956168785758855339
 GameObject:
@@ -558,7 +559,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2956168785758855339}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -26,5 +26,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Debug/TestScene.unity
     guid: 62c074efa618063418866ea23df07c24
+  - enabled: 1
+    path: Assets/Scenes/Forest/Forest1.unity
+    guid: 661622848a1f5954d9b4fddc5392f066
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 5c3bd914ef89c5f428fecffd59da1e41, type: 2}

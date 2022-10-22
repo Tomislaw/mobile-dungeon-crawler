@@ -15,7 +15,13 @@ MonoBehaviour:
   levels:
   - enabled: 0
     finished: 0
-    chests: []
+    chests:
+    - acquired: 0
+      type: 0
+    - acquired: 0
+      type: 0
+    - acquired: 0
+      type: 0
     firstClearReward:
       redGems: 0
       blueGems: 0
@@ -24,7 +30,13 @@ MonoBehaviour:
     scene: Volcano1
   - enabled: 0
     finished: 0
-    chests: []
+    chests:
+    - acquired: 0
+      type: 0
+    - acquired: 0
+      type: 0
+    - acquired: 0
+      type: 0
     firstClearReward:
       redGems: 0
       blueGems: 0
@@ -33,7 +45,13 @@ MonoBehaviour:
     scene: Volcano2
   - enabled: 0
     finished: 0
-    chests: []
+    chests:
+    - acquired: 0
+      type: 0
+    - acquired: 0
+      type: 0
+    - acquired: 0
+      type: 0
     firstClearReward:
       redGems: 0
       blueGems: 0
@@ -42,7 +60,13 @@ MonoBehaviour:
     scene: Volcano3
   - enabled: 0
     finished: 0
-    chests: []
+    chests:
+    - acquired: 0
+      type: 0
+    - acquired: 0
+      type: 0
+    - acquired: 0
+      type: 0
     firstClearReward:
       redGems: 0
       blueGems: 0
@@ -51,7 +75,13 @@ MonoBehaviour:
     scene: Volcano4
   - enabled: 0
     finished: 0
-    chests: []
+    chests:
+    - acquired: 0
+      type: 0
+    - acquired: 0
+      type: 0
+    - acquired: 0
+      type: 0
     firstClearReward:
       redGems: 0
       blueGems: 0
@@ -60,7 +90,13 @@ MonoBehaviour:
     scene: Volcano5
   - enabled: 0
     finished: 0
-    chests: []
+    chests:
+    - acquired: 0
+      type: 0
+    - acquired: 0
+      type: 0
+    - acquired: 0
+      type: 0
     firstClearReward:
       redGems: 0
       blueGems: 0
@@ -69,7 +105,13 @@ MonoBehaviour:
     scene: Volcano6
   - enabled: 0
     finished: 0
-    chests: []
+    chests:
+    - acquired: 0
+      type: 0
+    - acquired: 0
+      type: 0
+    - acquired: 0
+      type: 0
     firstClearReward:
       redGems: 0
       blueGems: 0
@@ -78,7 +120,13 @@ MonoBehaviour:
     scene: Volcano7
   - enabled: 0
     finished: 0
-    chests: []
+    chests:
+    - acquired: 0
+      type: 0
+    - acquired: 0
+      type: 0
+    - acquired: 0
+      type: 0
     firstClearReward:
       redGems: 0
       blueGems: 0
@@ -87,7 +135,13 @@ MonoBehaviour:
     scene: Volcano8
   - enabled: 0
     finished: 0
-    chests: []
+    chests:
+    - acquired: 0
+      type: 0
+    - acquired: 0
+      type: 0
+    - acquired: 0
+      type: 0
     firstClearReward:
       redGems: 0
       blueGems: 0
