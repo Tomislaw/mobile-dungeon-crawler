@@ -24,6 +24,12 @@ MonoBehaviour:
     - Locale
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8d1462183e0672549b27f63d8ab16130
+    m_Address: Polish (pl)
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 14017ba065c14184c84dfbf7f40189b1
     m_Address: Spanish (es)
     m_ReadOnly: 1
     m_SerializedLabels:
