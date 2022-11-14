@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Menus_pl
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pl
+  m_SharedData: {fileID: 11400000, guid: 28b919ffe2a9ff94180b8b39235d679e, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 1554364559360
+    m_Localized: Wyprawa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1715090288640
+    m_Localized: "Ku\u017Ania"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2012118315008
+    m_Localized: Sklep
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2192947343360
+    m_Localized: 'Kredyty
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3052251181056
+    m_Localized: Sterowanie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3227430481920
+    m_Localized: Przyciski
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276499644416
+    m_Localized: Przyciski odzielone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3411661090816
+    m_Localized: Joystick
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3467197870080
+    m_Localized: Nic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3653504659456
+    m_Localized: "D\u017Awi\u0119k"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3751903031296
+    m_Localized: Muzyka
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3793363726336
+    m_Localized: Efekty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4800630026240
+    m_Localized: 'Rycerz
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4967777234944
+    m_Localized: "\u0141ucznik\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5113785151488
+    m_Localized: 'Mag
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5277874712576
+    m_Localized: "W\u0142\xF3cznik\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27215770742784
+    m_Localized: "J\u0119zyk"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

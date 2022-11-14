@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 587152af50085ec43b53f18ab5edf1d6
+guid: 4225c94c70e7e47468430171411b7dc0
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,8 +9,9 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - CG pixel 4x5
-  fallbackFontReferences: []
+  - 4x5mono
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 587152af50085ec43b53f18ab5edf1d6, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
