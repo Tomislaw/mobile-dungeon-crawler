@@ -45,20 +45,22 @@ namespace RuinsRaiders
         private Collider2D _collider;
 
         private bool _hit = false;
+        private float _lifeTimeLeft = 2;
 
         void Start()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _rigidbody.velocity = initialVelocity;
             _collider = GetComponent<Collider2D>();
+            _lifeTimeLeft = lifeTime;
             onSpawn.Invoke();
         }
 
         // Update is called once per frame
         void FixedUpdate()
         {
-            lifeTime -= Time.fixedDeltaTime;
-            if (lifeTime <= 0)
+            _lifeTimeLeft -= Time.fixedDeltaTime;
+            if (_lifeTimeLeft <= 0)
             {
                 if (_hit == false)
                 {
@@ -67,7 +69,7 @@ namespace RuinsRaiders
                     Stop();
                 }
 
-                lifeTime = 0;
+                _lifeTimeLeft = 0;
                 destroyTime -= Time.fixedDeltaTime;
                 if (destroyTime <= 0)
                     Destroy(gameObject);
@@ -157,18 +159,18 @@ namespace RuinsRaiders
                 var target = hit.GetComponent<HealthController>();
                 if (target == null)
                 {
-                    lifeTime = 0;
+                    _lifeTimeLeft = 0;
                     continue;
                 }
                 if (target.IsDead)
                     continue;
 
-                lifeTime = 0;
+                _lifeTimeLeft = 0;
                 ResolveHit(target);
             }
 
 
-            if (lifeTime <= 0)
+            if (_lifeTimeLeft <= 0)
             {
                 Stop();
                 OnProjectileDeath();
@@ -181,6 +183,12 @@ namespace RuinsRaiders
             _rigidbody.isKinematic = false;
             _rigidbody.simulated = false;
             _hit = true;
+        }
+
+        public void ResetLifeTime()
+        {
+            if (_lifeTimeLeft > 0)
+                _lifeTimeLeft = lifeTime;
         }
 
         private void OnProjectileDeath()
