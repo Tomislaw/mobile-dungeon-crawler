@@ -14,10 +14,10 @@ GameObject:
   - component: {fileID: 1805714663868828914}
   - component: {fileID: 1805714663868828918}
   - component: {fileID: 5045053919743331434}
-  - component: {fileID: 8159555819364694171}
-  - component: {fileID: 8982838123525516651}
-  m_Layer: 12
-  m_Name: Arrow
+  - component: {fileID: -8807375777240236185}
+  - component: {fileID: -3383266266087061591}
+  m_Layer: 0
+  m_Name: ArrowShort
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,8 +121,8 @@ MonoBehaviour:
           m_StringArgument: Destroy
           m_BoolArgument: 0
         m_CallState: 2
-  initialVelocity: {x: 35, y: 0}
-  damage: 3
+  initialVelocity: {x: 25, y: 0}
+  damage: 2
   rotating: 1
   destroyTime: 1
   lifeTime: 0.4
@@ -198,7 +198,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6350517, y: 0.1318978}
   m_EdgeRadius: 0
---- !u!114 &8159555819364694171
+--- !u!114 &-8807375777240236185
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
   soundType: 1
---- !u!82 &8982838123525516651
+--- !u!82 &-3383266266087061591
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 1805714663868828917}
   - component: {fileID: 1805714663868828914}
   - component: {fileID: 1805714663868828918}
-  - component: {fileID: 7738982885625658183}
-  - component: {fileID: -4250467093801503428}
-  - component: {fileID: -158256940773805104}
-  m_Layer: 12
-  m_Name: Shock
+  - component: {fileID: 5045053919743331434}
+  - component: {fileID: 8159555819364694171}
+  - component: {fileID: 8982838123525516651}
+  m_Layer: 0
+  m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 878698372, guid: 956dec27c9633ed4c89ebe571a054733, type: 3}
+  m_Sprite: {fileID: 72258738, guid: 0a8cb3962a69f19439a4002bf0a31ccc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -121,13 +121,13 @@ MonoBehaviour:
           m_StringArgument: Destroy
           m_BoolArgument: 0
         m_CallState: 2
-  initialVelocity: {x: 0, y: -10}
-  damage: 2
-  rotating: 0
+  initialVelocity: {x: 35, y: 0}
+  damage: 3
+  rotating: 1
   destroyTime: 1
-  lifeTime: 2
+  lifeTime: 0.4
   explosionRadius: 1
-  explosionForce: 400
+  explosionForce: 1
   group: 1
   deceleration: {x: 0, y: 0}
   gravity: 0
@@ -141,16 +141,16 @@ Rigidbody2D:
   m_GameObject: {fileID: 1805714663868828912}
   m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 1
+  m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!95 &1805714663868828918
 Animator:
@@ -162,7 +162,7 @@ Animator:
   m_GameObject: {fileID: 1805714663868828912}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3c84f031409569442a1ed912c70f159c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0e095bd700c060d48994a6678601f585, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -172,7 +172,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &7738982885625658183
+--- !u!61 &5045053919743331434
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,23 +182,23 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.25}
+  m_Offset: {x: 0.32247412, y: -0.06227544}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1, y: 2}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 1}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.5}
+  m_Size: {x: 0.6350517, y: 0.1318978}
   m_EdgeRadius: 0
---- !u!114 &-4250467093801503428
+--- !u!114 &8159555819364694171
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
   soundType: 1
---- !u!82 &-158256940773805104
+--- !u!82 &8982838123525516651
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,10 +222,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a47515242ac52cf4b81220f7b268e254, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 108b9753b120b384dab1a1f39d450bae, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 0.61
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -233,7 +233,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 30
+  MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -283,7 +283,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.6027778
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

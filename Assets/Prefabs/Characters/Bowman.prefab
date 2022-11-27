@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 499992325529902725, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1586342966391059652, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
       propertyPath: m_Name
       value: Bowman
