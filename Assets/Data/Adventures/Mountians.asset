@@ -14,21 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - enabled: 1
-    finished: 0
+    finished: 1
     chests:
-    - acquired: 0
+    - acquired: 1
       type: 0
     - acquired: 0
       type: 0
-    - acquired: 0
+    - acquired: 1
       type: 0
-    firstClearReward:
-      redGems: 0
-      blueGems: 0
-      greenGems: 0
-      silverGems: 0
     scene: Mountian1
-  - enabled: 0
+  - enabled: 1
     finished: 0
     chests:
     - acquired: 0
@@ -37,11 +32,6 @@ MonoBehaviour:
       type: 0
     - acquired: 0
       type: 0
-    firstClearReward:
-      redGems: 0
-      blueGems: 0
-      greenGems: 0
-      silverGems: 0
     scene: Mountian2
   - enabled: 0
     finished: 0
@@ -52,11 +42,6 @@ MonoBehaviour:
       type: 0
     - acquired: 0
       type: 0
-    firstClearReward:
-      redGems: 0
-      blueGems: 0
-      greenGems: 0
-      silverGems: 0
     scene: Mountian3
   - enabled: 0
     finished: 0
@@ -67,11 +52,6 @@ MonoBehaviour:
       type: 0
     - acquired: 0
       type: 0
-    firstClearReward:
-      redGems: 0
-      blueGems: 0
-      greenGems: 0
-      silverGems: 0
     scene: Mountian4
   - enabled: 0
     finished: 0
@@ -82,11 +62,6 @@ MonoBehaviour:
       type: 0
     - acquired: 0
       type: 0
-    firstClearReward:
-      redGems: 0
-      blueGems: 0
-      greenGems: 0
-      silverGems: 0
     scene: Mountian5
   - enabled: 0
     finished: 0
@@ -97,11 +72,6 @@ MonoBehaviour:
       type: 0
     - acquired: 0
       type: 0
-    firstClearReward:
-      redGems: 0
-      blueGems: 0
-      greenGems: 0
-      silverGems: 0
     scene: Mountian6
   - enabled: 0
     finished: 0
@@ -112,11 +82,6 @@ MonoBehaviour:
       type: 0
     - acquired: 0
       type: 0
-    firstClearReward:
-      redGems: 0
-      blueGems: 0
-      greenGems: 0
-      silverGems: 0
     scene: Mountian7
   - enabled: 0
     finished: 0
@@ -127,11 +92,6 @@ MonoBehaviour:
       type: 0
     - acquired: 0
       type: 0
-    firstClearReward:
-      redGems: 0
-      blueGems: 0
-      greenGems: 0
-      silverGems: 0
     scene: Mountian8
   - enabled: 0
     finished: 0
@@ -142,9 +102,4 @@ MonoBehaviour:
       type: 0
     - acquired: 0
       type: 0
-    firstClearReward:
-      redGems: 0
-      blueGems: 0
-      greenGems: 0
-      silverGems: 0
     scene: Mountian9

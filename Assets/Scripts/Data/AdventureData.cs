@@ -42,7 +42,7 @@ namespace RuinsRaiders
 
                 levels[i].finished = true;
                 if (i < levels.Count - 1)
-                    levels[i].enabled = true;
+                    levels[i+1].enabled = true;
             }
         }
 
