@@ -374,7 +374,7 @@ MonoBehaviour:
   flying: 0
   gravityScale: 6
   climbLadderSpeed: 8
-  coyoteTime: 0.05
+  coyoteTime: 0.08
   walkSpeed: 9
   swimSpeed: 7
   jumpSpeed: 16.5

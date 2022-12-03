@@ -11,14 +11,17 @@ namespace RuinsRaiders {
         private List<Animator> chestsAnimators = new List<Animator>();
 
         [SerializeField]
-        private float songDelay = 1;
-
+        private float equisiteChestOpenedSongDelay = 1;
         [SerializeField]
         private AudioClip equisiteChestOpenedSong;
 
         [SerializeField]
+        private float chestOpenedSongDelay = 1;
+        [SerializeField]
         private AudioClip chestOpenedSong;
 
+        [SerializeField]
+        private float noChestOpenedSongDelay = 0;
         [SerializeField]
         private AudioClip noChestOpenedSong;
 
@@ -60,31 +63,21 @@ namespace RuinsRaiders {
             var audioSource = GetComponent<AudioSource>();
 
 
-            yield return new WaitForSeconds(songDelay);
-
             switch (songType)
             {
                 case AdventureData.ChestData.Type.Equisite:
+                    yield return new WaitForSeconds(equisiteChestOpenedSongDelay);
                     audioSource.PlayOneShot(equisiteChestOpenedSong);
                     break;
                 case AdventureData.ChestData.Type.Normal:
+                    yield return new WaitForSeconds(chestOpenedSongDelay);
                     audioSource.PlayOneShot(chestOpenedSong);
                     break;
                 default:
+                    yield return new WaitForSeconds(noChestOpenedSongDelay);
                     audioSource.PlayOneShot(noChestOpenedSong);
                     break;
             }
-        }
-
-        void Awake()
-        {
-            Debug.Log(name);
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
     }
 }

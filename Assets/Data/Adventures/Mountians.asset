@@ -16,7 +16,7 @@ MonoBehaviour:
   - enabled: 1
     finished: 1
     chests:
-    - acquired: 1
+    - acquired: 0
       type: 0
     - acquired: 0
       type: 0

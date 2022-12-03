@@ -409,7 +409,7 @@ MonoBehaviour:
   songDelay: 1
   equisiteChestOpenedSong: {fileID: 8300000, guid: 2f11e69e6e70286469d7221d4cd2fe7b, type: 3}
   chestOpenedSong: {fileID: 8300000, guid: 2f11e69e6e70286469d7221d4cd2fe7b, type: 3}
-  noChestOpenedSong: {fileID: 8300000, guid: 2f11e69e6e70286469d7221d4cd2fe7b, type: 3}
+  noChestOpenedSong: {fileID: 8300000, guid: 929b7125e45210b479a4cada281eab96, type: 3}
   levelClearedParticles: {fileID: 0}
 --- !u!1 &5034235337040537556
 GameObject:
