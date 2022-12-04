@@ -29,6 +29,7 @@ namespace RuinsRaiders
 
         private MovementController _pusher;
         private AStar _astar;
+        private Collider2D _collider;
 
         private float _rotation = 0;
         public bool IsRolling { get; private set; }
@@ -50,6 +51,7 @@ namespace RuinsRaiders
         {
             _astar = FindObjectOfType<AStar>();
             _rotation = transform.rotation.eulerAngles.z;
+            _collider = GetComponent<Collider2D>();
 
             if (_astar == null)
                 return;
@@ -60,7 +62,7 @@ namespace RuinsRaiders
 
         private void OnEnable()
         {
-            if (_astar == null)
+            if (_astar == null || _collider == null || _collider.isActiveAndEnabled)
                 return;
             _astar.AddDynamicBlockTile(_astar.GetTileId(transform.position));
             UpdateStandings();
@@ -128,8 +130,24 @@ namespace RuinsRaiders
                 coroutine = StartCoroutine(Roll(_pusher.FaceLeft));
             }
 
-
         }
+
+        public void SetCollision(bool collision)
+        {
+            if (_collider == null)
+                return;
+
+            _collider.enabled = collision;
+            if (collision)
+            {
+                _astar.AddDynamicBlockTile(_astar.GetTileId(transform.position));
+            }
+            else
+            {
+                _astar.RemoveDynamicBlockTile(_astar.GetTileId(transform.position));
+            }
+        }
+
         public void UpdateStandings()
         {
             if(!isActiveAndEnabled)

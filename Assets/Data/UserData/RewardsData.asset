@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e89aa2aa0611880409b150dd0df1add4, type: 3}
+  m_Name: RewardsData
+  m_EditorClassIdentifier: 
+  normalChestReward:
+    redGems: 10
+    blueGems: 10
+    greenGems: 10
+    silverGems: 10
+  exuisiteChestReward:
+    redGems: 50
+    blueGems: 50
+    greenGems: 50
+    silverGems: 50

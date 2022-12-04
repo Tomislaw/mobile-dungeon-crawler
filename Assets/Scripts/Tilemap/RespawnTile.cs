@@ -2,6 +2,7 @@
 
 namespace RuinsRaiders
 {
+    [ExecuteAlways]
     public class RespawnTile : MonoBehaviour
     {
         private void Start()

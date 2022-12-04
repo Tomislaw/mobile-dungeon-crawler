@@ -22,6 +22,17 @@ namespace RuinsRaiders.UI
         [SerializeField]
         private Sprite normalSprite;
 
+        [SerializeField]
+        private Sprite noChestSprite;
+
+        [SerializeField]
+        private Sprite normalChestSprite;
+
+        [SerializeField]
+        private Sprite exquisiteChestSprite;
+
+        [SerializeField]
+        private Image[] chests;
 
         [SerializeField]
         private TMPro.TMP_Text tmpText;
@@ -81,6 +92,25 @@ namespace RuinsRaiders.UI
 
             var levelData = data.levels[level];
             isLocked = !levelData.enabled;
+
+            if (chests.Length != levelData.chests.Count)
+                Debug.LogWarningFormat("Invalid number of chests in ui for {0} in {1}", name, transform.parent.name);
+
+            for (int i = 0; i < chests.Length && i < levelData.chests.Count; i++)
+            {
+                if (!levelData.chests[i].acquired)
+                    chests[i].sprite = noChestSprite;
+                else
+                    switch (levelData.chests[i].type)
+                    {
+                        case AdventureData.ChestData.Type.Normal:
+                            chests[i].sprite = normalChestSprite;
+                            break;
+                        case AdventureData.ChestData.Type.Equisite:
+                            chests[i].sprite = exquisiteChestSprite;
+                            break;
+                    }
+            }
 
             if (tmpText)
                 tmpText.text = (level + 1).ToString();

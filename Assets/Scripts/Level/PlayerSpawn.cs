@@ -48,13 +48,18 @@ namespace RuinsRaiders
             transform.parent = player.gameObject.transform;
 
             var healthComponent = player.GetComponent<HealthController>();
-            if(healthComponent)
+            if (healthComponent)
                 healthComponent.onDeath.AddListener(OnDeath);
+
+            var movement = player.GetComponent<MovementController>();
+            if (movement)
+                movement.Teleport(movement.transform.position);
+
         }
 
         private void OnDeath()
         {
-            FindObjectOfType<LevelEvents>().LevelFailed();
+            LevelEvents.Instance.FailLevel();
         }
 
         [Serializable]

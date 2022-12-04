@@ -26,7 +26,7 @@ namespace RuinsRaiders
 
             if (playerLayer == (playerLayer | (1 << collision.gameObject.layer)))
             {
-                _levelEvents.LevelFinished();
+                _levelEvents.FinishLevel();
                 StartCoroutine(character.HideCoroutine());
             }
         }

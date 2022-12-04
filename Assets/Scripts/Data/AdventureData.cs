@@ -9,6 +9,7 @@ namespace RuinsRaiders
     [CreateAssetMenu(fileName = "AdventureData", menuName = "RuinsRaiders/AdventureData", order = 1)]
     public class AdventureData : ScriptableObject
     {
+
         public List<Level> levels = new();
 
         public Level GetCurrentLevel()
@@ -41,7 +42,7 @@ namespace RuinsRaiders
 
                 levels[i].finished = true;
                 if (i < levels.Count - 1)
-                    levels[i].enabled = true;
+                    levels[i+1].enabled = true;
             }
         }
 
@@ -51,7 +52,6 @@ namespace RuinsRaiders
             public bool enabled;
             public bool finished;
             public List<ChestData> chests = new();
-            public PlayerData.Gems firstClearReward;
 
             public string scene;
         }
@@ -68,7 +68,6 @@ namespace RuinsRaiders
                 }
 
                 level.enabled = previous.finished;
-
                 previous = level;
             }
         }
@@ -81,8 +80,10 @@ namespace RuinsRaiders
 
             public enum Type
             {
-                Normal, Exotic
+                Normal, Equisite
             }
+
+            public static ChestData Empty { get => new ChestData { acquired = true }; }
         }
     }
 }
