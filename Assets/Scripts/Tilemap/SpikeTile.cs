@@ -14,7 +14,7 @@ namespace RuinsRaiders
             var player = collision.gameObject.GetComponent<PlayerController>();
             var character = collision.gameObject.GetComponent<Character>();
 
-            if (character == null && character.holdUpdate == true)
+            if (character != null && character.holdUpdate == true)
                 return;
 
             if (player != null)

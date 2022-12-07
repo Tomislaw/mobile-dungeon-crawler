@@ -168,8 +168,8 @@ RectTransform:
   m_Children:
   - {fileID: 9113057339086647043}
   - {fileID: 9113057339045534705}
-  - {fileID: 9113057337963362718}
   - {fileID: 9113057338394525029}
+  - {fileID: 9113057337963362718}
   m_Father: {fileID: 1393119007437367985}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -466,7 +466,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7791511146771845288, guid: 8db4954cfecae8e478c2417d69c58260, type: 3}
       propertyPath: characterType
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7867031014076936096, guid: 8db4954cfecae8e478c2417d69c58260, type: 3}
       propertyPath: m_Pivot.x
@@ -478,7 +478,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7867031014076936096, guid: 8db4954cfecae8e478c2417d69c58260, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7867031014076936096, guid: 8db4954cfecae8e478c2417d69c58260, type: 3}
       propertyPath: m_AnchorMax.x
@@ -554,7 +554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8821675915605710312, guid: 8db4954cfecae8e478c2417d69c58260, type: 3}
       propertyPath: m_Name
-      value: CharacterSelect (2)
+      value: Spearman
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8db4954cfecae8e478c2417d69c58260, type: 3}
@@ -720,7 +720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8821675915605710312, guid: 8db4954cfecae8e478c2417d69c58260, type: 3}
       propertyPath: m_Name
-      value: CharacterSelect (1)
+      value: Archer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8db4954cfecae8e478c2417d69c58260, type: 3}
@@ -906,7 +906,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8821675915605710312, guid: 8db4954cfecae8e478c2417d69c58260, type: 3}
       propertyPath: m_Name
-      value: CharacterSelect
+      value: Knight
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8db4954cfecae8e478c2417d69c58260, type: 3}
@@ -992,7 +992,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7791511146771845288, guid: 8db4954cfecae8e478c2417d69c58260, type: 3}
       propertyPath: characterType
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7867031014076936096, guid: 8db4954cfecae8e478c2417d69c58260, type: 3}
       propertyPath: m_Pivot.x
@@ -1004,7 +1004,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7867031014076936096, guid: 8db4954cfecae8e478c2417d69c58260, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7867031014076936096, guid: 8db4954cfecae8e478c2417d69c58260, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1080,7 +1080,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8821675915605710312, guid: 8db4954cfecae8e478c2417d69c58260, type: 3}
       propertyPath: m_Name
-      value: CharacterSelect (3)
+      value: Mage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8db4954cfecae8e478c2417d69c58260, type: 3}

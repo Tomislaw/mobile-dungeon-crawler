@@ -23,6 +23,10 @@ PrefabInstance:
       propertyPath: haxHealth
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4885720716787640596, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
+      propertyPath: maxHealth
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8932571243353351920, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
       propertyPath: m_Name
       value: ShieldSkeleton

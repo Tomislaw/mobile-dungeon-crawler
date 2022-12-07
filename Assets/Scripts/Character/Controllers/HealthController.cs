@@ -20,13 +20,13 @@ namespace RuinsRaiders
         public int maxHealth = 4;
 
         [SerializeField]
-        private float ressurectTime = 1f;
+        protected float ressurectTime = 1f;
 
-        private Character _character;
-        private AI.BasicAi _ai;
-        private Renderer _renderer;
+        protected Character _character;
+        protected AI.BasicAi _ai;
+        protected Renderer _renderer;
 
-        private int _initialLayer = 0;
+        protected int _initialLayer = 0;
 
         public enum Group
         {
@@ -50,7 +50,7 @@ namespace RuinsRaiders
             }
         }
 
-        public void Damage(int damage, GameObject who)
+        public virtual void Damage(int damage, GameObject who)
         {
             if (_character != null && _character.holdUpdate == true)
                 return;

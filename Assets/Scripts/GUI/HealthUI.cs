@@ -7,15 +7,15 @@ namespace RuinsRaiders.GUI
     public class HealthUI : MonoBehaviour
     {
         [SerializeField]
-        private HealthHeart prefab;
+        protected HealthHeart prefab;
         [SerializeField]
-        private HealthController healthController;
+        protected HealthController healthController;
         [SerializeField]
-        private int maxHeartsInRow = 4;
+        protected int maxHeartsInRow = 4;
 
-        private readonly List<HealthHeart> _hearts = new();
+        protected readonly List<HealthHeart> _hearts = new();
 
-        private int _previousHealth = 0;
+        protected int _previousHealth = 0;
 
         // Update is called once per frame
         private void OnEnable()
@@ -45,15 +45,15 @@ namespace RuinsRaiders.GUI
             else
                 transform.localScale = new Vector3(1, 1, 1);
 
-            if ((healthController.maxHealth + 1) / 2 != _hearts.Count)
+            if ((GetMaxHealth() + 1) / 2 != _hearts.Count)
             {
                 Invalidate();
                 _previousHealth = 0;
             }
 
-            if (healthController.health != _previousHealth)
+            if (GetHealth() != _previousHealth)
             {
-                _previousHealth = healthController.health;
+                _previousHealth = GetHealth();
                 var healthLeft = _previousHealth;
                 for (int i = _hearts.Count - 1; i >= 0; i--)
                 {
@@ -76,6 +76,21 @@ namespace RuinsRaiders.GUI
             }
         }
 
+        protected virtual int GetHealth()
+        {
+            return healthController.health;
+        }
+
+        protected virtual int GetMaxHealth()
+        {
+            return healthController.maxHealth;
+        }
+
+        protected virtual int GetHeartsCount()
+        {
+            return healthController.IsDead ? 0 : (GetMaxHealth() + 1) / 2; ;
+        }
+
         private void Invalidate()
         {
             foreach (var heart in _hearts)
@@ -84,7 +99,7 @@ namespace RuinsRaiders.GUI
             _hearts.Clear();
 
 
-            int heartsCount = healthController.IsDead ? 0 : (healthController.maxHealth + 1) / 2;
+            int heartsCount = GetHeartsCount();
 
             float hearthWidth = 1;
 

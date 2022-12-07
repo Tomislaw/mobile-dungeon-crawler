@@ -381,7 +381,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.6}
+  m_Size: {x: 0.6, y: 0.6}
   m_EdgeRadius: 0
 --- !u!210 &940695730345937389
 SortingGroup:
@@ -438,7 +438,7 @@ GameObject:
   - component: {fileID: 405904931236297413}
   - component: {fileID: 3577735574495050856}
   - component: {fileID: 4015532235627700331}
-  m_Layer: 14
+  m_Layer: 11
   m_Name: AttackTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

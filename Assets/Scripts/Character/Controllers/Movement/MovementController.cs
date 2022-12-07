@@ -376,6 +376,7 @@ namespace RuinsRaiders
 
         public void Teleport(Vector2 position)
         {
+            _character.holdUpdate = true;
             StartCoroutine(TeleportCoroutine(position));
         }
 
@@ -383,7 +384,7 @@ namespace RuinsRaiders
         {
             if (_rigidbody)
                 _rigidbody.velocity = new Vector2();
-            _character.holdUpdate = true;
+
             transform.position = position;
             _character.SetAnimation("Dead");
             yield return new WaitForSeconds(0.3f);
