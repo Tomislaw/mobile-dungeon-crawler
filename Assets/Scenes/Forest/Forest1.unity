@@ -662,7 +662,7 @@ GameObject:
   m_Component:
   - component: {fileID: 774470939}
   - component: {fileID: 774470938}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -958,7 +958,7 @@ GameObject:
   - component: {fileID: 1093150931}
   - component: {fileID: 1093150933}
   - component: {fileID: 1093150932}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35281,6 +35281,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5507352413909316133, guid: 26774be20ad537e499c3d02875cb9dc6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5507352414279268001, guid: 26774be20ad537e499c3d02875cb9dc6, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -35393,6 +35397,10 @@ PrefabInstance:
     - target: {fileID: 4392692541754170176, guid: ef9260712ae53924495542d01a2656c1, type: 3}
       propertyPath: m_Name
       value: ChestGemUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4392692541754170176, guid: ef9260712ae53924495542d01a2656c1, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7173257107497319671, guid: ef9260712ae53924495542d01a2656c1, type: 3}
       propertyPath: m_RootOrder

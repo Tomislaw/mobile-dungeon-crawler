@@ -274,7 +274,7 @@ MonoBehaviour:
     - {x: 1, y: 0, z: 0}
     - {x: 0, y: -1, z: 0}
     - {x: -1, y: 0, z: 0}
-    m_RuleTransform: 0
+    m_RuleTransform: 3
   - m_Id: 16
     m_Sprites:
     - {fileID: -3326570739189927688, guid: 6aa3450d5f2d03746ac83df96e4a9efe, type: 3}
@@ -291,7 +291,7 @@ MonoBehaviour:
     - {x: -1, y: 0, z: 0}
     - {x: 0, y: -1, z: 0}
     - {x: 1, y: 0, z: 0}
-    m_RuleTransform: 0
+    m_RuleTransform: 3
   - m_Id: 8
     m_Sprites:
     - {fileID: 7102861316328181937, guid: 6aa3450d5f2d03746ac83df96e4a9efe, type: 3}
@@ -339,3 +339,8 @@ MonoBehaviour:
   - WaterWall
   - TreeTrunkBackground
   - TreeBranchBackground
+  - DarkEarth
+  - Sand
+  - SandSlope
+  - SandBackground
+  - SandBackgroundSlope

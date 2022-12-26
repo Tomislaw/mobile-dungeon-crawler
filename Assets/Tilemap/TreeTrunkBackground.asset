@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bbd949ab97e5ff4fa55647666dc5fa0, type: 3}
-  m_Name: Earth (Override)
+  m_Name: TreeTrunkBackground
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: -1533395546, guid: ce614571d384f444a9358484c8262788, type: 3}
   m_DefaultGameObject: {fileID: 0}

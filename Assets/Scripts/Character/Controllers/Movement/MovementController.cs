@@ -143,6 +143,9 @@ namespace RuinsRaiders
                 Stop();
             }
 
+            // fix for trigger not activating when characters are not moving
+            _rigidbody.AddForce(Vector2.zero);
+
 
             var landed = IsGrounded;
             IsGrounded = CheckForGround();

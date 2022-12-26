@@ -11,6 +11,9 @@ namespace RuinsRaiders
         [HideInInspector]
         public bool holdUpdate;
 
+        [SerializeField]
+        private bool setAnimationVariablesInstead;
+
         // fields used for animations
         [SerializeField]
         private bool haveSneakAnimation = false;
@@ -48,6 +51,20 @@ namespace RuinsRaiders
         // Update is called once per frame
         private void FixedUpdate()
         {
+            if (setAnimationVariablesInstead)
+            {
+                _animator.SetBool("IsDead", IsDead);
+                _animator.SetBool("IsChargingAttack", AttackController.chargeAttack);
+                _animator.SetBool("IsOvercharged", AttackController.IsOvercharged);
+                _animator.SetBool("IsAttacking", AttackController.IsAttacking);
+                _animator.SetBool("IsJumping", MovementController.IsJumping);
+                _animator.SetBool("IsMoving", MovementController.IsMoving);
+                _animator.SetBool("IsGrounded", MovementController.IsMoving);
+                _animator.SetFloat("VelocityX", MovementController.Velocity.x);
+                _animator.SetFloat("VelocityY", MovementController.Velocity.y);
+                return;
+            }
+
             if (holdUpdate)
                 return;
 
