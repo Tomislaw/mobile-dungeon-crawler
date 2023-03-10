@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3165c69492433e0409aa1ec6efa0ceee, type: 3}
-  m_Name: IdleVulture
+  m_Name: Idle2Vulture
   m_EditorClassIdentifier: Assembly-CSharp::BasicAiStateData
-  action: {fileID: 11400000, guid: f0c7ffc17ab8912469283265793ab236, type: 2}
-  onActionFinished: {fileID: 11400000, guid: 9602944714a1c14439eb9760cc05f25d, type: 2}
+  action: {fileID: 11400000, guid: 854aa1945afd71345a53b290c92d0333, type: 2}
+  onActionFinished: {fileID: 11400000}
   stateTransitions:
   - state: {fileID: 11400000, guid: 49947a6bce0e46c4dada67df470d4010, type: 2}
     activators:

@@ -59,7 +59,7 @@ namespace RuinsRaiders
                 _animator.SetBool("IsAttacking", AttackController.IsAttacking);
                 _animator.SetBool("IsJumping", MovementController.IsJumping);
                 _animator.SetBool("IsMoving", MovementController.IsMoving);
-                _animator.SetBool("IsGrounded", MovementController.IsMoving);
+                _animator.SetBool("IsGrounded", MovementController.IsGrounded);
                 _animator.SetFloat("VelocityX", MovementController.Velocity.x);
                 _animator.SetFloat("VelocityY", MovementController.Velocity.y);
                 return;

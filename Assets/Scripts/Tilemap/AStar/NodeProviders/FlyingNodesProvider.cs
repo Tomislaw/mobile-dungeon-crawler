@@ -20,7 +20,7 @@ namespace RuinsRaiders
             AddNode(astar, nodes, data, parent.Id + new Vector2Int(1, -1), parent);
             AddNode(astar, nodes, data, parent.Id + new Vector2Int(1, 1), parent);
             AddNode(astar, nodes, data, parent.Id + new Vector2Int(-1, 1), parent);
-            AddNode(astar, nodes, data, parent.Id + new Vector2Int(1, -1), parent);
+            AddNode(astar, nodes, data, parent.Id + new Vector2Int(-1, -1), parent);
             return nodes;
         }
 
@@ -33,16 +33,16 @@ namespace RuinsRaiders
             node.Weight = 1;
 
             // if blocks are nearby, then dont like coming near them
-            for (int x = -1; x <= 1; x++)
-                for (int y = -1; y <= 1; y++)
-                {
-                    if (x == 0 || y == 0)
-                        continue;
+            for (int y = -2; y <= 1; y++)
+            {
+                if (y == 0)
+                    continue;
 
-                    var above = astar.GetNode(new Vector2Int(Id.x + x, Id.y + y));
-                    if (node == null || above.Block)
-                        node.Weight += 4;
-                }
+                var near = astar.GetNode(new Vector2Int(Id.x, Id.y + y));
+                if (node == null || near.Block)
+                    node.Weight += 4;
+            }
+
 
 
             node.Parent = parent;

@@ -16,7 +16,7 @@ public class PlayerMovementTest : TestSceneTests
         yield return new WaitForSeconds(0.1F); //Give it just a moment extra
         pCtrl.GetControlData().MoveRight(false);
         Assert.Less(startPos.x, knight.transform.position.x, "Player didn't move right");
-        Assert.False(mCtrl.FaceLeft, "Should be facing right");
+        Assert.False(mCtrl.faceLeft, "Should be facing right");
     }
 
     [UnityTest]
@@ -29,7 +29,7 @@ public class PlayerMovementTest : TestSceneTests
         yield return new WaitForSeconds(0.1F); //Give it just a moment extra
         pCtrl.GetControlData().MoveLeft(false);
         Assert.Greater(startPos.x, knight.transform.position.x, "Player didn't move left");
-        Assert.True(mCtrl.FaceLeft, "Should be facing left");
+        Assert.True(mCtrl.faceLeft, "Should be facing left");
     }
 
     [UnityTest]

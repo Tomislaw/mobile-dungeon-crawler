@@ -208,10 +208,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   astar: {fileID: 0}
   data:
-    flying: 0
-    canSwim: 1
+    flying: 1
+    canSwim: 0
     canUseLadder: 0
-    canUsePlatform: 1
+    canUsePlatform: 0
     maxTimeOnNode: 1
     height: 2
     jumpHeight: 1
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdUpdate: 0
-  setAnimationVariablesInstead: 0
+  setAnimationVariablesInstead: 1
   haveSneakAnimation: 0
   haveWalkPreAttackAnimation: 0
   haveOverchargeAnimation: 0
@@ -279,13 +279,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flying: 1
-  gravityScale: 6
+  gravityScale: 1
   climbLadderSpeed: 0
   coyoteTime: 0.15
   walkSpeed: 9
   swimSpeed: 8
   jumpSpeed: 12
-  maxSpeed: 30
+  maxSpeed: 20
   acceleration: 65
   jerk: 10
   canUseLadder: 0
@@ -302,6 +302,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   move: {x: 0, y: 0}
+  faceLeft: 1
 --- !u!114 &4885720716787640596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,7 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0c3f2aa8029a645bfe45835783f313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialState: {fileID: 11400000, guid: 2d63ba37260ec0649a7c6a0b772723d8, type: 2}
+  initialState: {fileID: 11400000, guid: 9602944714a1c14439eb9760cc05f25d, type: 2}
 --- !u!210 &5671693322976097471
 SortingGroup:
   m_ObjectHideFlags: 0

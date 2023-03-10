@@ -58,7 +58,7 @@ namespace RuinsRaiders
 
         private float _accumulatedAcceleration;
 
-        public bool FaceLeft { get; private set; }
+        public bool faceLeft;
         public bool IsJumping { get; private set; }
         public bool IsMoving { get => move.x != 0; }
         public bool IsOnLadder { get; private set; }
@@ -100,16 +100,12 @@ namespace RuinsRaiders
             _character = GetComponent<Character>();
             _collider2D = GetComponent<Collider2D>();
             _rigidbody = GetComponent<Rigidbody2D>();
-            FaceLeft = false;
 
             if (canUseLadder && climbLadderSpeed <= 0)
                 Debug.LogErrorFormat("{0} can climb but climb speed os set to {1}!", name, climbLadderSpeed);
 
             if (canSwim && swimSpeed <= 0)
                 Debug.LogErrorFormat("{0} can swim but climb speed os set to {1}!", name, swimSpeed);
-
-            if (flying && gravityScale > 0)
-                Debug.LogErrorFormat("{0} is flying but gravity scale is set to {1}!", name, gravityScale);
 
             if (walkSpeed > maxSpeed || swimSpeed > maxSpeed || jumpSpeed > maxSpeed)
                 Debug.LogErrorFormat("{0} movement speed is higher than max speed of {1}!", name, maxSpeed);
@@ -153,7 +149,9 @@ namespace RuinsRaiders
 
             HandleDirection();
 
-            if (flying || IsSwimming && canSwim)
+            if (_character.IsDead)
+                DeadMovement();
+            else if ((flying || IsSwimming && canSwim))
                 FlyingMovement();
             else
                 WalkingMovement();
@@ -169,13 +167,13 @@ namespace RuinsRaiders
         {
             // set direction based on movement
             if (move.x > 0)
-                FaceLeft = false;
+                faceLeft = false;
 
             if (move.x < 0)
-                FaceLeft = true;
+                faceLeft = true;
 
             // change scale based on face direction
-            if (FaceLeft)
+            if (faceLeft)
                 transform.localScale = new Vector2(-1, 1);
             else
                 transform.localScale = new Vector2(1, 1);
@@ -183,6 +181,8 @@ namespace RuinsRaiders
 
         private void WalkingMovement()
         {
+            _rigidbody.drag = 0;
+
             if (move.x == 0 || Mathf.Sign(_previousMove.x) != Mathf.Sign(move.x))
                 _accumulatedAcceleration = acceleration;
             else
@@ -264,6 +264,8 @@ namespace RuinsRaiders
 
         private void FlyingMovement()
         {
+            _rigidbody.drag = 0;
+
             if (move.x == 0 || Mathf.Sign(_previousMove.x) != Mathf.Sign(move.x))
                 _accumulatedAcceleration = acceleration;
             else
@@ -309,6 +311,19 @@ namespace RuinsRaiders
             IsJumping = false;
         }
 
+        private void DeadMovement()
+        {
+            _rigidbody.gravityScale = 6;
+            if (IsGrounded) { 
+                _rigidbody.velocity = new Vector2(0, _rigidbody.velocity.y);
+                _rigidbody.drag = 20;
+            }
+            else
+            {
+                _rigidbody.drag = 2;
+            }
+        }
+
         private Vector2 GetSlopeFactor()
         {
 
@@ -320,7 +335,7 @@ namespace RuinsRaiders
 
             var hit1 = Physics2D.Raycast(center, Vector2.down, height, Physics2D.GetLayerCollisionMask(_collider2D.gameObject.layer));
 
-            float dir = FaceLeft ? -1 : 1;
+            float dir = faceLeft ? -1 : 1;
             center.x += _collider2D.bounds.size.x * dir / 2f;
             center.y -= 0.001f;
 
@@ -397,7 +412,7 @@ namespace RuinsRaiders
 
         public void FacePosition(Vector2 position)
         {
-            FaceLeft = position.x < transform.position.x;
+            faceLeft = position.x < transform.position.x;
         }
     }
 }

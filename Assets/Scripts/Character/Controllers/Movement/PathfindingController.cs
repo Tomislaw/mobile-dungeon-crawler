@@ -10,7 +10,7 @@ namespace RuinsRaiders
     public class PathfindingController : MonoBehaviour
     {
         private static float MinDistanceToMove = 0.1f;
-
+        private static int MinNodesToFinishWhenMoving = 3;
 
         [SerializeField]
         private AStar astar;
@@ -30,7 +30,7 @@ namespace RuinsRaiders
 
         private float _timeLeftOnNode;
         private Vector2Int _movingToTile;
-        private Stack<AStarSharp.Node> _nodes;
+        private Stack<AStarSharp.Node> _nodes = new();
 
         private void Start()
         {
@@ -61,13 +61,11 @@ namespace RuinsRaiders
 
         public void MoveToId(Vector2Int id, bool moveToClosestTileIfFail = false)
         {
-            Stop();
             _coroutine = StartCoroutine(MoveToCoroutine(id, moveToClosestTileIfFail));
         }
 
         public void MoveTo(Vector2 position, bool moveToClosestTileIfFail = false)
         {
-            Stop();
             _coroutine = StartCoroutine(MoveToCoroutine(position, moveToClosestTileIfFail));
         }
 
@@ -85,30 +83,55 @@ namespace RuinsRaiders
             var enumerator = astar.GetPath(start, end, data, maxNodesPerBatch, maxNodes, _cancellationTokenSource.Token);
             while (enumerator.MoveNext())
             {
-                if (enumerator.Current.Finished)
-                {
-                    if (!enumerator.Current.PathFound && !moveToClosestTileIfFail)
-                    {
-                        _coroutine = null;
-                        yield break;
-                    }
+                if (enumerator.Current.Finished != true) { 
+                    yield return new WaitForFixedUpdate();
+                    continue;
+                }
 
-                    _nodes = enumerator.Current.Path;
-                    _movingToTile = id;
-                    _timeLeftOnNode = data.maxTimeOnNode;
+                if (!enumerator.Current.PathFound && !moveToClosestTileIfFail)
+                {
                     _coroutine = null;
                     yield break;
                 }
-                yield return new WaitForFixedUpdate();
+
+                if(enumerator.Current.Path == null) { 
+                    yield break;
+                }
+
+                // case whe target is already moving
+                if (_nodes.Count > 0)
+                {
+                    var startingNodes = _nodes.TakeWhile(it => it.Id != start);
+                    if (startingNodes.Count() == 0 || startingNodes.Last().Id != start)
+                    {
+                        _nodes = enumerator.Current.Path;
+                    }
+                    else
+                    {
+                        var adjustedPath = startingNodes.Concat(enumerator.Current.Path);
+                        _nodes = new Stack<AStarSharp.Node>(adjustedPath);
+                    }
+                }
+                else // case when target is not moving
+                {
+                    _nodes = enumerator.Current.Path;
+                }
+                _movingToTile = id;
+                _timeLeftOnNode = data.maxTimeOnNode;
+                _coroutine = null;
+                yield break;
             }
         }
 
         private Vector2Int StartingTileId()
         {
             var start = TileId;
-            if (data.flying || character.IsSwimming)
+            // scenario when moving
+            if (_nodes.Count > 0)
             {
-
+                var startingNode = _nodes.Skip(MinNodesToFinishWhenMoving).FirstOrDefault(it=> CanMoveToTile(it.Id));
+                if (startingNode != null)
+                    start = startingNode.Id;
             }
             else if (character.IsGrounded && !CanMoveToTile(start))
             {
@@ -126,8 +149,7 @@ namespace RuinsRaiders
             if (_cancellationTokenSource != null)
                 _cancellationTokenSource.Cancel();
             character.Stop();
-            if (_nodes != null)
-                _nodes.Clear();
+            _nodes.Clear();
 
             if (_coroutine != null)
                 StopCoroutine(_coroutine);
@@ -135,18 +157,18 @@ namespace RuinsRaiders
             _coroutine = null;
         }
 
-        public bool IsMoving { get => _coroutine != null || _nodes != null && _nodes.Count > 0; }
+        public bool IsMoving { get => _coroutine != null  && _nodes.Count > 0; }
 
         // Update is called once per frame
         private void FixedUpdate()
         {
-            if (_timeLeftOnNode < 0 && _nodes != null)
+            if (_timeLeftOnNode < 0)
             {
                 _nodes.Clear();
                 character.Stop();
             }
 
-            if (_nodes != null && _nodes.Count > 0)
+            if (_nodes.Count > 0)
             {
                 _timeLeftOnNode -= Time.fixedDeltaTime;
 
@@ -230,7 +252,7 @@ namespace RuinsRaiders
 
         private void OnDrawGizmos()
         {
-            if (astar == null || _nodes == null)
+            if (astar == null)
                 return;
             foreach (var node in _nodes)
                 DrawNode(node);
@@ -238,9 +260,6 @@ namespace RuinsRaiders
 
         public int RemainingNodes()
         {
-            if (_nodes == null)
-                return 0;
-
             return _nodes.Count;
         }
 
@@ -277,6 +296,15 @@ namespace RuinsRaiders
             if(character.canUseLadder && node.Ladder)
                 return true;
 
+            if(node.Spike)
+                return false;
+
+            var floor = astar.GetNode(new Vector2Int(Id.x, Id.y - 1));
+            return CanStand(Id);
+        }
+
+        public bool CanStand(Vector2Int Id)
+        {
             var floor = astar.GetNode(new Vector2Int(Id.x, Id.y - 1));
             return floor.Platform || floor.Block;
         }
