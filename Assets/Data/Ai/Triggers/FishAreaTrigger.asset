@@ -16,5 +16,5 @@ MonoBehaviour:
   triggerArea: {x: 12, y: 12}
   onlyTargetInSight: 0
   onlyTargetInWater: 1
-  activators: 020000000100000000000000
+  activators: 0200000001000000000000000500000006000000
   triggerDelay: 0.3

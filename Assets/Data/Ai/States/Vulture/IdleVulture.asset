@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3165c69492433e0409aa1ec6efa0ceee, type: 3}
+  m_Name: IdleVulture
+  m_EditorClassIdentifier: Assembly-CSharp::BasicAiStateData
+  action: {fileID: 11400000, guid: f0c7ffc17ab8912469283265793ab236, type: 2}
+  onActionFinished: {fileID: 11400000, guid: 9602944714a1c14439eb9760cc05f25d, type: 2}
+  stateTransitions:
+  - state: {fileID: 11400000, guid: 49947a6bce0e46c4dada67df470d4010, type: 2}
+    activators:
+    - {fileID: 11400000, guid: 47c0a15e818bf9f47a03f8be1b2aa01e, type: 2}
+    - {fileID: 11400000, guid: 7d9080452cdc0a048944aa392cba88f6, type: 2}

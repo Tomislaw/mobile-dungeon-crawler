@@ -46,8 +46,8 @@ namespace RuinsRaiders
                 if (movementController == null)
                     yield break;
 
-                go.transform.position = launcher.transform.position + new Vector3(offset.x * (movementController.FaceLeft ? 1 : -1), offset.y, 0);
-                if (movementController.FaceLeft)
+                go.transform.position = launcher.transform.position + new Vector3(offset.x * (movementController.faceLeft ? 1 : -1), offset.y, 0);
+                if (movementController.faceLeft)
                     p.initialVelocity *= -1;
             }
         }

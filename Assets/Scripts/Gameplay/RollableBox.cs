@@ -122,12 +122,12 @@ namespace RuinsRaiders
             _timeLeftToPush -= Time.fixedDeltaTime;
             if (_timeLeftToPush < 0)
             {
-                if (_pusher.FaceLeft && !CanRollLeft)
+                if (_pusher.faceLeft && !CanRollLeft)
                     return;
-                if (!_pusher.FaceLeft && !CanRollRight)
+                if (!_pusher.faceLeft && !CanRollRight)
                     return;
 
-                coroutine = StartCoroutine(Roll(_pusher.FaceLeft));
+                coroutine = StartCoroutine(Roll(_pusher.faceLeft));
             }
 
         }

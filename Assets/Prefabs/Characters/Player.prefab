@@ -48,4 +48,4 @@ MonoBehaviour:
   knightPrefab: {fileID: 1586342966391059679, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
   archerPrefab: {fileID: 2430270853078161005, guid: 5d27ae14de336674c85182c6fb708fbe, type: 3}
   magePrefab: {fileID: 2430270853078161005, guid: 5e0d3a2c96171234f98a45b59ea7f373, type: 3}
-  spearmanPrefab: {fileID: 1586342966391059679, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
+  spearmanPrefab: {fileID: 3966246214659086911, guid: 45661de4cae9fcd4f9dbbcc339aa6fd7, type: 3}

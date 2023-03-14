@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbd949ab97e5ff4fa55647666dc5fa0, type: 3}
+  m_Name: Lava
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: 1113946837, guid: 9bee65d74844a414d92e334ed6d7a4d5, type: 3}
+  m_DefaultGameObject: {fileID: 8897054653239763015, guid: f095043ffab074744af49c374c3ef9f3, type: 3}
+  m_DefaultColliderType: 1
+  m_TilingRules:
+  - m_Id: 0
+    m_Sprites:
+    - {fileID: 278810438, guid: 9bee65d74844a414d92e334ed6d7a4d5, type: 3}
+    - {fileID: 1555782168, guid: 9bee65d74844a414d92e334ed6d7a4d5, type: 3}
+    m_GameObject: {fileID: 8897054653239763015, guid: f095043ffab074744af49c374c3ef9f3, type: 3}
+    m_AnimationSpeed: 4
+    m_PerlinScale: 0.5
+    m_Output: 2
+    m_ColliderType: 0
+    m_RandomTransform: 0
+    m_Neighbors: 03000000
+    m_NeighborPositions:
+    - {x: 0, y: 1, z: 0}
+    m_RuleTransform: 0
+  - m_Id: 1
+    m_Sprites:
+    - {fileID: 1072465800, guid: 9bee65d74844a414d92e334ed6d7a4d5, type: 3}
+    m_GameObject: {fileID: 8897054653239763015, guid: f095043ffab074744af49c374c3ef9f3, type: 3}
+    m_AnimationSpeed: 1
+    m_PerlinScale: 0.5
+    m_Output: 0
+    m_ColliderType: 0
+    m_RandomTransform: 0
+    m_Neighbors: 02000000
+    m_NeighborPositions:
+    - {x: 0, y: 1, z: 0}
+    m_RuleTransform: 0
+  - m_Id: 2
+    m_Sprites:
+    - {fileID: 1113946837, guid: 9bee65d74844a414d92e334ed6d7a4d5, type: 3}
+    - {fileID: 514642642, guid: 9bee65d74844a414d92e334ed6d7a4d5, type: 3}
+    - {fileID: 1113946837, guid: 9bee65d74844a414d92e334ed6d7a4d5, type: 3}
+    - {fileID: 1113946837, guid: 9bee65d74844a414d92e334ed6d7a4d5, type: 3}
+    m_GameObject: {fileID: 8897054653239763015, guid: f095043ffab074744af49c374c3ef9f3, type: 3}
+    m_AnimationSpeed: 1
+    m_PerlinScale: 0.5
+    m_Output: 1
+    m_ColliderType: 0
+    m_RandomTransform: 4
+    m_Neighbors: 
+    m_NeighborPositions: []
+    m_RuleTransform: 0
+  tiles:
+  - Lavafall1
+  - Lavafall2

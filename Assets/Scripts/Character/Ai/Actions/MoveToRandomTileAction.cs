@@ -15,6 +15,9 @@ namespace RuinsRaiders.AI
         [SerializeField]
         private int searchDistanceY = 1;
 
+        [SerializeField]
+        private bool onlyGround;
+
         public override BasicAiAction Create(ActivatorData trigger)
         {
             return new Action(trigger, this);
@@ -40,7 +43,7 @@ namespace RuinsRaiders.AI
                             continue;
 
                         var pos = new Vector2Int(id.x + x, id.y + y);
-                        if (pathfinding.CanMoveToTile(pos))
+                        if (pathfinding.CanMoveToTile(pos) && (!parent.onlyGround ||pathfinding.CanStand(pos)))
                             positions.Add(pos);
                     }
 

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bbd949ab97e5ff4fa55647666dc5fa0, type: 3}
-  m_Name: Earth (Override)
+  m_Name: Rock
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 1582494923448540761, guid: 586f6eab877cec24f8c1401d397d30e7, type: 3}
   m_DefaultGameObject: {fileID: 0}
@@ -339,6 +339,8 @@ MonoBehaviour:
   - WaterWall
   - TreeTrunkBackground
   - TreeBranchBackground
+  - DarkEarth
+  - Sand
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
