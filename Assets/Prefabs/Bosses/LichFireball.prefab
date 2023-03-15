@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6199246207084554118}
   - component: {fileID: 6199246207084554119}
   - component: {fileID: 6199246207084554114}
-  m_Layer: 13
+  m_Layer: 11
   m_Name: LichFireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}

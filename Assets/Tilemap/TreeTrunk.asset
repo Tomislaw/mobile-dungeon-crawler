@@ -10,28 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bbd949ab97e5ff4fa55647666dc5fa0, type: 3}
-  m_Name: TreeTrunk
+  m_Name: Earth (Override)
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: -1126629557, guid: a181ef01de6c526408f87d953e1c7851, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 2
   m_TilingRules:
-  - m_Id: 8
-    m_Sprites:
-    - {fileID: -929253374, guid: a181ef01de6c526408f87d953e1c7851, type: 3}
-    m_GameObject: {fileID: 0}
-    m_AnimationSpeed: 1
-    m_PerlinScale: 0.5
-    m_Output: 0
-    m_ColliderType: 1
-    m_RandomTransform: 0
-    m_Neighbors: 03000000030000000300000003000000
-    m_NeighborPositions:
-    - {x: -1, y: 0, z: 0}
-    - {x: 0, y: 1, z: 0}
-    - {x: 1, y: 0, z: 0}
-    - {x: 0, y: -1, z: 0}
-    m_RuleTransform: 0
   - m_Id: 0
     m_Sprites:
     - {fileID: -21747669, guid: a181ef01de6c526408f87d953e1c7851, type: 3}
@@ -283,12 +267,14 @@ MonoBehaviour:
     m_Output: 0
     m_ColliderType: 1
     m_RandomTransform: 0
-    m_Neighbors: 040000000300000003000000
+    m_Neighbors: 0400000003000000030000000300000003000000
     m_NeighborPositions:
     - {x: 1, y: 1, z: 0}
     - {x: 0, y: 1, z: 0}
     - {x: 1, y: 0, z: 0}
-    m_RuleTransform: 0
+    - {x: 0, y: -1, z: 0}
+    - {x: -1, y: 0, z: 0}
+    m_RuleTransform: 3
   - m_Id: 16
     m_Sprites:
     - {fileID: -88544111, guid: a181ef01de6c526408f87d953e1c7851, type: 3}
@@ -298,11 +284,29 @@ MonoBehaviour:
     m_Output: 0
     m_ColliderType: 1
     m_RandomTransform: 0
-    m_Neighbors: 040000000300000003000000
+    m_Neighbors: 0400000003000000030000000300000003000000
     m_NeighborPositions:
     - {x: -1, y: 1, z: 0}
     - {x: 0, y: 1, z: 0}
     - {x: -1, y: 0, z: 0}
+    - {x: 0, y: -1, z: 0}
+    - {x: 1, y: 0, z: 0}
+    m_RuleTransform: 3
+  - m_Id: 8
+    m_Sprites:
+    - {fileID: -929253374, guid: a181ef01de6c526408f87d953e1c7851, type: 3}
+    m_GameObject: {fileID: 0}
+    m_AnimationSpeed: 1
+    m_PerlinScale: 0.5
+    m_Output: 0
+    m_ColliderType: 1
+    m_RandomTransform: 0
+    m_Neighbors: 03000000030000000300000003000000
+    m_NeighborPositions:
+    - {x: -1, y: 0, z: 0}
+    - {x: 0, y: 1, z: 0}
+    - {x: 1, y: 0, z: 0}
+    - {x: 0, y: -1, z: 0}
     m_RuleTransform: 0
   - m_Id: 6
     m_Sprites:
@@ -333,6 +337,13 @@ MonoBehaviour:
   - TreeBranch
   - TreeTrunkSlope
   - WaterWall
+  - TreeTrunkBackground
+  - TreeBranchBackground
+  - DarkEarth
+  - Sand
+  - SandSlope
+  - SandBackground
+  - SandBackgroundSlope
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

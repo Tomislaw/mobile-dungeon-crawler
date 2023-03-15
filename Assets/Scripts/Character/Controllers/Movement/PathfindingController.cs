@@ -83,7 +83,8 @@ namespace RuinsRaiders
             var enumerator = astar.GetPath(start, end, data, maxNodesPerBatch, maxNodes, _cancellationTokenSource.Token);
             while (enumerator.MoveNext())
             {
-                if (enumerator.Current.Finished != true) { 
+                if (enumerator.Current.Finished != true)
+                {
                     yield return new WaitForFixedUpdate();
                     continue;
                 }
@@ -94,23 +95,30 @@ namespace RuinsRaiders
                     yield break;
                 }
 
-                if(enumerator.Current.Path == null) { 
+                if (enumerator.Current.Path == null || enumerator.Current.Path.Count == 0)
+                {
                     yield break;
                 }
 
+                var startNode = _nodes.FirstOrDefault(it => it.Id == TileId);
+
                 // case whe target is already moving
-                if (_nodes.Count > 0)
+                if (_nodes.Count >0)
                 {
-                    var startingNodes = _nodes.TakeWhile(it => it.Id != start);
-                    if (startingNodes.Count() == 0 || startingNodes.Last().Id != start)
+                    var pathContinue = enumerator.Current.Path.ToList();
+                    var newFirst = pathContinue.First();
+                    var startingNodes = _nodes.TakeWhile(it => it.Id != newFirst.Id).ToList();
+                    if (startingNodes.Count() == _nodes.Count())
                     {
-                        _nodes = enumerator.Current.Path;
+                        _nodes.Clear();
+                        yield break;
                     }
-                    else
-                    {
-                        var adjustedPath = startingNodes.Concat(enumerator.Current.Path);
-                        _nodes = new Stack<AStarSharp.Node>(adjustedPath);
-                    }
+                    var startLast = startingNodes.LastOrDefault();
+                    if (startLast != null)
+                        newFirst.Parent = startLast;
+
+                    var adjustedPath = startingNodes.Concat(pathContinue).Reverse().ToList();
+                    _nodes = new Stack<AStarSharp.Node>(adjustedPath);
                 }
                 else // case when target is not moving
                 {
