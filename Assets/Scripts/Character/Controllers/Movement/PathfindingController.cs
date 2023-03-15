@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System.Threading;
+using System;
 
 namespace RuinsRaiders
 {
@@ -59,9 +60,9 @@ namespace RuinsRaiders
                 astar = FindAStar();
         }
 
-        public void MoveToId(Vector2Int id, bool moveToClosestTileIfFail = false)
+        public void MoveTo(Vector2Int id, bool moveToClosestTileIfFail = false)
         {
-            _coroutine = StartCoroutine(MoveToCoroutine(id, moveToClosestTileIfFail));
+            _coroutine = StartCoroutine(MoveToCoroutine((Vector2)id, moveToClosestTileIfFail));
         }
 
         public void MoveTo(Vector2 position, bool moveToClosestTileIfFail = false)
@@ -69,18 +70,35 @@ namespace RuinsRaiders
             _coroutine = StartCoroutine(MoveToCoroutine(position, moveToClosestTileIfFail));
         }
 
-        private IEnumerator MoveToCoroutine(Vector2 position, bool moveToClosestTileIfFail = false)
+        public void MoveTo(
+            Func<AStarSharp.Node, bool> IsTarget,
+            Func<AStarSharp.Node, float> GetCost,
+            Func<AStarSharp.Node, float> GetDistance,
+            bool moveToClosestTileIfFail = false)
         {
-            return MoveToIdCoroutine(astar.GetTileId(position), moveToClosestTileIfFail);
+            _coroutine = StartCoroutine(MoveToCoroutine(IsTarget, GetCost, GetDistance, moveToClosestTileIfFail));
         }
 
-        private IEnumerator MoveToIdCoroutine(Vector2Int id, bool moveToClosestTileIfFail = false)
+        private IEnumerator MoveToCoroutine(Vector2 position, bool moveToClosestTileIfFail = false)
+        {
+            return MoveToCoroutine(astar.GetTileId(position), moveToClosestTileIfFail);
+        }
+
+        private IEnumerator MoveToCoroutine(Vector2Int id, bool moveToClosestTileIfFail = false)
+        {
+            return MoveToCoroutine(n => n.Id == id, n => n.Weight + n.Parent.Cost, n => Vector2.Distance(n.Id, id));
+        }
+
+        private IEnumerator MoveToCoroutine(
+            Func<AStarSharp.Node, bool> IsTarget,
+            Func<AStarSharp.Node, float> GetCost,
+            Func<AStarSharp.Node, float> GetDistance,
+            bool moveToClosestTileIfFail = false)
         {
             _cancellationTokenSource = new CancellationTokenSource();
             var start = StartingTileId();
-            var end = id;
 
-            var enumerator = astar.GetPath(start, end, data, maxNodesPerBatch, maxNodes, _cancellationTokenSource.Token);
+            var enumerator = astar.GetPath(start, IsTarget, GetCost, GetDistance, data, maxNodesPerBatch, maxNodes, _cancellationTokenSource.Token);
             while (enumerator.MoveNext())
             {
                 if (enumerator.Current.Finished != true)
@@ -103,7 +121,7 @@ namespace RuinsRaiders
                 var startNode = _nodes.FirstOrDefault(it => it.Id == TileId);
 
                 // case whe target is already moving
-                if (_nodes.Count >0)
+                if (_nodes.Count > 0)
                 {
                     var pathContinue = enumerator.Current.Path.ToList();
                     var newFirst = pathContinue.First();
@@ -124,12 +142,13 @@ namespace RuinsRaiders
                 {
                     _nodes = enumerator.Current.Path;
                 }
-                _movingToTile = id;
+                _movingToTile = _nodes.Last().Id;
                 _timeLeftOnNode = data.maxTimeOnNode;
                 _coroutine = null;
                 yield break;
             }
         }
+
 
         private Vector2Int StartingTileId()
         {
@@ -165,7 +184,7 @@ namespace RuinsRaiders
             _coroutine = null;
         }
 
-        public bool IsMoving { get => _coroutine != null  && _nodes.Count > 0; }
+        public bool IsMoving { get => _coroutine != null  || _nodes.Count > 0; }
 
         // Update is called once per frame
         private void FixedUpdate()

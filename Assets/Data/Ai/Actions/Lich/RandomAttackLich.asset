@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab72218f6f21e1b48b0b6977fb8d0f32, type: 3}
+  m_Name: RandomAttackLich
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 11400000, guid: 8fe8c61fdf0cad0448237515d2e3d27b, type: 2}
+  - {fileID: 11400000, guid: 315639efa809eda499e119f5ad8aab73, type: 2}

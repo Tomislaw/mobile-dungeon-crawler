@@ -50,7 +50,7 @@ namespace RuinsRaiders.AI
                 var randomizedPositions = positions.OrderBy(it => Random.Range(0f, 1f));
 
                 if (randomizedPositions.Any())
-                    pathfinding.MoveToId(randomizedPositions.First(), false);
+                    pathfinding.MoveTo(randomizedPositions.First(), false);
 
             }
 

@@ -65,6 +65,12 @@ namespace RuinsRaiders.AStarSharp
     {
         public Func<Vector2Int, Node> GetNode;
         public Func<Node, List<Node>> GetAdjacentNodes;
+        public Func<Node, float> GetCost;
+        public Func<Node, float> GetDistance;
+        public Func<Node, bool> IsEnd;
+
+        public int SizePerBatch = 10;
+        public int MaxSize = 600;
 
         public struct FindPathStatus
         {
@@ -73,10 +79,11 @@ namespace RuinsRaiders.AStarSharp
             public Stack<Node> Path;
         }
 
-        public IEnumerator<FindPathStatus> FindPath(Vector2Int Start, Vector2Int End, int SizePerBatch = 10, int MaxSize = 600, CancellationToken ct = default)
+        public IEnumerator<FindPathStatus> FindPath(
+            Vector2Int Start,
+            CancellationToken ct = default)
         {
             Node start = GetNode(Start);
-            Node end = GetNode(End);
 
             Stack<Node> Path = new();
             List<Node> OpenList = new();
@@ -87,7 +94,7 @@ namespace RuinsRaiders.AStarSharp
             // add start node to Open List
             OpenList.Add(start);
 
-            while (OpenList.Count != 0 && !ClosedList.Exists(x => x.Id == end.Id) && ClosedList.Count < MaxSize)
+            while (OpenList.Count != 0 && !ClosedList.Exists(x => IsEnd(x)) && ClosedList.Count < MaxSize)
             {
                 if (ct.IsCancellationRequested || ClosedList.Count % SizePerBatch == 0)
                     yield return new FindPathStatus();
@@ -108,8 +115,8 @@ namespace RuinsRaiders.AStarSharp
                         continue;
 
                     n.Parent = current;
-                    n.DistanceToTarget = Vector2.Distance(n.Id, end.Id);
-                    n.Cost = n.Weight + n.Parent.Cost;
+                    n.DistanceToTarget = GetDistance(n);
+                    n.Cost = GetCost(n);
                     OpenList.Add(n);
                     OpenList = OpenList.OrderBy(node => node.F).ToList<Node>();
 
@@ -118,9 +125,9 @@ namespace RuinsRaiders.AStarSharp
 
             var pathFound = true;
             // construct path, if end was not closed return null
-            if (!ClosedList.Exists(x => x.Id == end.Id))
+            if (!ClosedList.Exists(n => IsEnd(n)))
             {
-                current = ClosedList.Where(it => it.jumpHeightLeft == -1 && !it.Spike).OrderBy(it => Vector2Int.Distance(it.Id, End)).First();
+                current = ClosedList.Where(it => it.jumpHeightLeft == -1 && !it.Spike).OrderBy(n => GetDistance(n)).First();
                 pathFound = false;
             }
 
@@ -141,71 +148,6 @@ namespace RuinsRaiders.AStarSharp
             yield return new FindPathStatus() { Finished = true, PathFound = pathFound, Path = Path };
             yield break;
 
-        }
-
-
-        public (bool, Stack<Node>) FindPath(Vector2Int Start, Vector2Int End, int MaxSize = 600, CancellationToken ct = default)
-        {
-            Node start = GetNode(Start);
-            Node end = GetNode(End);
-
-            Stack<Node> Path = new();
-            List<Node> OpenList = new();
-            List<Node> ClosedList = new();
-            List<Node> adjacencies;
-            Node current = start;
-
-            // add start node to Open List
-            OpenList.Add(start);
-
-            while (OpenList.Count != 0 && !ClosedList.Exists(x => x.Id == end.Id) && ClosedList.Count < MaxSize)
-            {
-                if (ct.IsCancellationRequested)
-                    return (false, null);
-                current = OpenList[0];
-                OpenList.Remove(current);
-                ClosedList.Add(current);
-                adjacencies = GetAdjacentNodes(current);
-
-                foreach (Node n in adjacencies)
-                {
-                    if (ct.IsCancellationRequested)
-                        return (false, null);
-                    if (ClosedList.Contains(n))
-                        continue;
-                    if (OpenList.Contains(n))
-                        continue;
-
-                    n.Parent = current;
-                    n.DistanceToTarget = Vector2.Distance(n.Id, end.Id);
-                    n.Cost = n.Weight + n.Parent.Cost;
-                    OpenList.Add(n);
-                    OpenList = OpenList.OrderBy(node => node.F).ToList<Node>();
-                }
-            }
-
-            if (ct.IsCancellationRequested)
-                return (false, null);
-
-
-            // construct path, if end was not closed return null
-            if (!ClosedList.Exists(x => x.Id == end.Id))
-            {
-                current = ClosedList.Where(it => it.jumpHeightLeft == -1).OrderBy(it => Vector2Int.Distance(it.Id, End)).First();
-            }
-
-            // if all good, return path
-            Node temp = ClosedList[ClosedList.IndexOf(current)];
-            if (temp == null) return (false, null);
-            do
-            {
-                if (ct.IsCancellationRequested)
-                    return (false, null);
-
-                Path.Push(temp);
-                temp = temp.Parent;
-            } while (temp != start && temp != null);
-            return (true, Path);
         }
     }
 }

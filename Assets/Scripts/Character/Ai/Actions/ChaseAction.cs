@@ -47,7 +47,7 @@ namespace RuinsRaiders.AI
 
             public override bool CanStop()
             {
-                return IsFinished() || movementController.IsGrounded;
+                return IsFinished() || (movementController.IsGrounded || movementController.flying);
             }
             public override bool IsFinished()
             {

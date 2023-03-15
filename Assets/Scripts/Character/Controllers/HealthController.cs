@@ -69,16 +69,12 @@ namespace RuinsRaiders
                 Death();
         }
 
-        private void Death()
+        protected void Death()
         {
-            if (_character)
-                gameObject.layer = LayerMask.NameToLayer("Dead");
+            gameObject.layer = LayerMask.NameToLayer("Dead");
 
             if (_ai)
-            {
                 _ai.enabled = false;
-            }
-
 
             if (onDeath != null)
                 onDeath.Invoke();

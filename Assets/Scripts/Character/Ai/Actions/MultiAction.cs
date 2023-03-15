@@ -101,9 +101,6 @@ namespace RuinsRaiders.AI
                     if (_currentAction == -1)
                         return;
 
-                    if (_currentAction == -1)
-                        return;
-
                     if (_actions.ElementAt(_currentAction).IsFinished())
                     {
                         if (_currentAction >= _actions.Count() - 1)

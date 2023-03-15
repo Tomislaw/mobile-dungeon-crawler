@@ -86,6 +86,8 @@ namespace RuinsRaiders
             target.group = _group;
             target.ResetLifeTime();
 
+            projectile.layer = gameObject.layer;
+
             rigidbody2d.velocity = -rigidbody2d.velocity;
             return true;
         }

@@ -117,22 +117,42 @@ namespace RuinsRaiders
 
         }
 
-        //public Stack<AStarSharp.Node> GetPath(Vector2Int start, Vector2Int end, WalkData data, int maxNodes = 600, CancellationToken ct = default)
-        //{
-        //    var astar = new AStarSharp.Astar();
-        //    astar.GetAdjacentNodes = (it) => { return GetNearbyNodes(it, data); };
-        //    astar.GetNode = (it) => { return GetNode(it); };
-        //    return astar.FindPath(start, end, maxNodes, ct);
-        //}
-
         public IEnumerator<FindPathStatus> GetPath(Vector2Int start, Vector2Int end, WalkData data, int maxNodesPerBatch = 10, int maxNodes = 600, CancellationToken ct = default)
         {
             var astar = new AStarSharp.Astar
             {
-                GetAdjacentNodes = (it) => { return GetNearbyNodes(it, data); },
-                GetNode = (it) => { return GetNode(it); }
+                GetAdjacentNodes = n => GetNearbyNodes(n, data),
+                GetNode = n => GetNode(n),
+                IsEnd = n => n.Id == end,
+                GetCost = n => n.Weight + n.Parent.Cost,
+                GetDistance = n => Vector2.Distance(n.Id, end),
+                MaxSize = maxNodes,
+                SizePerBatch = maxNodesPerBatch,
             };
-            return astar.FindPath(start, end, maxNodesPerBatch, maxNodes, ct);
+            return astar.FindPath(start, ct);
+        }
+
+        public IEnumerator<FindPathStatus> GetPath(
+            Vector2Int start, 
+            Func<AStarSharp.Node, bool> IsEnd,
+            Func<AStarSharp.Node, float> GetCost,
+            Func<AStarSharp.Node, float> GetDistance,
+            WalkData data, 
+            int maxNodesPerBatch = 10, 
+            int maxNodes = 600, 
+            CancellationToken ct = default)
+        {
+            var astar = new AStarSharp.Astar
+            {
+                GetAdjacentNodes = n => GetNearbyNodes(n, data),
+                GetNode = n => GetNode(n),
+                IsEnd = n => IsEnd(n),
+                GetCost = n => GetCost(n),
+                GetDistance = n => GetDistance(n),
+                MaxSize = maxNodes,
+                SizePerBatch = maxNodesPerBatch,
+            };
+            return astar.FindPath(start, ct);
         }
     }
 
