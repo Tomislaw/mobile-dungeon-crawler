@@ -16,7 +16,7 @@ namespace RuinsRaiders
         public bool deflectProjectiles = false;
 
         private HealthController _healthController;
-        public float _attackTimeLeft;
+        private float _attackTimeLeft;
 
         private void Awake()
         {
