@@ -232,6 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdUpdate: 0
+  setAnimationVariablesInstead: 0
   haveSneakAnimation: 0
   haveWalkPreAttackAnimation: 0
   haveOverchargeAnimation: 0
@@ -264,7 +265,6 @@ MonoBehaviour:
   attackTime: 0.1
   knockback: 200
   deflectProjectiles: 0
-  _attackTimeLeft: 0
 --- !u!114 &4069350316886678256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +301,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   move: {x: 0, y: 0}
+  faceLeft: 0
 --- !u!114 &4885720716787640596
 MonoBehaviour:
   m_ObjectHideFlags: 0

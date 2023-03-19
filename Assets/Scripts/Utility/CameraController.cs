@@ -13,10 +13,15 @@ namespace RuinsRaiders
         private Camera controlledCamera;
 
         [SerializeField]
-        private SubScene subScene;
+        private Vector2 cameraSizeInUnits = new(16, 9);
 
         [SerializeField]
-        private Vector2 cameraSizeInUnits = new(16, 9);
+        private AnimationCurve tweenAnimation;
+
+        [SerializeField]
+        private float tweenTime = 1;
+
+        private SubScene _subScene;
 
         // bounds of current SubScene
         private float _left = 0;
@@ -24,12 +29,14 @@ namespace RuinsRaiders
         private float _top = 0;
         private float _bottom = 0;
 
+        private float _tweanTimeLeft = 0;
+        private Vector3 _tweanStartingPos;
+
         private void Start()
         {
             if (controlledCamera == null)
                 controlledCamera = GetComponent<Camera>();
 
-            SetSubScene(subScene);
             UpdateCameraPosition();
         }
 
@@ -42,66 +49,84 @@ namespace RuinsRaiders
         private void LateUpdate()
         {
             UpdateCameraPosition();
+
+            if(_tweanTimeLeft > 0)
+                _tweanTimeLeft -= Time.deltaTime;
         }
 
-        public void SetSubScene(SubScene scene)
+        private void SetSubScene(SubScene scene)
         {
-            if (!scene)
-                return;
-
             _left = -scene.size.x / 2 + scene.transform.position.x;
             _right = scene.size.x / 2 + scene.transform.position.x;
             _top = scene.size.y / 2 + scene.transform.position.y;
             _bottom = -scene.size.y / 2 + scene.transform.position.y;
 
-            subScene = scene;
+            if (_subScene != null)
+            {
+                _tweanStartingPos = transform.position;
+                _tweanTimeLeft = tweenTime;
+            }
+            _subScene = scene;
         }
+
+        private Vector3 CalculatePosition()
+        {
+            var startingPosition = objectToFollow != null ?
+                new Vector3(objectToFollow.transform.position.x, objectToFollow.transform.position.y, transform.position.z)
+                : transform.position;
+
+            if (controlledCamera && _subScene)
+            {
+                float w = cameraSizeInUnits.x;
+                float h = cameraSizeInUnits.y;
+
+                if (startingPosition.x - w < _left)
+                    startingPosition = new Vector3(_left + w, startingPosition.y, startingPosition.z);
+                if (startingPosition.x + w > _right)
+                    startingPosition = new Vector3(_right - w, startingPosition.y, startingPosition.z);
+                if (startingPosition.y - h < _bottom)
+                    startingPosition = new Vector3(startingPosition.x, _bottom + h, startingPosition.z);
+                if (startingPosition.y + h > _top)
+                    startingPosition = new Vector3(startingPosition.x, _top - h, startingPosition.z);
+
+            }
+
+            if (_tweanTimeLeft >= 0)
+                startingPosition = Vector3.Lerp(_tweanStartingPos, startingPosition, 1f - _tweanTimeLeft / tweenTime);
+
+            return startingPosition;
+        }
+
 
         private void UpdateCameraPosition()
         {
             if (objectToFollow == null)
                 return;
 
-            transform.position = new Vector3(
-                objectToFollow.transform.position.x,
-                objectToFollow.transform.position.y,
-                transform.position.z);
-
-            if (subScene == null)
+            if (_subScene == null)
             {
                 var scenes = FindObjectsOfType<SubScene>();
                 if (scenes.Length == 0)
                     return;
-                subScene = scenes.OrderBy(it => Vector3.Distance(it.transform.position, transform.position)).First();
+                var scene = scenes.OrderBy(it => Vector3.Distance(it.transform.position, objectToFollow.transform.position)).First();
+                SetSubScene(scene);
             }
 
-            if (subScene)
+            if (_subScene)
             {
-                if (subScene.left && _left > objectToFollow.transform.position.x)
-                    SetSubScene(subScene.left);
-                else if (subScene.right && _right < objectToFollow.transform.position.x)
-                    SetSubScene(subScene.right);
-                else if (subScene.bottom && _bottom > objectToFollow.transform.position.y)
-                    SetSubScene(subScene.bottom);
-                else if (subScene.top && _top < objectToFollow.transform.position.y)
-                    SetSubScene(subScene.top);
+                if (_subScene.left && _left > objectToFollow.transform.position.x)
+                    SetSubScene(_subScene.left);
+                else if (_subScene.right && _right < objectToFollow.transform.position.x)
+                    SetSubScene(_subScene.right);
+                else if (_subScene.bottom && _bottom > objectToFollow.transform.position.y)
+                    SetSubScene(_subScene.bottom);
+                else if (_subScene.top && _top < objectToFollow.transform.position.y)
+                    SetSubScene(_subScene.top);
             }
 
-            if (controlledCamera && subScene)
-            {
-                float w = cameraSizeInUnits.x;
-                float h = cameraSizeInUnits.y;
+            transform.position = CalculatePosition();
 
-                if (transform.position.x - w < _left)
-                    transform.position = new Vector3(_left + w, transform.position.y, transform.position.z);
-                if (transform.position.x + w > _right)
-                    transform.position = new Vector3(_right - w, transform.position.y, transform.position.z);
-                if (transform.position.y - h < _bottom)
-                    transform.position = new Vector3(transform.position.x, _bottom + h, transform.position.z);
-                if (transform.position.y + h > _top)
-                    transform.position = new Vector3(transform.position.x, _top - h, transform.position.z);
 
-            }
         }
     }
 }
