@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1586342966391059650, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
       propertyPath: attackDamage
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1586342966391059650, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
       propertyPath: deflectProjectiles
@@ -87,6 +87,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 1101450059, guid: 807663c2629e94441ba9955faa95dafc, type: 3}
+    - target: {fileID: 4181743231487395800, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
+      propertyPath: attackDamageIncreasePerLevel
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9095645185290459867, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
@@ -109,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackSpeed: 0
   attackAnimationTime: 0
-  overchargeTime: 1
+  overchargeTime: 0
   chargeAttack: 0
   onAttack:
     m_PersistentCalls:
@@ -121,4 +125,7 @@ MonoBehaviour:
   - projectile: {fileID: 1805714663868828917, guid: 53f5e209b4c330247acbfd4b8bcbd0d7, type: 3}
     offset: {x: 0, y: 0.4, z: 0}
     delay: 0
-  projectilesCharged: []
+  projectilesCharged:
+  - projectile: {fileID: 1805714663868828917, guid: 53f5e209b4c330247acbfd4b8bcbd0d7, type: 3}
+    offset: {x: 0, y: 0.4, z: 0}
+    delay: 0

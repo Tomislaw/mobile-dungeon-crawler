@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: a16dcf0a14c672d499fdc3e88ffd357f, type: 2}
+    - target: {fileID: 1586342966391059651, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
+      propertyPath: astar
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1586342966391059652, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
       propertyPath: m_Name
       value: Bowman
@@ -50,6 +54,10 @@ PrefabInstance:
     - target: {fileID: 2839153680246517994, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
       propertyPath: MaxHealth
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181743231487395800, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
+      propertyPath: specialAttackDamageIncreasePerLevel
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1586342966391059650, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}

@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31caabe9a495d5d4792dc39caf7fce16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 9060408073096087312, guid: 2cd9a96ac1039a441a9e9d4cd20d91c5, type: 3}
+  prefab: {fileID: 9060408073096087312, guid: 81352b13410d0dc42865ba7a862de255, type: 3}
   healthController: {fileID: 0}
   maxHeartsInRow: 4
 --- !u!1 &5367954657964136393
@@ -459,7 +459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   astar: {fileID: 0}
   data:
-    flying: 1
+    flying: 0
     canSwim: 1
     canUseLadder: 1
     canUsePlatform: 1
@@ -539,9 +539,9 @@ MonoBehaviour:
   health: 24
   maxHealth: 24
   ressurectTime: 1
-  shield: 8
-  maxShield: 8
-  regenerationTime: 0.75
+  shield: 4
+  maxShield: 4
+  regenerationTime: 0
 --- !u!114 &7300881240795306579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,13 +554,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 262c84ae8ceb69345ac9ed36833301f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 1
+  attackSpeed: 2
   attackAnimationTime: 1
   overchargeTime: 2
   chargeAttack: 0
   onAttack:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3863709360230651382}
+        m_TargetAssemblyTypeName: RuinsRaiders.Shockwave, Scripts
+        m_MethodName: StartShockwave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5858280563277373340}
+        m_TargetAssemblyTypeName: RuinsRaiders.Shockwave, Scripts
+        m_MethodName: StartShockwave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onChargedAttack:
     m_PersistentCalls:
       m_Calls: []

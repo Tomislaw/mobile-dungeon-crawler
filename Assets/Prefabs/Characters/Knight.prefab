@@ -121,7 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 9060408073096087312, guid: d1adc1b4e2799db4795da0efb0d7070c, type: 3}
   healthController: {fileID: 0}
-  maxHeartsInRow: 4
+  maxHeartsInRow: 5
 --- !u!1 &1586342966391059652
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 6072170547237964431}
   - component: {fileID: -8808715197590347756}
   - component: {fileID: 21499108938568145}
+  - component: {fileID: 4181743231487395800}
   m_Layer: 12
   m_Name: Knight
   m_TagString: Player
@@ -257,6 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdUpdate: 0
+  setAnimationVariablesInstead: 0
   haveSneakAnimation: 1
   haveWalkPreAttackAnimation: 1
   haveOverchargeAnimation: 1
@@ -339,7 +341,6 @@ MonoBehaviour:
   attackTime: 0.2
   knockback: 650
   deflectProjectiles: 1
-  _attackTimeLeft: 0
 --- !u!114 &2839153680246517994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,6 +396,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   move: {x: 0, y: 0}
+  faceLeft: 0
 --- !u!82 &7068583201586914935
 AudioSource:
   m_ObjectHideFlags: 0
@@ -612,6 +614,27 @@ MonoBehaviour:
   headHeight: 0.8
   oxygenTime: 0.5
   damageWithoutOxygen: 1
+--- !u!114 &4181743231487395800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586342966391059652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dee69fa68e0d214ba5877846bfffc55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 968a04ce1fca0b743bb1689a0969032f, type: 2}
+  characterType: 0
+  shieldIncreasePerLevel: 0
+  healthIncreasePerLevel: 2
+  attackDamageIncreasePerLevel: 1
+  attackSpeedDecreasePerLevel: 0
+  specialAttackDamageIncreasePerLevel: 0
+  specialAttackRangeIncreasePerLevel: 1
+  overchargeTimeDecreasePerLevel: 0.1
 --- !u!1 &2956168785758855339
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,4 +682,4 @@ MonoBehaviour:
   prefab: {fileID: -2785653933655266142, guid: f7dbdf9bb6cc5b74aad6324096daa1b1, type: 3}
   oxygenController: {fileID: 0}
   healthController: {fileID: 0}
-  maxBubblesInRow: 4
+  maxBubblesInRow: 5

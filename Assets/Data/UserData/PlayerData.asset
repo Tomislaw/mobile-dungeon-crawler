@@ -19,13 +19,13 @@ MonoBehaviour:
     silverGems: 60
   knight:
     unlocked: 1
-    skills: 000000000000000000000000
+    skills: 060000000600000006000000
   mage:
     unlocked: 1
-    skills: 000000000000000000000000
+    skills: 060000000600000006000000
   spearman:
     unlocked: 1
-    skills: 000000000000000000000000
+    skills: 060000000600000006000000
   archer:
     unlocked: 1
-    skills: 000000000000000000000000
+    skills: 060000000600000006000000

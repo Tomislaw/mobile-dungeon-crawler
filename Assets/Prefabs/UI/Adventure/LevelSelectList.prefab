@@ -443,7 +443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3500871649617097090, guid: 89177cf901f5bd544aa6893b7d53269f, type: 3}
       propertyPath: m_Interactable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4844736225063389817, guid: 89177cf901f5bd544aa6893b7d53269f, type: 3}
       propertyPath: m_Sprite
@@ -452,10 +452,10 @@ PrefabInstance:
     - target: {fileID: 6451704525302508691, guid: 89177cf901f5bd544aa6893b7d53269f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -7334886338573059942, guid: bd9ea01d645c0874a999c7a4010a36e6, type: 3}
+      objectReference: {fileID: -4352409407941354246, guid: bd9ea01d645c0874a999c7a4010a36e6, type: 3}
     - target: {fileID: 7325908595693147035, guid: 89177cf901f5bd544aa6893b7d53269f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8695867864358465923, guid: 89177cf901f5bd544aa6893b7d53269f, type: 3}
       propertyPath: m_text
@@ -471,7 +471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8831964147252316859, guid: 89177cf901f5bd544aa6893b7d53269f, type: 3}
       propertyPath: isLocked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89177cf901f5bd544aa6893b7d53269f, type: 3}

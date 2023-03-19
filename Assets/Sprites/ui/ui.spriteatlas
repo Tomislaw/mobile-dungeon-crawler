@@ -59,6 +59,8 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 2751bba42664e8f45a4f1dc7913d3c08, type: 3}
     - {fileID: 2800000, guid: bd9ea01d645c0874a999c7a4010a36e6, type: 3}
     - {fileID: 2800000, guid: 371c1ac2787f1c341bc2309c2601b398, type: 3}
+    - {fileID: 2800000, guid: 033b256bff8f2c6438eecae617890808, type: 3}
+    - {fileID: 2800000, guid: fe96a58f115def745876b2595cd09d2d, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -125,6 +127,12 @@ SpriteAtlas:
   - {fileID: 1514295333, guid: 03596d09e24659a4b8b951752f3ec599, type: 3}
   - {fileID: 1067960147, guid: 03596d09e24659a4b8b951752f3ec599, type: 3}
   - {fileID: 966867389, guid: 03596d09e24659a4b8b951752f3ec599, type: 3}
+  - {fileID: 727007038, guid: 033b256bff8f2c6438eecae617890808, type: 3}
+  - {fileID: -991830747, guid: 033b256bff8f2c6438eecae617890808, type: 3}
+  - {fileID: -769647022, guid: 033b256bff8f2c6438eecae617890808, type: 3}
+  - {fileID: 1174534496, guid: 033b256bff8f2c6438eecae617890808, type: 3}
+  - {fileID: -1265267213, guid: 033b256bff8f2c6438eecae617890808, type: 3}
+  - {fileID: 1552512765, guid: 033b256bff8f2c6438eecae617890808, type: 3}
   - {fileID: 1808266713, guid: 7ac4577b5df27ed439a6fe1b5511a9ea, type: 3}
   - {fileID: 1148654188, guid: 7ac4577b5df27ed439a6fe1b5511a9ea, type: 3}
   - {fileID: 1974321936, guid: 7ac4577b5df27ed439a6fe1b5511a9ea, type: 3}
@@ -200,6 +208,12 @@ SpriteAtlas:
   - {fileID: -6800271045598921714, guid: 159303ed9409feb428e01e282aaabba2, type: 3}
   - {fileID: 2750597781653886275, guid: 159303ed9409feb428e01e282aaabba2, type: 3}
   - {fileID: -2972363167018425737, guid: 159303ed9409feb428e01e282aaabba2, type: 3}
+  - {fileID: -783132952, guid: fe96a58f115def745876b2595cd09d2d, type: 3}
+  - {fileID: 567833100, guid: fe96a58f115def745876b2595cd09d2d, type: 3}
+  - {fileID: -2061972940, guid: fe96a58f115def745876b2595cd09d2d, type: 3}
+  - {fileID: 701865152, guid: fe96a58f115def745876b2595cd09d2d, type: 3}
+  - {fileID: 1065229898, guid: fe96a58f115def745876b2595cd09d2d, type: 3}
+  - {fileID: 1245907895, guid: fe96a58f115def745876b2595cd09d2d, type: 3}
   - {fileID: 2131741409, guid: 078611dfae221074596d617a6fda8944, type: 3}
   - {fileID: -729751436, guid: 078611dfae221074596d617a6fda8944, type: 3}
   - {fileID: -1989653792, guid: 078611dfae221074596d617a6fda8944, type: 3}
@@ -267,6 +281,12 @@ SpriteAtlas:
   - bubbles1_0
   - bubbles1_1
   - bubbles1_2
+  - armors1_1
+  - armors1_0
+  - armors1_3
+  - armors1_2
+  - armors1_5
+  - armors1_4
   - shields2_2
   - shields2_3
   - shields2_0
@@ -342,6 +362,12 @@ SpriteAtlas:
   - pads_arrow_pressed
   - pad_attack_pressed
   - pads_arrow_diagonal_pressed
+  - armors2_4
+  - armors2_5
+  - armors2_2
+  - armors2_3
+  - armors2_0
+  - armors2_1
   - tutorial_arrows_bottom
   - tutorial_arrows_space
   - tutorial_arrows_top

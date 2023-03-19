@@ -13,9 +13,11 @@ namespace RuinsRaiders
 
         private float _regenerationTimeLeft;
 
-        void Start()
+        new protected void Start()
         {
+            base.Start();
             _regenerationTimeLeft = regenerationTime;
+
         }
 
         // Update is called once per frame

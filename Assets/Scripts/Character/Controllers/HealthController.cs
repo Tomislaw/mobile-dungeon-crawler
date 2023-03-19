@@ -33,7 +33,7 @@ namespace RuinsRaiders
             Skeletons, Player, Goblins, Fish, None, Animals, Nomads
         }
 
-        private void Start()
+        protected void Start()
         {
             _character = GetComponent<Character>();
             _ai = GetComponent<AI.BasicAi>();
@@ -71,7 +71,7 @@ namespace RuinsRaiders
 
         protected void Death()
         {
-            gameObject.layer = LayerMask.NameToLayer("Dead");
+              gameObject.layer = LayerMask.NameToLayer("Dead");
 
             if (_ai)
                 _ai.enabled = false;

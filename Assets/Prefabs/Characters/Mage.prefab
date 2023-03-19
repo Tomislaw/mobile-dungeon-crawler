@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 9060408073096087312, guid: 2cd9a96ac1039a441a9e9d4cd20d91c5, type: 3}
   healthController: {fileID: 218566901503083164}
-  maxHeartsInRow: 4
+  maxHeartsInRow: 5
 --- !u!1 &5447173780039099581
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,6 +247,22 @@ PrefabInstance:
     - target: {fileID: 3238673523870878560, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181743231487395800, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
+      propertyPath: healthIncreasePerLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181743231487395800, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
+      propertyPath: shieldIncreasePerLevel
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181743231487395800, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
+      propertyPath: attackDamageIncreasePerLevel
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181743231487395800, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
+      propertyPath: specialAttackDamageIncreasePerLevel
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1586342966391059650, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
