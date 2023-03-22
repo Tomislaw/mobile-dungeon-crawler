@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5285578303715754282
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2294004080011893840, guid: cf94a8c1f99265f40ba1b848c880aa9f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -802555481, guid: f0689c29f595d6749b71a2b466c578f0, type: 3}
+    - target: {fileID: 3488539925626880802, guid: cf94a8c1f99265f40ba1b848c880aa9f, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488539925626880802, guid: cf94a8c1f99265f40ba1b848c880aa9f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488539925626880802, guid: cf94a8c1f99265f40ba1b848c880aa9f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488539925626880802, guid: cf94a8c1f99265f40ba1b848c880aa9f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488539925626880802, guid: cf94a8c1f99265f40ba1b848c880aa9f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488539925626880802, guid: cf94a8c1f99265f40ba1b848c880aa9f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488539925626880802, guid: cf94a8c1f99265f40ba1b848c880aa9f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488539925626880802, guid: cf94a8c1f99265f40ba1b848c880aa9f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488539925626880802, guid: cf94a8c1f99265f40ba1b848c880aa9f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488539925626880802, guid: cf94a8c1f99265f40ba1b848c880aa9f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488539925626880802, guid: cf94a8c1f99265f40ba1b848c880aa9f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456677531582014655, guid: cf94a8c1f99265f40ba1b848c880aa9f, type: 3}
+      propertyPath: m_Name
+      value: Boulder Snow2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cf94a8c1f99265f40ba1b848c880aa9f, type: 3}
+--- !u!1 &8395670595719947669 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4456677531582014655, guid: cf94a8c1f99265f40ba1b848c880aa9f, type: 3}
+  m_PrefabInstance: {fileID: 5285578303715754282}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-2628405227186138534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8395670595719947669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b6abc0c42d16543b0bc614ba4a1e0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteTop: {fileID: 111377459, guid: f0689c29f595d6749b71a2b466c578f0, type: 3}
+  spriteTopLeft: {fileID: 1266508622, guid: f0689c29f595d6749b71a2b466c578f0, type: 3}
+  spriteTopRight: {fileID: -1507630340, guid: f0689c29f595d6749b71a2b466c578f0, type: 3}
+  spriteTopBottom: {fileID: -1502692769, guid: f0689c29f595d6749b71a2b466c578f0, type: 3}
+  spriteTopLeftRight: {fileID: -1428619936, guid: f0689c29f595d6749b71a2b466c578f0, type: 3}
+  spriteTopLeftBottom: {fileID: -657719982, guid: f0689c29f595d6749b71a2b466c578f0, type: 3}
+  spriteTopRightBottom: {fileID: -1579116088, guid: f0689c29f595d6749b71a2b466c578f0, type: 3}
+  spriteAll: {fileID: 378946898, guid: f0689c29f595d6749b71a2b466c578f0, type: 3}
+  hasTop: 0

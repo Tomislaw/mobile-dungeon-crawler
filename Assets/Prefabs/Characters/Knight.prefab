@@ -141,13 +141,13 @@ GameObject:
   - component: {fileID: 1217533563843094445}
   - component: {fileID: 7068583201586914935}
   - component: {fileID: 1586342966391059676}
-  - component: {fileID: 1586342966391059648}
   - component: {fileID: 9095645185290459867}
   - component: {fileID: 39514931662721533}
   - component: {fileID: 6072170547237964431}
   - component: {fileID: -8808715197590347756}
   - component: {fileID: 21499108938568145}
   - component: {fileID: 4181743231487395800}
+  - component: {fileID: 7211350550334106730}
   m_Layer: 12
   m_Name: Knight
   m_TagString: Player
@@ -514,22 +514,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!70 &1586342966391059648
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1586342966391059652}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: f9bace41386d69e40b8b8c61df95014c, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.45}
-  m_Size: {x: 0.7, y: 0.9}
-  m_Direction: 0
 --- !u!114 &9095645185290459867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -635,6 +619,32 @@ MonoBehaviour:
   specialAttackDamageIncreasePerLevel: 0
   specialAttackRangeIncreasePerLevel: 1
   overchargeTimeDecreasePerLevel: 0.1
+--- !u!61 &7211350550334106730
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586342966391059652}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.45}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.25, y: 0}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 2, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.6, y: 0.9}
+  m_EdgeRadius: 0
 --- !u!1 &2956168785758855339
 GameObject:
   m_ObjectHideFlags: 0

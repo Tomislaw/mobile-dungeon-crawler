@@ -94,10 +94,10 @@ GameObject:
   - component: {fileID: 2774166976484500296}
   - component: {fileID: 5671693322976097471}
   - component: {fileID: 8932571243353351934}
-  - component: {fileID: 1644591716329279559}
   - component: {fileID: -5021091212187416249}
   - component: {fileID: 4013012953703228152}
   - component: {fileID: -4647018605040078090}
+  - component: {fileID: 1560565852766236328}
   m_Layer: 11
   m_Name: Skeleton
   m_TagString: Untagged
@@ -366,22 +366,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!70 &1644591716329279559
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8932571243353351920}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.09500265, y: 0.6802039}
-  m_Size: {x: 0.6924162, y: 1.3673506}
-  m_Direction: 0
 --- !u!82 &-5021091212187416249
 AudioSource:
   m_ObjectHideFlags: 0
@@ -511,6 +495,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
   soundType: 1
+--- !u!61 &1560565852766236328
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932571243353351920}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.1, y: 0.625}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.25, y: 0}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 2, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.7, y: 1.25}
+  m_EdgeRadius: 0
 --- !u!1 &8932571244200176013
 GameObject:
   m_ObjectHideFlags: 0

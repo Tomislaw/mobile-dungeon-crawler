@@ -198,6 +198,8 @@ SpriteAtlas:
   - {fileID: -1396676395, guid: 69bfa252b0dbcb443b4103e0344bb5d6, type: 3}
   - {fileID: -1615721665, guid: 69bfa252b0dbcb443b4103e0344bb5d6, type: 3}
   - {fileID: -1492307191, guid: 69bfa252b0dbcb443b4103e0344bb5d6, type: 3}
+  - {fileID: 1180401537, guid: 69bfa252b0dbcb443b4103e0344bb5d6, type: 3}
+  - {fileID: 1745797842, guid: 69bfa252b0dbcb443b4103e0344bb5d6, type: 3}
   - {fileID: -785650039, guid: 69bfa252b0dbcb443b4103e0344bb5d6, type: 3}
   - {fileID: 780868778, guid: f41269130783a7e4a81ddfceded8d0e0, type: 3}
   - {fileID: -885870304, guid: f41269130783a7e4a81ddfceded8d0e0, type: 3}
@@ -693,6 +695,8 @@ SpriteAtlas:
   - door0_2
   - door0_3
   - lock
+  - special_1
+  - special_0
   - key
   - sand_23
   - sand_20

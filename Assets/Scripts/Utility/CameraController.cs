@@ -29,6 +29,9 @@ namespace RuinsRaiders
         private float _top = 0;
         private float _bottom = 0;
 
+        private float _paddingX = 0;
+        private float _paddingY = 0;
+
         private float _tweanTimeLeft = 0;
         private Vector3 _tweanStartingPos;
 
@@ -60,6 +63,9 @@ namespace RuinsRaiders
             _right = scene.size.x / 2 + scene.transform.position.x;
             _top = scene.size.y / 2 + scene.transform.position.y;
             _bottom = -scene.size.y / 2 + scene.transform.position.y;
+
+            _paddingX = scene.padding.x;
+            _paddingY = scene.padding.y;
 
             if (_subScene != null)
             {
@@ -114,13 +120,13 @@ namespace RuinsRaiders
 
             if (_subScene)
             {
-                if (_subScene.left && _left > objectToFollow.transform.position.x)
+                if (_subScene.left && (_left > objectToFollow.transform.position.x - _paddingX / 2f))
                     SetSubScene(_subScene.left);
-                else if (_subScene.right && _right < objectToFollow.transform.position.x)
+                else if (_subScene.right && (_right < objectToFollow.transform.position.x + _paddingX / 2f))
                     SetSubScene(_subScene.right);
-                else if (_subScene.bottom && _bottom > objectToFollow.transform.position.y)
+                else if (_subScene.bottom && (_bottom > objectToFollow.transform.position.y - _paddingY / 2f))
                     SetSubScene(_subScene.bottom);
-                else if (_subScene.top && _top < objectToFollow.transform.position.y)
+                else if (_subScene.top && (_top < objectToFollow.transform.position.y + _paddingY / 2f))
                     SetSubScene(_subScene.top);
             }
 

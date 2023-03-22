@@ -15,20 +15,20 @@ namespace RuinsRaiders
         public UnityEvent onMapUpdated = new();
 
         private Tilemap _tilemap;
-        private readonly HashSet<Vector2Int> _dynamicTiles = new();
+        private readonly HashSet<GameObject> _dynamicTiles = new();
         private readonly Dictionary<Vector2Int, AStarSharp.Node> _cache = new();
 
         private bool _mapUpdated = false;
 
-        public void AddDynamicBlockTile(Vector2Int tileId)
+        public void AddDynamicBlockTile(GameObject gameObject)
         {
-            _dynamicTiles.Add(tileId);
+            _dynamicTiles.Add(gameObject);
             _mapUpdated = true;
         }
 
-        public void RemoveDynamicBlockTile(Vector2Int tileId)
+        public void RemoveDynamicBlockTile(GameObject gameObject)
         {
-            _dynamicTiles.Remove(tileId);
+            _dynamicTiles.Remove(gameObject);
             _mapUpdated = true;
         }
 
@@ -46,6 +46,16 @@ namespace RuinsRaiders
             }
         }
 
+        public GameObject GetGameObject(Vector2Int Id)
+        {
+            return _tilemap.GetInstantiatedObject(new Vector3Int(Id.x, Id.y, 0));
+        }
+
+        public TileBase GetTile(Vector2Int Id)
+        {
+            return _tilemap.GetTile(new Vector3Int(Id.x, Id.y, 0));
+        }
+
         public AStarSharp.Node GetNode(Vector2Int Id)
         {
             var cachedNode = _cache.GetValueOrDefault(Id);
@@ -56,7 +66,7 @@ namespace RuinsRaiders
                     Id = Id
                 };
                 var collider = _tilemap.GetColliderType(new Vector3Int(Id.x, Id.y, 0));
-                var gameobject = _tilemap.GetInstantiatedObject(new Vector3Int(Id.x, Id.y, 0));
+                var gameobject = GetGameObject(Id);
                 if (gameobject != null)
                 {
                     cachedNode.Spike = gameobject.GetComponentInChildren<SpikeTile>() != null;
@@ -75,7 +85,7 @@ namespace RuinsRaiders
             if (node.Block)
                 return node;
 
-            node.Destroyable = _dynamicTiles.Contains(Id);
+            node.Destroyable = _dynamicTiles.Any(it => GetTileId(it.transform.position) == node.Id);
             node.Block = node.Destroyable;
 
             return node;

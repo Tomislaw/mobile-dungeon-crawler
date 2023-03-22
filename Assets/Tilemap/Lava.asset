@@ -35,10 +35,10 @@ MonoBehaviour:
     - {fileID: 1072465800, guid: 9bee65d74844a414d92e334ed6d7a4d5, type: 3}
     m_GameObject: {fileID: 8897054653239763015, guid: f095043ffab074744af49c374c3ef9f3, type: 3}
     m_AnimationSpeed: 1
-    m_PerlinScale: 0.5
-    m_Output: 0
+    m_PerlinScale: 0.196
+    m_Output: 1
     m_ColliderType: 0
-    m_RandomTransform: 0
+    m_RandomTransform: 2
     m_Neighbors: 02000000
     m_NeighborPositions:
     - {x: 0, y: 1, z: 0}
