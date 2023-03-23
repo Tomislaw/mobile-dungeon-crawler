@@ -529,19 +529,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 5367954658345666721}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c61692008fedfb4eb3208e68725bf0f, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b2c6fe3b94d91a41a1db1471222ce76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   group: 2
   onDeath:
     m_PersistentCalls:
       m_Calls: []
-  health: 24
-  maxHealth: 24
+  health: 30
+  maxHealth: 30
+  shield: 0
+  maxShield: 0
+  armor: 4
+  maxArmor: 4
+  shieldRegenerationTime: 10
   ressurectTime: 1
-  shield: 4
-  maxShield: 4
-  regenerationTime: 0
 --- !u!114 &7300881240795306579
 MonoBehaviour:
   m_ObjectHideFlags: 0

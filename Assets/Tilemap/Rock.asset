@@ -274,7 +274,7 @@ MonoBehaviour:
     - {x: 1, y: 0, z: 0}
     - {x: 0, y: -1, z: 0}
     - {x: -1, y: 0, z: 0}
-    m_RuleTransform: 0
+    m_RuleTransform: 3
   - m_Id: 16
     m_Sprites:
     - {fileID: -8933452447185942237, guid: 586f6eab877cec24f8c1401d397d30e7, type: 3}
@@ -291,7 +291,7 @@ MonoBehaviour:
     - {x: -1, y: 0, z: 0}
     - {x: 0, y: -1, z: 0}
     - {x: 1, y: 0, z: 0}
-    m_RuleTransform: 0
+    m_RuleTransform: 3
   - m_Id: 8
     m_Sprites:
     - {fileID: -2490388491417578302, guid: 586f6eab877cec24f8c1401d397d30e7, type: 3}
@@ -341,6 +341,10 @@ MonoBehaviour:
   - TreeBranchBackground
   - DarkEarth
   - Sand
+  - SandSlope
+  - SandBackground
+  - SandBackgroundSlope
+  - SnowSlope
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

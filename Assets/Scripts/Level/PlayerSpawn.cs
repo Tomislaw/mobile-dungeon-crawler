@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RuinsRaiders.GUI;
+using System;
+using System.Linq;
 using UnityEngine;
 
 
@@ -25,6 +27,12 @@ namespace RuinsRaiders
         [SerializeField]
         private Character spearmanPrefab;
 
+        [SerializeField]
+        private HealthUI healthUI;
+        [SerializeField]
+        private ShieldUI shieldUI;
+        [SerializeField]
+        private OxygenUI oxygenUI;
 
         public void Spawn(CharacterType type)
         {
@@ -54,6 +62,11 @@ namespace RuinsRaiders
             var movement = player.GetComponent<MovementController>();
             if (movement)
                 movement.Teleport(movement.transform.position);
+
+            healthUI.healthController = healthComponent;
+            shieldUI.healthController = healthComponent;
+            oxygenUI.healthController = healthComponent;
+            oxygenUI.oxygenController = player.GetComponent<OxygenController>();
 
         }
 

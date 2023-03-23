@@ -10,7 +10,6 @@ namespace RuinsRaiders
         public int slopeRollDamage = 2;
         public int fallDamage = 4;
 
-        public MeeleAttackTrigger trigger;
         private RollableBox _box;
 
         private HashSet<HealthController> touchers = new();
@@ -48,11 +47,17 @@ namespace RuinsRaiders
         {
             foreach(var health in touchers)
             {
-                health.Damage(fallDamage, null);
+                if(health.transform.position.y <= transform.position.y)
+                    health.Damage(fallDamage, null);
             }
 
             if(_healthController != null)
                 _healthController.Damage(fallDamage, null);
+
+            foreach (var t in touchersToBeRemoved)
+                touchers.Remove(t);
+
+            touchersToBeRemoved.Clear();
         }
 
         private void RollDamage()
@@ -63,18 +68,12 @@ namespace RuinsRaiders
                 if (_healthController != null)
                     _healthController.Damage(slopeRollDamage, null);
             }
+
+            foreach (var t in touchersToBeRemoved)
+                touchers.Remove(t);
+
+            touchersToBeRemoved.Clear();
         }
 
-        // Update is called once per frame
-        void FixedUpdate()
-        {
-            if(_box.IsFalling! && !_box.IsRolling && touchersToBeRemoved.Count > 0)
-            {
-                foreach(var t in touchersToBeRemoved)
-                    touchers.Remove(t);
-
-                touchersToBeRemoved.Clear();
-            }
-        }
     }
 }

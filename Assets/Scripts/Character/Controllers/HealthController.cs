@@ -19,6 +19,16 @@ namespace RuinsRaiders
         public int health = 4;
         public int maxHealth = 4;
 
+        public int shield = 0;
+        public int maxShield = 0;
+
+        public int armor = 0;
+        public int maxArmor = 0;
+
+        public float shieldRegenerationTime = 10f;
+        private float _shieldRegenerationTimeLeft;
+
+
         [SerializeField]
         protected float ressurectTime = 1f;
 
@@ -50,6 +60,22 @@ namespace RuinsRaiders
             }
         }
 
+        protected void FixedUpdate()
+        {
+            armor = maxArmor;
+
+            if (shield >= maxShield)
+                return;
+
+            _shieldRegenerationTimeLeft -= Time.fixedDeltaTime;
+
+            if (_shieldRegenerationTimeLeft <= 0)
+            {
+                _shieldRegenerationTimeLeft = shieldRegenerationTime;
+                shield++;
+            }
+        }
+
         public virtual void Damage(int damage, GameObject who)
         {
             if (_character != null && _character.holdUpdate == true)
@@ -64,7 +90,22 @@ namespace RuinsRaiders
             if (_renderer != null)
                 StartCoroutine(FlashColor());
 
-            health -= damage;
+
+            armor -= damage;
+
+            if (armor >= 0)
+                return;
+
+            shield += armor;
+            armor = 0;
+
+            if (shield >= 0)
+                return;
+
+            health += shield;
+            shield = 0;
+
+
             if (health <= 0)
                 Death();
         }

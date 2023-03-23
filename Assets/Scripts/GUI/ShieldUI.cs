@@ -9,16 +9,12 @@ namespace RuinsRaiders.GUI
 
         protected override int GetHealth()
         {
-            if (healthController is ShieldedHealthController)
-                return (healthController as ShieldedHealthController).shield;
-            else return 0;
+            return healthController.shield;
         }
 
         protected override int GetMaxHealth()
         {
-            if (healthController is ShieldedHealthController)
-                return (healthController as ShieldedHealthController).maxShield;
-            else return 0;
+            return healthController.maxShield;
         }
 
     }

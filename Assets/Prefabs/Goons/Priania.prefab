@@ -1,52 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1178574586735708614
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8722321411202059928}
-  - component: {fileID: 1905970679089972682}
-  m_Layer: 11
-  m_Name: HearthUI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8722321411202059928
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1178574586735708614}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.00002, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2951990357465692226}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1905970679089972682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1178574586735708614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4a4a92357f01cc4e92f09a03593b042, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 9060408073096087312, guid: d1adc1b4e2799db4795da0efb0d7070c, type: 3}
-  healthController: {fileID: 3005066418970644057}
-  maxHeartsInRow: 4
 --- !u!1 &3882099613467087025
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,8 +125,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7519929784265880082}
-  - {fileID: 8722321411202059928}
   - {fileID: 405904931236297413}
+  - {fileID: 1955598564412254649}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -30.469894}
@@ -235,6 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdUpdate: 0
+  setAnimationVariablesInstead: 0
   haveSneakAnimation: 0
   haveWalkPreAttackAnimation: 0
   haveOverchargeAnimation: 0
@@ -267,7 +221,6 @@ MonoBehaviour:
   attackTime: 0.1
   knockback: 0
   deflectProjectiles: 0
-  _attackTimeLeft: 0
 --- !u!114 &6529528878227959671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,6 +257,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   move: {x: 0, y: 0}
+  faceLeft: 0
 --- !u!114 &3005066418970644057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,6 +276,11 @@ MonoBehaviour:
       m_Calls: []
   health: 2
   maxHealth: 2
+  shield: 0
+  maxShield: 0
+  armor: 0
+  maxArmor: 0
+  shieldRegenerationTime: 10
   ressurectTime: 1
 --- !u!114 &-8839992570248876018
 MonoBehaviour:
@@ -427,6 +386,72 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
   soundType: 1
+--- !u!1 &6275282479640741850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1955598564412254649}
+  - component: {fileID: 2178662404842519328}
+  - component: {fileID: 32442748572835988}
+  m_Layer: 11
+  m_Name: Healthbar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1955598564412254649
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6275282479640741850}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2951990357465692226}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2178662404842519328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6275282479640741850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d8b7e7e278e8c4b8f660eee5b67dd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barPrefab: {fileID: 9060408073096087315, guid: b0ff000c3e256614e855de4e1227b57b, type: 3}
+  healthController: {fileID: 3005066418970644057}
+  health: {fileID: -1500149140, guid: e55edfc600e76864d85fbf274646a016, type: 3}
+  shield: {fileID: 684872157, guid: e55edfc600e76864d85fbf274646a016, type: 3}
+  armor: {fileID: 1958763620, guid: e55edfc600e76864d85fbf274646a016, type: 3}
+  hit: {fileID: 1195512238, guid: e55edfc600e76864d85fbf274646a016, type: 3}
+  empty: {fileID: -426187218, guid: e55edfc600e76864d85fbf274646a016, type: 3}
+  offset: 0.25
+  maxInRow: 8
+--- !u!114 &32442748572835988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6275282479640741850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89900d905e4d28643b09f4817b77dbd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7162587712982903530
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,7 +483,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2951990357465692226}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &3577735574495050856
 PolygonCollider2D:

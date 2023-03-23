@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -32,9 +34,12 @@ namespace RuinsRaiders
 
         private float _timeLeftToPush = 0;
 
-        private MovementController _pusher;
+        private List<MovementController> _pushers = new();
         private AStar _astar;
         private Collider2D _collider;
+        private HealthController _healthController;
+
+        public bool IsDead { get => _healthController != null && _healthController.IsDead; }
 
         public float Rotation { get; private set; }
 
@@ -69,11 +74,18 @@ namespace RuinsRaiders
             _astar = FindObjectOfType<AStar>();
             Rotation = transform.rotation.eulerAngles.z;
             _collider = GetComponent<Collider2D>();
+            _healthController = GetComponent<HealthController>();
 
+            var health = GetComponent<HealthController>();
+
+            if (!IsDead)
+                _astar.AddDynamicBlockTile(gameObject);
+
+            if (health != null)
+                health.onDeath.AddListener(UpdateStandings);
             if (_astar == null)
                 return;
             _astar.onMapUpdated.AddListener(UpdateStandings);
-            _astar.AddDynamicBlockTile(gameObject);
         }
 
 
@@ -81,17 +93,19 @@ namespace RuinsRaiders
         {
             if (_astar == null || _collider == null || _collider.isActiveAndEnabled)
                 return;
-            _astar.AddDynamicBlockTile(gameObject);
-            UpdateStandings();
+
+            if (IsDead)
+                _astar.RemoveDynamicBlockTile(gameObject);
+            else
+                _astar.AddDynamicBlockTile(gameObject);
         }
 
         private void OnDisable()
         {
             if (_astar == null)
                 return;
-            _astar.RemoveDynamicBlockTile(gameObject);
-            UpdateStandings();
 
+            _astar.RemoveDynamicBlockTile(gameObject);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -99,7 +113,7 @@ namespace RuinsRaiders
             var pusher = collision.gameObject.GetComponent<MovementController>();
             if (pusher)
             {
-                this._pusher = pusher;
+                _pushers.Add(pusher);
                 _timeLeftToPush = timeToPush;
             }
 
@@ -107,9 +121,10 @@ namespace RuinsRaiders
 
         private void OnCollisionExit2D(Collision2D collision)
         {
-            if (_pusher!= null && _pusher.gameObject == collision.gameObject)
+            var pusher = collision.gameObject.GetComponent<MovementController>();
+            if (pusher)
             {
-                _pusher = null;
+                _pushers.Remove(pusher);
                 _timeLeftToPush = timeToPush;
             }
         }
@@ -119,18 +134,22 @@ namespace RuinsRaiders
             if (coroutine != null)
                 return;
 
-            if (_pusher == null)
+            if (_pushers.Count == 0 || IsDead)
                 return;
 
+            var pusher = _pushers
+                .Aggregate((agg, next) =>
+                next.Mass > agg.Mass ? next : agg);
+
             // cannot push when standing on it
-            if (_pusher.transform.position.y > transform.position.y + 0.48)
+            if (pusher.transform.position.y > transform.position.y + 0.48)
             {
                 _timeLeftToPush = timeToPush;
                 return;
             }
 
             // cannot push when not moving
-            if (!_pusher.IsMoving)
+            if (!pusher.IsMoving)
             {
                 _timeLeftToPush = timeToPush;
                 return;
@@ -139,30 +158,14 @@ namespace RuinsRaiders
             _timeLeftToPush -= Time.fixedDeltaTime;
             if (_timeLeftToPush < 0)
             {
-                if (_pusher.faceLeft && !CanRollLeft)
+                if (pusher.faceLeft && !CanRollLeft)
                     return;
-                if (!_pusher.faceLeft && !CanRollRight)
+                if (!pusher.faceLeft && !CanRollRight)
                     return;
 
-                coroutine = StartCoroutine(Roll(_pusher.faceLeft));
+                coroutine = StartCoroutine(Roll(pusher.faceLeft));
             }
 
-        }
-
-        public void SetCollision(bool collision)
-        {
-            if (_collider == null)
-                return;
-
-            _collider.enabled = collision;
-            if (collision)
-            {
-                _astar.AddDynamicBlockTile(gameObject);
-            }
-            else
-            {
-                _astar.RemoveDynamicBlockTile(gameObject);
-            }
         }
 
         public void UpdateStandings()
@@ -173,10 +176,13 @@ namespace RuinsRaiders
             if (coroutine != null)
                 return;
 
-            transform.position = new Vector3(
-                (float)Math.Round(transform.position.x * 2, MidpointRounding.AwayFromZero) / 2,
-                (float)Math.Round(transform.position.y * 2, MidpointRounding.AwayFromZero) / 2,
-                transform.position.z);
+            if (IsDead && _collider != null && _collider.enabled == true) { 
+                _collider.enabled = false;
+                ResetRotation();
+                _astar.RemoveDynamicBlockTile(gameObject);
+            }
+
+            SnapToGrid();
 
             if (_astar == null)
                 return;
@@ -184,7 +190,7 @@ namespace RuinsRaiders
             var id = _astar.GetTileId(transform.position) + new Vector2Int(0, -1);
             var bottomNode = _astar.GetNode(id);
             var isBottomSlope = IsSlope(id);
-            if (isBottomSlope)
+            if (isBottomSlope && !IsDead)
             {
                 if(CanRoll(true, id))
                     coroutine = StartCoroutine(RollOnSlope(true));
@@ -197,6 +203,14 @@ namespace RuinsRaiders
 
         }
 
+        public void SnapToGrid()
+        {
+            transform.position = new Vector3(
+                (float)Math.Round(transform.position.x * 2, MidpointRounding.AwayFromZero) / 2,
+                (float)Math.Round(transform.position.y * 2, MidpointRounding.AwayFromZero) / 2,
+                transform.position.z);
+        }
+
         private IEnumerator Fall()
         {
             if (IsFalling == true || IsRolling == true)
@@ -204,8 +218,10 @@ namespace RuinsRaiders
 
             IsFalling = true;
 
-            if (isActiveAndEnabled)
+            if (!IsDead)
+            {
                 _astar.RemoveDynamicBlockTile(gameObject);
+            }
 
             int falledTiles = 0;
             var movement = 1f / fallPoints;
@@ -239,17 +255,13 @@ namespace RuinsRaiders
                 falledTiles++;
             }
 
-
-            if (_astar == null)
-            {
-                coroutine = null;
-                yield break;
-            }
-
-            if (isActiveAndEnabled)
-                _astar.AddDynamicBlockTile(gameObject);
-
             yield return new WaitForSeconds((timeToFall / (float)fallPoints));
+
+
+            if (!IsDead)
+            {
+                _astar.AddDynamicBlockTile(gameObject);
+            }
 
             coroutine = null;
             UpdateStandings();
@@ -268,7 +280,10 @@ namespace RuinsRaiders
             IsRolling = true;
             IsFalling = false;
 
-            _astar.RemoveDynamicBlockTile(gameObject);
+            if (!IsDead)
+            {
+                _astar.RemoveDynamicBlockTile(gameObject);
+            }
 
             var sign = left ? 1 : -1;
             var step = sign * 90f / (float)rotations;
@@ -293,9 +308,13 @@ namespace RuinsRaiders
             if (OnRoll != null)
                 OnRoll.Invoke();
 
-            if (_astar == null)
-                yield break;
-            _astar.AddDynamicBlockTile(gameObject);
+            if (!IsDead)
+            {
+                _astar.AddDynamicBlockTile(gameObject);
+            }
+
+            UpdateStandings();
+
         }
 
         private IEnumerator RollOnSlope(bool left)
@@ -309,11 +328,13 @@ namespace RuinsRaiders
             if (IsFalling == true || IsRolling == true)
                 yield break;
 
+            if (!IsDead)
+            {
+                _astar.RemoveDynamicBlockTile(gameObject);
+            }
 
             IsRolling = true;
             IsFalling = false;
-
-            _astar.RemoveDynamicBlockTile(gameObject);
 
             var sign = left ? -1 : 1;
 
@@ -348,9 +369,10 @@ namespace RuinsRaiders
             if (OnSlopeRoll != null)
                 OnSlopeRoll.Invoke();
 
-            if (_astar == null)
-                yield break;
-            _astar.AddDynamicBlockTile(gameObject);
+            if (!IsDead)
+            {
+                _astar.AddDynamicBlockTile(gameObject);
+            }
 
             coroutine = null;
             UpdateStandings();

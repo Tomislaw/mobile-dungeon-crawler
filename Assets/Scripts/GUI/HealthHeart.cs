@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace RuinsRaiders.GUI
 {
     // Responsible for showing single heart in HeartUi and handling its flashin animations
-    [RequireComponent(typeof(SpriteRenderer))]
     public class HealthHeart : MonoBehaviour
     {
         public float SwitchTime = 0.5f;
@@ -32,7 +32,8 @@ namespace RuinsRaiders.GUI
         [SerializeField]
         private int _health = 2;
 
-        private SpriteRenderer sprite;
+        private SpriteRenderer _sprite;
+        private Image _image;
 
         public int Health
         {
@@ -45,7 +46,8 @@ namespace RuinsRaiders.GUI
 
         private void Awake()
         {
-            sprite = GetComponent<SpriteRenderer>();
+            _sprite = GetComponent<SpriteRenderer>();
+            _image = GetComponent<Image>();
         }
 
         private IEnumerator SetHealth(int value)
@@ -57,45 +59,94 @@ namespace RuinsRaiders.GUI
             {
                 if (health == 1)
                 {
-                    sprite.sprite = damageHalfRightSprite;
+                    if(_sprite)
+                        _sprite.sprite = damageHalfRightSprite;
+                    if (_image)
+                        _image.sprite = damageHalfRightSprite;
+
                     yield return new WaitForSeconds(SwitchTime);
-                    sprite.sprite = halfFullSprite;
+
+                    if (_sprite)
+                        _sprite.sprite = halfFullSprite;
+                    if (_image)
+                        _image.sprite = halfFullSprite;
                 }
                 else if (health == 0)
                 {
-                    sprite.sprite = damageFullSprite;
+                    if (_sprite)
+                        _sprite.sprite = damageFullSprite;
+                    if (_image)
+                        _image.sprite = damageFullSprite;
+
                     yield return new WaitForSeconds(SwitchTime);
-                    sprite.sprite = noneSprite;
+
+                    if (_sprite)
+                        _sprite.sprite = noneSprite;
+                    if (_image)
+                        _image.sprite = noneSprite;
                 }
             }
             else if (current == 1)
             {
                 if (health == 2)
                 {
-                    sprite.sprite = damageHalfRightSprite;
+                    if (_sprite)
+                        _sprite.sprite = damageHalfRightSprite;
+                    if (_image)
+                        _image.sprite = damageHalfRightSprite;
+
                     yield return new WaitForSeconds(SwitchTime);
-                    sprite.sprite = fullSprite;
+
+                    if (_sprite)
+                        _sprite.sprite = fullSprite;
+                    if (_image)
+                        _image.sprite = fullSprite;
                 }
                 else if (health == 0)
                 {
-                    sprite.sprite = damageHalfLeftSprite;
+                    if (_sprite)
+                        _sprite.sprite = damageHalfLeftSprite;
+                    if (_image)
+                        _image.sprite = damageHalfLeftSprite;
+
                     yield return new WaitForSeconds(SwitchTime);
-                    sprite.sprite = noneSprite;
+
+                    if (_sprite)
+                        _sprite.sprite = noneSprite;
+                    if (_image)
+                        _image.sprite = noneSprite;
+
                 }
             }
             else if (current == 0)
             {
                 if (health == 2)
                 {
-                    sprite.sprite = damageFullSprite;
+                    if (_sprite)
+                        _sprite.sprite = damageFullSprite;
+                    if (_image)
+                        _image.sprite = damageFullSprite;
+
                     yield return new WaitForSeconds(SwitchTime);
-                    sprite.sprite = fullSprite;
+
+                    if (_sprite)
+                        _sprite.sprite = fullSprite;
+                    if (_image)
+                        _image.sprite = fullSprite;
                 }
                 else if (health == 1)
                 {
-                    sprite.sprite = damageHalfLeftSprite;
+                    if (_sprite)
+                        _sprite.sprite = damageHalfLeftSprite;
+                    if (_image)
+                        _image.sprite = damageHalfLeftSprite;
+
                     yield return new WaitForSeconds(SwitchTime);
-                    sprite.sprite = halfFullSprite;
+
+                    if (_sprite)
+                        _sprite.sprite = halfFullSprite;
+                    if (_image)
+                        _image.sprite = halfFullSprite;
                 }
             }
         }

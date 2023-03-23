@@ -6,10 +6,15 @@ namespace RuinsRaiders.GUI
     // Responsible for showinh hearts above player and enemies
     public class HealthUI : MonoBehaviour
     {
+
+        public HealthController healthController;
+
+        [SerializeField]
+        protected float hearthWidth = 1;
+
         [SerializeField]
         protected HealthHeart prefab;
-        [SerializeField]
-        protected HealthController healthController;
+
         [SerializeField]
         protected int maxHeartsInRow = 4;
 
@@ -45,6 +50,7 @@ namespace RuinsRaiders.GUI
             else
                 transform.localScale = new Vector3(1, 1, 1);
 
+            var ah = GetMaxHealth();
             if ((GetMaxHealth() + 1) / 2 != _hearts.Count)
             {
                 Invalidate();
@@ -101,13 +107,10 @@ namespace RuinsRaiders.GUI
 
             int heartsCount = GetHeartsCount();
 
-            float hearthWidth = 1;
-
             for (int i = 0; i < heartsCount; i++)
             {
                 int hearthRow = i / maxHeartsInRow;
-                int heartsInRow = Mathf.Min(maxHeartsInRow, heartsCount - hearthRow * maxHeartsInRow);
-                float startingPos = (float)heartsInRow / 2 - hearthWidth / 2 - hearthWidth * i % maxHeartsInRow;
+                float startingPos = i % maxHeartsInRow * hearthWidth;
 
                 var p = Instantiate(prefab);
                 p.name = "heart" + i;
@@ -115,6 +118,7 @@ namespace RuinsRaiders.GUI
                 p.transform.localPosition = new Vector2(startingPos, hearthRow * hearthWidth);
                 _hearts.Add(p);
             }
+            _hearts.Reverse();
         }
     }
 }

@@ -22,14 +22,16 @@ namespace RuinsRaiders
 
         public void AddDynamicBlockTile(GameObject gameObject)
         {
+            var size = _dynamicTiles.Count;
             _dynamicTiles.Add(gameObject);
-            _mapUpdated = true;
+            _mapUpdated = size != _dynamicTiles.Count;
         }
 
         public void RemoveDynamicBlockTile(GameObject gameObject)
         {
+            var size = _dynamicTiles.Count;
             _dynamicTiles.Remove(gameObject);
-            _mapUpdated = true;
+            _mapUpdated = size != _dynamicTiles.Count;
         }
 
         private void Awake()
@@ -37,12 +39,12 @@ namespace RuinsRaiders
             _tilemap = GetComponent<Tilemap>();
         }
 
-        private void FixedUpdate()
+        private void LateUpdate()
         {
             if (_mapUpdated)
             {
-                onMapUpdated.Invoke();
                 _mapUpdated = false;
+                onMapUpdated.Invoke();
             }
         }
 

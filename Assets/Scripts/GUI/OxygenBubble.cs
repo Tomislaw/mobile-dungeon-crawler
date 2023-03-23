@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace RuinsRaiders.GUI
 {
     // Responsible for showing single heart in HeartUi and handling its flashin animations
-    [RequireComponent(typeof(SpriteRenderer))]
     public class OxygenBubble : MonoBehaviour
     {
 
@@ -22,7 +22,8 @@ namespace RuinsRaiders.GUI
         [SerializeField]
         private int _oxygen = 2;
 
-        private SpriteRenderer sprite;
+        private SpriteRenderer _sprite;
+        private Image _image;
 
         public int Oxygen
         {
@@ -35,7 +36,8 @@ namespace RuinsRaiders.GUI
 
         private void Awake()
         {
-            sprite = GetComponent<SpriteRenderer>();
+            _sprite = GetComponent<SpriteRenderer>();
+            _image = GetComponent<Image>();
         }
 
         private void SetOxygen(int value)
@@ -45,13 +47,22 @@ namespace RuinsRaiders.GUI
             switch (_oxygen)
             {
                 case 0:
-                    sprite.sprite = noneSprite;
+                    if(_sprite)
+                        _sprite.sprite = noneSprite;
+                    if (_image)
+                        _image.sprite = noneSprite;
                     break;
                 case 1:
-                    sprite.sprite = halfSprite;
+                    if (_sprite)
+                        _sprite.sprite = halfSprite;
+                    if (_image)
+                        _image.sprite = halfSprite;
                     break;
                 default:
-                    sprite.sprite = fullSprite;
+                    if (_sprite)
+                        _sprite.sprite = fullSprite;
+                    if (_image)
+                        _image.sprite = fullSprite;
                     break;
             }
         }

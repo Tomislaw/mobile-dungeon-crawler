@@ -6,12 +6,17 @@ namespace RuinsRaiders.GUI
     // Responsible for showinh hearts above player and enemies
     public class OxygenUI : MonoBehaviour
     {
+
+        public OxygenController oxygenController;
+
+        public HealthController healthController;
+
+        [SerializeField]
+        private float bubbleWidth = 1;
+
         [SerializeField]
         private OxygenBubble prefab;
-        [SerializeField]
-        private OxygenController oxygenController;
-        [SerializeField]
-        private HealthController healthController;
+
         [SerializeField]
         private int maxBubblesInRow = 4;
 
@@ -93,13 +98,11 @@ namespace RuinsRaiders.GUI
 
             int bubbleCount = !oxygenController.IsUnderwater || healthController.IsDead ? 0 : (oxygenController.maxOxygen + 1) / 2;
 
-            float bubbleWidth = 1;
-
             for (int i = 0; i < bubbleCount; i++)
             {
                 int bubbleRow = i / maxBubblesInRow;
                 int bubblesInRow = Mathf.Min(maxBubblesInRow, bubbleCount - bubbleRow * maxBubblesInRow);
-                float startingPos = (float)bubblesInRow / 2 - bubbleWidth / 2 - bubbleWidth * i % maxBubblesInRow;
+                float startingPos = i % maxBubblesInRow * bubbleWidth;
 
                 var p = Instantiate(prefab);
                 p.name = "bubble" + i;
@@ -107,6 +110,7 @@ namespace RuinsRaiders.GUI
                 p.transform.localPosition = new Vector2(startingPos, bubbleRow * bubbleWidth);
                 _bubbles.Add(p);
             }
+            _bubbles.Reverse();
         }
     }
 }

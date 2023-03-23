@@ -21,8 +21,6 @@ namespace RuinsRaiders {
         public int specialAttackRangeIncreasePerLevel;
         public float overchargeTimeDecreasePerLevel;
 
-
-        private ShieldedHealthController _shieldController;
         private HealthController _healthController;
 
         private RangedAttack _rangedAttack;
@@ -32,7 +30,6 @@ namespace RuinsRaiders {
 
         void Start()
         {
-            _shieldController = GetComponent<ShieldedHealthController>();
             _healthController = GetComponent<HealthController>();
 
             _rangedAttack = GetComponent<RangedAttack>();
@@ -41,18 +38,14 @@ namespace RuinsRaiders {
 
             var data = playerData.GetCharacterData(characterType);
 
-            if (_shieldController != null)
-            {
-                _shieldController.health += healthIncreasePerLevel * data.skills[0];
-                _shieldController.maxHealth += healthIncreasePerLevel * data.skills[0];
 
-                _shieldController.shield += shieldIncreasePerLevel * data.skills[0];
-                _shieldController.maxShield += shieldIncreasePerLevel * data.skills[0];
-            }
             if (_healthController != null)
             {
                 _healthController.health += healthIncreasePerLevel * data.skills[0];
                 _healthController.maxHealth += healthIncreasePerLevel * data.skills[0];
+
+                _healthController.shield += shieldIncreasePerLevel * data.skills[0];
+                _healthController.maxShield += shieldIncreasePerLevel * data.skills[0];
             }
             if(_meeleAttack != null)
             {

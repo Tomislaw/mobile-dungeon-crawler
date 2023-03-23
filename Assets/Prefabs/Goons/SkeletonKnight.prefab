@@ -27,6 +27,10 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 1643307426841123556, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3709137861338101807, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].y
       value: 2
@@ -52,16 +56,28 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4885720716787640596, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
+      propertyPath: armor
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4885720716787640596, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
       propertyPath: Health
       value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4885720716787640596, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
       propertyPath: health
-      value: 16
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4885720716787640596, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
+      propertyPath: maxArmor
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4885720716787640596, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
       propertyPath: MaxHealth
       value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4885720716787640596, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
+      propertyPath: maxHealth
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 8932571243353351911, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
       propertyPath: knockback
@@ -170,6 +186,14 @@ PrefabInstance:
     - target: {fileID: 8932571243353351935, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
       propertyPath: WalkSpeed
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8932571244200176011, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
+      propertyPath: maxHeartsInRow
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8932571244200176011, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
+      propertyPath: healthController
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8932571244200176012, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
       propertyPath: m_LocalPosition.y

@@ -23,9 +23,9 @@ SpriteAtlas:
     platformSettings:
     - serializedVersion: 3
       m_BuildTarget: DefaultTexturePlatform
-      m_MaxTextureSize: 2048
+      m_MaxTextureSize: 8192
       m_ResizeAlgorithm: 0
-      m_TextureFormat: -1
+      m_TextureFormat: 4
       m_TextureCompression: 0
       m_CompressionQuality: 50
       m_CrunchedCompression: 0
@@ -61,6 +61,7 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 371c1ac2787f1c341bc2309c2601b398, type: 3}
     - {fileID: 2800000, guid: 033b256bff8f2c6438eecae617890808, type: 3}
     - {fileID: 2800000, guid: fe96a58f115def745876b2595cd09d2d, type: 3}
+    - {fileID: 2800000, guid: e55edfc600e76864d85fbf274646a016, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -120,6 +121,14 @@ SpriteAtlas:
   - {fileID: 1564688358316481467, guid: 20d3c156daefaf540bf1c1af9964b7b0, type: 3}
   - {fileID: 7885684081779559860, guid: 20d3c156daefaf540bf1c1af9964b7b0, type: 3}
   - {fileID: 8522625820373494394, guid: 20d3c156daefaf540bf1c1af9964b7b0, type: 3}
+  - {fileID: 1195512238, guid: e55edfc600e76864d85fbf274646a016, type: 3}
+  - {fileID: -1500149140, guid: e55edfc600e76864d85fbf274646a016, type: 3}
+  - {fileID: 684872157, guid: e55edfc600e76864d85fbf274646a016, type: 3}
+  - {fileID: 2044876765, guid: e55edfc600e76864d85fbf274646a016, type: 3}
+  - {fileID: 1958763620, guid: e55edfc600e76864d85fbf274646a016, type: 3}
+  - {fileID: -426187218, guid: e55edfc600e76864d85fbf274646a016, type: 3}
+  - {fileID: -383412723, guid: e55edfc600e76864d85fbf274646a016, type: 3}
+  - {fileID: 2146768626, guid: e55edfc600e76864d85fbf274646a016, type: 3}
   - {fileID: 2062767613, guid: a44e5707dc26e5746b591aecacabe493, type: 3}
   - {fileID: -1581197087, guid: a44e5707dc26e5746b591aecacabe493, type: 3}
   - {fileID: 1830127490, guid: a44e5707dc26e5746b591aecacabe493, type: 3}
@@ -274,6 +283,14 @@ SpriteAtlas:
   - hearts_0
   - hearts_3
   - hearts_2
+  - healthbar_white
+  - healthbar_red
+  - healthbar_blue
+  - healthbar_brown
+  - healthbar_grey
+  - healthbar_dark
+  - healthbar_green
+  - healthbar_blue2
   - bubbles2_2
   - bubbles2_1
   - bubbles2_0

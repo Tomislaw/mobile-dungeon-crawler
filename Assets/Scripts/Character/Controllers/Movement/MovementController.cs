@@ -67,6 +67,8 @@ namespace RuinsRaiders
 
         public Vector2 Velocity { get => _rigidbody.velocity; }
 
+        public float Mass { get => _rigidbody.mass; }
+
         public bool IsColliderAbove
         {
             get
