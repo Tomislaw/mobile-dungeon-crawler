@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -25,49 +26,75 @@ namespace RuinsRaiders.AI
 
         public class Action : BasicAiAction
         {
-            readonly private MovementController character;
-            readonly private PathfindingController pathfinding;
+            readonly private MovementController _movementController;
+            readonly private PathfindingController _pathfindingController;
             private float awaitTime;
             public Action(ActivatorData trigger, MoveToRandomTileAction parent)
             {
-                character = trigger.triggeredFor.GetComponent<MovementController>();
-                pathfinding = trigger.triggeredFor.GetComponent<PathfindingController>();
+                _movementController = trigger.triggeredFor.GetComponent<MovementController>();
+                _pathfindingController = trigger.triggeredFor.GetComponent<PathfindingController>();
                 awaitTime = parent.AwaitTime;
-                var id = pathfinding.TileId;
+                var targetId = _pathfindingController.GetAStar().GetTileId(trigger.triggeredFor.transform.position);
 
-                List<Vector2Int> positions = new();
-                for (int x = -parent.searchDistanceX; x <= parent.searchDistanceX; x++)
-                    for (int y = -parent.searchDistanceY; y <= parent.searchDistanceY; y++)
-                    {
-                        if (id.x == 0 && id.y == 0)
-                            continue;
+                int random = UnityEngine.Random.Range(0, parent.searchDistanceX * 2 + 1) - parent.searchDistanceX;
+                if (random == 0)
+                    random = UnityEngine.Random.Range(0, 2) * 2 - parent.searchDistanceX;
 
-                        var pos = new Vector2Int(id.x + x, id.y + y);
-                        if (pathfinding.CanMoveToTile(pos) && (!parent.onlyGround ||pathfinding.CanStand(pos)))
-                            positions.Add(pos);
-                    }
+                Func<AStarSharp.Node, bool> IsTarget = (node) =>
+                {
+                    var height = node.Id.y - targetId.y;
+                    if (height < -parent.searchDistanceY || height > parent.searchDistanceY)
+                        return false;
 
-                var randomizedPositions = positions.OrderBy(it => Random.Range(0f, 1f));
+                    var width = node.Id.x - targetId.x;
+                    if (width != random)
+                        return false;
 
-                if (randomizedPositions.Any())
-                    pathfinding.MoveTo(randomizedPositions.First(), false);
+                    if (!_movementController.canSwim && node.Water)
+                        return false;
+
+                    if (!_movementController.canUseLadder && node.Ladder && !_movementController.flying)
+                        return false;
+
+                    if (node.Spike)
+                        return false;
+
+                    if (!_movementController.flying)
+                        return _pathfindingController.CanStand(node.Id);
+
+                    return true;
+
+                };
+
+                Func<AStarSharp.Node, float> GetCost = (node) =>
+                {
+                    var cost = node.Weight + node.Parent.Cost;
+                    return cost;
+                };
+
+                Func<AStarSharp.Node, float> GetDistance = (node) =>
+                {
+                    return Vector2.Distance(node.Id, targetId);
+                };
+
+                _pathfindingController.MoveTo(IsTarget, GetCost, GetDistance, false);
 
             }
 
 
             public override bool CanStop()
             {
-                return IsFinished() || character.IsSwimming || character.flying || character.IsGrounded;
+                return IsFinished() || (_movementController.IsGrounded || _movementController.flying || _movementController.IsSwimming);
             }
             public override bool IsFinished()
             {
-                return !pathfinding.IsMoving && awaitTime <= 0;
+                return !_pathfindingController.IsMoving && awaitTime <= 0;
             }
 
 
             public override void Update(float dt)
             {
-                if (!pathfinding.IsMoving && awaitTime > 0)
+                if (!_pathfindingController.IsMoving && awaitTime > 0)
                     awaitTime -= dt;
             }
 
@@ -75,8 +102,8 @@ namespace RuinsRaiders.AI
             {
                 return "MoveToRandomTileAction;" +
                     "\nawait: " + awaitTime.ToString() +
-                    "\nmoving: " + pathfinding.IsMoving +
-                    "\nnodes: " + pathfinding.RemainingNodes() +
+                    "\nmoving: " + _pathfindingController.IsMoving +
+                    "\nnodes: " + _pathfindingController.RemainingNodes() +
                     "\nfinished: " + IsFinished();
             }
         }

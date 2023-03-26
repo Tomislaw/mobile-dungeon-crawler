@@ -67,6 +67,18 @@ namespace RuinsRaiders.AI
                     if (distance < _minDistance || distance > _maxDistance)
                         return false;
 
+                    if (!_movementController.canSwim && node.Water)
+                        return false;
+
+                    if (!_movementController.canUseLadder && node.Ladder && !_movementController.flying)
+                        return false;
+
+                    if (node.Spike)
+                        return false;
+
+                    if (!_movementController.flying)
+                        return _pathfindingController.CanStand(targetId);
+
                     return true;
 
                 };

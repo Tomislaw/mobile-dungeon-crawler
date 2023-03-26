@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: WalkSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4069350316886678256, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
+      propertyPath: jumpSpeed
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 4885720716787640596, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
       propertyPath: armor
       value: 2

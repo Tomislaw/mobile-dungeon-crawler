@@ -48,6 +48,33 @@ namespace RuinsRaiders
             }
         }
 
+        private void OnDrawGizmos()
+        {
+            foreach (var node in _cache)
+                DrawNode(node.Value);
+        }
+
+        private void DrawNode(AStarSharp.Node node)
+        {
+            var pos = GetPositionFromId(node.Id);
+
+            if (node.Water)
+                Gizmos.color = Color.blue;
+            else if(node.Spike)
+                Gizmos.color = Color.red;
+            else if (node.Block)
+                Gizmos.color = Color.black;
+            else if (node.Platform)
+                Gizmos.color = Color.yellow;
+            else if (node.Ladder)
+                Gizmos.color = Color.green;
+            else
+                Gizmos.color = Color.white;
+
+            Gizmos.DrawSphere(new Vector3(pos.x, pos.y, 0), 0.1f);
+            Gizmos.color = Color.white;
+        }
+
         public GameObject GetGameObject(Vector2Int Id)
         {
             return _tilemap.GetInstantiatedObject(new Vector3Int(Id.x, Id.y, 0));

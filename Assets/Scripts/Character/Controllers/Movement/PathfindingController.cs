@@ -261,7 +261,7 @@ namespace RuinsRaiders
                 )
             {
                 return node.Id.x == currentTileId.x
-                    && node.Id.y == currentTileId.y
+                    && node.Id.y == currentTileId.y || node.Id.y == currentTileId.y + 1
                     && character.IsGrounded;
             }
             else // when jumping or falling
@@ -292,7 +292,6 @@ namespace RuinsRaiders
 
         private void DrawNode(AStarSharp.Node node)
         {
-
             var pos = astar.GetPositionFromId(node.Id);
             if (node.jumpDistanceLeft > 0 || node.jumpHeightLeft > 0)
                 Gizmos.color = Color.blue;

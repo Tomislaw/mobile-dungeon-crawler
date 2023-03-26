@@ -9,6 +9,7 @@ namespace RuinsRaiders
 {
 
     [DefaultExecutionOrder(100)]
+    [RequireComponent(typeof(Rigidbody2D))]
     public class RollableBox : MonoBehaviour
     {
 
@@ -37,7 +38,10 @@ namespace RuinsRaiders
         private List<MovementController> _pushers = new();
         private AStar _astar;
         private Collider2D _collider;
+        private Rigidbody2D _rigidbody;
         private HealthController _healthController;
+
+        private int _accumulatedRoll = 0;
 
         public bool IsDead { get => _healthController != null && _healthController.IsDead; }
 
@@ -75,6 +79,7 @@ namespace RuinsRaiders
             Rotation = transform.rotation.eulerAngles.z;
             _collider = GetComponent<Collider2D>();
             _healthController = GetComponent<HealthController>();
+            _rigidbody = GetComponent<Rigidbody2D>();
 
             var health = GetComponent<HealthController>();
 
@@ -163,6 +168,7 @@ namespace RuinsRaiders
                 if (!pusher.faceLeft && !CanRollRight)
                     return;
 
+                _accumulatedRoll = 0;
                 coroutine = StartCoroutine(Roll(pusher.faceLeft));
             }
 
@@ -170,13 +176,14 @@ namespace RuinsRaiders
 
         public void UpdateStandings()
         {
-            if(!isActiveAndEnabled)
+            if (!isActiveAndEnabled)
                 return;
 
             if (coroutine != null)
                 return;
 
-            if (IsDead && _collider != null && _collider.enabled == true) { 
+            if (IsDead && _collider != null && _collider.enabled == true)
+            {
                 _collider.enabled = false;
                 ResetRotation();
                 _astar.RemoveDynamicBlockTile(gameObject);
@@ -187,28 +194,65 @@ namespace RuinsRaiders
             if (_astar == null)
                 return;
 
-            var id = _astar.GetTileId(transform.position) + new Vector2Int(0, -1);
-            var bottomNode = _astar.GetNode(id);
-            var isBottomSlope = IsSlope(id);
+            var id = _astar.GetTileId(transform.position);
+            var bottomId = id + new Vector2Int(0, -1);
+            var bottomNode = _astar.GetNode(bottomId);
+            var isBottomSlope = IsSlope(bottomId);
             if (isBottomSlope && !IsDead)
             {
-                if(CanRoll(true, id))
+                if (CanRoll(true, bottomId))
+                {
+                    _accumulatedRoll += -1;
                     coroutine = StartCoroutine(RollOnSlope(true));
-                else if (CanRoll(false, id))
+                }
+                else if (CanRoll(false, bottomId))
+                {
+                    _accumulatedRoll += 1;
                     coroutine = StartCoroutine(RollOnSlope(false));
-            } else if (!bottomNode.Block && !bottomNode.Platform)
-            {
-                coroutine = StartCoroutine(Fall());
+                }
             }
-
+            else if (!bottomNode.Block && !bottomNode.Platform)
+            {
+                if (_accumulatedRoll < 0 && CanRoll(true, bottomId))
+                {
+                    _accumulatedRoll = 0;
+                    coroutine = StartCoroutine(RollOnSlope(true));
+                }
+                else if (_accumulatedRoll > 0 && CanRoll(false, bottomId))
+                {
+                    _accumulatedRoll = 0;
+                    coroutine = StartCoroutine(RollOnSlope(false));
+                }
+                else
+                {
+                    _accumulatedRoll = 0;
+                    coroutine = StartCoroutine(Fall());
+                }
+            }
+            else if (_accumulatedRoll != 0)
+            {
+                if (_accumulatedRoll > 0 && CanRoll(false, id))
+                {
+                    _accumulatedRoll -= 1;
+                    coroutine = StartCoroutine(Roll(false));
+                }
+                else if (_accumulatedRoll < 0 && CanRoll(true, id))
+                {
+                    _accumulatedRoll += 1;
+                    coroutine = StartCoroutine(Roll(true));
+                } else
+                {
+                    _accumulatedRoll = 0;
+                }
+            }
         }
 
         public void SnapToGrid()
         {
-            transform.position = new Vector3(
+            _rigidbody.MovePosition(new Vector3(
                 (float)Math.Round(transform.position.x * 2, MidpointRounding.AwayFromZero) / 2,
                 (float)Math.Round(transform.position.y * 2, MidpointRounding.AwayFromZero) / 2,
-                transform.position.z);
+                transform.position.z));
         }
 
         private IEnumerator Fall()
@@ -232,13 +276,15 @@ namespace RuinsRaiders
             while (IsFalling)
             {
 
+                var startingPosition = transform.position;
                 for (int i = 0; i < fallPoints; i++)
                 {
-                    transform.position -= new Vector3(0, movement, 0);
-                    yield return new WaitForSeconds((timeToFall / (float)fallPoints) * acceleration);
+                    _rigidbody.MovePosition(transform.position - new Vector3(0, movement, 0));
+                    yield return new WaitForSeconds((timeToFall / fallPoints) * acceleration);
                 }
+                transform.position = startingPosition + new Vector3(0, -1, 0);
 
-                if(OnFall != null)
+                if (OnFall != null)
                     OnFall.Invoke();
 
                     // stop if reached block or platform
@@ -288,25 +334,27 @@ namespace RuinsRaiders
             var sign = left ? 1 : -1;
             var step = sign * 90f / (float)rotations;
             var movement = -1 * sign * 1f / (float)rotations;
-
+            var startingPosition = transform.position;
             for (int i = 0; i < rotations; i++)
             {
+                Rotation += step;
+                _rigidbody.MovePosition(transform.position + new Vector3(movement, 0, 0));
+                _rigidbody.SetRotation(Rotation);
                 yield return new WaitForSeconds(timeToRoll / (float)rotations);
 
-                Rotation += step;
-                transform.transform.eulerAngles = new Vector3(0, 0, Rotation);
-                transform.position += new Vector3(movement, 0, 0);
-
             }
+            transform.position = startingPosition + new Vector3(-sign, 0, 0);
 
-            if (Mathf.Abs(Rotation) > 360)
-                Rotation = 0;
+            SetRotation(Mathf.Round(Rotation / 45f) * 45);
 
             IsRolling = false;
             coroutine = null;
 
             if (OnRoll != null)
                 OnRoll.Invoke();
+
+            if(_accumulatedRoll!=0)
+                OnSlopeRoll.Invoke();
 
             if (!IsDead)
             {
@@ -342,24 +390,24 @@ namespace RuinsRaiders
             var isBottomSlope = IsSlope(id + new Vector2Int(0, -1));
 
             var totalRotations = rotations;
-            if (!isBottomSlope)
+            if (!isBottomSlope && Rotation % 90 != 0)
                 totalRotations += rotations / 2;
 
             var step = -sign * 90f / rotations;
             var movement = sign / (float) totalRotations;
 
+            var startingPosition = transform.position;
             for (int i = 0; i < totalRotations; i++)
             {
-                yield return new WaitForSeconds(timeToRoll / (float)rotations);
-
                 Rotation += step;
-                transform.transform.eulerAngles = new Vector3(0, 0, Rotation);
-                transform.position += new Vector3(movement, -Mathf.Abs(movement), 0);
+                _rigidbody.MovePosition(transform.position + new Vector3(movement, -Mathf.Abs(movement), 0));
+                _rigidbody.SetRotation(Rotation);
+                yield return new WaitForSeconds(timeToRoll / (float)rotations);
 
             }
 
-            Rotation = Mathf.Round(Rotation / 45f) * 45;
-
+            SetRotation(Mathf.Round(Rotation / 45f) * 45);
+            transform.position = startingPosition + new Vector3(sign, -1, 0);
 
             IsRolling = false;
             coroutine = null;
@@ -380,10 +428,10 @@ namespace RuinsRaiders
 
         public void ResetRotation()
         {
-            ResetRotation(0);
+            SetRotation(0);
         }
 
-        public void ResetRotation(float rotation)
+        public void SetRotation(float rotation)
         {
             Rotation = rotation;
             transform.transform.eulerAngles = new Vector3(0, 0, Rotation);

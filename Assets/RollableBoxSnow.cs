@@ -52,6 +52,7 @@ namespace RuinsRaiders
             _box = GetComponent<RollableBox>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _box.OnRoll.AddListener(OnRoll);
+            _box.OnFall.AddListener(OnRoll);
         }
 
         private void OnRoll()
@@ -77,9 +78,9 @@ namespace RuinsRaiders
                 return;
 
             if(hasTop == false)
-                _box.ResetRotation(180);
+                _box.SetRotation(180);
            
-            int rotation = (int) Mathf.Ceil((_box.transform.rotation.eulerAngles.z - 15f) / 90f);
+            int rotation = (int) Mathf.Ceil((_box.Rotation - 15f) / 90f);
             switch (rotation)
             {
                 case 3:

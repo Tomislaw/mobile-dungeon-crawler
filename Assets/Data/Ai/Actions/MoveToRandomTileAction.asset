@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f987494fdcb549c4e866a2872200eb3e, type: 3}
   m_Name: MoveToRandomTileAction
   m_EditorClassIdentifier: 
-  Name: MoveToRandom
-  searchDistanceX: 4
-  searchDistanceY: 0
   AwaitTime: 2
+  searchDistanceX: 3
+  searchDistanceY: 2
+  onlyGround: 0

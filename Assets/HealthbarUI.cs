@@ -43,6 +43,7 @@ namespace RuinsRaiders.GUI {
         void OnEnable()
         {
             Invalidate();
+            SetSprites();
         }
 
         // Update is called once per frame
@@ -56,7 +57,23 @@ namespace RuinsRaiders.GUI {
                 || _maxShieldCount != healthController.maxShield)
                 Invalidate();
 
+            SetHitSprites();
 
+
+            if (_flashTimeLeft > 0)
+                _flashTimeLeft -= Time.fixedDeltaTime;
+
+
+            if (_flashTimeLeft < 0)
+            {
+                _flashTimeLeft = 0;
+                SetSprites();
+            }
+
+        }
+
+        private void SetHitSprites()
+        {
             if (_healthCount != healthController.health)
             {
                 SetHitSprite(_healthCount - healthController.health, healthController.health, _hearts);
@@ -72,29 +89,22 @@ namespace RuinsRaiders.GUI {
                 SetHitSprite(_armorCount - healthController.armor, healthController.armor, _armors);
                 _armorCount = healthController.armor;
             }
+        }
 
-            if (_flashTimeLeft > 0)
-                _flashTimeLeft -= Time.fixedDeltaTime;
-
-
-            if (_flashTimeLeft < 0)
+        private void SetSprites()
+        {
+            if (healthController.IsDead)
             {
-                _flashTimeLeft = 0;
-
-                if (healthController.IsDead)
-                {
-                    _armors.ForEach(armor => armor.sprite = null);
-                    _shields.ForEach(shield => shield.sprite = null);
-                    _hearts.ForEach(health => health.sprite = null);
-                }
-                else
-                {
-                    SetSprite(_armorCount, _armors, armor);
-                    SetSprite(_shieldCount, _shields, shield);
-                    SetSprite(_healthCount, _hearts, health);
-                }
+                _armors.ForEach(armor => armor.sprite = null);
+                _shields.ForEach(shield => shield.sprite = null);
+                _hearts.ForEach(health => health.sprite = null);
             }
-
+            else
+            {
+                SetSprite(_armorCount, _armors, armor);
+                SetSprite(_shieldCount, _shields, shield);
+                SetSprite(_healthCount, _hearts, health);
+            }
         }
 
         private void SetHitSprite(int damage, int left, List<SpriteRenderer> sprites)
@@ -179,11 +189,6 @@ namespace RuinsRaiders.GUI {
                 }
 
             }
-        }
-
-        private void OnDamage()
-        {
-
         }
     }
 }

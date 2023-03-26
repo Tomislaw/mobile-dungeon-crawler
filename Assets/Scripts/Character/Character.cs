@@ -119,7 +119,6 @@ namespace RuinsRaiders
         {
             if (_currentAnimation == animation)
                 return;
-
             _currentAnimation = animation;
             _animator.Play(animation);
 
