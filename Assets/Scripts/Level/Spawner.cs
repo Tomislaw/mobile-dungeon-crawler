@@ -39,6 +39,7 @@ namespace RuinsRaiders
 
             var spawn = Instantiate(prefab, transform.position, Quaternion.identity);
             _spawnedObjects.Add(spawn);
+            spawn.gameObject.SetActive(true);
 
             if (preserveScale)
                 spawn.transform.localScale = transform.localScale;

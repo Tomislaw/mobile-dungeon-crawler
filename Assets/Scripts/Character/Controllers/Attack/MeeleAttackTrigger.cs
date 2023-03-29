@@ -6,7 +6,7 @@ namespace RuinsRaiders
 {
     public class MeeleAttackTrigger : MonoBehaviour
     {
-        private List<GameObject> hits = new List<GameObject>();
+        public List<GameObject> hits = new List<GameObject>();
 
         private int _damage = 0;
         private float _knockback = 0;

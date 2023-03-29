@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace RuinsRaiders
@@ -26,7 +22,7 @@ namespace RuinsRaiders
 
         private static void AddNode(AStar astar, in List<AStarSharp.Node> nodes, WalkData data, Vector2Int Id, AStarSharp.Node parent)
         {
-            var node = astar.GetNode(Id);
+            var node = new AStarSharp.Node(astar.GetTileData(Id));
             if (!CanFitInNode(astar, node, data))
                 return;
 
@@ -38,31 +34,30 @@ namespace RuinsRaiders
                 if (y == 0)
                     continue;
 
-                var near = astar.GetNode(new Vector2Int(Id.x, Id.y + y));
+                var near = astar.GetTileData(new Vector2Int(Id.x, Id.y + y));
                 if (node == null || near.Block)
                     node.Weight += 4;
             }
 
-
-
+            node.action = node.Tile.Water && data.canSwim ? AStarSharp.Node.Type.Swim : AStarSharp.Node.Type.Fly;
             node.Parent = parent;
             nodes.Add(node);
         }
 
         private static bool CanFitInNode(AStar astar, AStarSharp.Node node, WalkData data)
         {
-            if (IsNodeBlocking(node, data))
+            if (IsNodeBlocking(node.Tile, data))
                 return false;
 
             for (int i = node.Id.y + 1; i < node.Id.y + data.height; i++)
-                if (IsNodeBlocking(astar.GetNode(new Vector2Int(node.Id.x, i)), data))
+                if (IsNodeBlocking(astar.GetTileData(new Vector2Int(node.Id.x, i)), data))
                     return false;
 
             return true;
         }
-        private static bool IsNodeBlocking(AStarSharp.Node node, WalkData data)
+        private static bool IsNodeBlocking(AStarSharp.Tile node, WalkData data)
         {
-            return node == null || node.Block || node.Water && !data.canSwim;
+            return node.Block || node.Water && !data.canSwim;
         }
     }
 }

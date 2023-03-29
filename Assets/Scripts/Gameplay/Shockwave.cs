@@ -47,8 +47,8 @@ namespace RuinsRaiders
                 bool shouldStopShockwave = true;
                 for (int y = 1; y > -shockWidth; y--)
                 {
-                    var nodeBottom = _astar.GetNode(id + new Vector2Int(0, y - 1));
-                    var nodeCenter = _astar.GetNode(id + new Vector2Int(0, y));
+                    var nodeBottom = _astar.GetTileData(id + new Vector2Int(0, y - 1));
+                    var nodeCenter = _astar.GetTileData(id + new Vector2Int(0, y));
 
                     var bottomOk = nodeBottom.Block || nodeBottom.Platform;
                     var centerOk = nodeCenter.Destroyable || !nodeCenter.Block;

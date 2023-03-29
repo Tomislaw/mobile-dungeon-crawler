@@ -278,7 +278,7 @@ MonoBehaviour:
     canSwim: 1
     canUseLadder: 0
     canUsePlatform: 1
-    maxTimeOnNode: 0.2
+    maxTimeOnNode: 0.5
     height: 2
     jumpHeight: 1
     jumpDistance: 2
@@ -343,16 +343,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 681d635a5cb7c4c48be5480f465c0c27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  move: {x: 0, y: 0}
+  faceLeft: 0
   flying: 0
   gravityScale: 6
-  climbLadderSpeed: 0
+  waterGravityScale: 6
   coyoteTime: 0.15
+  jumpSpeed: 12
+  jumpCutGravityMultiplier: 2
+  jumpHangTimeTreshold: 5
+  jumpHangSpeedGravityMultiplier: 0.5
   walkSpeed: 9
   swimSpeed: 8
-  jumpSpeed: 12
-  maxSpeed: 30
+  climbSpeed: 8
   acceleration: 65
-  jerk: 10
+  deacceleration: 10
+  maxSpeed: 30
   canUseLadder: 0
   canSwim: 1
   canUsePlatform: 1
@@ -366,8 +372,6 @@ MonoBehaviour:
   onSwim:
     m_PersistentCalls:
       m_Calls: []
-  move: {x: 0, y: 0}
-  faceLeft: 0
 --- !u!114 &4885720716787640596
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1805714663868828915}
   - component: {fileID: 1805714663868828918}
   - component: {fileID: 8801047253844893276}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,19 @@ MonoBehaviour:
       m_Calls: []
   onHit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1805714663868828918}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Destroy
+          m_BoolArgument: 0
+        m_CallState: 2
   initialVelocity: {x: 0, y: 0}
   damage: 0
   rotating: 0
@@ -115,7 +127,7 @@ MonoBehaviour:
   lifeTime: 2
   explosionRadius: 1
   explosionForce: 1
-  group: 0
+  group: 7
   deceleration: {x: 0, y: 0}
   gravity: 0
 --- !u!50 &1805714663868828914
@@ -192,3 +204,4 @@ MonoBehaviour:
       m_Calls: []
   prefab: {fileID: 0}
   preserveScale: 0
+  maxReplicas: -1

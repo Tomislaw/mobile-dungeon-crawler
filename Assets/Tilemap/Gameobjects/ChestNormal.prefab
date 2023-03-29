@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5840832154263460929}
   - component: {fileID: 5273356234361313858}
   - component: {fileID: -6992353969111108592}
-  m_Layer: 9
+  m_Layer: 6
   m_Name: ChestNormal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isOpen: 0
-  type: 0
+  chestData:
+    acquired: 0
+    type: 0
 --- !u!212 &3855078207122313808
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -270,7 +272,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6124403294440782918}
   - component: {fileID: 1690073399407382377}
-  m_Layer: 9
+  m_Layer: 6
   m_Name: Shine
   m_TagString: Untagged
   m_Icon: {fileID: 0}

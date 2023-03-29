@@ -47,12 +47,16 @@ namespace RuinsRaiders
         private bool _hit = false;
         private float _lifeTimeLeft = 2;
 
-        void Start()
+        void Awake()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
-            _rigidbody.velocity = initialVelocity;
             _collider = GetComponent<Collider2D>();
             _lifeTimeLeft = lifeTime;
+        }
+
+        private void Start()
+        {
+            _rigidbody.velocity = initialVelocity;
             onSpawn.Invoke();
         }
 

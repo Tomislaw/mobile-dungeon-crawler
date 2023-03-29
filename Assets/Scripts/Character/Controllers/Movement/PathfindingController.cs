@@ -120,7 +120,7 @@ namespace RuinsRaiders
 
                 var startNode = _nodes.FirstOrDefault(it => it.Id == TileId);
 
-                // case whe target is already moving
+                // case when target is already moving
                 if (_nodes.Count > 0)
                 {
                     var pathContinue = enumerator.Current.Path.ToList();
@@ -175,6 +175,7 @@ namespace RuinsRaiders
         {
             if (_cancellationTokenSource != null)
                 _cancellationTokenSource.Cancel();
+
             character.Stop();
             _nodes.Clear();
 
@@ -189,29 +190,22 @@ namespace RuinsRaiders
         // Update is called once per frame
         private void FixedUpdate()
         {
-            if (_timeLeftOnNode < 0)
+            if (_nodes.Count == 0)
+                return;
+
+            _timeLeftOnNode -= Time.fixedDeltaTime;
+            var node = _nodes.Peek();
+            if (IsNodeReached(node))
             {
-                _nodes.Clear();
-                character.Stop();
+                _nodes.Pop();
+                _timeLeftOnNode = data.maxTimeOnNode;
             }
 
-            if (_nodes.Count > 0)
-            {
-                _timeLeftOnNode -= Time.fixedDeltaTime;
+            character.Move(GetMovement(node));
 
-                var node = _nodes.Peek();
+            if (_timeLeftOnNode < 0 || _nodes.Count == 0 || IsNodeTooFar(node))
+                Stop();
 
-                if (IsNodeReached(node))
-                {
-                    _nodes.Pop();
-                    _timeLeftOnNode = data.maxTimeOnNode;
-                }
-
-                character.Move(GetMovement(node));
-
-                if (_nodes.Count == 0)
-                    character.Stop();
-            }
         }
 
         private Vector2 GetMovement(AStarSharp.Node node)
@@ -224,57 +218,34 @@ namespace RuinsRaiders
             if (Mathf.Abs(distance.x) > MinDistanceToMove)
                 move.x = Mathf.Clamp(distance.x, -1, 1);
 
-            if (character.flying
-                || character.IsSwimming && character.canSwim
-                || character.canUseLadder && character.ladders.Count > 0)
+            move.y = node.action switch
             {
-                if (Mathf.Abs(distance.y) > MinDistanceToMove)
-                    move.y = Mathf.Clamp(distance.y, -1, 1);
-            }
-            else
-            {
-                var tileDifference = node.Id.y - TileId.y;
-                if (tileDifference > 0)
-                    move.y = 1;
-                else if (tileDifference < 0 &&
-                    (
-                     (node.Platform == true && character.canUsePlatform)
-                    || (node.Ladder && character.canUseLadder)
-                    ))
-                    move.y = -1;
-            }
-
+                AStarSharp.Node.Type.Walk or AStarSharp.Node.Type.Fall => 0,
+                AStarSharp.Node.Type.Drop => character.IsGrounded ? -1 : 0,
+                AStarSharp.Node.Type.Jump => 1,
+                _ => Mathf.Abs(distance.y) > MinDistanceToMove ? Mathf.Clamp(distance.y, -1, 1) : 0,
+            };
             return move;
+        }
+
+        private bool IsNodeTooFar(AStarSharp.Node node)
+        {
+            return Vector2.Distance(TileId, node.Id) > 3f;
         }
 
         private bool IsNodeReached(AStarSharp.Node node)
         {
             var currentTileId = TileId;
-            if (character.flying // when flying
-                || character.canSwim && node.Water // when swimming
-                || character.canUseLadder && node.Ladder) // when on ladder
+            return node.action switch
             {
-                return node.Id.x == currentTileId.x && node.Id.y == currentTileId.y;
-            }
-            else if ((node.Block || node.Platform)  // when walking
-                && (node.jumpDistanceLeft <= 0 || node.jumpHeightLeft <= 0)
-                )
-            {
-                return node.Id.x == currentTileId.x
-                    && node.Id.y == currentTileId.y || node.Id.y == currentTileId.y + 1
-                    && character.IsGrounded;
-            }
-            else // when jumping or falling
-            {
-                bool yReached = currentTileId.y >= node.Id.y && character.Velocity.y > 0
-                    || currentTileId.y <= node.Id.y && character.Velocity.y < 0
-                    || currentTileId.y == node.Id.y;
-
-                bool xReached = currentTileId.x >= node.Id.x && character.Velocity.x > 0
-                    || currentTileId.x <= node.Id.x && character.Velocity.x < 0
-                    || currentTileId.x == node.Id.x;
-                return xReached && yReached;
-            }
+                AStarSharp.Node.Type.Walk => (node.Id.x == currentTileId.x)
+                                          && (node.Id.y == currentTileId.y || node.Id.y == currentTileId.y + 1)
+                                          && (character.IsGrounded && !character.IsJumping),
+                AStarSharp.Node.Type.Jump => currentTileId.x == node.Id.x && currentTileId.y >= node.Id.y,
+                AStarSharp.Node.Type.Fall or AStarSharp.Node.Type.Drop
+                                          => currentTileId.x == node.Id.x && currentTileId.y <= node.Id.y,
+                _ => node.Id.x == currentTileId.x && node.Id.y == currentTileId.y,
+            };
         }
 
         private void OnDrawGizmos()
@@ -293,9 +264,22 @@ namespace RuinsRaiders
         private void DrawNode(AStarSharp.Node node)
         {
             var pos = astar.GetPositionFromId(node.Id);
-            if (node.jumpDistanceLeft > 0 || node.jumpHeightLeft > 0)
-                Gizmos.color = Color.blue;
-            Gizmos.DrawSphere(new Vector3(pos.x, pos.y, 0), 0.2f);
+            var position = new Vector3(pos.x, pos.y, 0);
+
+            Gizmos.color = node.action switch
+            {
+                AStarSharp.Node.Type.None => Color.white,
+                AStarSharp.Node.Type.Walk => Color.green,
+                AStarSharp.Node.Type.Jump => Color.blue,
+                AStarSharp.Node.Type.Fall => Color.yellow,
+                AStarSharp.Node.Type.Drop => Color.red,
+                AStarSharp.Node.Type.Climb => Color.cyan,
+                AStarSharp.Node.Type.Swim => Color.black,
+                AStarSharp.Node.Type.Fly => Color.grey,
+                _ => Color.white,
+            };
+            Gizmos.DrawSphere(position, 0.2f);
+
             Gizmos.color = Color.white;
         }
 
@@ -307,12 +291,12 @@ namespace RuinsRaiders
         {
             for (int i = Id.y; i < Id.y + data.height; i++)
             {
-                var above = astar.GetNode(new Vector2Int(Id.x, i));
+                var above = astar.GetTileData(new Vector2Int(Id.x, i));
                 if (above.Block || above.Spike)
                     return false;
             }
 
-            var node = astar.GetNode(Id);
+            var node = astar.GetTileData(Id);
             if (node.Water)
                 return character.canSwim;
 
@@ -325,13 +309,12 @@ namespace RuinsRaiders
             if(node.Spike)
                 return false;
 
-            var floor = astar.GetNode(new Vector2Int(Id.x, Id.y - 1));
             return CanStand(Id);
         }
 
         public bool CanStand(Vector2Int Id)
         {
-            var floor = astar.GetNode(new Vector2Int(Id.x, Id.y - 1));
+            var floor = astar.GetTileData(new Vector2Int(Id.x, Id.y - 1));
             return floor.Platform || floor.Block;
         }
 

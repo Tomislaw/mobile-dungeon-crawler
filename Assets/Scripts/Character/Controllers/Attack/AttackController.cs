@@ -20,6 +20,7 @@ namespace RuinsRaiders
         private float _timeToOvercharge = 0;
 
         protected Character _character;
+        protected HealthController _healthController;
 
         public bool CanAttack { get => _timeToNextAttack <= 0 && !_character.IsDead && !_character.holdUpdate; }
         public bool IsAttacking { get => _timeToAnimationAttackFinish > 0; }
@@ -29,6 +30,7 @@ namespace RuinsRaiders
         {
             _timeToOvercharge = overchargeTime;
             _character = GetComponent<Character>();
+            _healthController = GetComponent<HealthController>();
 
         }
         public void FixedUpdate()

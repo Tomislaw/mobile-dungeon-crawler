@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5045053919743331434}
   - component: {fileID: -8807375777240236185}
   - component: {fileID: -3383266266087061591}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GoblinArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ MonoBehaviour:
   lifeTime: 0.5
   explosionRadius: 1
   explosionForce: 1
-  group: 2
+  group: 7
   deceleration: {x: 0, y: 0}
   gravity: 0
 --- !u!50 &1805714663868828914

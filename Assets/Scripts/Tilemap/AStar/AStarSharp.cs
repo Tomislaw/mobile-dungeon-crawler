@@ -8,14 +8,34 @@ using UnityEngine;
 
 namespace RuinsRaiders.AStarSharp
 {
+
+    public struct Tile
+    {
+        public Vector2Int Id;
+        public bool Spike;
+        public bool Block;
+        public bool Slope;
+        public bool Water;
+        public bool Ladder;
+        public bool Platform;
+        public bool Destroyable;
+    }
+
     public class Node
     {
         public Node Parent;
         public Vector2Int Id;
+        public Tile Tile;
 
         public float DistanceToTarget;
         public float Cost;
         public float Weight;
+
+        public Node(Tile Tile)
+        {
+            this.Tile = Tile;
+            Id = Tile.Id;
+        }
 
         public float F
         {
@@ -28,12 +48,9 @@ namespace RuinsRaiders.AStarSharp
             }
         }
 
-        public bool Spike;
-        public bool Block;
-        public bool Water;
-        public bool Ladder;
-        public bool Platform;
-        public bool Destroyable;
+        public Type action = Type.None;
+        public Type nextAction = Type.None;
+
         public int jumpHeightLeft = -1;
         public int jumpDistanceLeft = -1;
 
@@ -47,7 +64,8 @@ namespace RuinsRaiders.AStarSharp
             var compare = obj as Node;
             return this.Id == compare.Id
                 && this.jumpHeightLeft == compare.jumpHeightLeft
-                && this.jumpDistanceLeft == compare.jumpDistanceLeft;
+                && this.jumpDistanceLeft == compare.jumpDistanceLeft
+                && this.action == compare.action;
         }
 
         public Node Clone()
@@ -59,11 +77,16 @@ namespace RuinsRaiders.AStarSharp
         {
             return base.GetHashCode();
         }
+
+        public enum Type
+        {
+            None, Walk, Jump, Fall, Drop, Climb, Swim, Fly
+        }
     }
 
     public class Astar
     {
-        public Func<Vector2Int, Node> GetNode;
+        public Func<Vector2Int, Tile> GetTile;
         public Func<Node, List<Node>> GetAdjacentNodes;
         public Func<Node, float> GetCost;
         public Func<Node, float> GetDistance;
@@ -83,7 +106,7 @@ namespace RuinsRaiders.AStarSharp
             Vector2Int Start,
             CancellationToken ct = default)
         {
-            Node start = GetNode(Start);
+            Node start = new Node(GetTile(Start));
 
             Stack<Node> Path = new();
             List<Node> OpenList = new();
@@ -127,8 +150,15 @@ namespace RuinsRaiders.AStarSharp
             // construct path, if end was not closed return null
             if (!ClosedList.Exists(n => IsEnd(n)))
             {
-                current = ClosedList.Where(it => it.jumpHeightLeft == -1 && !it.Spike).OrderBy(n => GetDistance(n)).First();
+                current = ClosedList.Where(it => it.jumpHeightLeft == -1 && !it.Tile.Spike).OrderBy(n => GetDistance(n)).First();
                 pathFound = false;
+            }
+
+            var previousAction = current;
+            while(previousAction.Parent != null)
+            {
+                previousAction.Parent.nextAction = previousAction.action;
+                previousAction = previousAction.Parent;
             }
 
             // if all good, return path

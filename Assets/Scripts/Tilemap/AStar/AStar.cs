@@ -16,7 +16,7 @@ namespace RuinsRaiders
 
         private Tilemap _tilemap;
         private readonly HashSet<GameObject> _dynamicTiles = new();
-        private readonly Dictionary<Vector2Int, AStarSharp.Node> _cache = new();
+        private readonly Dictionary<Vector2Int, AStarSharp.Tile> _cache = new();
 
         private bool _mapUpdated = false;
 
@@ -54,7 +54,7 @@ namespace RuinsRaiders
                 DrawNode(node.Value);
         }
 
-        private void DrawNode(AStarSharp.Node node)
+        private void DrawNode(AStarSharp.Tile node)
         {
             var pos = GetPositionFromId(node.Id);
 
@@ -85,12 +85,17 @@ namespace RuinsRaiders
             return _tilemap.GetTile(new Vector3Int(Id.x, Id.y, 0));
         }
 
-        public AStarSharp.Node GetNode(Vector2Int Id)
+        public AStarSharp.Tile GetTileData(Vector2Int Id)
         {
-            var cachedNode = _cache.GetValueOrDefault(Id);
-            if (cachedNode == null)
+            AStarSharp.Tile? cachedData = null;
+
+            if (_cache.ContainsKey(Id))
             {
-                cachedNode = new AStarSharp.Node
+                cachedData = _cache.GetValueOrDefault(Id);
+            }
+            else
+            {
+                var data = new AStarSharp.Tile
                 {
                     Id = Id
                 };
@@ -98,26 +103,30 @@ namespace RuinsRaiders
                 var gameobject = GetGameObject(Id);
                 if (gameobject != null)
                 {
-                    cachedNode.Spike = gameobject.GetComponentInChildren<SpikeTile>() != null;
-                    cachedNode.Ladder = gameobject.GetComponentInChildren<LadderTile>() != null;
-                    cachedNode.Platform = gameobject.GetComponentInChildren<PlatformTile>() != null;
-                    cachedNode.Water = gameobject.GetComponentInChildren<WaterTile>() != null;
+                    data.Spike = gameobject.GetComponentInChildren<SpikeTile>() != null;
+                    data.Ladder = gameobject.GetComponentInChildren<LadderTile>() != null;
+                    data.Platform = gameobject.GetComponentInChildren<PlatformTile>() != null;
+                    data.Water = gameobject.GetComponentInChildren<WaterTile>() != null;
                 }
-                cachedNode.Block = collider != Tile.ColliderType.None;
-                cachedNode.Weight = 1;
-                cachedNode.Cost = 1;
-                _cache.Add(Id, cachedNode);
+
+                var tile = GetTile(Id);
+                if(tile != null)
+                    data.Slope = tile.name.Contains("Slope");
+
+                data.Block = collider != Tile.ColliderType.None;
+                _cache.Add(Id, data);
+                cachedData = data;
             }
 
-            var node = cachedNode.Clone();
+            var result = cachedData.Value;
 
-            if (node.Block)
-                return node;
+            if (result.Block)
+                return result;
 
-            node.Destroyable = _dynamicTiles.Any(it => GetTileId(it.transform.position) == node.Id);
-            node.Block = node.Destroyable;
+            result.Destroyable = _dynamicTiles.Any(it => GetTileId(it.transform.position) == result.Id);
+            result.Block = result.Destroyable;
 
-            return node;
+            return result;
         }
 
         public Vector2 GetPositionFromId(Vector2Int id)
@@ -146,7 +155,7 @@ namespace RuinsRaiders
         {
             var list = new List<AStarSharp.Node>();
 
-            if (node.Spike)
+            if (node.Tile.Spike)
                 return list;
 
             if (data.flying)
@@ -161,7 +170,7 @@ namespace RuinsRaiders
             var astar = new AStarSharp.Astar
             {
                 GetAdjacentNodes = n => GetNearbyNodes(n, data),
-                GetNode = n => GetNode(n),
+                GetTile = n => GetTileData(n),
                 IsEnd = n => n.Id == end,
                 GetCost = n => n.Weight + n.Parent.Cost,
                 GetDistance = n => Vector2.Distance(n.Id, end),
@@ -184,7 +193,7 @@ namespace RuinsRaiders
             var astar = new AStarSharp.Astar
             {
                 GetAdjacentNodes = n => GetNearbyNodes(n, data),
-                GetNode = n => GetNode(n),
+                GetTile = n => GetTileData(n),
                 IsEnd = n => IsEnd(n),
                 GetCost = n => GetCost(n),
                 GetDistance = n => GetDistance(n),

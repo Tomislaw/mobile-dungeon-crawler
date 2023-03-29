@@ -63,8 +63,8 @@ namespace RuinsRaiders
                 return false;
 
             var sign = left ? -1 : 1;
-            return _astar.GetNode(id + new Vector2Int(sign, 0)).Block == false
-                && !IsSlope(id + new Vector2Int(sign, 0));
+            var tile = _astar.GetTileData(id + new Vector2Int(sign, 0));
+            return tile.Block == false && !tile.Slope;
         }
 
 
@@ -196,9 +196,8 @@ namespace RuinsRaiders
 
             var id = _astar.GetTileId(transform.position);
             var bottomId = id + new Vector2Int(0, -1);
-            var bottomNode = _astar.GetNode(bottomId);
-            var isBottomSlope = IsSlope(bottomId);
-            if (isBottomSlope && !IsDead)
+            var bottomNode = _astar.GetTileData(bottomId);
+            if (bottomNode.Slope && !IsDead)
             {
                 if (CanRoll(true, bottomId))
                 {
@@ -264,6 +263,7 @@ namespace RuinsRaiders
 
             if (!IsDead)
             {
+                yield return new WaitForFixedUpdate();
                 _astar.RemoveDynamicBlockTile(gameObject);
             }
 
@@ -289,9 +289,9 @@ namespace RuinsRaiders
 
                     // stop if reached block or platform
                 var bottomId = _astar.GetTileId(transform.position) + new Vector2Int(0, -1);
-                var bottomTile = _astar.GetNode(bottomId);
+                var bottomTile = _astar.GetTileData(bottomId);
 
-                if (bottomTile.Block || bottomTile.Platform || IsSlope(bottomId))
+                if (bottomTile.Block || bottomTile.Platform || bottomTile.Slope)
                 {
                     IsFalling = false;
                     break;
@@ -301,13 +301,13 @@ namespace RuinsRaiders
                 falledTiles++;
             }
 
-            yield return new WaitForSeconds((timeToFall / (float)fallPoints));
-
-
             if (!IsDead)
             {
                 _astar.AddDynamicBlockTile(gameObject);
             }
+
+            yield return new WaitForSeconds((timeToFall / (float)fallPoints));
+
 
             coroutine = null;
             UpdateStandings();
@@ -386,11 +386,11 @@ namespace RuinsRaiders
 
             var sign = left ? -1 : 1;
 
-            var id = _astar.GetTileId(transform.position);
-            var isBottomSlope = IsSlope(id + new Vector2Int(0, -1));
+            var bottomId = _astar.GetTileId(transform.position) + new Vector2Int(0, -1);
+            var bottomTile = _astar.GetTileData(bottomId);
 
             var totalRotations = rotations;
-            if (!isBottomSlope && Rotation % 90 != 0)
+            if (!bottomTile.Slope && Rotation % 90 != 0)
                 totalRotations += rotations / 2;
 
             var step = -sign * 90f / rotations;
@@ -435,16 +435,6 @@ namespace RuinsRaiders
         {
             Rotation = rotation;
             transform.transform.eulerAngles = new Vector3(0, 0, Rotation);
-        }
-
-        private bool IsSlope(Vector2Int Id)
-        {
-            var tile = _astar.GetTile(Id);
-
-            if(tile==null)
-                return false;
-            else 
-                return tile.name.Contains("Slope");
         }
     }
 }

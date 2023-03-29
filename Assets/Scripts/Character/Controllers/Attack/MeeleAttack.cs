@@ -15,12 +15,10 @@ namespace RuinsRaiders
         public float knockback;
         public bool deflectProjectiles = false;
 
-        private HealthController _healthController;
         private float _attackTimeLeft;
 
         private void Awake()
         {
-            _healthController = GetComponent<HealthController>();
             if(attackTrigger == null)
                 attackTrigger = GetComponentInChildren<MeeleAttackTrigger>();
         }

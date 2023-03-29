@@ -329,16 +329,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 681d635a5cb7c4c48be5480f465c0c27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  move: {x: 0, y: 0}
+  faceLeft: 0
   flying: 0
   gravityScale: 6
-  climbLadderSpeed: 8
   coyoteTime: 0.08
+  jumpSpeed: 17
+  jumpCutGravityMultiplier: 3
+  jumpHangTimeTreshold: 2
+  jumpHangSpeedGravityMultiplier: 0.5
   walkSpeed: 9
   swimSpeed: 7
-  jumpSpeed: 16.5
+  climbSpeed: 8
+  acceleration: 10
+  deacceleration: 10
   maxSpeed: 20
-  acceleration: 50
-  jerk: 20
   canUseLadder: 1
   canSwim: 1
   canUsePlatform: 1
@@ -352,8 +357,6 @@ MonoBehaviour:
   onSwim:
     m_PersistentCalls:
       m_Calls: []
-  move: {x: 0, y: 0}
-  faceLeft: 0
 --- !u!82 &7068583201586914935
 AudioSource:
   m_ObjectHideFlags: 0

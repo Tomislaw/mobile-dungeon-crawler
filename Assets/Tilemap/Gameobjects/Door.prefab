@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5453002226987129144}
   - component: {fileID: 4111498557999450302}
   - component: {fileID: 1795562197025510340}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,9 +128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c8a0a13371e314ebcc903557fcfed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockedSound: {fileID: 0}
+  openSound: {fileID: 0}
   lockGameObject: {fileID: 8472465329325820886}
-  LockedSound: {fileID: 8300000, guid: c27ecb4d196e3014989265f0b1139b01, type: 3}
-  OpenSound: {fileID: 8300000, guid: 0027e11d7be2d634587888cb85a5faf6, type: 3}
 --- !u!95 &5453002226987129144
 Animator:
   serializedVersion: 4
@@ -271,7 +271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5253234994996384923}
   - component: {fileID: 450922824594919712}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Lock
   m_TagString: Untagged
   m_Icon: {fileID: 0}

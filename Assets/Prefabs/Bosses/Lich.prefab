@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5367954658345666726}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2808274867094519259
 MonoBehaviour:
@@ -66,102 +66,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89900d905e4d28643b09f4817b77dbd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &4784212589217755823
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6124989473511648725}
-  - component: {fileID: 8986387139639333051}
-  m_Layer: 11
-  m_Name: ShieldUI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6124989473511648725
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4784212589217755823}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5367954658345666726}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8986387139639333051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4784212589217755823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31caabe9a495d5d4792dc39caf7fce16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthController: {fileID: 0}
-  hearthWidth: 1
-  prefab: {fileID: 9060408073096087312, guid: 2cd9a96ac1039a441a9e9d4cd20d91c5, type: 3}
-  maxHeartsInRow: 4
---- !u!1 &5367954657964136393
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5367954657964136394}
-  - component: {fileID: 5367954657964136395}
-  m_Layer: 11
-  m_Name: HearthUI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5367954657964136394
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5367954657964136393}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5367954658345666726}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5367954657964136395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5367954657964136393}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4a4a92357f01cc4e92f09a03593b042, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthController: {fileID: 0}
-  hearthWidth: 1
-  prefab: {fileID: 9060408073096087312, guid: d1adc1b4e2799db4795da0efb0d7070c, type: 3}
-  maxHeartsInRow: 12
 --- !u!1 &5367954658345666721
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,8 +104,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5367954657964136394}
-  - {fileID: 6124989473511648725}
   - {fileID: 5429444924028703415}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -272,7 +174,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 2}
-  m_Size: {x: 2, y: 6}
+  m_Size: {x: 2, y: 4}
   m_Direction: 0
 --- !u!50 &5367954658345666723
 Rigidbody2D:
@@ -407,16 +309,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 681d635a5cb7c4c48be5480f465c0c27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  move: {x: 0, y: 0}
+  faceLeft: 0
   flying: 1
   gravityScale: 0
-  climbLadderSpeed: 8
+  waterGravityScale: 6
   coyoteTime: 0.15
+  jumpSpeed: 20
+  jumpCutGravityMultiplier: 2
+  jumpHangTimeTreshold: 5
+  jumpHangSpeedGravityMultiplier: 0.5
   walkSpeed: 10
   swimSpeed: 8
-  jumpSpeed: 20
-  maxSpeed: 20
+  climbSpeed: 8
   acceleration: 30
-  jerk: 20
+  deacceleration: 10
+  maxSpeed: 20
   canUseLadder: 1
   canSwim: 1
   canUsePlatform: 1
@@ -430,8 +338,6 @@ MonoBehaviour:
   onSwim:
     m_PersistentCalls:
       m_Calls: []
-  move: {x: 0, y: 0}
-  faceLeft: 0
 --- !u!114 &8309213051711081826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,9 +369,9 @@ MonoBehaviour:
       m_Calls: []
   health: 26
   maxHealth: 26
-  shield: 6
-  maxShield: 6
-  armor: 2
-  maxArmor: 2
+  shield: 8
+  maxShield: 8
+  armor: 0
+  maxArmor: 0
   shieldRegenerationTime: 1
   ressurectTime: 1

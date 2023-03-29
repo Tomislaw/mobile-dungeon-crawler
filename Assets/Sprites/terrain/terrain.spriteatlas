@@ -67,6 +67,7 @@ SpriteAtlas:
     - {fileID: 2800000, guid: ce614571d384f444a9358484c8262788, type: 3}
     - {fileID: 2800000, guid: 977a2e7de413e9448905cc3924ffbb9e, type: 3}
     - {fileID: 2800000, guid: 0854954d3f456d1488abe56741b8b6d6, type: 3}
+    - {fileID: 2800000, guid: d3fd8b7804e4753438463c8953d1b723, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -385,6 +386,19 @@ SpriteAtlas:
   - {fileID: -1900181185, guid: 9bee65d74844a414d92e334ed6d7a4d5, type: 3}
   - {fileID: -1892826598, guid: 9bee65d74844a414d92e334ed6d7a4d5, type: 3}
   - {fileID: -1717406761, guid: 9bee65d74844a414d92e334ed6d7a4d5, type: 3}
+  - {fileID: 620371128, guid: d3fd8b7804e4753438463c8953d1b723, type: 3}
+  - {fileID: 1052588548, guid: d3fd8b7804e4753438463c8953d1b723, type: 3}
+  - {fileID: 171532016, guid: d3fd8b7804e4753438463c8953d1b723, type: 3}
+  - {fileID: -1396392707, guid: d3fd8b7804e4753438463c8953d1b723, type: 3}
+  - {fileID: 1750814220, guid: d3fd8b7804e4753438463c8953d1b723, type: 3}
+  - {fileID: 1079300270, guid: d3fd8b7804e4753438463c8953d1b723, type: 3}
+  - {fileID: 930022607, guid: d3fd8b7804e4753438463c8953d1b723, type: 3}
+  - {fileID: 1643605614, guid: d3fd8b7804e4753438463c8953d1b723, type: 3}
+  - {fileID: 1368903480, guid: d3fd8b7804e4753438463c8953d1b723, type: 3}
+  - {fileID: -1523050715, guid: d3fd8b7804e4753438463c8953d1b723, type: 3}
+  - {fileID: 1626718967, guid: d3fd8b7804e4753438463c8953d1b723, type: 3}
+  - {fileID: 1271862600, guid: d3fd8b7804e4753438463c8953d1b723, type: 3}
+  - {fileID: 486430103, guid: d3fd8b7804e4753438463c8953d1b723, type: 3}
   - {fileID: -1818712205, guid: f39a5f9a6eaa3e04db4b37ff5da0f0a8, type: 3}
   - {fileID: 1547158136, guid: f39a5f9a6eaa3e04db4b37ff5da0f0a8, type: 3}
   - {fileID: 1015919703, guid: f39a5f9a6eaa3e04db4b37ff5da0f0a8, type: 3}
@@ -882,6 +896,19 @@ SpriteAtlas:
   - lava_1
   - lava_2
   - lava_3
+  - mechanisms_3
+  - mechanisms_4
+  - mechanisms_chain
+  - mechanisms_cage
+  - mechanisms_rope_log
+  - mechanisms_chain_log
+  - mechanisms_rope
+  - mechanisms_cage_destroyed1
+  - mechanisms_cage_destroyed2
+  - mechanisms_lever1
+  - mechanisms_cage_destroyed3
+  - mechanisms_lever2
+  - mechanisms_grate
   - tree_branch_background_lb
   - tree_branch_background_lt
   - tree_branch_background_rt

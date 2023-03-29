@@ -24,14 +24,11 @@ namespace RuinsRaiders
 
         public GameObject thunderboltStartPosition;
 
-
-        private HealthController _healthController;
         private float _timeToNextSpecialAttack;
         private float _attackDistance;
 
         void Start()
         {
-            _healthController = GetComponent<HealthController>();
             onAttack.AddListener(OnAttack);
             onChargedAttack.AddListener(OnChargedAttack);
             var collider = colliderContainer.GetComponent<Collider2D>();

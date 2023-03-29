@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 284198670695329218}
   - component: {fileID: 8039349252551047476}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: HalfColliderRB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ PolygonCollider2D:
   m_Material: {fileID: 6200000, guid: f9bace41386d69e40b8b8c61df95014c, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}

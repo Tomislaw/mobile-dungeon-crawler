@@ -18,10 +18,10 @@ namespace RuinsRaiders
             {
                 if (IsOvercharged)
                     foreach (var p in projectilesCharged)
-                        StartCoroutine(p.Launch(_character));
+                        StartCoroutine(p.Launch(this));
                 else
                     foreach (var p in projectiles)
-                        StartCoroutine(p.Launch(_character));
+                        StartCoroutine(p.Launch(this));
                 base.Attack();
             }
 
@@ -33,22 +33,20 @@ namespace RuinsRaiders
             public Projectile projectile;
             public Vector3 offset;
             public float delay;
-            public IEnumerator Launch(Character launcher)
+            public IEnumerator Launch(RangedAttack rangedAttack)
             {
                 yield return new WaitForSeconds(delay);
 
-                GameObject go = Instantiate(projectile.gameObject);
-                var p = go.GetComponent<Projectile>();
+                Projectile launchedProjectile = Instantiate(projectile);
+                launchedProjectile.launcher = rangedAttack._character;
 
-                p.launcher = launcher;
+                if (rangedAttack._healthController)
+                    launchedProjectile.group = rangedAttack._healthController.group;
 
-                var movementController = launcher.GetComponent<MovementController>();
-                if (movementController == null)
-                    yield break;
-
-                go.transform.position = launcher.transform.position + new Vector3(offset.x * (movementController.faceLeft ? 1 : -1), offset.y, 0);
-                if (movementController.faceLeft)
-                    p.initialVelocity *= -1;
+                var faceLeft = launchedProjectile.launcher.transform.lossyScale.x < 0;
+                launchedProjectile.transform.position = launchedProjectile.launcher.transform.position + new Vector3(offset.x * (faceLeft ? 1 : -1), offset.y, 0);
+                if (faceLeft)
+                    launchedProjectile.initialVelocity *= -1;
             }
         }
     }
