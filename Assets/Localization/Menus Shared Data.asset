@@ -16,71 +16,103 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 28b919ffe2a9ff94180b8b39235d679e
   m_Entries:
   - m_Id: 1554364559360
-    m_Key: MainMenu/Menu/Main/Panel/Selection/Adventure/Text
+    m_Key: MainMenu/Adventure
     m_Metadata:
       m_Items: []
   - m_Id: 1715090288640
-    m_Key: MainMenu/Menu/Main/Panel/Selection/Forge/Text
+    m_Key: MainMenu/Forge
     m_Metadata:
       m_Items: []
   - m_Id: 2012118315008
-    m_Key: MainMenu/Menu/Main/Panel/Selection/Shop/Text
+    m_Key: MainMenu/Shop
     m_Metadata:
       m_Items: []
   - m_Id: 2192947343360
-    m_Key: MainMenu/Menu/Main/Panel/Selection/Credits/Text
+    m_Key: MainMenu/Credits
     m_Metadata:
       m_Items: []
   - m_Id: 3052251181056
-    m_Key: MainMenu/Menu/OptionsMenu/SelectUi/Text
+    m_Key: MainMenu/Options/Controls
     m_Metadata:
       m_Items: []
   - m_Id: 3227430481920
-    m_Key: MainMenu/Menu/OptionsMenu/SelectUi/Arrows/Text
+    m_Key: MainMenu/Options/Arrows
     m_Metadata:
       m_Items: []
   - m_Id: 3276499644416
-    m_Key: MainMenu/Menu/OptionsMenu/SelectUi/ArrowsSeparate/Text
+    m_Key: MainMenu/Options/ArrowsSeparate
     m_Metadata:
       m_Items: []
   - m_Id: 3411661090816
-    m_Key: MainMenu/Menu/OptionsMenu/SelectUi/Joystick/Text
+    m_Key: MainMenu/Options/Joystick
     m_Metadata:
       m_Items: []
   - m_Id: 3467197870080
-    m_Key: MainMenu/Menu/OptionsMenu/SelectUi/None/Text
+    m_Key: MainMenu/Options/None
     m_Metadata:
       m_Items: []
   - m_Id: 3653504659456
-    m_Key: MainMenu/Menu/OptionsMenu/SoundUi/Text
+    m_Key: MainMenu/Menu/Sound
     m_Metadata:
       m_Items: []
   - m_Id: 3751903031296
-    m_Key: MainMenu/Menu/OptionsMenu/SoundUi/Text 1
+    m_Key: MainMenu/Options/Music
     m_Metadata:
       m_Items: []
   - m_Id: 3793363726336
-    m_Key: MainMenu/Menu/OptionsMenu/SoundUi/Text 2
+    m_Key: MainMenu/Options/Effects
     m_Metadata:
       m_Items: []
   - m_Id: 4800630026240
-    m_Key: MainMenu/Menu/Main/Panel/Forge/KnightUpgrades/Banner/Text (TMP)
+    m_Key: MainMenu/Forge/Knight
     m_Metadata:
       m_Items: []
   - m_Id: 4967777234944
-    m_Key: MainMenu/Menu/Main/Panel/Forge/ArcherUpgrades/Banner/Text (TMP)
+    m_Key: MainMenu/Forge/Archer
     m_Metadata:
       m_Items: []
   - m_Id: 5113785151488
-    m_Key: MainMenu/Menu/Main/Panel/Forge/MageUpgrades/Banner/Text (TMP)
+    m_Key: MainMenu/Forge/Mage
     m_Metadata:
       m_Items: []
   - m_Id: 5277874712576
-    m_Key: MainMenu/Menu/Main/Panel/Forge/SpearmanUpgrades/Banner/Text (TMP)
+    m_Key: MainMenu/Forge/
     m_Metadata:
       m_Items: []
   - m_Id: 27215770742784
-    m_Key: MainMenu/Menu/OptionsMenu/LocaleUI/Text
+    m_Key: MainMenu/Options/Locale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59065290847662080
+    m_Key: MainMenu/Options
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59067435756007424
+    m_Key: MainMenu/Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59078017854976000
+    m_Key: MainMenu/Adventure/Mountians
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59078569590501376
+    m_Key: MainMenu/Adventure/Forest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59078829960310784
+    m_Key: MainMenu/Adventure/Ruins
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59079343066296320
+    m_Key: MainMenu/Adventure/Desert
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59079790304931840
+    m_Key: MainMenu/Adventure/Swamp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59081122835312640
+    m_Key: MainMenu/Adventure/Volcano
     m_Metadata:
       m_Items: []
   m_Metadata:

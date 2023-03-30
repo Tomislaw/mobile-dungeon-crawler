@@ -94,6 +94,38 @@ MonoBehaviour:
     m_Localized: Lugar
     m_Metadata:
       m_Items: []
+  - m_Id: 59065290847662080
+    m_Localized: "\rOpciones"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59067435756007424
+    m_Localized: Salida
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59078017854976000
+    m_Localized: "Monta\xF1as"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59078569590501376
+    m_Localized: Bosque
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59078829960310784
+    m_Localized: Las ruinas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59079343066296320
+    m_Localized: Desierto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59079790304931840
+    m_Localized: Pantano
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59081122835312640
+    m_Localized: "Volc\xE1n"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Mountian/Mountian1.unity
-    guid: 217ba25a5a3e0024fbe524ab97c01b2b
-  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 3706bb345c2e62049a37a93f1aced8d3
+  - enabled: 1
+    path: Assets/Scenes/Mountian/Mountian1.unity
+    guid: 217ba25a5a3e0024fbe524ab97c01b2b
   - enabled: 1
     path: Assets/Scenes/Mountian/Mountian2.unity
     guid: 6ba061e1e752b19419e7553cf6e0b8d9
@@ -23,12 +23,24 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Mountian/Mountian5.unity
     guid: a4fd0e15c72bea744bcb5a3695d60863
-  - enabled: 0
-    path: Assets/Scenes/Debug/TestScene.unity
-    guid: 62c074efa618063418866ea23df07c24
+  - enabled: 1
+    path: Assets/Scenes/Mountian/Mountian6.unity
+    guid: 0a1bd1f6bab195348a79634420f7eddb
+  - enabled: 1
+    path: Assets/Scenes/Mountian/Mountian7.unity
+    guid: 6abd2a21f42120f4c9a1d76bcea9759e
+  - enabled: 1
+    path: Assets/Scenes/Mountian/Mountian8.unity
+    guid: e92eff4e17e2d14408e76afade8e3676
+  - enabled: 1
+    path: Assets/Scenes/Mountian/Mountian9.unity
+    guid: 98e2f03cb1960ef4bb06c2241119afae
   - enabled: 1
     path: Assets/Scenes/Forest/Forest1.unity
     guid: 661622848a1f5954d9b4fddc5392f066
+  - enabled: 0
+    path: Assets/Scenes/Debug/TestScene.unity
+    guid: 62c074efa618063418866ea23df07c24
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: eeea6e052087e0a43b2f48edf6a81b77, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 5c3bd914ef89c5f428fecffd59da1e41, type: 2}

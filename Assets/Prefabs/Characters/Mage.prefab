@@ -237,6 +237,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8942d41327e0c8c4c83bc7bb38fd0089, type: 2}
+    - target: {fileID: 2540004558146435167, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2601901536454801996, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2839153680246517994, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
       propertyPath: Health
       value: 6
@@ -310,16 +318,16 @@ MonoBehaviour:
   onChargedAttack:
     m_PersistentCalls:
       m_Calls: []
-  damage: 2
-  damageReduction: 1
+  thunderboltStartPosition: {fileID: 6078602474075028045}
+  attackDamage: 2
+  attackDamageReduction: 1
   colliderContainer: {fileID: 1527467334543557864}
   thunderboltPrefab: {fileID: 8761778409980734357, guid: 28935cc7107412e4e9ad76d9b0375593, type: 3}
-  specialDamage: 1
-  specialDamageReduction: 0
+  specialAttackDamage: 1
+  specialAttackDamageReduction: 0
   specialColliderContainer: {fileID: 2799187307291954396}
   specialThunderboltPrefab: {fileID: 8761778409980734357, guid: 28935cc7107412e4e9ad76d9b0375593, type: 3}
   specialRateOfFire: 0.3
-  thunderboltStartPosition: {fileID: 6078602474075028045}
 --- !u!1 &3551520061723884599 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 499992325529902725, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}

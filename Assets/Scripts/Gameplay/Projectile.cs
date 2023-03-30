@@ -15,8 +15,9 @@ namespace RuinsRaiders
 
         public Vector2 initialVelocity;
 
-        [SerializeField]
-        private int damage = 0;
+        public int damage = 0;
+
+        public List<HealthController> hitTargets = new List<HealthController>();
 
         [SerializeField]
         private bool rotating = false;
@@ -150,7 +151,7 @@ namespace RuinsRaiders
             transform.position = collision.contacts.First().point;
 
             var hitItems = explosionRadius > 0
-                ? Physics2D.OverlapCircleAll(transform.position, explosionRadius).Select(it => it.gameObject).Distinct()
+                ? Physics2D.OverlapCircleAll(transform.position, explosionRadius).Select(it => it.gameObject)
                 : new List<GameObject>() { collision.gameObject };
 
             ResolveColliders(hitItems);
@@ -161,13 +162,16 @@ namespace RuinsRaiders
             foreach (var hit in hitItems)
             {
                 var target = hit.GetComponent<HealthController>();
-                if (target == null)
+                if (target == null || hitTargets.Contains(target))
                 {
                     _lifeTimeLeft = 0;
                     continue;
                 }
+
                 if (target.IsDead)
                     continue;
+
+                hitTargets.Add(target);
 
                 _lifeTimeLeft = 0;
                 ResolveHit(target);

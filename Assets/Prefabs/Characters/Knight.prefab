@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2924506e847ef454c843827c3a2cf458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hits: []
 --- !u!1 &1586342966391059652
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,7 +95,6 @@ GameObject:
   - component: {fileID: 1217533563843094445}
   - component: {fileID: 7068583201586914935}
   - component: {fileID: 1586342966391059676}
-  - component: {fileID: 9095645185290459867}
   - component: {fileID: 39514931662721533}
   - component: {fileID: 6072170547237964431}
   - component: {fileID: -8808715197590347756}
@@ -122,6 +122,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6223032762603531501}
+  - {fileID: 2540004558146435167}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -276,8 +277,8 @@ MonoBehaviour:
   onChargedAttack:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9095645185290459867}
-        m_TargetAssemblyTypeName: RuinsRaiders.Shockwave, Assembly-CSharp
+      - m_Target: {fileID: 4935482358244900551}
+        m_TargetAssemblyTypeName: RuinsRaiders.Shockwave, Scripts
         m_MethodName: StartShockwave
         m_Mode: 1
         m_Arguments:
@@ -333,6 +334,7 @@ MonoBehaviour:
   faceLeft: 0
   flying: 0
   gravityScale: 6
+  waterGravityScale: 6
   coyoteTime: 0.08
   jumpSpeed: 17
   jumpCutGravityMultiplier: 3
@@ -474,23 +476,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &9095645185290459867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1586342966391059652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d13015ac466d864485547c903231aee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shockTile: {fileID: 1805714663868828912, guid: dae9ec3adbc79174bae86b5426490c19, type: 3}
-  shockWidth: 6
-  shockTime: 0.025
-  shockDistance: 1
-  initialOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &39514931662721533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,7 +561,7 @@ MonoBehaviour:
   healthIncreasePerLevel: 2
   attackDamageIncreasePerLevel: 1
   attackSpeedDecreasePerLevel: 0
-  specialAttackDamageIncreasePerLevel: 0
+  specialAttackDamageIncreasePerLevel: 1
   specialAttackRangeIncreasePerLevel: 1
   overchargeTimeDecreasePerLevel: 0.1
 --- !u!61 &7211350550334106730
@@ -621,3 +606,53 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.45}
   m_Size: {x: 0.6, y: 0.95}
   m_Direction: 0
+--- !u!1 &2601901536454801996
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2540004558146435167}
+  - component: {fileID: 4935482358244900551}
+  m_Layer: 12
+  m_Name: Shockwave
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2540004558146435167
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2601901536454801996}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1586342966391059674}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4935482358244900551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2601901536454801996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d13015ac466d864485547c903231aee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shockTile: {fileID: 1805714663868828917, guid: dae9ec3adbc79174bae86b5426490c19, type: 3}
+  shockDamage: 2
+  shockWidth: 4
+  shockTime: 0.025
+  shockDistance: 1
+  initialOffset: {x: 0, y: 0, z: 0}

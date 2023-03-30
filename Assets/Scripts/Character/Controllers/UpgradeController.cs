@@ -26,15 +26,17 @@ namespace RuinsRaiders {
         private RangedAttack _rangedAttack;
         private MeeleAttack _meeleAttack;
         private RaycastAttack _raycastAttack;
+        private Shockwave _shockwave;
 
 
         void Start()
         {
             _healthController = GetComponent<HealthController>();
 
-            _rangedAttack = GetComponent<RangedAttack>();
-            _raycastAttack = GetComponent<RaycastAttack>();
-            _meeleAttack = GetComponent<MeeleAttack>();
+            _rangedAttack = GetComponentInChildren<RangedAttack>();
+            _raycastAttack = GetComponentInChildren<RaycastAttack>();
+            _meeleAttack = GetComponentInChildren<MeeleAttack>();
+            _shockwave = GetComponentInChildren<Shockwave>();
 
             var data = playerData.GetCharacterData(characterType);
 
@@ -57,26 +59,25 @@ namespace RuinsRaiders {
             if (_rangedAttack != null)
             {
                 _rangedAttack.attackSpeed -= attackSpeedDecreasePerLevel * data.skills[1];
-                //_rangedAttack.attackDamage += attackDamageIncreasePerLevel * data.skills[1];
+                _rangedAttack.attackDamage += attackDamageIncreasePerLevel * data.skills[1];
 
                 _rangedAttack.overchargeTime -= overchargeTimeDecreasePerLevel * data.skills[2];
+                _rangedAttack.specialAttackDamage += specialAttackDamageIncreasePerLevel * data.skills[2];
             }
             if (_raycastAttack != null)
             {
                 _raycastAttack.attackSpeed -= attackSpeedDecreasePerLevel * data.skills[1];
-                _raycastAttack.damage += attackDamageIncreasePerLevel * data.skills[1];
+                _raycastAttack.attackDamage += attackDamageIncreasePerLevel * data.skills[1];
 
                 _raycastAttack.overchargeTime -= overchargeTimeDecreasePerLevel * data.skills[2];
-                _raycastAttack.specialDamage += specialAttackDamageIncreasePerLevel * data.skills[1];
+                _raycastAttack.specialAttackDamage += specialAttackDamageIncreasePerLevel * data.skills[2];
             }
-
-
+            if (_shockwave != null)
+            {
+                _shockwave.shockDamage += specialAttackDamageIncreasePerLevel * data.skills[2];
+                _shockwave.shockWidth += specialAttackRangeIncreasePerLevel * data.skills[2];
+            }
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
     }
 }

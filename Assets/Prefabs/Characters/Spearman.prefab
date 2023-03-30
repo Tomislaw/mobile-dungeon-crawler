@@ -87,6 +87,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 1101450059, guid: 807663c2629e94441ba9955faa95dafc, type: 3}
+    - target: {fileID: 2601901536454801996, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4181743231487395800, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
       propertyPath: attackDamageIncreasePerLevel
       value: 2
@@ -121,6 +125,8 @@ MonoBehaviour:
   onChargedAttack:
     m_PersistentCalls:
       m_Calls: []
+  attackDamage: 2
+  specialAttackDamage: 2
   projectiles:
   - projectile: {fileID: 1805714663868828917, guid: 53f5e209b4c330247acbfd4b8bcbd0d7, type: 3}
     offset: {x: 0, y: 0.4, z: 0}

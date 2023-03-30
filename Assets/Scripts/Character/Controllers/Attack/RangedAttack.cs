@@ -7,6 +7,9 @@ namespace RuinsRaiders
 {
     public class RangedAttack : AttackController
     {
+        public int attackDamage = 2;
+        public int specialAttackDamage = 2;
+
         [SerializeField]
         private List<ProjectileData> projectiles = new();
         [SerializeField]
@@ -18,10 +21,10 @@ namespace RuinsRaiders
             {
                 if (IsOvercharged)
                     foreach (var p in projectilesCharged)
-                        StartCoroutine(p.Launch(this));
+                        StartCoroutine(p.Launch(this, specialAttackDamage));
                 else
                     foreach (var p in projectiles)
-                        StartCoroutine(p.Launch(this));
+                        StartCoroutine(p.Launch(this, attackDamage));
                 base.Attack();
             }
 
@@ -33,12 +36,13 @@ namespace RuinsRaiders
             public Projectile projectile;
             public Vector3 offset;
             public float delay;
-            public IEnumerator Launch(RangedAttack rangedAttack)
+            public IEnumerator Launch(RangedAttack rangedAttack, int damage)
             {
                 yield return new WaitForSeconds(delay);
 
                 Projectile launchedProjectile = Instantiate(projectile);
                 launchedProjectile.launcher = rangedAttack._character;
+                launchedProjectile.damage = damage;
 
                 if (rangedAttack._healthController)
                     launchedProjectile.group = rangedAttack._healthController.group;

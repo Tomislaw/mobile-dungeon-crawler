@@ -65,7 +65,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3793363726336
-    m_Localized: effects volume
+    m_Localized: Effects volume
     m_Metadata:
       m_Items: []
   - m_Id: 4800630026240
@@ -94,6 +94,38 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 27215770742784
     m_Localized: Locale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59065290847662080
+    m_Localized: Options
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59067435756007424
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59078017854976000
+    m_Localized: Mountian
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59078569590501376
+    m_Localized: Forest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59078829960310784
+    m_Localized: Ruins
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59079343066296320
+    m_Localized: Desert
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59079790304931840
+    m_Localized: Swamp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59081122835312640
+    m_Localized: Volcano
     m_Metadata:
       m_Items: []
   references:

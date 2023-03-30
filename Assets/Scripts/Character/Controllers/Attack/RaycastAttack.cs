@@ -7,22 +7,22 @@ namespace RuinsRaiders
 {
     public class RaycastAttack : AttackController
     {
-        // Start is called before the first frame update
-        public int damage = 2;
-        public int damageReduction = 1;
+        public GameObject thunderboltStartPosition;
+
+        [Header("Attack")]
+        public int attackDamage = 2;
+        public int attackDamageReduction = 1;
 
         public ColliderContainer colliderContainer;
         public Thunderbolt thunderboltPrefab;
 
-        public int specialDamage = 1;
-        public int specialDamageReduction = 0;
+        [Header("Special Attack")]
+        public int specialAttackDamage = 1;
+        public int specialAttackDamageReduction = 0;
         public ColliderContainer specialColliderContainer;
         public Thunderbolt specialThunderboltPrefab;
 
         public float specialRateOfFire = 0.2f;
-
-
-        public GameObject thunderboltStartPosition;
 
         private float _timeToNextSpecialAttack;
         private float _attackDistance;
@@ -38,7 +38,7 @@ namespace RuinsRaiders
         private void OnAttack()
         {
             var targetPos = thunderboltStartPosition.transform.position + new Vector3(_attackDistance * transform.localScale.x, 0, 0);
-            LaunchBolt(thunderboltPrefab, targetPos, damage, damageReduction);
+            LaunchBolt(thunderboltPrefab, targetPos, attackDamage, attackDamageReduction);
         }
 
         private void OnChargedAttack()
@@ -58,7 +58,7 @@ namespace RuinsRaiders
             if (_timeToNextSpecialAttack <= 0)
             {
                 _timeToNextSpecialAttack = specialRateOfFire;
-                LaunchBolt(specialThunderboltPrefab, GetRandomPoint(colliderContainer), specialDamage, specialDamageReduction);
+                LaunchBolt(specialThunderboltPrefab, GetRandomPoint(colliderContainer), specialAttackDamage, specialAttackDamageReduction);
             }
         }
 

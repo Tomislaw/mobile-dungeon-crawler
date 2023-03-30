@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -6,25 +7,33 @@ namespace RuinsRaiders
 {
     public class Shockwave : MonoBehaviour
     {
-        [SerializeField]
-        private GameObject shockTile;
+        public Projectile shockTile;
 
-        [SerializeField]
-        private int shockWidth;
-        [SerializeField]
-        private float shockTime;
+        public int shockDamage = 2;
 
+        public int shockWidth;
 
-        [SerializeField]
-        private float shockDistance;
-        [SerializeField]
-        private Vector3 initialOffset;
+        public float shockTime;
+
+        public float shockDistance;
+
+        public Vector3 initialOffset;
 
         private AStar _astar;
+
+        private Character _character;
+        private HealthController _healthController;
 
         void Start()
         {
             _astar = FindAStar();
+            _character = GetComponentInChildren<Character>();
+            if (_character == null && transform.parent != null)
+                _character = transform.parent.GetComponent<Character>();
+
+            _healthController = GetComponentInChildren<HealthController>();
+            if (_healthController == null && transform.parent != null)
+                _healthController = transform.parent.GetComponent<HealthController>();
         }
 
         public void StartShockwave()
@@ -37,9 +46,11 @@ namespace RuinsRaiders
             if (_astar == null)
                 yield break;
 
+            var sharedHitTargetsList = new List<HealthController>();
             var startingPosition = initialOffset + transform.position;
-            var rotation = Mathf.Sign(transform.localScale.x);
-            startingPosition += new Vector3(rotation, 0, 0);
+            var direction = Mathf.Sign(transform.lossyScale.x);
+            startingPosition += new Vector3(direction, 0, 0);
+
             for (int i = 0; i < shockWidth; i++)
             {
                 var id = _astar.GetTileId(startingPosition);
@@ -65,11 +76,12 @@ namespace RuinsRaiders
                     break;
 
                 var prefab = Instantiate(shockTile, startingPosition, Quaternion.identity);
-                var projectile = prefab.GetComponent<Projectile>();
-                if (projectile != null)
-                    projectile.launcher = GetComponent<Character>();
+                prefab.launcher = _character;
+                prefab.hitTargets = sharedHitTargetsList;
+                prefab.group = _healthController.group;
+                prefab.damage = shockDamage;
 
-                startingPosition += new Vector3(shockDistance * rotation, 0, 0);
+                startingPosition += new Vector3(shockDistance * direction, 0, 0);
                 yield return new WaitForSeconds(shockTime);
             }
         }

@@ -9,6 +9,7 @@ namespace RuinsRaiders
     [CreateAssetMenu(fileName = "AdventureData", menuName = "RuinsRaiders/AdventureData", order = 1)]
     public class AdventureData : ScriptableObject
     {
+        public bool enabled;
 
         public List<Level> levels = new();
 
