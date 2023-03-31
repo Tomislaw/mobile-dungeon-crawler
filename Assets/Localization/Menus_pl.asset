@@ -23,7 +23,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1715090288640
-    m_Localized: "Ku\u017Ania"
+    m_Localized: Ulepszenia
     m_Metadata:
       m_Items: []
   - m_Id: 2012118315008
@@ -122,6 +122,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 59081122835312640
     m_Localized: Wulkan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59094398017187840
+    m_Localized: "Nie dost\u0119pne w obecnej wersji"
     m_Metadata:
       m_Items: []
   references:

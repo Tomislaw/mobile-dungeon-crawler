@@ -63,6 +63,7 @@ namespace RuinsRaiders {
 
                 _rangedAttack.overchargeTime -= overchargeTimeDecreasePerLevel * data.skills[2];
                 _rangedAttack.specialAttackDamage += specialAttackDamageIncreasePerLevel * data.skills[2];
+                _rangedAttack.specialAttackMaxProjectileCount += specialAttackRangeIncreasePerLevel * data.skills[2];
             }
             if (_raycastAttack != null)
             {

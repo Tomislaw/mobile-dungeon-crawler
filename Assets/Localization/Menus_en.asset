@@ -23,7 +23,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1715090288640
-    m_Localized: Forge
+    m_Localized: Upgrades
     m_Metadata:
       m_Items: []
   - m_Id: 2012118315008
@@ -126,6 +126,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 59081122835312640
     m_Localized: Volcano
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59094398017187840
+    m_Localized: Not available in current version
     m_Metadata:
       m_Items: []
   references:

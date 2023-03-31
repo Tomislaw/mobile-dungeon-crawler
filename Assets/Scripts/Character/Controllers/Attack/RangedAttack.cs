@@ -9,6 +9,7 @@ namespace RuinsRaiders
     {
         public int attackDamage = 2;
         public int specialAttackDamage = 2;
+        public int specialAttackMaxProjectileCount = 3;
 
         [SerializeField]
         private List<ProjectileData> projectiles = new();
@@ -20,11 +21,24 @@ namespace RuinsRaiders
             if (CanAttack)
             {
                 if (IsOvercharged)
+                {
+                    int counter = 0;
                     foreach (var p in projectilesCharged)
+                    {
                         StartCoroutine(p.Launch(this, specialAttackDamage));
+                        counter++;
+                        if (counter >= specialAttackMaxProjectileCount)
+                            break;
+                    }
+                }
                 else
+                {
+
                     foreach (var p in projectiles)
+                    {
                         StartCoroutine(p.Launch(this, attackDamage));
+                    }
+                }
                 base.Attack();
             }
 

@@ -76,6 +76,26 @@ namespace RuinsRaiders
             }
         }
 
+        public virtual void DamageIgnoreShield(int damage, GameObject who)
+        {
+            if (_character != null && _character.holdUpdate == true)
+                return;
+
+            if (health <= 0 && damage > 0)
+                return;
+
+            if (onDamage != null)
+                onDamage.Invoke(who);
+
+            if (_renderer != null)
+                StartCoroutine(FlashColor());
+
+            health -= damage;
+
+            if (health <= 0)
+                Death();
+        }
+
         public virtual void Damage(int damage, GameObject who)
         {
             if (_character != null && _character.holdUpdate == true)

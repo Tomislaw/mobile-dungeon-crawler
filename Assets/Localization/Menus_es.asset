@@ -126,6 +126,10 @@ MonoBehaviour:
     m_Localized: "Volc\xE1n"
     m_Metadata:
       m_Items: []
+  - m_Id: 59094398017187840
+    m_Localized: "Los dispositivos con cualquier versi\xF3n"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

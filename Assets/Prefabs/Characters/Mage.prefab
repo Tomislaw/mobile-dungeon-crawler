@@ -246,12 +246,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2839153680246517994, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
+      propertyPath: armor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2839153680246517994, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
       propertyPath: Health
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2839153680246517994, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
       propertyPath: health
-      value: 6
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2839153680246517994, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
+      propertyPath: shield
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2839153680246517994, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
       propertyPath: MaxHealth
@@ -259,7 +267,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2839153680246517994, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
       propertyPath: maxHealth
-      value: 6
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2839153680246517994, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
+      propertyPath: maxShield
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3238673523870878560, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -267,11 +279,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4181743231487395800, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
       propertyPath: healthIncreasePerLevel
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4181743231487395800, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
       propertyPath: shieldIncreasePerLevel
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4181743231487395800, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
       propertyPath: attackDamageIncreasePerLevel

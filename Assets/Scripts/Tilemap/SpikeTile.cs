@@ -5,6 +5,12 @@ namespace RuinsRaiders
 {
     public class SpikeTile : MonoBehaviour
     {
+        [SerializeField]
+        private int damageToPlayer = 2;
+
+        [SerializeField]
+        private int damageToNpc = 000;
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             var healthController = collision.gameObject.GetComponent<HealthController>();
@@ -23,12 +29,12 @@ namespace RuinsRaiders
                 var respawn = transform.FindRespawnPosition();
                 if (respawn == null)
                 {
-                    healthController.Damage(9999, gameObject);
+                    healthController.DamageIgnoreShield(damageToNpc, gameObject);
                 }
                 else
                 {
                     var movementController = collision.gameObject.GetComponent<MovementController>();
-                    healthController.Damage(2, gameObject);
+                    healthController.DamageIgnoreShield(damageToPlayer, gameObject);
                     if (character != null && !character.IsDead)
                         movementController.Teleport(respawn.transform.position);
                 }
@@ -36,7 +42,7 @@ namespace RuinsRaiders
             }
             else
             {
-                healthController.Damage(9999, gameObject);
+                healthController.DamageIgnoreShield(damageToNpc, gameObject);
             }
         }
 

@@ -115,6 +115,10 @@ MonoBehaviour:
     m_Key: MainMenu/Adventure/Volcano
     m_Metadata:
       m_Items: []
+  - m_Id: 59094398017187840
+    m_Key: MainMenu/Adventure/NotAvailable
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
