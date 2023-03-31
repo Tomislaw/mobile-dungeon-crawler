@@ -119,6 +119,46 @@ MonoBehaviour:
     m_Key: MainMenu/Adventure/NotAvailable
     m_Metadata:
       m_Items: []
+  - m_Id: 59383591092072448
+    m_Key: Tips/Move
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59384226042589184
+    m_Key: Tips/Jump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59384843456720896
+    m_Key: Tips/Climb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59385409486434304
+    m_Key: Tips/Fall
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59386699218137088
+    m_Key: Tips/Chest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59387204141035520
+    m_Key: Tips/Attack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59387589140393984
+    m_Key: Tips/PowerAttack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59398027588644864
+    m_Key: Menu/Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59398339581947904
+    m_Key: Menu/Restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59399169215279104
+    m_Key: Menu/MainMenu
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -92,7 +92,11 @@ SpriteAtlas:
   - {fileID: -1431907577120088334, guid: 60804920d87c96346acce0f7e1e7b581, type: 3}
   - {fileID: -5270896279477487387, guid: 60804920d87c96346acce0f7e1e7b581, type: 3}
   - {fileID: -7967417430065030077, guid: 60804920d87c96346acce0f7e1e7b581, type: 3}
-  - {fileID: 21300000, guid: df8ce9c2e4bc61c458137a630d71a9f8, type: 3}
+  - {fileID: 272945487, guid: df8ce9c2e4bc61c458137a630d71a9f8, type: 3}
+  - {fileID: 1051423965, guid: df8ce9c2e4bc61c458137a630d71a9f8, type: 3}
+  - {fileID: 1430529259, guid: df8ce9c2e4bc61c458137a630d71a9f8, type: 3}
+  - {fileID: -174840877, guid: df8ce9c2e4bc61c458137a630d71a9f8, type: 3}
+  - {fileID: -1174238823, guid: df8ce9c2e4bc61c458137a630d71a9f8, type: 3}
   - {fileID: -470784496, guid: 371c1ac2787f1c341bc2309c2601b398, type: 3}
   - {fileID: 1457530353, guid: 371c1ac2787f1c341bc2309c2601b398, type: 3}
   - {fileID: -1929847915, guid: 371c1ac2787f1c341bc2309c2601b398, type: 3}
@@ -115,7 +119,11 @@ SpriteAtlas:
   - {fileID: 3901815962169110082, guid: 06731b940e85d2c44b075d5701bf2b81, type: 3}
   - {fileID: -1401104878230470536, guid: 06731b940e85d2c44b075d5701bf2b81, type: 3}
   - {fileID: -4477578937794702022, guid: 06731b940e85d2c44b075d5701bf2b81, type: 3}
-  - {fileID: 21300000, guid: 2751bba42664e8f45a4f1dc7913d3c08, type: 3}
+  - {fileID: -1379928540, guid: 2751bba42664e8f45a4f1dc7913d3c08, type: 3}
+  - {fileID: 1337681231, guid: 2751bba42664e8f45a4f1dc7913d3c08, type: 3}
+  - {fileID: 547577058, guid: 2751bba42664e8f45a4f1dc7913d3c08, type: 3}
+  - {fileID: -98713234, guid: 2751bba42664e8f45a4f1dc7913d3c08, type: 3}
+  - {fileID: 422862964, guid: 2751bba42664e8f45a4f1dc7913d3c08, type: 3}
   - {fileID: 4537193172801868870, guid: 20d3c156daefaf540bf1c1af9964b7b0, type: 3}
   - {fileID: 5726080727020278575, guid: 20d3c156daefaf540bf1c1af9964b7b0, type: 3}
   - {fileID: 1564688358316481467, guid: 20d3c156daefaf540bf1c1af9964b7b0, type: 3}
@@ -132,7 +140,11 @@ SpriteAtlas:
   - {fileID: 2062767613, guid: a44e5707dc26e5746b591aecacabe493, type: 3}
   - {fileID: -1581197087, guid: a44e5707dc26e5746b591aecacabe493, type: 3}
   - {fileID: 1830127490, guid: a44e5707dc26e5746b591aecacabe493, type: 3}
-  - {fileID: 21300000, guid: af2863284e26f324ab36092311c31855, type: 3}
+  - {fileID: 811257101, guid: af2863284e26f324ab36092311c31855, type: 3}
+  - {fileID: -316059815, guid: af2863284e26f324ab36092311c31855, type: 3}
+  - {fileID: 431278252, guid: af2863284e26f324ab36092311c31855, type: 3}
+  - {fileID: 55270316, guid: af2863284e26f324ab36092311c31855, type: 3}
+  - {fileID: -1015611877, guid: af2863284e26f324ab36092311c31855, type: 3}
   - {fileID: 1514295333, guid: 03596d09e24659a4b8b951752f3ec599, type: 3}
   - {fileID: 1067960147, guid: 03596d09e24659a4b8b951752f3ec599, type: 3}
   - {fileID: 966867389, guid: 03596d09e24659a4b8b951752f3ec599, type: 3}
@@ -254,7 +266,11 @@ SpriteAtlas:
   - chest2_3
   - chest2_2
   - chest2_4
-  - tutorial_joystick
+  - tutorial_joystick_3
+  - tutorial_joystick_2
+  - tutorial_joystick_1
+  - tutorial_joystick_0
+  - tutorial_joystick_4
   - upgrades_sword2
   - upgrades_sword1
   - upgrades_wand2
@@ -277,7 +293,11 @@ SpriteAtlas:
   - hearts2_0
   - hearts2_5
   - hearts2_4
-  - tutorial_wsad
+  - tutorial_wsad_0
+  - tutorial_wsad_1
+  - tutorial_wsad_2
+  - tutorial_wsad_3
+  - tutorial_wsad_4
   - hearts_4
   - hearts_1
   - hearts_0
@@ -294,7 +314,11 @@ SpriteAtlas:
   - bubbles2_2
   - bubbles2_1
   - bubbles2_0
-  - tutorial_mobile_joystick
+  - tutorial_mobile_joystick_4
+  - tutorial_mobile_joystick_2
+  - tutorial_mobile_joystick_3
+  - tutorial_mobile_joystick_0
+  - tutorial_mobile_joystick_1
   - bubbles1_0
   - bubbles1_1
   - bubbles1_2

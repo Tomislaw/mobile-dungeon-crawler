@@ -130,6 +130,46 @@ MonoBehaviour:
     m_Localized: "Los dispositivos con cualquier versi\xF3n"
     m_Metadata:
       m_Items: []
+  - m_Id: 59383591092072448
+    m_Localized: "\rmovimienot"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59384226042589184
+    m_Localized: "\rsaltando"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59384843456720896
+    m_Localized: trepar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59385409486434304
+    m_Localized: bajar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59386699218137088
+    m_Localized: tesoro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59387204141035520
+    m_Localized: ataque
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59387589140393984
+    m_Localized: "mant\xE9n presionado para un ataque poderoso"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59398027588644864
+    m_Localized: Continuar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59398339581947904
+    m_Localized: Reanudar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59399169215279104
+    m_Localized: "Men\xFA"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
