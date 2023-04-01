@@ -123,6 +123,7 @@ MonoBehaviour:
         m_CallState: 2
   initialVelocity: {x: 35, y: 0}
   damage: 4
+  hitTargets: []
   rotating: 1
   destroyTime: 1
   lifeTime: 0.4
@@ -154,7 +155,7 @@ Rigidbody2D:
   m_Constraints: 4
 --- !u!95 &1805714663868828918
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -171,7 +172,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &5045053919743331434
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -207,7 +209,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1805714663868828912}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a7e7f3d2502159418ad467a5b17e3c8, type: 3}
+  m_Script: {fileID: 11500000, guid: ed93bd0b11d6a50478b2f4e35107ffda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}

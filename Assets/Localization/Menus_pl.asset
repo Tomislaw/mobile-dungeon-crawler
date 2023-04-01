@@ -53,7 +53,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3467197870080
-    m_Localized: Nic
+    m_Localized: "Nic/Zwn\u0119trzne urz\u0105dzenie"
     m_Metadata:
       m_Items: []
   - m_Id: 3653504659456
@@ -161,11 +161,19 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 59398339581947904
-    m_Localized: Restart poziomu
+    m_Localized: Restart
     m_Metadata:
       m_Items: []
   - m_Id: 59399169215279104
-    m_Localized: "Wr\xF3\u0107 do Menu"
+    m_Localized: Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59423175557492736
+    m_Localized: Pozycja X
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59423798315167744
+    m_Localized: Pozycja Y
     m_Metadata:
       m_Items: []
   references:

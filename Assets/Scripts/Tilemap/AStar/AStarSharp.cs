@@ -148,7 +148,7 @@ namespace RuinsRaiders.AStarSharp
 
             var pathFound = true;
             // construct path, if end was not closed return null
-            if (!ClosedList.Exists(n => IsEnd(n)))
+            if (!ClosedList.Exists(n => IsEnd(n)) && ClosedList.Count > 0)
             {
                 current = ClosedList.Where(it => it.jumpHeightLeft == -1 && !it.Tile.Spike).OrderBy(n => GetDistance(n)).First();
                 pathFound = false;

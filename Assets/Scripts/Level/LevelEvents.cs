@@ -162,7 +162,7 @@ namespace RuinsRaiders
                         playerData.gems += rewardsData.normalChestReward;
                         break;
                     case AdventureData.ChestData.Type.Equisite:
-                        playerData.gems += rewardsData.exuisiteChestReward;
+                        playerData.gems += rewardsData.exquisiteChestReward;
                         break;
                 }
                 adventure.GetCurrentLevel().chests[i] = new() { acquired = true, type = collectedChest.chestData.type };

@@ -53,7 +53,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3467197870080
-    m_Localized: None
+    m_Localized: None/External input
     m_Metadata:
       m_Items: []
   - m_Id: 3653504659456
@@ -170,6 +170,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 59399169215279104
     m_Localized: Main Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59423175557492736
+    m_Localized: Offset x
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59423798315167744
+    m_Localized: Offset Y
     m_Metadata:
       m_Items: []
   references:

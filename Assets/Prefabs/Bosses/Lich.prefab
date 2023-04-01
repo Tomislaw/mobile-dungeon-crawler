@@ -85,6 +85,8 @@ GameObject:
   - component: {fileID: 3570942336502991756}
   - component: {fileID: 8309213051711081826}
   - component: {fileID: 1232985620076072888}
+  - component: {fileID: 2895877086576702235}
+  - component: {fileID: 35853251458301214}
   m_Layer: 11
   m_Name: Lich
   m_TagString: Untagged
@@ -218,7 +220,7 @@ MonoBehaviour:
   haveJumpAnimation: 0
 --- !u!95 &5367954658345666727
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -235,7 +237,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &5367954658345666728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,6 +286,9 @@ MonoBehaviour:
   onChargedAttack:
     m_PersistentCalls:
       m_Calls: []
+  attackDamage: 2
+  specialAttackDamage: 2
+  specialAttackMaxProjectileCount: 3
   projectiles:
   - projectile: {fileID: 6199246207084554113, guid: 81e469a12c189134b87bf2f8620eefc5, type: 3}
     offset: {x: -3, y: 3, z: 0}
@@ -375,3 +381,36 @@ MonoBehaviour:
   maxArmor: 0
   shieldRegenerationTime: 1
   ressurectTime: 1
+--- !u!114 &2895877086576702235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5367954658345666721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d872bf0fe7dbe941ba4cd061e80a9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  death: {fileID: 0}
+  hit: {fileID: 0}
+  walk: {fileID: 0}
+  jump: {fileID: 0}
+  swim: {fileID: 0}
+  attack: {fileID: 0}
+  chargedAttack: {fileID: 0}
+--- !u!114 &35853251458301214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5367954658345666721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed93bd0b11d6a50478b2f4e35107ffda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
+  soundType: 1

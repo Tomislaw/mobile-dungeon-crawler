@@ -16,5 +16,5 @@ MonoBehaviour:
   resignDistance: 15
   resignTime: 3
   distanceForAttack: {x: 1.5, y: 1.5}
-  attackTime: 0.2
-  timeBetweenAttack: 0.2
+  attackTime: 0.33
+  timeBetweenAttack: 0.66

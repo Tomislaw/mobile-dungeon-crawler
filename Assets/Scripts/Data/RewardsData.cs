@@ -12,6 +12,6 @@ namespace RuinsRaiders
     public class RewardsData : ScriptableObject
     {
         public Gems normalChestReward;
-        public Gems exuisiteChestReward;
+        public Gems exquisiteChestReward;
     }
 }

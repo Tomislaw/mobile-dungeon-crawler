@@ -59,7 +59,7 @@ namespace RuinsRaiders.AI
                     if (node.Tile.Spike)
                         return false;
 
-                    if (!_movementController.flying)
+                    if (!_movementController.flying || parent.onlyGround)
                         return _pathfindingController.CanStand(node.Id);
 
                     return true;

@@ -223,6 +223,7 @@ namespace RuinsRaiders
                 AStarSharp.Node.Type.Walk or AStarSharp.Node.Type.Fall => 0,
                 AStarSharp.Node.Type.Drop => character.IsGrounded ? -1 : 0,
                 AStarSharp.Node.Type.Jump => 1,
+                AStarSharp.Node.Type.None => character.flying || character.IsSwimming || character.IsOnLadder ? Mathf.Clamp(distance.y, -1, 1) : 0,
                 _ => Mathf.Abs(distance.y) > MinDistanceToMove ? Mathf.Clamp(distance.y, -1, 1) : 0,
             };
             return move;

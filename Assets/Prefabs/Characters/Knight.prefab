@@ -180,7 +180,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &1586342966391059649
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -197,7 +197,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1586342966391059679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,7 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackSpeed: 0.3
   attackAnimationTime: 0.15
-  overchargeTime: 1
+  overchargeTime: 0.5
   chargeAttack: 0
   onAttack:
     m_PersistentCalls:
@@ -332,12 +333,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0}
   faceLeft: 0
+  jumpingTreshold: 0.99
   flying: 0
   gravityScale: 6
   waterGravityScale: 6
   coyoteTime: 0.08
-  jumpSpeed: 17
-  jumpCutGravityMultiplier: 3
+  jumpSpeed: 16.8
+  jumpCutGravityMultiplier: 1
   jumpHangTimeTreshold: 2
   jumpHangSpeedGravityMultiplier: 0.5
   walkSpeed: 9
@@ -504,7 +506,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1586342966391059652}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a7e7f3d2502159418ad467a5b17e3c8, type: 3}
+  m_Script: {fileID: 11500000, guid: ed93bd0b11d6a50478b2f4e35107ffda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
@@ -563,7 +565,7 @@ MonoBehaviour:
   attackSpeedDecreasePerLevel: 0
   specialAttackDamageIncreasePerLevel: 1
   specialAttackRangeIncreasePerLevel: 1
-  overchargeTimeDecreasePerLevel: 0.1
+  overchargeTimeDecreasePerLevel: 0.05
 --- !u!61 &7211350550334106730
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -652,7 +654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shockTile: {fileID: 1805714663868828917, guid: dae9ec3adbc79174bae86b5426490c19, type: 3}
   shockDamage: 2
-  shockWidth: 3
+  shockWidth: 4
   shockTime: 0.025
   shockDistance: 1
   initialOffset: {x: 0, y: 0, z: 0}

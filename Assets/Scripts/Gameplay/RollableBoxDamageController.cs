@@ -62,8 +62,16 @@ namespace RuinsRaiders
 
         private void RollDamage()
         {
+            if(_box._accumulatedRoll == 0)
+                return;
+
             foreach (var health in touchers)
             {
+                if (_box._accumulatedRoll < 0 && health.transform.position.x > transform.position.x)
+                    continue;
+                else if(health.transform.position.x < transform.position.x)
+                    continue;
+
                 health.Damage(slopeRollDamage, null);
                 if (_healthController != null)
                     _healthController.Damage(slopeRollDamage, null);

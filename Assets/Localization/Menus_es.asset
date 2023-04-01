@@ -170,6 +170,10 @@ MonoBehaviour:
     m_Localized: "Men\xFA"
     m_Metadata:
       m_Items: []
+  - m_Id: 59423798315167744
+    m_Localized: Offset Y
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

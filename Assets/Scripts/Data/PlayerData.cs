@@ -26,7 +26,7 @@ namespace RuinsRaiders
             {
                 redGems = a.redGems + b.redGems, 
                 blueGems = a.blueGems + b.blueGems,
-                greenGems = a.blueGems - b.blueGems,
+                greenGems = a.greenGems + b.greenGems,
                 silverGems = a.silverGems + b.silverGems,
             };
         }

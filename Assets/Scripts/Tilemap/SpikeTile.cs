@@ -9,7 +9,7 @@ namespace RuinsRaiders
         private int damageToPlayer = 2;
 
         [SerializeField]
-        private int damageToNpc = 000;
+        private int damageToNpc = 999;
 
         private void OnTriggerEnter2D(Collider2D collision)
         {

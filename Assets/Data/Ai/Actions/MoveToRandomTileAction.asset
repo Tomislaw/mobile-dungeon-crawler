@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AwaitTime: 2
   searchDistanceX: 3
-  searchDistanceY: 2
-  onlyGround: 0
+  searchDistanceY: 1
+  onlyGround: 1

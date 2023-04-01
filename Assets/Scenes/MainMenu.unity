@@ -231,7 +231,7 @@ RectTransform:
   m_Pivot: {x: 0, y: 0}
 --- !u!95 &50811684
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -248,7 +248,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &59599493
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,7 +611,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 103569885}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a7e7f3d2502159418ad467a5b17e3c8, type: 3}
+  m_Script: {fileID: 11500000, guid: ed93bd0b11d6a50478b2f4e35107ffda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
@@ -17829,10 +17830,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 745773192}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a7e7f3d2502159418ad467a5b17e3c8, type: 3}
+  m_Script: {fileID: 11500000, guid: ed93bd0b11d6a50478b2f4e35107ffda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
+  data: {fileID: 0}
   soundType: 1
 --- !u!1 &751814758
 GameObject:
@@ -21673,7 +21674,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1450806126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a7e7f3d2502159418ad467a5b17e3c8, type: 3}
+  m_Script: {fileID: 11500000, guid: ed93bd0b11d6a50478b2f4e35107ffda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
@@ -22633,6 +22634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
@@ -22649,6 +22651,7 @@ MonoBehaviour:
   m_TrackedDeviceOrientationAction: {fileID: 2047522317953154292, guid: 68962301d0e6029458963e7415f67dc4, type: 3}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
 --- !u!114 &1586247911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24827,10 +24830,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1990387532}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a7e7f3d2502159418ad467a5b17e3c8, type: 3}
+  m_Script: {fileID: 11500000, guid: ed93bd0b11d6a50478b2f4e35107ffda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
+  data: {fileID: 0}
   soundType: 1
 --- !u!114 &1990387540
 MonoBehaviour:

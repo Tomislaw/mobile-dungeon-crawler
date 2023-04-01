@@ -41,7 +41,7 @@ namespace RuinsRaiders
         private Rigidbody2D _rigidbody;
         private HealthController _healthController;
 
-        private int _accumulatedRoll = 0;
+        internal int _accumulatedRoll = 0;
 
         public bool IsDead { get => _healthController != null && _healthController.IsDead; }
 

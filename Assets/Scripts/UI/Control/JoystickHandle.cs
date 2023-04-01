@@ -13,10 +13,12 @@ namespace RuinsRaiders.UI
 
         internal Vector2 _center;
         internal Vector2 _value;
+        internal Vector2 _lastPointerPosition;
+
         internal bool _pressed;
 
-        private Vector2 _localInitialPosition;
-        private Vector2 _worldInitialPosition;
+        internal Vector2 _localInitialPosition;
+        internal Vector2 _worldInitialPosition;
 
         private int _pointerId = -2;
 
@@ -39,6 +41,7 @@ namespace RuinsRaiders.UI
                         var distance = Vector2.Distance(_worldInitialPosition, touch.position.ReadValue());
                         if (distance < _radius)
                         {
+                            _lastPointerPosition = touch.position.ReadValue();
                             TouchStarted(touch.touchId.ReadValue());
                             return;
                         }
@@ -101,6 +104,8 @@ namespace RuinsRaiders.UI
             else if (_pointerId == -1)
                 point = Mouse.current.position.ReadValue();
 
+            _lastPointerPosition = point;
+
             var normalized = (point - _worldInitialPosition).normalized;
 
             transform.position = point;
@@ -156,6 +161,7 @@ namespace RuinsRaiders.UI
         public Vector2 Center;
 
         public Vector2 Value { get => joystick == null ? new Vector2() : joystick._value; }
+
 
         [SerializeField]
         protected JoystickHandle joystick;

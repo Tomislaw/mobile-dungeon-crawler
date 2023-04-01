@@ -129,7 +129,7 @@ MonoBehaviour:
   m_TrackedDevicePositionAction: {fileID: 8719144128610055468, guid: 68962301d0e6029458963e7415f67dc4, type: 3}
   m_TrackedDeviceOrientationAction: {fileID: 2047522317953154292, guid: 68962301d0e6029458963e7415f67dc4, type: 3}
   m_DeselectOnBackgroundClick: 1
-  m_PointerBehavior: 0
+  m_PointerBehavior: 2
   m_CursorLockBehavior: 0
 --- !u!1 &555347884450650022
 GameObject:
@@ -780,23 +780,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11474921119239845, guid: 70c29f9c7de7fd743a8d6b5509ee93bc, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 11474921119239845, guid: 70c29f9c7de7fd743a8d6b5509ee93bc, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: -0.000061035156
-      objectReference: {fileID: 0}
-    - target: {fileID: 11474921119239845, guid: 70c29f9c7de7fd743a8d6b5509ee93bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11474921119239845, guid: 70c29f9c7de7fd743a8d6b5509ee93bc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11474921119239845, guid: 70c29f9c7de7fd743a8d6b5509ee93bc, type: 3}
-      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11474921119239845, guid: 70c29f9c7de7fd743a8d6b5509ee93bc, type: 3}
@@ -817,10 +805,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11474921119239845, guid: 70c29f9c7de7fd743a8d6b5509ee93bc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11474921119239845, guid: 70c29f9c7de7fd743a8d6b5509ee93bc, type: 3}
-      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11474921119239845, guid: 70c29f9c7de7fd743a8d6b5509ee93bc, type: 3}
@@ -1863,13 +1847,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6499899905697516543, guid: 9f42443cf9954a843b96929ff47ff5e0, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6499899905729815416, guid: 9f42443cf9954a843b96929ff47ff5e0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6499899905883631688, guid: 9f42443cf9954a843b96929ff47ff5e0, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6499899906106285391, guid: 9f42443cf9954a843b96929ff47ff5e0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7618233647089698763, guid: 9f42443cf9954a843b96929ff47ff5e0, type: 3}
       propertyPath: m_IsActive

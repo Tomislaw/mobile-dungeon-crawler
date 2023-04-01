@@ -14,7 +14,7 @@ namespace RuinsRaiders
         [Header("Controlls")]
         public Vector2 move = new();
         public bool faceLeft;
-
+        public float jumpingTreshold = 0f;
 
         [Header("Type")]
         public bool flying = false;
@@ -27,6 +27,7 @@ namespace RuinsRaiders
         public float jumpCutGravityMultiplier = 2f;
         public float jumpHangTimeTreshold = 5;
         public float jumpHangSpeedGravityMultiplier = 0.5f;
+
 
         [Header("Movement")]
         public float walkSpeed = 10;
@@ -187,7 +188,7 @@ namespace RuinsRaiders
                 LadderMovement();
             else
             {
-                if (CanJump() && move.y > 0)
+                if (CanJump() && move.y > jumpingTreshold)
                     Jump();
 
                 if (IsJumping)

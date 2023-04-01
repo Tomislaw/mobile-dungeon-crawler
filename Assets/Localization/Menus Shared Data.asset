@@ -159,6 +159,14 @@ MonoBehaviour:
     m_Key: Menu/MainMenu
     m_Metadata:
       m_Items: []
+  - m_Id: 59423175557492736
+    m_Key: MainMenu/Options/Offset X
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59423798315167744
+    m_Key: MainMenu/Options/OffsetY
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
