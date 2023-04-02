@@ -10,6 +10,7 @@ namespace RuinsRaiders.UI
     public class JoystickHandle : MonoBehaviour
     {
         internal float _radius;
+        internal float _clickAreaRadius;
 
         internal Vector2 _center;
         internal Vector2 _value;
@@ -39,7 +40,7 @@ namespace RuinsRaiders.UI
                     if (touch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Began)
                     {
                         var distance = Vector2.Distance(_worldInitialPosition, touch.position.ReadValue());
-                        if (distance < _radius)
+                        if (distance < _clickAreaRadius)
                         {
                             _lastPointerPosition = touch.position.ReadValue();
                             TouchStarted(touch.touchId.ReadValue());
@@ -54,7 +55,7 @@ namespace RuinsRaiders.UI
             if (Mouse.current.leftButton.isPressed && Mouse.current.leftButton.wasPressedThisFrame)
             {
                 var distance = Vector2.Distance(_worldInitialPosition, Mouse.current.position.ReadValue());
-                if (distance < _radius)
+                if (distance < _clickAreaRadius)
                 {
                     TouchStarted(-1);
                     return;
@@ -158,6 +159,7 @@ namespace RuinsRaiders.UI
     public abstract class BasicJoystick : MonoBehaviour
     {
         public float Radius;
+        public float ClickAreaRadius;
         public Vector2 Center;
 
         public Vector2 Value { get => joystick == null ? new Vector2() : joystick._value; }
@@ -173,6 +175,7 @@ namespace RuinsRaiders.UI
             {
                 joystick._center = Center;
                 joystick._radius = Radius;
+                joystick._clickAreaRadius = ClickAreaRadius;
             }
         }
     }

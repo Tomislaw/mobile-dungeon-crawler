@@ -123,7 +123,7 @@ namespace RuinsRaiders
         {
             var legsPosition = _collider2D.bounds.center - new Vector3(0, _collider2D.bounds.size.y/2f);
             var raycast = Physics2D.BoxCastAll(legsPosition + new Vector3(0, 0.1f, 0),
-                  new Vector3(_collider2D.bounds.size.x - 0.02f, 0.01f), 0, Vector2.down, 0.2f);
+                  new Vector3(_collider2D.bounds.size.x - 0.01f, 0.01f), 0, Vector2.down, 0.2f);
             foreach (var cast in raycast)
             {
                 if (cast.collider.gameObject != gameObject
@@ -136,7 +136,9 @@ namespace RuinsRaiders
 
         private bool CheckForCeiling()
         {
-            var raycast = Physics2D.LinecastAll(transform.position, transform.position + new Vector3(0, 1.1f, 0));
+            var headPosition = _collider2D.bounds.center + new Vector3(0, _collider2D.bounds.size.y / 2f);
+            var raycast = Physics2D.BoxCastAll(headPosition + new Vector3(0, -0.1f, 0),
+                  new Vector3(_collider2D.bounds.size.x, 0.01f), 0, Vector2.up, 0.2f);
             foreach (var cast in raycast)
             {
                 if (cast.collider is TilemapCollider2D || cast.collider is CompositeCollider2D)
@@ -250,10 +252,51 @@ namespace RuinsRaiders
             }
         }
 
+        private Vector2 CornerMovementAdjust(Vector2 movement)
+        {
+            if(movement.y > 0 && IsColliderAbove)
+            {
+                var topLeft = _collider2D.bounds.center + new Vector3(-_collider2D.bounds.size.x / 2f, _collider2D.bounds.size.y / 2f - 0.1f);
+                var topRight = _collider2D.bounds.center + new Vector3(_collider2D.bounds.size.x / 2f, _collider2D.bounds.size.y / 2f - 0.1f);
+
+                var hitLeft = Physics2D.Raycast(topLeft, Vector2.up, 0.5f, Physics2D.GetLayerCollisionMask(_collider2D.gameObject.layer));
+                var hitRight = Physics2D.Raycast(topRight, Vector2.up, 0.5f, Physics2D.GetLayerCollisionMask(_collider2D.gameObject.layer));
+
+                if (hitLeft && hitRight)
+                    return movement;
+
+                if(hitLeft)
+                    return movement + new Vector2(0.2f, 0);
+
+                if (hitRight)
+                    return movement + new Vector2(-0.2f, 0);
+            }
+
+            if(movement.y < 0 && IsGrounded)
+            {
+                var bottomLeft = _collider2D.bounds.center + new Vector3(-_collider2D.bounds.size.x / 2f, -_collider2D.bounds.size.y / 2f + 0.1f);
+                var bottomRight = _collider2D.bounds.center + new Vector3(_collider2D.bounds.size.x / 2f, -_collider2D.bounds.size.y / 2f + 0.1f);
+
+                var hitLeft = Physics2D.Raycast(bottomLeft, Vector2.down, 0.5f, Physics2D.GetLayerCollisionMask(_collider2D.gameObject.layer));
+                var hitRight = Physics2D.Raycast(bottomRight, Vector2.down, 0.5f, Physics2D.GetLayerCollisionMask(_collider2D.gameObject.layer));
+
+                if (hitLeft && hitRight)
+                    return movement;
+
+                if (hitLeft)
+                    return movement + new Vector2(0.2f, 0);
+
+                if (hitRight)
+                    return movement +  new Vector2(-0.2f, 0);
+            }
+
+            return movement;
+        }
+
         private void LadderMovement()
         {
             SetGravityScale(0);
-            Vector2 targetSpeed = move * climbSpeed;
+            Vector2 targetSpeed = CornerMovementAdjust(move) * climbSpeed;
             Vector2 speedDif = targetSpeed - _rigidbody.velocity;
 
             float accelRateX = (Mathf.Abs(targetSpeed.x) > 0.01f) ? acceleration : deacceleration;
@@ -342,7 +385,7 @@ namespace RuinsRaiders
             SetGravityScale(IsLanded || OnSlope ? 0f : scale);
 
             var speed = IsInWater ? swimSpeed : walkSpeed;
-            Vector2 targetSpeed = move * speed;
+            Vector2 targetSpeed = CornerMovementAdjust(move) * speed;
             Vector2 speedDif = targetSpeed - _rigidbody.velocity;
 
             float accelRateX = (Mathf.Abs(targetSpeed.x) > 0.01f) ? acceleration : deacceleration;
