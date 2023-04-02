@@ -236,9 +236,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0}
   faceLeft: 0
+  jumpingTreshold: 0
   flying: 0
   gravityScale: 6
-  waterGravityScale: 6
+  waterGravityScale: 0.5
   coyoteTime: 0.1
   jumpSpeed: 14
   jumpCutGravityMultiplier: 2
@@ -247,7 +248,7 @@ MonoBehaviour:
   walkSpeed: 1
   swimSpeed: 12
   climbSpeed: 8
-  acceleration: 65
+  acceleration: 20
   deacceleration: 10
   maxSpeed: 30
   canUseLadder: 0
@@ -417,7 +418,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6275282479640741850}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.25, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

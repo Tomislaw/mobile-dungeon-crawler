@@ -6,6 +6,7 @@ namespace RuinsRaiders
     {
         public void Exit()
         {
+            SaveableData.SaveAll();
             Application.Quit();
         }
     }

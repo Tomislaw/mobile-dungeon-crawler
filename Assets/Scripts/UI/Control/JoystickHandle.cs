@@ -37,16 +37,20 @@ namespace RuinsRaiders.UI
                 int id = 0;
                 foreach (var touch in Touchscreen.current.touches)
                 {
-                    if (touch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Began)
+                    var phase = touch.phase.ReadValue();
+                    switch (phase)
                     {
-                        var distance = Vector2.Distance(_worldInitialPosition, touch.position.ReadValue());
-                        if (distance < _clickAreaRadius)
-                        {
-                            _lastPointerPosition = touch.position.ReadValue();
-                            TouchStarted(touch.touchId.ReadValue());
-                            return;
-                        }
-
+                        case UnityEngine.InputSystem.TouchPhase.Began:
+                        case UnityEngine.InputSystem.TouchPhase.Stationary:
+                        case UnityEngine.InputSystem.TouchPhase.Moved:
+                            var distance = Vector2.Distance(_worldInitialPosition, touch.position.ReadValue());
+                            if (distance < _clickAreaRadius * (transform.localScale.x + transform.lossyScale.y) / 2f)
+                            {
+                                _lastPointerPosition = touch.position.ReadValue();
+                                TouchStarted(touch.touchId.ReadValue());
+                                return;
+                            }
+                            break;
                     }
                     id++;
                 }
@@ -67,10 +71,12 @@ namespace RuinsRaiders.UI
         {
             if (_pointerId >= 0)
             {
+                bool pointerFound = false;
                 foreach (var touch in Touchscreen.current.touches)
                 {
                     if (touch.touchId.ReadValue() == _pointerId)
                     {
+                        pointerFound = true;
                         switch (touch.phase.ReadValue())
                         {
                             case UnityEngine.InputSystem.TouchPhase.None:
@@ -79,8 +85,12 @@ namespace RuinsRaiders.UI
                                 TouchFinished(_pointerId);
                                 break;
                         };
+                        break;
                     }
                 }
+
+                if(!pointerFound)
+                    TouchFinished(_pointerId);
             }
             else if (_pointerId == -1)
             {

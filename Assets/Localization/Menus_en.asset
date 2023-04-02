@@ -180,6 +180,22 @@ MonoBehaviour:
     m_Localized: Offset Y
     m_Metadata:
       m_Items: []
+  - m_Id: 60112218662350848
+    m_Localized: Choose your hero
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60112680383918080
+    m_Localized: Level cleared!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60113796085559296
+    m_Localized: Level failed!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60151479839207424
+    m_Localized: Size
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

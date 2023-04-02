@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 namespace RuinsRaiders
 {
     [CreateAssetMenu(fileName = "AdventureData", menuName = "RuinsRaiders/AdventureData", order = 1)]
-    public class AdventureData : ScriptableObject
+    [Serializable]
+    public class AdventureData : ScriptableObject, SaveableData
     {
         public bool enabled;
 
@@ -71,6 +72,11 @@ namespace RuinsRaiders
                 level.enabled = previous.finished;
                 previous = level;
             }
+        }
+
+        string SaveableData.GetFileName()
+        {
+            return name;
         }
 
         [Serializable]

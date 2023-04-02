@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Tilemaps;
-
+using System.Linq;
 
 namespace RuinsRaiders
 {
@@ -182,22 +182,19 @@ namespace RuinsRaiders
             DirectionCheck();
             FlagsCheck();
 
+            if (CanJump() && move.y > jumpingTreshold)
+                Jump();
+
             if (_character.IsDead)
                 DeadMovement();
+            if (IsJumping)
+                JumpingMovement();
             else if (flying || IsSwimming)
                 FlyingMovement();
             else if (IsOnLadder)
                 LadderMovement();
             else
-            {
-                if (CanJump() && move.y > jumpingTreshold)
-                    Jump();
-
-                if (IsJumping)
-                    JumpingMovement();
-                else
-                    WalkingMovement();
-            }
+                WalkingMovement();
 
             _previousMove = move;
 
@@ -241,18 +238,26 @@ namespace RuinsRaiders
             if (canUseLadder)
             {
                 if (ladders.Count == 0)
+                {
                     IsOnLadder = false;
-                else if (move.y != 0 && ladders.Count > 0)
+                }
+                else if (IsOnLadder == false && move.y != 0 && ladders.Count > 0)
+                {
+
+                    _rigidbody.velocity = new Vector2();
                     IsOnLadder = true;
+                }
             }
             if (canSwim)
             {
                 _wasSwimming = IsSwimming;
                 IsSwimming = IsInWater;
+                if(IsSwimming)
+                    IsJumping = false;
             }
         }
 
-        private Vector2 CornerMovementAdjust(Vector2 movement)
+        private Vector2 MovementAdjust(Vector2 movement)
         {
             if(movement.y > 0 && IsColliderAbove)
             {
@@ -290,13 +295,20 @@ namespace RuinsRaiders
                     return movement +  new Vector2(-0.2f, 0);
             }
 
+            if(IsOnLadder && Mathf.Abs(move.x) < 0.2f && Mathf.Abs(move.y) > 0.2f)
+            {
+                var ladder = ladders.OrderBy(it => Vector2.Distance(transform.position, it.transform.position)).First();
+                var diff = ladder.transform.position.x - transform.position.x;
+                return movement + new Vector2(Mathf.Clamp(diff, -0.8f, 0.8f), 0);
+            }
+
             return movement;
         }
 
         private void LadderMovement()
         {
             SetGravityScale(0);
-            Vector2 targetSpeed = CornerMovementAdjust(move) * climbSpeed;
+            Vector2 targetSpeed = MovementAdjust(move) * climbSpeed;
             Vector2 speedDif = targetSpeed - _rigidbody.velocity;
 
             float accelRateX = (Mathf.Abs(targetSpeed.x) > 0.01f) ? acceleration : deacceleration;
@@ -315,6 +327,10 @@ namespace RuinsRaiders
                 && !IsJumping
                 && !IsColliderAbove
                 && !IsLanded
+                && !flying
+                && !_character.IsDead
+                && !IsSwimming
+                && !IsOnLadder
                 || _wasSwimming && !IsSwimming && !IsJumping;
         }
 
@@ -376,6 +392,7 @@ namespace RuinsRaiders
         private void Jump()
         {
             IsJumping = true;
+            waters.Clear();
             _rigidbody.velocity = new(_rigidbody.velocity.x, jumpSpeed);
         }
 
@@ -385,7 +402,7 @@ namespace RuinsRaiders
             SetGravityScale(IsLanded || OnSlope ? 0f : scale);
 
             var speed = IsInWater ? swimSpeed : walkSpeed;
-            Vector2 targetSpeed = CornerMovementAdjust(move) * speed;
+            Vector2 targetSpeed = MovementAdjust(move) * speed;
             Vector2 speedDif = targetSpeed - _rigidbody.velocity;
 
             float accelRateX = (Mathf.Abs(targetSpeed.x) > 0.01f) ? acceleration : deacceleration;

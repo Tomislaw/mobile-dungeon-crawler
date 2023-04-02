@@ -5,7 +5,8 @@ using UnityEngine;
 namespace RuinsRaiders
 {
     [CreateAssetMenu(fileName = "PlayerData", menuName = "RuinsRaiders/PlayerData", order = 1)]
-    public class PlayerData : ScriptableObject
+    [Serializable]
+    public class PlayerData : ScriptableObject, SaveableData
     {
         public Gems gems;
 
@@ -93,6 +94,11 @@ namespace RuinsRaiders
             }
 
             GetCharacterData(character).skills[skill] += 1;
+        }
+
+        string SaveableData.GetFileName()
+        {
+            return name;
         }
 
         public enum CharacterType

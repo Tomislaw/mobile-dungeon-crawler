@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 5034235336300042202}
   - component: {fileID: 5034235336300042200}
   - component: {fileID: 5034235336300042203}
+  - component: {fileID: 1523787885364527805}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -213,6 +214,44 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1523787885364527805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5034235336300042197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69beb381e244f92449b8c4cf954630e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrackedObjects:
+  - rid: 629965247358435333
+  references:
+    version: 2
+    RefIds:
+    - rid: 629965247358435333
+      type: {class: TrackedUGuiGraphic, ns: UnityEngine.Localization.PropertyVariants.TrackedObjects, asm: Unity.Localization}
+      data:
+        m_Target: {fileID: 5034235336300042203}
+        m_TrackedProperties:
+          items:
+          - rid: 629965247358435334
+        m_UpdateType: 0
+    - rid: 629965247358435334
+      type: {class: LocalizedStringProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_Localized:
+          m_TableReference:
+            m_TableCollectionName: GUID:28b919ffe2a9ff94180b8b39235d679e
+          m_TableEntryReference:
+            m_KeyId: 60112680383918080
+            m_Key: 
+          m_FallbackState: 0
+          m_WaitForCompletion: 0
+          m_LocalVariables: []
+        m_PropertyPath: m_text
 --- !u!1 &5034235336572526511
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,9 +445,11 @@ MonoBehaviour:
   - {fileID: 2436257069164548338}
   - {fileID: 3215450983598482150}
   - {fileID: 373423691889674828}
-  songDelay: 1
+  equisiteChestOpenedSongDelay: 1
   equisiteChestOpenedSong: {fileID: 8300000, guid: 2f11e69e6e70286469d7221d4cd2fe7b, type: 3}
+  chestOpenedSongDelay: 1
   chestOpenedSong: {fileID: 8300000, guid: 2f11e69e6e70286469d7221d4cd2fe7b, type: 3}
+  noChestOpenedSongDelay: 0
   noChestOpenedSong: {fileID: 8300000, guid: 929b7125e45210b479a4cada281eab96, type: 3}
   levelClearedParticles: {fileID: 0}
 --- !u!1 &5034235337040537556

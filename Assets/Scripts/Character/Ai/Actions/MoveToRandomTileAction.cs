@@ -53,6 +53,9 @@ namespace RuinsRaiders.AI
                     if (!_movementController.canSwim && node.Tile.Water)
                         return false;
 
+                    if (_movementController.canSwim && node.Tile.Water && !parent.onlyGround)
+                        return true;
+
                     if (!_movementController.canUseLadder && node.Tile.Ladder && !_movementController.flying)
                         return false;
 

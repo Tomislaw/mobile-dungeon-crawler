@@ -16,7 +16,12 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 9de099af3b0f1e34a88e58db4d1ea329
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 200f4adb7e2ae214ab53f5ac9ee2eae9
+    m_Address: Assets/Data/Ai/Actions/Pirania/ChaseAndAttackTargetPiraniaAction.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3baf29e57450cee4bab106b23fea1b14, type: 2}
   m_SchemaSet:

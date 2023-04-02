@@ -121,6 +121,7 @@ namespace RuinsRaiders.UI
         public void StartLevel()
         {
             EventManager.TriggerEvent("Level Start");
+            EventManager.TriggerEvent("Next Scene");
             StartCoroutine(DelayedStart());
         }
 

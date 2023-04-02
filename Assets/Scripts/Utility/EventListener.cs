@@ -11,7 +11,7 @@ namespace RuinsRaiders
         [SerializeField]
         private List<Event> events = new();
 
-        private void Awake()
+        private void Start()
         {
             EventManager.Register(OnEvent);
         }

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: OptionsData
   m_EditorClassIdentifier: 
   touchUiType: 2
-  touchUiSpacingX: 0.2
-  touchUiSpacingY: 0.2
-  touchUiScale: 0
+  touchUiSpacingX: 0.15
+  touchUiSpacingY: 0.15
+  touchUiScale: 1
   musicVolume: 1
   effectsVolume: 1

@@ -26,29 +26,26 @@ namespace RuinsRaiders
         [SerializeField]
         private GameObject playerCharacter;
 
-        private PlayerSpawn spawner;
+        [SerializeField]
+        private float delayBetwenLoadingScenes = 0.5f;
 
         public static LevelEvents Instance { get => FindObjectOfType<LevelEvents>(); }
 
-        private List<ChestTile> chests = new ();
-
-        private bool levelEnded = false;
+        private List<ChestTile> _chests = new();
+        private bool _levelEnded = false;
+        private PlayerSpawn _spawner;
+        private Coroutine _sceneCoroutine = null;
 
         public void Awake()
         {
             ValidityChecks();
-
-            EventManager.StartListening("LevelFailed", FailLevel);
-            EventManager.StartListening("LevelFinished", FinishLevel);
-            EventManager.StartListening("LevelRestarted", RestartLevel);
-            EventManager.StartListening("Menu", Menu);
-            spawner = FindObjectOfType<PlayerSpawn>();
+            _spawner = FindObjectOfType<PlayerSpawn>();
         }
 
         private void ValidityChecks()
         {
             if (SceneManager.GetActiveScene().name.Contains("Test"))
-                return; 
+                return;
             if (adventure == null)
                 Debug.LogErrorFormat("Object {0} is missing adventureData!", name);
             if (playerData == null)
@@ -63,42 +60,35 @@ namespace RuinsRaiders
             }
         }
 
-        public void OnDisable()
-        {
-            EventManager.StopListening("LevelFailed", FailLevel);
-            EventManager.StopListening("LevelFinished", FinishLevel);
-            EventManager.StopListening("LevelRestarted", RestartLevel);
-            EventManager.StopListening("Menu", Menu);
-        }
 
 
         public AdventureData.ChestData GetChestData(ChestTile chest)
         {
-            if(adventure == null)
+            if (adventure == null)
                 return AdventureData.ChestData.Empty;
 
             var adventureChestData = adventure.GetCurrentLevel().chests;
 
-            if (!chests.Contains(chest))
+            if (!_chests.Contains(chest))
             {
-                chests.Add(chest);
-                chests.Sort(delegate (ChestTile c1, ChestTile c2) { return c1.transform.position.x.CompareTo(c1.transform.position.x); });
+                _chests.Add(chest);
+                _chests.Sort(delegate (ChestTile c1, ChestTile c2) { return c1.transform.position.x.CompareTo(c1.transform.position.x); });
 
-                foreach (var chestTile in chests)
+                foreach (var chestTile in _chests)
                     if (chestTile != chest)
                         chestTile.Refresh();
             }
 
 
-            if (adventureChestData.Count < chests.Count)
+            if (adventureChestData.Count < _chests.Count)
                 Debug.LogErrorFormat("Scene have more than {0} chests!", adventureChestData.Count);
 
-            for (int i = 0; i < chests.Count; i++)
+            for (int i = 0; i < _chests.Count; i++)
             {
                 if (i >= adventureChestData.Count)
                     return AdventureData.ChestData.Empty;
 
-                if (chests[i] != chest)
+                if (_chests[i] != chest)
                     continue;
 
                 return adventureChestData[i];
@@ -109,27 +99,27 @@ namespace RuinsRaiders
 
         public void FailLevel()
         {
-            if (levelEnded)
+            if (_levelEnded)
                 return;
-            levelEnded = true;
+            _levelEnded = true;
 
             if (onLevelFailed != null)
                 onLevelFailed.Invoke();
 
-            Debug.Log("Level failed");
+            EventManager.TriggerEvent("Level Failed");
         }
 
         public void FinishLevel()
         {
-            if (levelEnded)
+            if (_levelEnded)
                 return;
-            levelEnded = true;
+            _levelEnded = true;
 
             if (onLevelFinished != null)
                 onLevelFinished.Invoke();
             adventure.FinishedCurrentLevel();
 
-            Debug.Log("Level finished");
+            EventManager.TriggerEvent("Level Finished");
         }
 
         public List<(ChestTile, bool)> GetCollectedChests()
@@ -137,10 +127,10 @@ namespace RuinsRaiders
             var adventureChests = adventure.GetCurrentLevel().chests;
             List<(ChestTile, bool)> collectedChests = new();
 
-            for (int i = 0; i < chests.Count && i < adventureChests.Count; i++)
+            for (int i = 0; i < _chests.Count && i < adventureChests.Count; i++)
             {
-                bool giveReward = chests[i].isOpen && !adventureChests[i].acquired;
-                collectedChests.Add((chests[i], giveReward));
+                bool giveReward = _chests[i].isOpen && !adventureChests[i].acquired;
+                collectedChests.Add((_chests[i], giveReward));
 
             }
             return collectedChests;
@@ -167,32 +157,50 @@ namespace RuinsRaiders
                 }
                 adventure.GetCurrentLevel().chests[i] = new() { acquired = true, type = collectedChest.chestData.type };
             }
+            (adventure as SaveableData).Save();
+            (playerData as SaveableData).Save();
         }
 
 
         public void RestartLevel()
         {
-            Debug.Log("Level restarted");
-            Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+            EventManager.TriggerEvent("Level Restarted");
+            Scene scene = SceneManager.GetActiveScene();
+            LoadScene(scene.name);
         }
 
         public void Menu()
         {
-            SceneManager.LoadScene("MainMenu");
+            EventManager.TriggerEvent("Menu");
+            LoadScene("MainMenu");
         }
 
         public void SelectHero(int id)
         {
-            spawner.Spawn((PlayerSpawn.CharacterType)id);
+            _spawner.Spawn((PlayerSpawn.CharacterType)id);
         }
 
         public void StartNextLevel()
         {
             var level = adventure.GetNextLevel();
             if (level == null)
-                SceneManager.LoadScene("MainMenu");
+                LoadScene("MainMenu");
             else
-                SceneManager.LoadScene(level.scene);
+                LoadScene(level.scene);
+        }
+
+        private void LoadScene(string scene)
+        {
+            if(_sceneCoroutine == null)
+                StartCoroutine(LoadSceneCoroutine(scene));
+        }
+
+        private IEnumerator LoadSceneCoroutine(string scene)
+        {
+            EventManager.TriggerEvent("Next Scene");
+            yield return new WaitForSeconds(delayBetwenLoadingScenes);
+            SceneManager.LoadScene(scene);
+            _sceneCoroutine = null;
         }
     }
 }

@@ -171,7 +171,27 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 59423798315167744
-    m_Localized: Offset Y
+    m_Localized: "Posici\xF3n Y"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60112218662350848
+    m_Localized: "Elige tu h\xE9roe"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60112680383918080
+    m_Localized: "\xA1Nivel completado!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60113796085559296
+    m_Localized: "\xA1Nivel fracasado!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59423175557492736
+    m_Localized: "Posici\xF3n X"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60151479839207424
+    m_Localized: "Tama\xF1o"
     m_Metadata:
       m_Items: []
   references:

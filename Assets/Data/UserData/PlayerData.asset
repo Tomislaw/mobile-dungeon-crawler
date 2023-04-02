@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   gems:
-    redGems: 0
-    blueGems: 0
-    greenGems: 0
-    silverGems: 0
+    redGems: 9999
+    blueGems: 9999
+    greenGems: 9999
+    silverGems: 9999
   knight:
     unlocked: 1
     skills: 000000000000000000000000

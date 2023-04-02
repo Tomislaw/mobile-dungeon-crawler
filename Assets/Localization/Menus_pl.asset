@@ -176,6 +176,22 @@ MonoBehaviour:
     m_Localized: Pozycja Y
     m_Metadata:
       m_Items: []
+  - m_Id: 60112218662350848
+    m_Localized: Wybierz bohatera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60112680383918080
+    m_Localized: "Poziom uko\u0144czony!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60113796085559296
+    m_Localized: "Poziom nieuko\u0144czony!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60151479839207424
+    m_Localized: "Wielko\u015B\u0107"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

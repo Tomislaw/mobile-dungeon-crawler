@@ -336,7 +336,7 @@ MonoBehaviour:
   jumpingTreshold: 0.99
   flying: 0
   gravityScale: 6
-  waterGravityScale: 6
+  waterGravityScale: 1
   coyoteTime: 0.08
   jumpSpeed: 16.8
   jumpCutGravityMultiplier: 1

@@ -13,6 +13,7 @@ namespace RuinsRaiders.UI
         private RectTransform rectTransform;
         private Vector2 startingSize;
         private Vector2 startingPosition;
+        private Vector3 startingScale;
         void Start()
         {
             slider = GetComponent<Slider>();
@@ -29,6 +30,7 @@ namespace RuinsRaiders.UI
                 rectTransform = gameObject.GetComponent<RectTransform>();
                 startingSize = rectTransform.sizeDelta;
                 startingPosition = rectTransform.anchoredPosition;
+                startingScale = rectTransform.localScale;
             }
         }
 
@@ -60,6 +62,12 @@ namespace RuinsRaiders.UI
                     var newPosition = startingPosition + new Vector2(0, options.touchUiSpacingY * rectTransform.rect.height / 2f);
                     if (rectTransform.anchoredPosition != newPosition)
                         rectTransform.anchoredPosition = newPosition;
+                }
+                if (type.HasFlag(Type.Scale))
+                {
+                    var newScale = startingScale * options.touchUiScale;
+                    if (rectTransform.localScale != newScale)
+                        rectTransform.localScale = newScale;
                 }
             }
         }

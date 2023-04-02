@@ -145,10 +145,10 @@ namespace RuinsRaiders
         bool m_StretchFill = false;
 
         [SerializeField]
-        RuinsRaiders.ViewportAnchor m_Anchor = RuinsRaiders.ViewportAnchor.Center;
+        ViewportAnchor m_Anchor = ViewportAnchor.Center;
 
         Camera m_Camera;
-        RuinsRaiders.PixelPerfectCameraInternal m_Internal;
+        PixelPerfectCameraInternal m_Internal;
         bool m_CinemachineCompatibilityMode;
 
         // Snap camera position to pixels using Camera.worldToCameraMatrix.
