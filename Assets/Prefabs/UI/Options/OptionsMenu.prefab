@@ -4471,6 +4471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   options: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
   type: 4
+  slider: {fileID: 5248851909808365042}
 --- !u!114 &7434807219797492060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5235,6 +5236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   options: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
   type: 1
+  slider: {fileID: 300383266251215656}
 --- !u!114 &605169233665807681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6762,6 +6764,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   options: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
   type: 2
+  slider: {fileID: 3227903887968226440}
 --- !u!114 &6905362595041462095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7571,7 +7574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6304464950965805082, guid: 429ded5265b715a46b04581f3621fde3, type: 3}
       propertyPath: m_IsOn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6304464950965805082, guid: 429ded5265b715a46b04581f3621fde3, type: 3}
       propertyPath: m_Group
@@ -7833,7 +7836,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6304464950965805082, guid: 429ded5265b715a46b04581f3621fde3, type: 3}
       propertyPath: m_IsOn
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6304464950965805082, guid: 429ded5265b715a46b04581f3621fde3, type: 3}
       propertyPath: m_Group

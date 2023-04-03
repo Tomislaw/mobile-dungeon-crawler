@@ -5,16 +5,17 @@ namespace RuinsRaiders.UI
 {
     public class ControlSpacingScaler : MonoBehaviour
     {
-        public OptionsData options;
+        private OptionsData options;
 
         public Type type = Type.None;
-        private Slider slider;
+        public Slider slider;
 
         private RectTransform rectTransform;
         private Vector2 startingSize;
         private Vector2 startingPosition;
         private Vector3 startingScale;
-        void Start()
+
+        void OnEnable()
         {
             slider = GetComponent<Slider>();
             if (slider != null)
@@ -25,6 +26,7 @@ namespace RuinsRaiders.UI
                     slider.value = options.touchUiSpacingY;
                 if (type.HasFlag(Type.Scale))
                     slider.value = options.touchUiScale;
+
             } else
             {
                 rectTransform = gameObject.GetComponent<RectTransform>();
@@ -37,7 +39,6 @@ namespace RuinsRaiders.UI
         // Update is called once per frame
         void FixedUpdate()
         {
-
             if (slider != null)
             {
                 if (type.HasFlag(Type.OffsetX))

@@ -53,7 +53,7 @@ namespace RuinsRaiders.UI
         [SerializeField]
         private float startDelay = 0.5f;
 
-        public void Start()
+        public void OnEnable()
         {
             Invalidate();
         }

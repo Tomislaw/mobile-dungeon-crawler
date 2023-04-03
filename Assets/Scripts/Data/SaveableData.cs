@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
@@ -7,11 +8,24 @@ namespace RuinsRaiders
 {
     public interface SaveableData
     {
-        protected string GetFileName();
+        public string GetFileName();
+
+        public string AsSerializedString()
+        {
+            return JsonUtility.ToJson(this, true);
+        }
+
+        public void FromSerializedString(string data)
+        {
+            if (!string.IsNullOrEmpty(data))
+                JsonConvert.PopulateObject(data, this);
+        }
 
 #if (UNITY_EDITOR)
         public void Load() { }
         public void Save() { }
+        public void Delete() { }
+        public static void DeleteAll() { }
 
 #elif (UNITY_STANDALONE)
 
@@ -20,22 +34,29 @@ namespace RuinsRaiders
             string path = GetFilePath(GetFileName());
             string result = "";
             if (File.Exists(path))
-            {
                 result = File.ReadAllText(path);
-            }
 
-            if (!string.IsNullOrEmpty(result))
-            {
-                JsonConvert.PopulateObject(result, this);
-            }
+            FromSerializedString(result);
         }
 
-
-        public virtual void Save()
+        public void Save()
         {
-            var json = JsonUtility.ToJson(this);
             var path = GetFilePath(GetFileName());
-            File.WriteAllText(path, json);
+            File.WriteAllText(path, AsSerializedString());
+        }
+
+        public void Delete()
+        {
+            var path = GetFilePath(GetFileName());
+            if (File.Exists(path))
+                File.Delete(path);
+        }
+
+        public static void DeleteAll()
+        {
+            var saveables = Resources.FindObjectsOfTypeAll<ScriptableObject>().OfType<SaveableData>();
+            foreach (var saveable in saveables)
+                saveable.Delete();
         }
 
         private static string GetFilePath(string fileName)
@@ -44,18 +65,25 @@ namespace RuinsRaiders
         }
 
 #else
-
         public void Load()
         {
-            var json = PlayerPrefs.GetString(GetFileName(), "");
-            if (!string.IsNullOrEmpty(json))
-                JsonConvert.PopulateObject(json, this);
+            FromSerializedString(PlayerPrefs.GetString(GetFileName(), ""));
         }
 
         public void Save()
         {
-            var json = JsonUtility.ToJson(this);
-            PlayerPrefs.SetString(GetFileName(), json);
+            PlayerPrefs.SetString(GetFileName(), AsSerializedString());
+            PlayerPrefs.Save();
+        }
+
+        public void Delete()
+        {
+            PlayerPrefs.DeleteKey(GetFileName());
+        }
+
+        public static void DeleteAll()
+        {
+            PlayerPrefs.DeleteAll();
         }
 
 #endif
@@ -65,6 +93,11 @@ namespace RuinsRaiders
             var saveables = Resources.FindObjectsOfTypeAll<ScriptableObject>().OfType<SaveableData>();
             foreach (var saveable in saveables)
                 saveable.Save();
+        }
+
+        public static List<SaveableData> GetAll()
+        {
+            return Resources.FindObjectsOfTypeAll<ScriptableObject>().OfType<SaveableData>().ToList();
         }
 
         public static void LoadAll()
@@ -87,5 +120,6 @@ namespace RuinsRaiders
             foreach (var saveable in saveables)
                 saveable.Load();
         }
+
     }
 }

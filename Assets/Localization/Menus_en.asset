@@ -37,7 +37,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3052251181056
-    m_Localized: Controls
+    m_Localized: Virtual controls
     m_Metadata:
       m_Items: []
   - m_Id: 3227430481920
@@ -53,7 +53,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3467197870080
-    m_Localized: None/External input
+    m_Localized: None
     m_Metadata:
       m_Items: []
   - m_Id: 3653504659456

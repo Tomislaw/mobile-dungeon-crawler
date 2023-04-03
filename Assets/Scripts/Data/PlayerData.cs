@@ -110,5 +110,6 @@ namespace RuinsRaiders
         {
             Red, Blue, Green, Silver
         }
+
     }
 }

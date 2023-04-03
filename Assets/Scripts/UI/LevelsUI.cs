@@ -18,7 +18,7 @@ namespace RuinsRaiders.UI
         [SerializeField]
         private GameObject whenUnlocked;
 
-        void Start()
+        void OnEnable()
         {
             if(data != null)
             {
