@@ -6,14 +6,15 @@ jobs:
   testAllModes:
     name: Run Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v2
         with:
           lfs: true
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: Library
-          key: Library-mobile-dungeon-crawler
+          key: Library-ruins-raiders
           restore-keys: |
             Library-
       - uses: game-ci/unity-test-runner@v2
@@ -26,12 +27,12 @@ jobs:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           checkName: Test Results
           coverageOptions: 'generateAdditionalMetrics;generateHtmlReport;generateBadgeReport;'
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: Test results
           path: ${{ steps.tests.outputs.artifactsPath }}
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: Coverage results
