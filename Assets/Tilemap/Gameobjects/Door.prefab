@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8968219468450566236}
   - component: {fileID: 5453002226987129144}
   - component: {fileID: 4111498557999450302}
-  - component: {fileID: 1795562197025510340}
+  - component: {fileID: 3848311846600669640}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -128,12 +128,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c8a0a13371e314ebcc903557fcfed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lockedSound: {fileID: 0}
-  openSound: {fileID: 0}
+  lockedSound: {fileID: 8300000, guid: c27ecb4d196e3014989265f0b1139b01, type: 3}
+  openSound: {fileID: 8300000, guid: 0027e11d7be2d634587888cb85a5faf6, type: 3}
   lockGameObject: {fileID: 8472465329325820886}
 --- !u!95 &5453002226987129144
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -150,7 +150,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!82 &4111498557999450302
 AudioSource:
   m_ObjectHideFlags: 0
@@ -247,7 +248,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1795562197025510340
+--- !u!114 &3848311846600669640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -256,7 +257,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1160281679214210568}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a7e7f3d2502159418ad467a5b17e3c8, type: 3}
+  m_Script: {fileID: 11500000, guid: ed93bd0b11d6a50478b2f4e35107ffda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}

@@ -149,9 +149,10 @@ namespace RuinsRaiders
 
         public void Update()
         {
+
             if (IsGrounded && move.x != 0)
             {
-                _timeToStep -= Time.fixedDeltaTime;
+                _timeToStep -= Time.deltaTime;
                 if (_timeToStep < 0)
                 {
                     _timeToStep = stepTime;
@@ -161,7 +162,7 @@ namespace RuinsRaiders
 
             if (IsSwimming && (move != new Vector2()))
             {
-                _timeToStep -= Time.fixedDeltaTime;
+                _timeToStep -= Time.deltaTime;
                 if (_timeToStep < 0)
                 {
                     _timeToStep = stepTime;
@@ -178,16 +179,19 @@ namespace RuinsRaiders
             if (_character.IsDead)
                 Stop();
 
+            if(_timeToFinishCoyoteTime > 0)
+                _timeToFinishCoyoteTime -= Time.fixedDeltaTime;
+
             GroundCheck();
             DirectionCheck();
             FlagsCheck();
 
-            if (CanJump() && move.y > jumpingTreshold)
+            if ( move.y > jumpingTreshold && CanJump())
                 Jump();
 
             if (_character.IsDead)
                 DeadMovement();
-            if (IsJumping)
+            else if (IsJumping)
                 JumpingMovement();
             else if (flying || IsSwimming)
                 FlyingMovement();
@@ -246,6 +250,7 @@ namespace RuinsRaiders
 
                     _rigidbody.velocity = new Vector2();
                     IsOnLadder = true;
+                    IsJumping = false;
                 }
             }
             if (canSwim)
@@ -394,6 +399,7 @@ namespace RuinsRaiders
             IsJumping = true;
             waters.Clear();
             _rigidbody.velocity = new(_rigidbody.velocity.x, jumpSpeed);
+            onJump.Invoke();
         }
 
         private void FlyingMovement()
@@ -417,7 +423,10 @@ namespace RuinsRaiders
 
         private void DeadMovement()
         {
-            SetGravityScale(gravityScale);
+            if(IsInWater)
+                SetGravityScale(0.5f);
+            else
+                SetGravityScale(6);
             if (IsGrounded) { 
                 _rigidbody.velocity = new Vector2(0, _rigidbody.velocity.y);
                 _rigidbody.drag = 20;

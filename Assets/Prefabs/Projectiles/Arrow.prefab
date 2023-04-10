@@ -127,8 +127,8 @@ MonoBehaviour:
   rotating: 1
   destroyTime: 1
   lifeTime: 0.4
-  explosionRadius: 1
-  explosionForce: 1
+  explosionRadius: 2
+  explosionForce: 400
   group: 7
   deceleration: {x: 0, y: 0}
   gravity: 0

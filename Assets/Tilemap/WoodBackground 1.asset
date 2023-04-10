@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbd949ab97e5ff4fa55647666dc5fa0, type: 3}
   m_Name: WoodBackground 1
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 8492561185014901345, guid: 586f6eab877cec24f8c1401d397d30e7, type: 3}
+  m_DefaultSprite: {fileID: 1509359952, guid: 0854954d3f456d1488abe56741b8b6d6, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 0
   m_TilingRules:

@@ -5,7 +5,7 @@ namespace RuinsRaiders.UI
 {
     public class ControlSpacingScaler : MonoBehaviour
     {
-        private OptionsData options;
+        public OptionsData options;
 
         public Type type = Type.None;
         public Slider slider;
@@ -35,6 +35,18 @@ namespace RuinsRaiders.UI
                 startingScale = rectTransform.localScale;
             }
         }
+        private void OnDisable()
+        {
+            if (slider == null)
+            {
+                if (type.HasFlag(Type.OffsetX))
+                    rectTransform.sizeDelta = startingSize;
+                if (type.HasFlag(Type.OffsetY))
+                    rectTransform.anchoredPosition = startingPosition;
+                if (type.HasFlag(Type.Scale))
+                    rectTransform.localScale = startingScale;
+            }
+        }
 
         // Update is called once per frame
         void FixedUpdate()
@@ -47,11 +59,9 @@ namespace RuinsRaiders.UI
                     options.touchUiSpacingY = slider.value;
                 if (type.HasFlag(Type.Scale))
                     options.touchUiScale = slider.value;
-
             }
             else
             {
-
                 if (type.HasFlag(Type.OffsetX))
                 {
                     var newSize = startingSize - new Vector2(options.touchUiSpacingX * rectTransform.rect.width / 2f, 0);

@@ -23,10 +23,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1560565852766236328, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.75
-      objectReference: {fileID: 0}
     - target: {fileID: 1643307426841123556, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -57,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4069350316886678256, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
       propertyPath: jumpSpeed
-      value: 16
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4885720716787640596, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
       propertyPath: armor
@@ -175,6 +171,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 5fdfb7b045f7eea4498d536da28d0ab2, type: 2}
+    - target: {fileID: 8932571243353351934, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
+      propertyPath: m_Mass
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8932571243353351935, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
       propertyPath: Health
       value: 16

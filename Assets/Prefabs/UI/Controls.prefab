@@ -131,6 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   options: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
   type: 4
+  slider: {fileID: 0}
 --- !u!1 &1005692879420531761
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,6 +471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   options: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
   type: 4
+  slider: {fileID: 0}
 --- !u!1 &2279703332488752512
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,6 +714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   options: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
   type: 4
+  slider: {fileID: 0}
 --- !u!1 &3990702129024749268
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,6 +769,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   options: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
   type: 4
+  slider: {fileID: 0}
 --- !u!1 &4707660871541506378
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,6 +1133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   options: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
   type: 3
+  slider: {fileID: 0}
 --- !u!1 &6499899905883631688
 GameObject:
   m_ObjectHideFlags: 0
@@ -1191,6 +1196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   options: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
   type: 3
+  slider: {fileID: 0}
 --- !u!1 &6499899906106285391
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,6 +1250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   options: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
   type: 3
+  slider: {fileID: 0}
 --- !u!1 &7010297587890842519
 GameObject:
   m_ObjectHideFlags: 0
@@ -1582,6 +1589,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   options: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
   type: 4
+  slider: {fileID: 0}
 --- !u!1001 &2907581534447582008
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1853,6 +1861,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   options: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
   type: 4
+  slider: {fileID: 0}
 --- !u!1001 &6499899905178318595
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5840832154263460929}
   - component: {fileID: 5273356234361313858}
   - component: {fileID: -6992353969111108592}
+  - component: {fileID: 4605580043494276801}
   m_Layer: 6
   m_Name: ChestNormal
   m_TagString: Untagged
@@ -52,7 +53,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onOpen:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5273356234361313858}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   isOpen: 0
   chestData:
     acquired: 0
@@ -111,7 +124,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &6536510655954509795
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -128,7 +141,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &5840832154263460929
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -165,8 +179,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: d275d48c74961a64eb1b522728d9560a, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -262,6 +276,20 @@ SortingGroup:
   m_SortingLayerID: -681518589
   m_SortingLayer: 1
   m_SortingOrder: 0
+--- !u!114 &4605580043494276801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3082100523231120117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed93bd0b11d6a50478b2f4e35107ffda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
+  soundType: 1
 --- !u!1 &7952154311419071124
 GameObject:
   m_ObjectHideFlags: 0
