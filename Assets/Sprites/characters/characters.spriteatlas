@@ -284,16 +284,18 @@ SpriteAtlas:
   - {fileID: 747409098, guid: 5576d62e8db836e4685222c36b089154, type: 3}
   - {fileID: 764796844, guid: 5576d62e8db836e4685222c36b089154, type: 3}
   - {fileID: -694523532, guid: 5576d62e8db836e4685222c36b089154, type: 3}
-  - {fileID: 871023000, guid: e697adbf1d7fc0347b4c0f6b08579205, type: 3}
   - {fileID: -1465978631, guid: e697adbf1d7fc0347b4c0f6b08579205, type: 3}
   - {fileID: -1597354117, guid: e697adbf1d7fc0347b4c0f6b08579205, type: 3}
+  - {fileID: 1843634070, guid: e697adbf1d7fc0347b4c0f6b08579205, type: 3}
+  - {fileID: 365500247, guid: e697adbf1d7fc0347b4c0f6b08579205, type: 3}
+  - {fileID: -1167026264, guid: e697adbf1d7fc0347b4c0f6b08579205, type: 3}
   - {fileID: -2097516304, guid: e697adbf1d7fc0347b4c0f6b08579205, type: 3}
   - {fileID: 1965030255, guid: e697adbf1d7fc0347b4c0f6b08579205, type: 3}
   - {fileID: -2010560079, guid: e697adbf1d7fc0347b4c0f6b08579205, type: 3}
+  - {fileID: 871023000, guid: e697adbf1d7fc0347b4c0f6b08579205, type: 3}
   - {fileID: 575698730, guid: e697adbf1d7fc0347b4c0f6b08579205, type: 3}
   - {fileID: -1995170373, guid: e697adbf1d7fc0347b4c0f6b08579205, type: 3}
   - {fileID: -1219906535, guid: e697adbf1d7fc0347b4c0f6b08579205, type: 3}
-  - {fileID: 1843634070, guid: e697adbf1d7fc0347b4c0f6b08579205, type: 3}
   - {fileID: -916225387, guid: e697adbf1d7fc0347b4c0f6b08579205, type: 3}
   - {fileID: -58095410, guid: e697adbf1d7fc0347b4c0f6b08579205, type: 3}
   - {fileID: 1053185340, guid: e697adbf1d7fc0347b4c0f6b08579205, type: 3}
@@ -521,16 +523,18 @@ SpriteAtlas:
   - skeleton_knight_precharge2
   - skeleton_knight_charge2
   - skeleton_knight_charge1
-  - skeleton_sword_idle
   - skeleton_sword_attack
   - skeleton_sword_preattack
+  - skeleton_shield_idle1
+  - skeleton_shield_idle2
+  - skeleton_idle2
   - skeleton_shield_attack
   - skeleton_shield_walk2
   - skeleton_shield_walk1
+  - skeleton_sword_idle1
   - skeleton_shield_preattack
   - skeleton_sword_walk1
   - skeleton_sword_walk2
-  - skeleton_shield_idle
   - skeleton_death4
   - skeleton_death3
   - skeleton_death2

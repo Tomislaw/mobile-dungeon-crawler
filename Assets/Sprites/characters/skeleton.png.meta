@@ -3,7 +3,7 @@ guid: e697adbf1d7fc0347b4c0f6b08579205
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -63,6 +63,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -128,7 +129,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: skeleton_sword_idle
+      name: skeleton_sword_idle1
       rect:
         serializedVersion: 2
         x: 0
@@ -152,7 +153,7 @@ TextureImporter:
       name: skeleton_sword_walk1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 32
         y: 32
         width: 16
         height: 16
@@ -173,7 +174,7 @@ TextureImporter:
       name: skeleton_sword_walk2
       rect:
         serializedVersion: 2
-        x: 32
+        x: 48
         y: 32
         width: 16
         height: 16
@@ -194,7 +195,7 @@ TextureImporter:
       name: skeleton_sword_preattack
       rect:
         serializedVersion: 2
-        x: 48
+        x: 64
         y: 32
         width: 16
         height: 16
@@ -215,7 +216,7 @@ TextureImporter:
       name: skeleton_sword_attack
       rect:
         serializedVersion: 2
-        x: 64
+        x: 80
         y: 32
         width: 16
         height: 16
@@ -299,7 +300,7 @@ TextureImporter:
       name: skeleton_death4
       rect:
         serializedVersion: 2
-        x: 64
+        x: 48
         y: 16
         width: 16
         height: 16
@@ -317,7 +318,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_shield_idle
+      name: skeleton_shield_idle1
       rect:
         serializedVersion: 2
         x: 0
@@ -341,7 +342,7 @@ TextureImporter:
       name: skeleton_shield_walk1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 32
         y: 0
         width: 16
         height: 16
@@ -362,7 +363,7 @@ TextureImporter:
       name: skeleton_shield_walk2
       rect:
         serializedVersion: 2
-        x: 32
+        x: 48
         y: 0
         width: 16
         height: 16
@@ -383,7 +384,7 @@ TextureImporter:
       name: skeleton_shield_preattack
       rect:
         serializedVersion: 2
-        x: 48
+        x: 64
         y: 0
         width: 16
         height: 16
@@ -404,7 +405,7 @@ TextureImporter:
       name: skeleton_shield_attack
       rect:
         serializedVersion: 2
-        x: 64
+        x: 80
         y: 0
         width: 16
         height: 16
@@ -421,6 +422,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: skeleton_shield_idle2
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b0a93a01e4cc574285904f048fd8f8a
+      internalID: 365500247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_idle2
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca79d1aca74729449832b84f3ff8aa66
+      internalID: -1167026264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -432,20 +475,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      skeleton_shield_walk2: 1965030255
-      skeleton_shield_walk1: -2010560079
-      skeleton_sword_walk1: -1995170373
-      skeleton_sword_walk2: -1219906535
-      skeleton_death3: -58095410
-      skeleton_death4: -916225387
-      skeleton_shield_attack: -2097516304
-      skeleton_shield_preattack: 575698730
       skeleton_death1: -1228880250
       skeleton_death2: 1053185340
-      skeleton_sword_idle: 871023000
+      skeleton_death3: -58095410
+      skeleton_death4: -916225387
+      skeleton_idle2: -1167026264
+      skeleton_shield_attack: -2097516304
+      skeleton_shield_idle1: 1843634070
+      skeleton_shield_idle2: 365500247
+      skeleton_shield_preattack: 575698730
+      skeleton_shield_walk1: -2010560079
+      skeleton_shield_walk2: 1965030255
       skeleton_sword_attack: -1465978631
+      skeleton_sword_idle1: 871023000
       skeleton_sword_preattack: -1597354117
-      skeleton_shield_idle: 1843634070
+      skeleton_sword_walk1: -1995170373
+      skeleton_sword_walk2: -1219906535
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
