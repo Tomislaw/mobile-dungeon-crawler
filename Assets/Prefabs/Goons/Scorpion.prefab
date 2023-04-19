@@ -183,6 +183,10 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 6707737215539305991, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7567219044854476788, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
       propertyPath: m_Layer
       value: 11

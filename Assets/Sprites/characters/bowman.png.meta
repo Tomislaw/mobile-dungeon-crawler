@@ -3,7 +3,7 @@ guid: 04fc3ad955fc7cb44bd7a9938d8d891c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -63,6 +63,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -128,11 +129,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bowman_idle
+      name: bowman_idle1
       rect:
         serializedVersion: 2
         x: 0
-        y: 16
+        y: 32
         width: 16
         height: 16
       alignment: 9
@@ -152,8 +153,8 @@ TextureImporter:
       name: bowman_walk1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 16
+        x: 80
+        y: 32
         width: 16
         height: 16
       alignment: 9
@@ -173,8 +174,8 @@ TextureImporter:
       name: bowman_walk2
       rect:
         serializedVersion: 2
-        x: 32
-        y: 16
+        x: 96
+        y: 32
         width: 16
         height: 16
       alignment: 9
@@ -194,8 +195,8 @@ TextureImporter:
       name: bowman_preattack1
       rect:
         serializedVersion: 2
-        x: 48
-        y: 16
+        x: 112
+        y: 32
         width: 16
         height: 16
       alignment: 9
@@ -215,7 +216,7 @@ TextureImporter:
       name: bowman_preattack2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 0
         y: 16
         width: 16
         height: 16
@@ -236,7 +237,7 @@ TextureImporter:
       name: bowman_attack
       rect:
         serializedVersion: 2
-        x: 80
+        x: 16
         y: 16
         width: 16
         height: 16
@@ -254,10 +255,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bowman_preattack1_walk
+      name: bowman_preattack1_walk1
       rect:
         serializedVersion: 2
-        x: 96
+        x: 32
         y: 16
         width: 16
         height: 16
@@ -275,10 +276,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bowman_preattack2_walk
+      name: bowman_preattack2_walk1
       rect:
         serializedVersion: 2
-        x: 112
+        x: 64
         y: 16
         width: 16
         height: 16
@@ -296,11 +297,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bowman_idle_sneak
+      name: bowman_idle1_sneak
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 96
+        y: 16
         width: 16
         height: 16
       alignment: 9
@@ -320,8 +321,8 @@ TextureImporter:
       name: bowman_walk1_sneak
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
+        x: 112
+        y: 16
         width: 16
         height: 16
       alignment: 9
@@ -341,7 +342,7 @@ TextureImporter:
       name: bowman_walk2_sneak
       rect:
         serializedVersion: 2
-        x: 32
+        x: 0
         y: 0
         width: 16
         height: 16
@@ -362,7 +363,7 @@ TextureImporter:
       name: bowman_preattack1_sneak
       rect:
         serializedVersion: 2
-        x: 48
+        x: 80
         y: 0
         width: 16
         height: 16
@@ -380,10 +381,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bowman_preaatack2_sneak
+      name: bowman_preattack2_sneak
       rect:
         serializedVersion: 2
-        x: 64
+        x: 96
         y: 0
         width: 16
         height: 16
@@ -404,7 +405,7 @@ TextureImporter:
       name: bowman_attack_sneak
       rect:
         serializedVersion: 2
-        x: 80
+        x: 112
         y: 0
         width: 16
         height: 16
@@ -422,10 +423,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bowman_preattack1_walk_sneak
+      name: bowman_preattack1_walk1_sneak
       rect:
         serializedVersion: 2
-        x: 96
+        x: 16
         y: 0
         width: 16
         height: 16
@@ -443,10 +444,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bowman_preattack2_walk_sneak
+      name: bowman_preattack2_walk1_sneak
       rect:
         serializedVersion: 2
-        x: 112
+        x: 48
         y: 0
         width: 16
         height: 16
@@ -463,6 +464,300 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: bowman_idle2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e72d46a9b1e6374e8993aed111c24d2
+      internalID: 957476373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bowman_preattack2_walk2
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 16
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1addabaa61558cd44afb2b44f2cd920f
+      internalID: 1237796912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bowman_preattack1_walk2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 16
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef955b4d345c11b4bae2af50362c1611
+      internalID: 216567969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bowman_preattack1_walk2_sneak
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 405fe1a4d1828a145a5bade0244c1b52
+      internalID: 1275429170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bowman_preattack2_walk2_sneak
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af36c6baa8ac4bf42bb34e5cf1fa5c72
+      internalID: -149765507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bowman_jump1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6930ee4c5b1cbd419e7dbb2a6bb14b6
+      internalID: 1698569764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bowman_jump2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5198bc9f8900a2443952f50ca776687c
+      internalID: 495286868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bowman_jump3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 32
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f41c0afc618116844a2fea51d76569f1
+      internalID: -2104715572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bowman_fall
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 830aa16d2939139428203a8badcc18fb
+      internalID: -1049654118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bowman_action_idle1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 48
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c85a4fa7e79131147b7f382ceb7f433e
+      internalID: 2116123607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bowman_action_idle2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 48
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc4ce5b323cf140468404ddeb6aafa09
+      internalID: 1892260027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bowman_idle2_sneak
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 48
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 581ad87853decf948b889e4c836d8c32
+      internalID: 292210068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bowman_action_idle1_sneak
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 48
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33110b69cf221f94b927eb2e2ae94e82
+      internalID: -224750394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bowman_action_idle2_sneak
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 48
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac1e5550893009342bfb56df0b0b2606
+      internalID: 1880695952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -474,22 +769,36 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bowman_idle_sneak: -1283903467
-      bowman_preattack1: 1562554306
+      bowman_action_idle1: 2116123607
+      bowman_action_idle1_sneak: -224750394
+      bowman_action_idle2: 1892260027
+      bowman_action_idle2_sneak: 1880695952
       bowman_attack: -1321117391
-      bowman_walk2_sneak: 1480783841
-      bowman_walk1: 449923424
-      bowman_preattack2: 1932911660
-      bowman_preattack2_walk_sneak: -1751244804
-      bowman_preattack1_walk_sneak: 1076463944
-      bowman_walk2: 764216443
       bowman_attack_sneak: 22795055
-      bowman_preattack1_walk: 1908288133
-      bowman_idle: 937433859
-      bowman_preattack2_walk: -170567011
+      bowman_fall: -1049654118
+      bowman_idle1: 937433859
+      bowman_idle1_sneak: -1283903467
+      bowman_idle2: 957476373
+      bowman_idle2_sneak: 292210068
+      bowman_jump1: 1698569764
+      bowman_jump2: 495286868
+      bowman_jump3: -2104715572
+      bowman_preattack1: 1562554306
       bowman_preattack1_sneak: 1799907823
+      bowman_preattack1_walk1: 1908288133
+      bowman_preattack1_walk1_sneak: 1076463944
+      bowman_preattack1_walk2: 216567969
+      bowman_preattack1_walk2_sneak: 1275429170
+      bowman_preattack2: 1932911660
+      bowman_preattack2_sneak: -1072111699
+      bowman_preattack2_walk1: -170567011
+      bowman_preattack2_walk1_sneak: -1751244804
+      bowman_preattack2_walk2: 1237796912
+      bowman_preattack2_walk2_sneak: -149765507
+      bowman_walk1: 449923424
       bowman_walk1_sneak: -1949324391
-      bowman_preaatack2_sneak: -1072111699
+      bowman_walk2: 764216443
+      bowman_walk2_sneak: 1480783841
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

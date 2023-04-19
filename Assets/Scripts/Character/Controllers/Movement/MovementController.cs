@@ -8,6 +8,7 @@ using System.Linq;
 
 namespace RuinsRaiders
 {
+
     [RequireComponent(typeof(Character))]
     public class MovementController : MonoBehaviour
     {
@@ -51,7 +52,7 @@ namespace RuinsRaiders
         public UnityEvent onJump;
         public UnityEvent onWalk;
         public UnityEvent onSwim;
-
+        public UnityEvent onLand;
 
         public HashSet<LadderTile> ladders = new();
         public HashSet<WaterTile> waters = new();
@@ -86,6 +87,8 @@ namespace RuinsRaiders
         public bool IsColliderAbove { get; private set; }
 
         public bool IsGrounded { get; private set; }
+
+        public bool IsJumpingStarted { get; private set; }
 
         public bool IsLanded { get; private set; }
 
@@ -186,8 +189,6 @@ namespace RuinsRaiders
             DirectionCheck();
             FlagsCheck();
 
-            if ( move.y > jumpingTreshold && CanJump())
-                Jump();
 
             if (_character.IsDead)
                 DeadMovement();
@@ -200,6 +201,9 @@ namespace RuinsRaiders
             else
                 WalkingMovement();
 
+            if (move.y > jumpingTreshold && CanJump())
+                Jump();
+
             _previousMove = move;
 
             _rigidbody.velocity = Vector2.ClampMagnitude(_rigidbody.velocity, maxSpeed);
@@ -210,8 +214,10 @@ namespace RuinsRaiders
             var wasGrounded = IsGrounded;
             IsGrounded = CheckForGround();
             IsLanded = !wasGrounded && IsGrounded && _rigidbody.velocity.y < 0.001f;
+            if(IsLanded)
+                onLand.Invoke();
 
-            if(IsGrounded && _rigidbody.velocity.y < 0.001f)
+            if (IsGrounded && _rigidbody.velocity.y < 0.001f)
                 IsJumping = false;
 
             IsColliderAbove = CheckForCeiling();
@@ -239,6 +245,8 @@ namespace RuinsRaiders
 
         private void FlagsCheck()
         {
+            IsJumpingStarted = false;
+
             if (canUseLadder)
             {
                 if (ladders.Count == 0)
@@ -397,6 +405,7 @@ namespace RuinsRaiders
         private void Jump()
         {
             IsJumping = true;
+            IsJumpingStarted = true;
             waters.Clear();
             _rigidbody.velocity = new(_rigidbody.velocity.x, jumpSpeed);
             onJump.Invoke();

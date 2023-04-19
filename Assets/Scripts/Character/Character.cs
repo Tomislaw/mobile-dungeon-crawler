@@ -49,24 +49,29 @@ namespace RuinsRaiders
         }
 
         // Update is called once per frame
-        private void FixedUpdate()
+        private void Update()
         {
+            if (holdUpdate)
+                return;
+
             if (setAnimationVariablesInstead)
             {
                 _animator.SetBool("IsDead", IsDead);
                 _animator.SetBool("IsChargingAttack", AttackController.chargeAttack);
                 _animator.SetBool("IsOvercharged", AttackController.IsOvercharged);
                 _animator.SetBool("IsAttacking", AttackController.IsAttacking);
+                _animator.SetBool("IsJumpingStarted", MovementController.IsJumpingStarted);
                 _animator.SetBool("IsJumping", MovementController.IsJumping);
+                _animator.SetBool("IsLanded", MovementController.IsLanded);
                 _animator.SetBool("IsMoving", MovementController.IsMoving);
+                _animator.SetBool("IsSwimming", MovementController.IsSwimming);
+                _animator.SetBool("IsColliderAbove", MovementController.IsColliderAbove);
                 _animator.SetBool("IsGrounded", MovementController.IsGrounded);
                 _animator.SetFloat("VelocityX", MovementController.Velocity.x);
                 _animator.SetFloat("VelocityY", MovementController.Velocity.y);
+                _animator.SetBool("IsOnLadder", MovementController.IsOnLadder);
                 return;
             }
-
-            if (holdUpdate)
-                return;
 
             string suffix = haveSneakAnimation && (MovementController.IsColliderAbove || MovementController.IsSwimming) ? "Sneak" : "";
             if (IsDead)

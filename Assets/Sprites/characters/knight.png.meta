@@ -3,7 +3,7 @@ guid: 1ec6b45d81e0f5449b9b4a0dea67a2dd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -63,6 +63,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -128,11 +129,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: knight_idle
+      name: knight_idle1
       rect:
         serializedVersion: 2
         x: 0
-        y: 16
+        y: 32
         width: 16
         height: 16
       alignment: 9
@@ -152,8 +153,8 @@ TextureImporter:
       name: knight_walk1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 16
+        x: 80
+        y: 32
         width: 16
         height: 16
       alignment: 9
@@ -173,8 +174,8 @@ TextureImporter:
       name: knight_walk2
       rect:
         serializedVersion: 2
-        x: 32
-        y: 16
+        x: 96
+        y: 32
         width: 16
         height: 16
       alignment: 9
@@ -194,8 +195,8 @@ TextureImporter:
       name: knight_preattack1
       rect:
         serializedVersion: 2
-        x: 48
-        y: 16
+        x: 112
+        y: 32
         width: 16
         height: 16
       alignment: 9
@@ -215,7 +216,7 @@ TextureImporter:
       name: knight_preattack2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 0
         y: 16
         width: 16
         height: 16
@@ -236,7 +237,7 @@ TextureImporter:
       name: knight_attack
       rect:
         serializedVersion: 2
-        x: 80
+        x: 16
         y: 16
         width: 16
         height: 16
@@ -254,10 +255,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: knight_preattack1_walk
+      name: knight_preattack1_walk1
       rect:
         serializedVersion: 2
-        x: 96
+        x: 32
         y: 16
         width: 16
         height: 16
@@ -275,10 +276,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: knight_preattack2_walk
+      name: knight_preattack2_walk1
       rect:
         serializedVersion: 2
-        x: 112
+        x: 64
         y: 16
         width: 16
         height: 16
@@ -296,11 +297,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: knight_idle_sneak
+      name: knight_idle1_sneak
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 96
+        y: 16
         width: 16
         height: 16
       alignment: 9
@@ -320,8 +321,8 @@ TextureImporter:
       name: knight_walk1_sneak
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
+        x: 112
+        y: 16
         width: 16
         height: 16
       alignment: 9
@@ -341,7 +342,7 @@ TextureImporter:
       name: knight_walk2_sneak
       rect:
         serializedVersion: 2
-        x: 32
+        x: 0
         y: 0
         width: 16
         height: 16
@@ -362,7 +363,7 @@ TextureImporter:
       name: knight_preattack1_sneak
       rect:
         serializedVersion: 2
-        x: 48
+        x: 80
         y: 0
         width: 16
         height: 16
@@ -383,7 +384,7 @@ TextureImporter:
       name: knight_preattack2_sneak
       rect:
         serializedVersion: 2
-        x: 64
+        x: 96
         y: 0
         width: 16
         height: 16
@@ -404,7 +405,7 @@ TextureImporter:
       name: knight_attack_sneak
       rect:
         serializedVersion: 2
-        x: 80
+        x: 112
         y: 0
         width: 16
         height: 16
@@ -422,10 +423,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: knight_preattack1_walk_sneak
+      name: knight_preattack1_walk1_sneak
       rect:
         serializedVersion: 2
-        x: 96
+        x: 16
         y: 0
         width: 16
         height: 16
@@ -443,10 +444,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: knight_preattack2_walk_sneak
+      name: knight_preattack2_walk2_sneak
       rect:
         serializedVersion: 2
-        x: 112
+        x: 64
         y: 0
         width: 16
         height: 16
@@ -463,6 +464,300 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: knight_preattack1_walk2_sneak
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8330bc9549bc224aad9dd6d8105cb59
+      internalID: -1771692848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: knight_preattack2_walk1_sneak
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b6044abaf831ca49951c4ede84284ea
+      internalID: -683950882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: knight_preattack1_walk2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 16
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5d5647224495c84097ab38617008c88
+      internalID: 527920792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: knight_preattack2_walk2
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 16
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb108b62f2e8e374b94d8789c11c605f
+      internalID: -159445485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: knight_jump1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b0cd47c932eb87449ae5dc80f3eb8d5
+      internalID: -734769240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: knight_jump2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07df8b2d31bb1ed49833016c50cce257
+      internalID: 1926736627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: knight_jump3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 32
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4b5d4840c84cd44fb2c77c6aab47e61
+      internalID: 764927527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: knight_fall
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0123389cc87d8194cbe5253247c836de
+      internalID: -303871580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: knight_idle2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06e4daa5c1a7efd41adf792277a3787e
+      internalID: 169198206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: knight_action_idle1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 48
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8140918e1d422e048bf1aafa345f2470
+      internalID: 1536777674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: knight_action_idle2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 48
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17fcdef6ca7356b40af8e2ad33514d97
+      internalID: -1347517718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: knight_action_idle1_sneak
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 48
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29595d5df65ebea47bacccd9392b5cba
+      internalID: -348001427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: knight_idle2_sneak
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 48
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6ee8cb111c6fe345ba7935574f4a61f
+      internalID: -1882117644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: knight_action_idle2_sneak
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 48
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbebd9ec5c45b954da9867498d7a0c14
+      internalID: 1851232981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -474,22 +769,36 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      knight_idle_sneak: -1671624961
-      knight_walk2: -1414094455
-      knight_preattack1_walk_sneak: 55407857
-      knight_walk2_sneak: -308435727
-      knight_idle: -75673561
+      knight_action_idle1: 1536777674
+      knight_action_idle1_sneak: -348001427
+      knight_action_idle2: -1347517718
+      knight_action_idle2_sneak: 1851232981
       knight_attack: -785683093
-      knight_walk1: 1722064428
-      knight_walk1_sneak: 1291767951
-      knight_preattack2_walk_sneak: -968076273
-      knight_preattack1_walk: 2103543300
-      knight_preattack2_sneak: 1637488485
+      knight_attack_sneak: -992070200
+      knight_fall: -303871580
+      knight_idle1: -75673561
+      knight_idle1_sneak: -1671624961
+      knight_idle2: 169198206
+      knight_idle2_sneak: -1882117644
+      knight_jump1: -734769240
+      knight_jump2: 1926736627
+      knight_jump3: 764927527
       knight_preattack1: 851218356
       knight_preattack1_sneak: 1824503667
+      knight_preattack1_walk1: 2103543300
+      knight_preattack1_walk1_sneak: 55407857
+      knight_preattack1_walk2: 527920792
+      knight_preattack1_walk2_sneak: 1808854497
       knight_preattack2: -1668178515
-      knight_preattack2_walk: 1227669666
-      knight_attack_sneak: -992070200
+      knight_preattack2_sneak: 1637488485
+      knight_preattack2_walk1: 1227669666
+      knight_preattack2_walk1_sneak: -683950882
+      knight_preattack2_walk2: -159445485
+      knight_preattack2_walk2_sneak: -968076273
+      knight_walk1: 1722064428
+      knight_walk1_sneak: 1291767951
+      knight_walk2: -1414094455
+      knight_walk2_sneak: -308435727
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
