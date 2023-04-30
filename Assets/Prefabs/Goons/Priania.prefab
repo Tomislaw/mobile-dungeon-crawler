@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 940695730345937389}
   - component: {fileID: -4841048329134280541}
   - component: {fileID: -4981200709401923606}
+  - component: {fileID: 5644254031300328569}
   m_Layer: 11
   m_Name: Priania
   m_TagString: Untagged
@@ -264,6 +265,9 @@ MonoBehaviour:
   onSwim:
     m_PersistentCalls:
       m_Calls: []
+  onLand:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &3005066418970644057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,14 +284,15 @@ MonoBehaviour:
   onDeath:
     m_PersistentCalls:
       m_Calls: []
+  immunityAfterHitTime: 0
+  ressurectTime: 1
   health: 2
   maxHealth: 2
   shield: 0
   maxShield: 0
+  shieldRegenerationTime: 10
   armor: 0
   maxArmor: 0
-  shieldRegenerationTime: 10
-  ressurectTime: 1
 --- !u!114 &-8839992570248876018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,6 +397,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
   soundType: 1
+--- !u!114 &5644254031300328569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5842567068908154298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33149d0f95671da4a945c1474b9740c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfKeys: 0
+  gems:
+    redGems: 1
+    blueGems: 0
+    greenGems: 0
+    silverGems: 0
+  keyPrefab: {fileID: 7926932315155287929, guid: 5f2504d000004fe45af3b49c1048cc13, type: 3}
+  gemPrefab: {fileID: 6484226641916986339, guid: 66ad2906e0854bf4f925da012d7acc80, type: 3}
+  pickupSound: {fileID: 8300000, guid: 60c6b26d63d297d4fb7e9864fcda3d82, type: 3}
 --- !u!1 &6275282479640741850
 GameObject:
   m_ObjectHideFlags: 0

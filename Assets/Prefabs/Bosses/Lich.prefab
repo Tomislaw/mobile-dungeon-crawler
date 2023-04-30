@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 2895877086576702235}
   - component: {fileID: 35853251458301214}
   - component: {fileID: 6325737292819958507}
+  - component: {fileID: 7682192174644956787}
   m_Layer: 11
   m_Name: Lich
   m_TagString: Untagged
@@ -346,6 +347,9 @@ MonoBehaviour:
   onSwim:
     m_PersistentCalls:
       m_Calls: []
+  onLand:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8309213051711081826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,14 +379,15 @@ MonoBehaviour:
   onDeath:
     m_PersistentCalls:
       m_Calls: []
+  immunityAfterHitTime: 0
+  ressurectTime: 1
   health: 26
   maxHealth: 26
   shield: 8
   maxShield: 8
+  shieldRegenerationTime: 2
   armor: 0
   maxArmor: 0
-  shieldRegenerationTime: 2
-  ressurectTime: 1
 --- !u!114 &2895877086576702235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,3 +517,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7682192174644956787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5367954658345666721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33149d0f95671da4a945c1474b9740c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfKeys: 0
+  gems:
+    redGems: 0
+    blueGems: 0
+    greenGems: 0
+    silverGems: 10
+  keyPrefab: {fileID: 7926932315155287929, guid: 5f2504d000004fe45af3b49c1048cc13, type: 3}
+  gemPrefab: {fileID: 6484226641916986339, guid: 66ad2906e0854bf4f925da012d7acc80, type: 3}
+  pickupSound: {fileID: 8300000, guid: 60c6b26d63d297d4fb7e9864fcda3d82, type: 3}

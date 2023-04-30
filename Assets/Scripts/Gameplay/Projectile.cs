@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,23 +18,31 @@ namespace RuinsRaiders
 
         public int damage = 0;
 
+        [SerializeField]
+        public HealthController.Group group;
+
+        [NonSerialized]
         public List<HealthController> hitTargets = new List<HealthController>();
 
+        [Header("Flags")]
         [SerializeField]
         private bool rotating = false;
+        [SerializeField]
+        private bool destroyOnHit = true;
 
+        [Header("Timers")]
         [SerializeField]
         private float destroyTime = 1;
         [SerializeField]
         private float lifeTime = 2;
 
+        [Header("Forces")]
         [SerializeField]
         private float explosionRadius = 1;
         [SerializeField]
         private float explosionForce = 1;
 
-        [SerializeField]
-        public HealthController.Group group;
+
 
 
         [SerializeField]
@@ -101,28 +110,7 @@ namespace RuinsRaiders
             }
         }
 
-        private void ResolveHit(HealthController target)
-        {
 
-            if (group == target.group)
-                return;
-            else
-            {
-                target.Damage(damage, gameObject);
-                if (explosionForce > 0)
-                {
-                    var rg = target.GetComponent<Rigidbody2D>();
-                    if (rg)
-                    {
-                        var force = transform.position - new Vector3(rg.worldCenterOfMass.x, rg.worldCenterOfMass.y, 0);
-                        force.Normalize();
-                        rg.AddForce(force * -explosionForce);
-                    }
-
-                }
-            }
-
-        }
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (_hit)
@@ -132,57 +120,51 @@ namespace RuinsRaiders
                 return;
 
             var healthController = collision.GetComponent<HealthController>();
-            if (healthController != null && group == healthController.group)
-                return;
-
-            var hitItems = explosionRadius > 0
-                ? Physics2D.OverlapCircleAll(transform.position, explosionRadius).Select(it => it.gameObject).Distinct()
-                : new List<GameObject>() { collision.gameObject };
-
-            ResolveColliders(hitItems);
-        }
-
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-
-            if (_hit)
-                return;
-
-            transform.position = collision.contacts.First().point;
-
-            var hitItems = explosionRadius > 0
-                ? Physics2D.OverlapCircleAll(transform.position, explosionRadius).Select(it => it.gameObject)
-                : new List<GameObject>() { collision.gameObject };
-
-            ResolveColliders(hitItems);
-        }
-
-        private void ResolveColliders(IEnumerable<GameObject> hitItems)
-        {
-            foreach (var hit in hitItems)
-            {
-                var target = hit.GetComponent<HealthController>();
-                if (target == null || hitTargets.Contains(target))
-                {
-                    _lifeTimeLeft = 0;
-                    continue;
-                }
-
-                if (target.IsDead)
-                    continue;
-
-                hitTargets.Add(target);
-
+            if (healthController == null)
                 _lifeTimeLeft = 0;
-                ResolveHit(target);
-            }
+            else if (group == healthController.group)
+                return;
 
-
-            if (_lifeTimeLeft <= 0)
+            if (destroyOnHit)
             {
-                Stop();
-                OnProjectileDeath();
+                _lifeTimeLeft = 0;
+                transform.position = collision.ClosestPoint(transform.position);
             }
+
+            ResolveHit(collision.gameObject);
+        }
+
+
+        private void ResolveHit(GameObject hit)
+        {
+
+            var target = hit.GetComponent<HealthController>();
+
+            if (target == null)
+                _lifeTimeLeft = 0;
+            if (target == null || hitTargets.Contains(target) || target.IsDead)
+                return;
+
+            hitTargets.Add(target);
+
+            if (group == target.group)
+                return;
+
+            target.Damage(damage, gameObject);
+
+
+            if (explosionForce <= 0)
+                return;
+            var rg = target.GetComponent<Rigidbody2D>();
+            if (rg)
+            {
+
+                var force = _lifeTimeLeft <= 0 ? new Vector3(rg.worldCenterOfMass.x, rg.worldCenterOfMass.y, 0) - transform.position
+                                               : new Vector3(_rigidbody.velocity.x, _rigidbody.velocity.y + _rigidbody.velocity.x/10f, 0);
+                force.Normalize();
+                rg.AddForce(force * explosionForce);
+            }
+
         }
 
         private void Stop()
@@ -202,6 +184,12 @@ namespace RuinsRaiders
         private void OnProjectileDeath()
         {
             onHit.Invoke();
+            if (explosionRadius > 0)
+            {
+                var hitItems = Physics2D.OverlapCircleAll(transform.position, explosionRadius).Select(it => it.gameObject).Distinct();
+                foreach (var item in hitItems)
+                    ResolveHit(item);
+            }
         }
     }
 }

@@ -10,6 +10,9 @@ namespace RuinsRaiders
         public int slopeRollDamage = 2;
         public int fallDamage = 4;
 
+        public int slopeRollDamageToPlayer = 1;
+        public int fallDamageToPlayer = 2;
+
         private RollableBox _box;
 
         private HashSet<HealthController> touchers = new();
@@ -48,7 +51,7 @@ namespace RuinsRaiders
             foreach(var health in touchers)
             {
                 if(health.transform.position.y <= transform.position.y)
-                    health.Damage(fallDamage, null);
+                    health.Damage(health.group == HealthController.Group.Player ? fallDamageToPlayer : fallDamage, null);
             }
 
             if(_healthController != null)
@@ -72,9 +75,10 @@ namespace RuinsRaiders
                 else if(health.transform.position.x < transform.position.x)
                     continue;
 
-                health.Damage(slopeRollDamage, null);
+                health.Damage(health.group == HealthController.Group.Player ? slopeRollDamageToPlayer : slopeRollDamage, null);
+
                 if (_healthController != null)
-                    _healthController.Damage(slopeRollDamage, null);
+                    _healthController.Damage(  slopeRollDamage, null);
             }
 
             foreach (var t in touchersToBeRemoved)

@@ -30,6 +30,27 @@ namespace RuinsRaiders
                 greenGems = a.greenGems + b.greenGems,
                 silverGems = a.silverGems + b.silverGems,
             };
+
+            public static Gems One(GemsType type)
+            {
+                Gems gems = new();
+                switch (type)
+                {
+                    case GemsType.Red:
+                        gems.redGems = 1;
+                        break;
+                    case GemsType.Blue:
+                        gems.blueGems = 1;
+                        break;
+                    case GemsType.Green:
+                        gems.greenGems = 1;
+                        break;
+                    case GemsType.Silver:
+                        gems.silverGems = 1;
+                        break;
+                }
+                return gems;
+            }
         }
 
         [Serializable]

@@ -71,6 +71,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: c9598430d6c048e438a81164deeea1b6, type: 2}
+    - target: {fileID: 5686623904557316601, guid: 9f3540719ecf5fb46ac3230ae24b1231, type: 3}
+      propertyPath: gems.greenGems
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4706730971261192245, guid: 9f3540719ecf5fb46ac3230ae24b1231, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9f3540719ecf5fb46ac3230ae24b1231, type: 3}
@@ -101,6 +105,9 @@ MonoBehaviour:
   onChargedAttack:
     m_PersistentCalls:
       m_Calls: []
+  attackDamage: 2
+  specialAttackDamage: 2
+  specialAttackMaxProjectileCount: 3
   projectiles:
   - projectile: {fileID: 1805714663868828917, guid: 26175418d8984124b8cf76a22f0746c0, type: 3}
     offset: {x: 0, y: 0.6, z: 0}

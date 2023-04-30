@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 1586342966391059649, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: fdfc1170dd881674b804dd4d009a29bb, type: 2}
+      objectReference: {fileID: 22100000, guid: 52fc109d03f82b44e8d60702e9be05c3, type: 2}
     - target: {fileID: 1586342966391059650, guid: 5e3ef77ef1de00d44828f1e1121a560b, type: 3}
       propertyPath: attackSpeed
       value: 0.4
@@ -127,6 +127,7 @@ MonoBehaviour:
       m_Calls: []
   attackDamage: 2
   specialAttackDamage: 2
+  specialAttackMaxProjectileCount: 3
   projectiles:
   - projectile: {fileID: 1805714663868828917, guid: 53f5e209b4c330247acbfd4b8bcbd0d7, type: 3}
     offset: {x: 0, y: 0.4, z: 0}

@@ -29,12 +29,12 @@ namespace RuinsRaiders
                 var respawn = transform.FindRespawnPosition();
                 if (respawn == null)
                 {
-                    healthController.DamageIgnoreShield(damageToNpc, gameObject);
+                    healthController.DamageIgnoreAll(damageToNpc, gameObject);
                 }
                 else
                 {
                     var movementController = collision.gameObject.GetComponent<MovementController>();
-                    healthController.DamageIgnoreShield(damageToPlayer, gameObject);
+                    healthController.DamageIgnoreAll(damageToPlayer, gameObject);
                     if (character != null && !character.IsDead)
                         movementController.Teleport(respawn.transform.position);
                 }
@@ -42,7 +42,7 @@ namespace RuinsRaiders
             }
             else
             {
-                healthController.DamageIgnoreShield(damageToNpc, gameObject);
+                healthController.DamageIgnoreAll(damageToNpc, gameObject);
             }
         }
 

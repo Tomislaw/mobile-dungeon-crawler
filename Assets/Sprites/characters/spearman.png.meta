@@ -3,7 +3,7 @@ guid: 807663c2629e94441ba9955faa95dafc
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -63,6 +63,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -128,11 +129,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spearman_idle
+      name: spearman_idle1
       rect:
         serializedVersion: 2
         x: 0
-        y: 16
+        y: 32
         width: 16
         height: 16
       alignment: 9
@@ -152,8 +153,8 @@ TextureImporter:
       name: spearman_walk1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 16
+        x: 80
+        y: 32
         width: 16
         height: 16
       alignment: 9
@@ -173,8 +174,8 @@ TextureImporter:
       name: spearman_walk2
       rect:
         serializedVersion: 2
-        x: 32
-        y: 16
+        x: 96
+        y: 32
         width: 16
         height: 16
       alignment: 9
@@ -194,8 +195,8 @@ TextureImporter:
       name: spearman_preattack1
       rect:
         serializedVersion: 2
-        x: 48
-        y: 16
+        x: 112
+        y: 32
         width: 16
         height: 16
       alignment: 9
@@ -215,7 +216,7 @@ TextureImporter:
       name: spearman_preattack2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 0
         y: 16
         width: 16
         height: 16
@@ -236,7 +237,7 @@ TextureImporter:
       name: spearman_attack
       rect:
         serializedVersion: 2
-        x: 80
+        x: 16
         y: 16
         width: 16
         height: 16
@@ -254,10 +255,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spearman_preattack1_walk
+      name: spearman_preattack1_walk1
       rect:
         serializedVersion: 2
-        x: 96
+        x: 32
         y: 16
         width: 16
         height: 16
@@ -275,10 +276,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spearman_prattack2_walk
+      name: spearman_preattack2_walk1
       rect:
         serializedVersion: 2
-        x: 112
+        x: 64
         y: 16
         width: 16
         height: 16
@@ -296,11 +297,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spearman_idle_sneak
+      name: spearman_idle1_sneak
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 96
+        y: 16
         width: 16
         height: 16
       alignment: 9
@@ -320,8 +321,8 @@ TextureImporter:
       name: spearman_walk1_sneak
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
+        x: 112
+        y: 16
         width: 16
         height: 16
       alignment: 9
@@ -341,7 +342,7 @@ TextureImporter:
       name: spearman_walk2_sneak
       rect:
         serializedVersion: 2
-        x: 32
+        x: 0
         y: 0
         width: 16
         height: 16
@@ -362,7 +363,7 @@ TextureImporter:
       name: spearman_preattack1_sneak
       rect:
         serializedVersion: 2
-        x: 48
+        x: 80
         y: 0
         width: 16
         height: 16
@@ -383,7 +384,7 @@ TextureImporter:
       name: spearman_preattack2_sneak
       rect:
         serializedVersion: 2
-        x: 64
+        x: 96
         y: 0
         width: 16
         height: 16
@@ -404,7 +405,7 @@ TextureImporter:
       name: spearman_attack_sneak
       rect:
         serializedVersion: 2
-        x: 80
+        x: 112
         y: 0
         width: 16
         height: 16
@@ -422,10 +423,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spearman_preattack1_walk_sneak
+      name: spearman_preattack1_walk1_sneak
       rect:
         serializedVersion: 2
-        x: 96
+        x: 16
         y: 0
         width: 16
         height: 16
@@ -443,10 +444,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spearman_preattack2_walk_sneak
+      name: spearman_preattack2_walk1_sneak
       rect:
         serializedVersion: 2
-        x: 112
+        x: 48
         y: 0
         width: 16
         height: 16
@@ -463,6 +464,300 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: spearman_idle2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19137e27381767947b54da069942ee70
+      internalID: 1547711396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spearman_preattack1_walk2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 16
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0a15870b25f82b4aae54a25701eb12f
+      internalID: 991462903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spearman_preattack2_walk2
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 16
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7986081ce0f91c449bec6aa54e81b548
+      internalID: 1282617884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spearman_preattack2_walk2_sneak
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c9af8191d520bc43b6efafffa29cb70
+      internalID: -416750084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spearman_preattack1_walk2_sneak
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42b96002fd5f23d40bbfa3a09e460116
+      internalID: -355611686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spearman_jump1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea7731ec9c975654da5b19199d2af0c4
+      internalID: 204934271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spearman_jump2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d00fb6d6a4282b04fa41de7633a18c07
+      internalID: 1625739067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spearman_jump3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 32
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bec46e1cfe1a6ef429fb7a233a55a7cb
+      internalID: -1786365367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spearman_land1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb8fe64b8fafb5e43b7dc7e71911d61b
+      internalID: 1052372701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spearman_idle_action1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 48
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25e5469320871a24b89dfca9edf9f6cb
+      internalID: 1291525881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spearman_idle_action2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 48
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db89aa777b8d25d4ab62688c032d3c2e
+      internalID: 783400268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spearman_idle2_sneak
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 48
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eae3c1d8497c44741b7c5cfd7a799c86
+      internalID: -788659512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spearman_idle_action1_sneak
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 48
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d731a6086e77cd34bac4fb2c6d978fe7
+      internalID: -1464740626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spearman_idle_action2_sneak
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 48
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 346f8fe111121d64480fd35ed2afda01
+      internalID: 279734943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -474,22 +769,37 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spearman_walk2: -1953313907
-      spearman_preattack2: -444753954
-      spearman_walk1_sneak: 707813868
-      spearman_preattack1_sneak: 948773266
-      spearman_preattack1_walk: -2038950873
-      spearman_idle: 1101450059
+      spearman_1: 1385534409
       spearman_attack: -869785949
-      spearman_preattack1_walk_sneak: -315742273
-      spearman_preattack2_sneak: 631077750
-      spearman_preattack1: 373180714
-      spearman_prattack2_walk: 1369516782
-      spearman_walk2_sneak: -1671386432
       spearman_attack_sneak: -2111491475
-      spearman_idle_sneak: -1634063339
+      spearman_idle1: 1101450059
+      spearman_idle1_sneak: -1634063339
+      spearman_idle2: 1547711396
+      spearman_idle2_sneak: -788659512
+      spearman_idle_action1: 1291525881
+      spearman_idle_action1_sneak: -1464740626
+      spearman_idle_action2: 783400268
+      spearman_idle_action2_sneak: 279734943
+      spearman_jump1: 204934271
+      spearman_jump2: 1625739067
+      spearman_jump3: -1786365367
+      spearman_land1: 1052372701
+      spearman_preattack1: 373180714
+      spearman_preattack1_sneak: 948773266
+      spearman_preattack1_walk1: -2038950873
+      spearman_preattack1_walk1_sneak: -315742273
+      spearman_preattack1_walk2: 991462903
+      spearman_preattack1_walk2_sneak: -355611686
+      spearman_preattack2: -444753954
+      spearman_preattack2_sneak: 631077750
+      spearman_preattack2_walk1: 1369516782
+      spearman_preattack2_walk1_sneak: 164901426
+      spearman_preattack2_walk2: 1282617884
+      spearman_preattack2_walk2_sneak: -416750084
       spearman_walk1: 195572832
-      spearman_preattack2_walk_sneak: 164901426
+      spearman_walk1_sneak: 707813868
+      spearman_walk2: -1953313907
+      spearman_walk2_sneak: -1671386432
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

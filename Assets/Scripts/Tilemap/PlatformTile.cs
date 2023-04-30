@@ -11,6 +11,12 @@ namespace RuinsRaiders
 
         private readonly HashSet<MovementController> _characters = new();
 
+        private void Start()
+        {
+            if(platformCollider == null)
+                platformCollider = GetComponent<Collider2D>();
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             var character = collision.gameObject.GetComponent<MovementController>();

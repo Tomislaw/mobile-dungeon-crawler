@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -842869574502557909, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
+      propertyPath: gems.silverGems
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1643307426841123556, guid: a119a68a7860fc843a7f1c47ef447864, type: 3}
       propertyPath: m_RootOrder
       value: 1

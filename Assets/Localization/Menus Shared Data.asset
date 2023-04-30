@@ -183,6 +183,10 @@ MonoBehaviour:
     m_Key: MainMenu/Options/Scale
     m_Metadata:
       m_Items: []
+  - m_Id: 70176427903266816
+    m_Key: MainMenu/Options/ControlsDesktop
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

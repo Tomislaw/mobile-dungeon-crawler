@@ -21,10 +21,10 @@ MonoBehaviour:
     unlocked: 1
     skills: 000000000000000000000000
   mage:
-    unlocked: 0
+    unlocked: 1
     skills: 000000000000000000000000
   spearman:
-    unlocked: 0
+    unlocked: 1
     skills: 000000000000000000000000
   archer:
     unlocked: 1

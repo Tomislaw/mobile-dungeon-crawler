@@ -53,12 +53,17 @@ namespace RuinsRaiders
         {
             UpdateCameraPosition();
 
-            if(_tweanTimeLeft > 0)
+            if (_tweanTimeLeft > 0)
                 _tweanTimeLeft -= Time.deltaTime;
         }
 
         private void SetSubScene(SubScene scene)
         {
+            if (_subScene == scene)
+                return;
+
+            scene.CameraEneterd();
+
             _left = -scene.size.x / 2 + scene.transform.position.x;
             _right = scene.size.x / 2 + scene.transform.position.x;
             _top = scene.size.y / 2 + scene.transform.position.y;
@@ -73,6 +78,7 @@ namespace RuinsRaiders
                 _tweanTimeLeft = tweenTime;
             }
             _subScene = scene;
+
         }
 
         private Vector3 CalculatePosition()
@@ -114,7 +120,10 @@ namespace RuinsRaiders
                 var scenes = FindObjectsOfType<SubScene>();
                 if (scenes.Length == 0)
                     return;
-                var scene = scenes.OrderBy(it => Vector3.Distance(it.transform.position, objectToFollow.transform.position)).First();
+                var scene = scenes.OrderBy(it =>
+                    it.Contains(objectToFollow.transform.position) ? 0 :
+                    Vector3.Distance(it.transform.position, objectToFollow.transform.position)
+                ).First();
                 SetSubScene(scene);
             }
 

@@ -165,6 +165,7 @@ GameObject:
   - component: {fileID: -5021091212187416249}
   - component: {fileID: 4013012953703228152}
   - component: {fileID: -4647018605040078090}
+  - component: {fileID: -6579151895504915352}
   m_Layer: 11
   m_Name: Vulture
   m_TagString: Untagged
@@ -347,6 +348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0}
   faceLeft: 1
+  jumpingTreshold: 0
   flying: 1
   gravityScale: 1
   waterGravityScale: 6
@@ -374,6 +376,9 @@ MonoBehaviour:
   onSwim:
     m_PersistentCalls:
       m_Calls: []
+  onLand:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4885720716787640596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,14 +395,15 @@ MonoBehaviour:
   onDeath:
     m_PersistentCalls:
       m_Calls: []
+  immunityAfterHitTime: 0
+  ressurectTime: 1
   health: 4
   maxHealth: 4
   shield: 0
   maxShield: 0
+  shieldRegenerationTime: 10
   armor: 0
   maxArmor: 0
-  shieldRegenerationTime: 10
-  ressurectTime: 1
 --- !u!114 &2774166976484500296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -588,3 +594,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 3428ecf548db2ab41a88f34050b39ada, type: 2}
   soundType: 1
+--- !u!114 &-6579151895504915352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932571243353351920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33149d0f95671da4a945c1474b9740c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfKeys: 0
+  gems:
+    redGems: 0
+    blueGems: 0
+    greenGems: 0
+    silverGems: 1
+  keyPrefab: {fileID: 7926932315155287929, guid: 5f2504d000004fe45af3b49c1048cc13, type: 3}
+  gemPrefab: {fileID: 6484226641916986339, guid: 66ad2906e0854bf4f925da012d7acc80, type: 3}
+  pickupSound: {fileID: 8300000, guid: 60c6b26d63d297d4fb7e9864fcda3d82, type: 3}

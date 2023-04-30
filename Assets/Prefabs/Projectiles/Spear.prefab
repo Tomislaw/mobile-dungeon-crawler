@@ -123,13 +123,13 @@ MonoBehaviour:
         m_CallState: 2
   initialVelocity: {x: 35, y: 0}
   damage: 4
-  hitTargets: []
+  group: 1
   rotating: 1
+  destroyOnHit: 0
   destroyTime: 1
   lifeTime: 0.4
   explosionRadius: 1
-  explosionForce: 1
-  group: 1
+  explosionForce: 1000
   deceleration: {x: 0, y: 0}
   gravity: 0
 --- !u!50 &1805714663868828914

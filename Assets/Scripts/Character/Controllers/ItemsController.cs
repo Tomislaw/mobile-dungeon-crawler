@@ -5,60 +5,85 @@ namespace RuinsRaiders
 {
     public class ItemsController : MonoBehaviour
     {
-        public GameObject keyPrefab;
+        public float itemSpeed = 5;
+        public int itemsInRow = 5;
 
-        public float hoverHeight = 2;
-        public float hoverVariationDistance = 0.5f;
-        public float itemSpeed = 10;
-        public int numberOfKeys = 0;
-
+        [Header("Key")]
+        public float keyHoverHeight = 2;
+        public float keyHoverVariationDistance = 0.5f;
+        private int _numberOfKeys = 0;
         private readonly List<GameObject> _keys = new();
+        public bool HaveKeys { get => _numberOfKeys > 0; }
 
-        public void AddKey()
+        [Header("Gem")]
+        public float gemHoverHeight = 1;
+        public float gemHoverVariationDistance = 1f;
+        public float gemLifetime = 1f;
+        public PlayerData.Gems gems;
+        private readonly List<MutablePair<GameObject, float>> _gems = new();
+
+        public void AddKey(GameObject key)
         {
-            var key = Instantiate(keyPrefab);
-            key.transform.position = transform.position;
             _keys.Add(key);
-            numberOfKeys++;
+            _numberOfKeys++;
+        }
+
+        public void AddGems(GameObject gem, PlayerData.Gems amount)
+        {
+            gems += amount;
+            _gems.Add(new MutablePair<GameObject, float>(gem, gemLifetime));
         }
 
         public void RemoveKey()
         {
-            if (numberOfKeys > 0)
+            if (_numberOfKeys > 0)
             {
-                var key = _keys[numberOfKeys - 1];
+                var key = _keys[_numberOfKeys - 1];
                 _keys.Remove(key);
                 Destroy(key);
             }
 
-            numberOfKeys--;
+            _numberOfKeys--;
         }
 
         public void FixedUpdate()
         {
-            if (numberOfKeys > _keys.Count && _keys.Count < 9)
-                while (numberOfKeys != _keys.Count && _keys.Count < 9)
-                {
-                    var key = Instantiate(keyPrefab);
-                    key.transform.position = transform.position;
-                    _keys.Add(key);
-                }
-
-            if (numberOfKeys != 0 && numberOfKeys < _keys.Count)
-                while (numberOfKeys != _keys.Count && _keys.Count > 0)
-                {
-                    var key = _keys[numberOfKeys - 1];
-                    _keys.Remove(key);
-                    Destroy(key);
-                }
-
             for (int i = 0; i < _keys.Count; i++)
             {
-                var offset = Mathf.Sin(((Time.fixedTime + i / 2f) % 1f) * Mathf.PI) * hoverVariationDistance;
+                var row = i / itemsInRow;
+                var rowItems = row == _keys.Count / itemsInRow ? _keys.Count % itemsInRow : itemsInRow;
+
+                var offset = Mathf.Sin(((Time.fixedTime + i / 2f) % 1f) * Mathf.PI) * keyHoverVariationDistance;
+                var yPos = keyHoverHeight + offset + row;
+                var xPos = i% itemsInRow - rowItems / 2f + 0.5f;
+
                 _keys[i].transform.position = Vector3.Lerp(
                     _keys[i].transform.position,
-                    transform.position + new Vector3(-i - 1, hoverHeight + offset),
+                    transform.position + new Vector3(xPos, yPos),
                     itemSpeed * Time.fixedDeltaTime);
+            }
+
+            for (int i = 0; i < _gems.Count;)
+            {
+                if (_gems[i].Second <= 0)
+                {
+                    Destroy(_gems[i].First);
+                    _gems.RemoveAt(i);
+                    continue;
+                }
+                var row = i / itemsInRow;
+                var rowItems = row == _gems.Count / itemsInRow ? _gems.Count % itemsInRow : itemsInRow;
+
+                var factor = (_gems[i].Second / gemLifetime);
+                var yPos = gemHoverHeight + factor * (gemHoverVariationDistance + row);
+                var xPos = Mathf.Lerp(0f, i % itemsInRow - rowItems / 2f + 0.5f, factor);
+
+                _gems[i].First.transform.position = Vector3.Lerp(
+                    _gems[i].First.transform.position,
+                    transform.position + new Vector3(xPos, yPos),
+                    itemSpeed * Time.fixedDeltaTime);
+                _gems[i].Second -= Time.fixedDeltaTime;
+                i++;
             }
         }
 

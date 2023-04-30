@@ -41,7 +41,7 @@ namespace RuinsRaiders
             if (itemController == null)
                 return;
 
-            if (itemController.numberOfKeys > 0)
+            if (itemController.HaveKeys)
             {
                 itemController.RemoveKey();
                 Open();

@@ -565,11 +565,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30eb3c10d10333d448c42eea7725f764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyPrefab: {fileID: 7926932315155287929, guid: 5f2504d000004fe45af3b49c1048cc13, type: 3}
-  hoverHeight: 2
-  hoverVariationDistance: 0.5
-  itemSpeed: 10
-  numberOfKeys: 0
+  itemSpeed: 5
+  itemsInRow: 5
+  keyHoverHeight: 2
+  keyHoverVariationDistance: 0.5
+  gemHoverHeight: 0
+  gemHoverVariationDistance: 4
+  gemLifetime: 1
+  gems:
+    redGems: 0
+    blueGems: 0
+    greenGems: 0
+    silverGems: 0
 --- !u!114 &21499108938568145
 MonoBehaviour:
   m_ObjectHideFlags: 0

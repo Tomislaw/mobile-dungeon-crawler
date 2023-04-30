@@ -13994,20 +13994,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5367954658345666721, guid: 85faea004f51f3342affdf3da47e3c65, type: 3}
   m_PrefabInstance: {fileID: 1439292050}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1129975254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129975242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33149d0f95671da4a945c1474b9740c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numberOfKeys: 1
-  pickupSound: {fileID: 8300000, guid: 60c6b26d63d297d4fb7e9864fcda3d82, type: 3}
 --- !u!1 &1177880975
 GameObject:
   m_ObjectHideFlags: 0
@@ -14491,6 +14477,10 @@ PrefabInstance:
       propertyPath: astar
       value: 
       objectReference: {fileID: 1093150931}
+    - target: {fileID: 7682192174644956787, guid: 85faea004f51f3342affdf3da47e3c65, type: 3}
+      propertyPath: numberOfKeys
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85faea004f51f3342affdf3da47e3c65, type: 3}
 --- !u!1001 &1461497953

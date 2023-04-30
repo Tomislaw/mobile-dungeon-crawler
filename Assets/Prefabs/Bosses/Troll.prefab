@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2924506e847ef454c843827c3a2cf458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hits: []
 --- !u!1 &2592614511173792620
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,6 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shockTile: {fileID: 1805714663868828912, guid: dae9ec3adbc79174bae86b5426490c19, type: 3}
+  shockDamage: 2
   shockWidth: 4
   shockTime: 0.025
   shockDistance: 1
@@ -173,6 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shockTile: {fileID: 1805714663868828912, guid: dae9ec3adbc79174bae86b5426490c19, type: 3}
+  shockDamage: 2
   shockWidth: 4
   shockTime: 0.025
   shockDistance: 1
@@ -221,8 +224,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31caabe9a495d5d4792dc39caf7fce16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 9060408073096087312, guid: 81352b13410d0dc42865ba7a862de255, type: 3}
   healthController: {fileID: 0}
+  hearthWidth: 1
+  prefab: {fileID: 9060408073096087312, guid: 81352b13410d0dc42865ba7a862de255, type: 3}
   maxHeartsInRow: 4
 --- !u!1 &5367954657964136393
 GameObject:
@@ -268,8 +272,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a4a92357f01cc4e92f09a03593b042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 9060408073096087312, guid: d1adc1b4e2799db4795da0efb0d7070c, type: 3}
   healthController: {fileID: 0}
+  hearthWidth: 1
+  prefab: {fileID: 9060408073096087312, guid: d1adc1b4e2799db4795da0efb0d7070c, type: 3}
   maxHeartsInRow: 12
 --- !u!1 &5367954658345666721
 GameObject:
@@ -427,7 +432,7 @@ MonoBehaviour:
   haveJumpAnimation: 0
 --- !u!95 &5367954658345666727
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -444,7 +449,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &5367954658345666728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,16 +488,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 681d635a5cb7c4c48be5480f465c0c27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  move: {x: 0, y: 0}
+  faceLeft: 0
+  jumpingTreshold: 0
   flying: 0
   gravityScale: 6
-  climbLadderSpeed: 8
+  waterGravityScale: 6
   coyoteTime: 0.15
+  jumpSpeed: 20
+  jumpCutGravityMultiplier: 2
+  jumpHangTimeTreshold: 5
+  jumpHangSpeedGravityMultiplier: 0.5
   walkSpeed: 10
   swimSpeed: 8
-  jumpSpeed: 20
-  maxSpeed: 20
+  climbSpeed: 8
   acceleration: 30
-  jerk: 20
+  deacceleration: 10
+  maxSpeed: 20
   canUseLadder: 1
   canSwim: 1
   canUsePlatform: 1
@@ -505,8 +518,9 @@ MonoBehaviour:
   onSwim:
     m_PersistentCalls:
       m_Calls: []
-  move: {x: 0, y: 0}
-  faceLeft: 0
+  onLand:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8309213051711081826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -536,14 +550,15 @@ MonoBehaviour:
   onDeath:
     m_PersistentCalls:
       m_Calls: []
+  immunityAfterHitTime: 0
+  ressurectTime: 1
   health: 30
   maxHealth: 30
   shield: 0
   maxShield: 0
+  shieldRegenerationTime: 10
   armor: 4
   maxArmor: 4
-  shieldRegenerationTime: 10
-  ressurectTime: 1
 --- !u!114 &7300881240795306579
 MonoBehaviour:
   m_ObjectHideFlags: 0
